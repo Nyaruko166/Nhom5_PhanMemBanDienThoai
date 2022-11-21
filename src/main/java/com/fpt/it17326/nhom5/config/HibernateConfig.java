@@ -25,6 +25,7 @@ public class HibernateConfig {
 
         conf.setProperties(properties);
         //Add @Entity
+        //conf.addAnnotatedClass(*);
         //conf.addAnnotatedClass(*.class);
         conf.addAnnotatedClass(Anh.class);
         
