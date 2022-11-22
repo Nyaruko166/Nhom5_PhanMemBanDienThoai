@@ -29,20 +29,20 @@ public class MauSac {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
-    private String Id;
+    private String id;
 
     @Column(name = "MaMauSac")
-    private String MaMauSac;
+    private String maMauSac;
     
     @Column(name = "TenMauSac")
-    private String TenMauSac;
+    private String tenMauSac;
 
     @Column(name = "CreatedAt")
-    private Date CreatedAt;
+    private Date createdAt;
 
     @Column(name = "Deleted")
-    private boolean Deleted;
+    private boolean deleted;
 
     @Column(name = "UpdatedAt")
-    private Date UpdatedAt;
+    private Date updatedAt;
 }

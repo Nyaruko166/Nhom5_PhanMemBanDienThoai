@@ -1,7 +1,7 @@
 package com.fpt.it17326.nhom5.repository;
 
 import com.fpt.it17326.nhom5.config.HibernateConfig;
-import com.fpt.it17326.nhom5.domainmodel.MauSac;
+import com.fpt.it17326.nhom5.domainmodel.LoaiSP;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -13,30 +13,29 @@ import org.hibernate.Transaction;
  * AowVN_Nyaruko
  *
  */
-public class MauSacRepository {
+public class LoaiSPRepository {
 
     private Session session = HibernateConfig.getFACTORY().openSession();
 
-    private String fromTable = "FROM MauSac";
+    private String fromTable = "FROM LoaiSP";
 
-    public List<MauSac> getAll() {
+    public List<LoaiSP> getAll() {
         Query query = session.createQuery(fromTable);
         return query.getResultList();
     }
 
-    public MauSac getOne(String MaMauSac) {
-        String sql = fromTable + " WHERE MaMauSac =: id";
-
+    public LoaiSP getOne(String MaLoaiSP) {
+        String sql = fromTable + " WHERE MaLoaiSP =: MaLoaiSP";
         Query query = session.createQuery(sql);
-        query.setParameter("id", MaMauSac);
-        return (MauSac) query.getSingleResult();
+        query.setParameter("MaLoaiSP", MaLoaiSP);
+        return (LoaiSP) query.getSingleResult();
     }
 
-    public Boolean add(MauSac ms) {
+    public Boolean add(LoaiSP lsp) {
         Transaction transaction = null;
         try ( Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
-            session.save(ms);
+            session.save(lsp);
             transaction.commit();
             return true;
         } catch (Exception e) {
@@ -45,11 +44,11 @@ public class MauSacRepository {
         return null;
     }
 
-    public Boolean update(MauSac ms) {
+    public Boolean update(LoaiSP lsp) {
         Transaction transaction = null;
         try ( Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
-            session.saveOrUpdate(ms);
+            session.saveOrUpdate(lsp);
             transaction.commit();
             return true;
         } catch (Exception e) {
@@ -58,12 +57,12 @@ public class MauSacRepository {
         return null;
     }
 
-    public Boolean delete(MauSac ms) {
+    public Boolean delete(LoaiSP lsp) {
         Transaction transaction = null;
         try ( Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
-            ms.setDeleted(true);
-            session.update(ms);
+            lsp.setDeleted(true);
+            session.update(lsp);
             transaction.commit();
             return true;
         } catch (Exception e) {
@@ -73,21 +72,21 @@ public class MauSacRepository {
     }
 
 //    public static void main(String[] args) throws ParseException {
-//        MauSacRepository mauSacRepository = new MauSacRepository();
-//
-//        MauSac ms = mauSacRepository.getOne("C29F2974-37C6-417E-85AE-310182D856C0");
-//        System.out.println(ms.toString());
-//        MauSac ms = new MauSac();
+//        LoaiSPRepository loaiSPRepository = new LoaiSPRepository();
+//        LoaiSP lsp = new LoaiSP();
+//        lsp.setId("C04F905E-7DD7-40DE-B829-36F4DD4FB6B9");
+//        lsp.setMaLoaiSP("LSP002");
+//        lsp.setTenDanhMuc("Máy Tính");
+//        lsp.setMota("May Tinh dok");
+//        lsp.setDeleted(false);
 //        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-//        ms.setTenMauSac("Hồng");
-//        ms.setCreatedAt(format.parse("2022-11-20"));
-//        ms.setDeleted(false);
-//        ms.setUpdatedAt(format.parse("2022-11-22"));
-//        ms.setMaMauSac("05641DA4-6706-4AA9-B007-875FDF74220B");
-//        mauSacRepository.update(ms);
+//        lsp.setCreatedAt(format.parse("2022-11-23"));
+//        lsp.setUpdatedAt(format.parse("2022-11-22"));
 //
-//        List<MauSac> lstms = mauSacRepository.getAll();
-//        for (MauSac x : lstms) {
+//        loaiSPRepository.update(lsp);
+//
+//        List<LoaiSP> lst = loaiSPRepository.getAll();
+//        for (LoaiSP x : lst) {
 //            System.out.println(x.toString());
 //        }
 //    }

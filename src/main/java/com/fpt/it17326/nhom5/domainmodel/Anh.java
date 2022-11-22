@@ -29,23 +29,23 @@ public class Anh {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
-    private String Id;
+    private String id;
     
     @Column(name = "MaAnh")
-    private String MaAnh;
+    private String maAnh;
     
     @Column(name = "UrlAnh")
-    private String UrlAnh;
+    private String urlAnh;
     
     @Column(name = "Cover")
-    private boolean Cover;
+    private boolean cover;
     
     @Column(name = "CreatedAt")
-    private Date CreatedAt;
+    private Date createdAt;
     
     @Column(name = "Deleted")
-    private boolean Deleted;
+    private boolean deleted;
     
     @Column(name = "UpdatedAt")
-    private Date UpdatedAt;
+    private Date updatedAt;
 }
