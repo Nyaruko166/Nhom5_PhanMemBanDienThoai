@@ -31,7 +31,7 @@ public class DoiTra {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
-    private Long id;
+    private int id;
 
     @Column(name = "MaDoiTra")
     private String maDoiTra;
