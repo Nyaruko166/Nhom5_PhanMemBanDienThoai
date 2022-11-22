@@ -26,7 +26,7 @@ public class MauSacResponse {
         this.MaMauSac = ms.getMaMauSac();
         this.TenMauSac = ms.getTenMauSac();
         this.CreatedAt = ms.getCreatedAt();
-        this.Deleted = ms.isDeleted();
+        this.Deleted = ms.getDeleted();
         this.UpdatedAt = ms.getUpdatedAt();
     }
 

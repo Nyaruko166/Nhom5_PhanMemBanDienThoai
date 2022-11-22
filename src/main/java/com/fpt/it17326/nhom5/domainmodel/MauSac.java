@@ -27,22 +27,22 @@ import lombok.ToString;
 public class MauSac {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id")
-    private String Id;
-
-    @Column(name = "MaMauSac")
-    private String MaMauSac;
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @Column (name = "Id")
+    private String id;
     
-    @Column(name = "TenMauSac")
-    private String TenMauSac;
+    @Column (name = "MaMauSac")
+    private String maMauSac;
 
-    @Column(name = "CreatedAt")
-    private Date CreatedAt;
+    @Column (name = "TenMauSac")
+    private String tenMauSac;
 
-    @Column(name = "Deleted")
-    private boolean Deleted;
+    @Column (name = "CreatedAt")
+    private Date createdAt;
 
-    @Column(name = "UpdatedAt")
-    private Date UpdatedAt;
+    @Column (name = "Deleted")
+    private Boolean deleted;
+
+    @Column (name = "UpdatedAt")
+    private Date updatedAt;
 }

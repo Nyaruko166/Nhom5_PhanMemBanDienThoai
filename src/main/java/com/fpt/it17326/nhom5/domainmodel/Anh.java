@@ -12,13 +12,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-
 /**
  * AowVN_Nyaruko
- *
- */
+ **/
+
 @Entity
-@Table(name = "Anh")
+@Table (name = "Anh")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -27,25 +26,26 @@ import lombok.ToString;
 public class Anh {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id")
-    private String Id;
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @Column (name = "Id")
+    private String id;
     
-    @Column(name = "MaAnh")
-    private String MaAnh;
-    
-    @Column(name = "UrlAnh")
-    private String UrlAnh;
-    
-    @Column(name = "Cover")
-    private boolean Cover;
-    
-    @Column(name = "CreatedAt")
-    private Date CreatedAt;
-    
-    @Column(name = "Deleted")
-    private boolean Deleted;
-    
-    @Column(name = "UpdatedAt")
-    private Date UpdatedAt;
+    @Column (name = "MaAnh")
+    private String maAnh;
+
+    @Column (name = "UrlAnh")
+    private String urlAnh;
+
+    @Column (name = "Cover")
+    private Boolean cover;
+
+    @Column (name = "CreatedAt")
+    private Date createdAt;
+
+    @Column (name = "Deleted")
+    private Boolean deleted;
+
+    @Column (name = "UpdatedAt")
+    private Date updatedAt;
+
 }
