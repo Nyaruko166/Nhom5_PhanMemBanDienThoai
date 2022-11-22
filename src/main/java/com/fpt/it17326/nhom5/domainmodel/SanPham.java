@@ -31,7 +31,7 @@ public class SanPham {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column (name = "Id")
-    private Long id;
+    private int id;
     
     @Column (name = "MaSP")
     private String maSP;

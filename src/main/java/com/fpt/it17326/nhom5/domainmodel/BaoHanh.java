@@ -29,7 +29,7 @@ public class BaoHanh {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column (name = "Id")
-    private Long id;
+    private int id;
     
     @Column (name = "MaBaoHanh")
     private String maBaoHanh;
