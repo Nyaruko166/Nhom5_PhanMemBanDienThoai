@@ -1,6 +1,7 @@
 package com.fpt.it17326.nhom5.config;
 
 import com.fpt.it17326.nhom5.domainmodel.Anh;
+import com.fpt.it17326.nhom5.domainmodel.HangDienThoai;
 import com.fpt.it17326.nhom5.domainmodel.LoaiSP;
 import com.fpt.it17326.nhom5.domainmodel.MauSac;
 import java.util.Properties;
@@ -32,6 +33,7 @@ public class HibernateConfig {
         conf.addAnnotatedClass(Anh.class);
         conf.addAnnotatedClass(MauSac.class);
         conf.addAnnotatedClass(LoaiSP.class);
+        conf.addAnnotatedClass(HangDienThoai.class);
         
 
         ServiceRegistry registry = new StandardServiceRegistryBuilder()
