@@ -30,7 +30,7 @@ public class NhanVien {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column (name = "Id")
-    private String id;
+    private Long id;
     
     @Column (name = "MaNhanVien")
     private String maNhanVien;

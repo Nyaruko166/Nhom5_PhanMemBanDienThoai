@@ -31,14 +31,14 @@ public class DoiTra {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
-    private String id;
+    private Long id;
 
     @Column(name = "MaDoiTra")
     private String maDoiTra;
 
     @ManyToOne
     @JoinColumn(name = "IdHD", referencedColumnName = "Id")
-    private String idHD;
+    private HoaDon hoaDon;
 
     @Column(name = "LyDoDoiTra")
     private String liDoDoiTra;

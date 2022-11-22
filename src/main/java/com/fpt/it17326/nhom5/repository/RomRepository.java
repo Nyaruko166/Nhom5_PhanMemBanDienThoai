@@ -6,6 +6,8 @@ package com.fpt.it17326.nhom5.repository;
 
 import com.fpt.it17326.nhom5.config.HibernateConfig;
 import com.fpt.it17326.nhom5.domainmodel.Rom;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.persistence.Query;
 import org.hibernate.Session;
@@ -72,5 +74,26 @@ public class RomRepository {
             e.printStackTrace();
         }
         return null;
+    }
+    
+        public static void main(String[] args) throws ParseException {
+        RomRepository romRepository = new RomRepository();
+
+        Rom rom = romRepository.getOne("1");
+        System.out.println(rom.toString());
+        
+        //Rom rom = new Rom();
+//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//        rom.setTenRom("Hồng");
+//        rom.setCreatedAt(format.parse("2022-11-20"));
+//        rom.setDeleted(false);
+//        rom.setUpdatedAt(format.parse("2022-11-22"));
+//        rom.setMaRom("05641DA4-6706-4AA9-B007-875FDF74220B");
+//        romRepository.update(rom);
+//
+//        List<Rom> lstms = romRepository.getAll();
+//        for (Rom x : lstms) {
+//            System.out.println(x.toString());
+//        }
     }
 }

@@ -18,7 +18,7 @@ import lombok.ToString;
  **/
 
 @Entity
-@Table (name = "CHIP")
+@Table (name = "Chip")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -29,7 +29,7 @@ public class Chip {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column (name = "Id")
-    private String id;
+    private Long id;
     
     @Column (name = "MaChip")
     private String maChip;
