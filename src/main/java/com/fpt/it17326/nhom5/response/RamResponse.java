@@ -32,7 +32,7 @@ public class RamResponse {
         this.maRam = ram.getMaRam();
         this.tenRam = ram.getTenRam();
         this.CreatedAt = ram.getCreatedAt();
-        this.Deleted = ram.getDeleted();
+        this.Deleted = ram.isDeleted();
         this.UpdatedAt = ram.getUpdatedAt();
     }
     

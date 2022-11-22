@@ -32,7 +32,7 @@ public class RomResponse {
         this.maRom = rom.getMaRom();
         this.tenRom = rom.getTenRom();
         this.CreatedAt = rom.getCreatedAt();
-        this.Deleted = rom.getDeleted();
+        this.Deleted = rom.isDeleted();
         this.UpdatedAt = rom.getUpdatedAt();
     }
     
