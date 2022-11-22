@@ -24,11 +24,11 @@ public class MauSacRepository {
         return query.getResultList();
     }
 
-    public MauSac getOne(String id) {
-        String sql = fromTable + " WHERE MaMauSac =: id";
+    public MauSac getOne(String MaMauSac) {
+        String sql = fromTable + " WHERE MaMauSac =: MaMauSac1";
 
         Query query = session.createQuery(sql);
-        query.setParameter("id", id);
+        query.setParameter("MaMauSac1", MaMauSac);
         return (MauSac) query.getSingleResult();
     }
 

@@ -4,6 +4,7 @@ import com.fpt.it17326.nhom5.domainmodel.MauSac;
 import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * AowVN_Nyaruko
@@ -11,6 +12,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@ToString
 public class MauSacResponse {
 
     private String MaMauSac;
