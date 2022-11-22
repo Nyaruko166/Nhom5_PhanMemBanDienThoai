@@ -1,42 +1,41 @@
 package com.fpt.it17326.nhom5.repository;
 
 import com.fpt.it17326.nhom5.config.HibernateConfig;
-import com.fpt.it17326.nhom5.domainmodel.Anh;
-import com.fpt.it17326.nhom5.response.AnhResponse;
+import com.fpt.it17326.nhom5.domainmodel.HangDienThoai;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
-import javax.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 /**
  * AowVN_Nyaruko
  *
  */
-public class AnhRepository {
+public class HangDienThoaiRepository {
 
     private Session session = HibernateConfig.getFACTORY().openSession();
 
-    private String fromTable = "FROM Anh";
+    private String fromTable = "FROM HangDienThoai";
 
-    public List<Anh> getAll() {
-        Query query = session.createQuery(fromTable, Anh.class);
+    public List<HangDienThoai> getAll() {
+        Query query = session.createQuery(fromTable);
         return query.getResultList();
     }
 
-    public Anh getOne(String MaAnh) {
-        String sql = fromTable + " WHERE MaAnh =: MaAnh1";
+    public HangDienThoai getOne(String MaHangDT) {
+        String sql = fromTable + " WHERE MaHangDT =: MaHangDT";
         Query query = session.createQuery(sql);
-        query.setParameter("MaAnh1", MaAnh);
-        return (Anh) query.getSingleResult();
+        query.setParameter("MaHangDT", MaHangDT);
+        return (HangDienThoai) query.getSingleResult();
     }
 
-    public Boolean add(Anh anh) {
+    public Boolean add(HangDienThoai hdt) {
         Transaction transaction = null;
         try ( Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
-            session.save(anh);
+            session.save(hdt);
             transaction.commit();
             return true;
         } catch (Exception e) {
@@ -45,11 +44,11 @@ public class AnhRepository {
         return null;
     }
 
-    public Boolean update(Anh anh) {
+    public Boolean update(HangDienThoai hdt) {
         Transaction transaction = null;
         try ( Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
-            session.saveOrUpdate(anh);
+            session.saveOrUpdate(hdt);
             transaction.commit();
             return true;
         } catch (Exception e) {
@@ -58,12 +57,11 @@ public class AnhRepository {
         return null;
     }
 
-    public Boolean delete(Anh anh) {
+    public Boolean delete(HangDienThoai hdt) {
         Transaction transaction = null;
         try ( Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
-            anh.setDeleted(true);
-            session.update(anh);
+            session.update(hdt);
             transaction.commit();
             return true;
         } catch (Exception e) {
@@ -73,26 +71,20 @@ public class AnhRepository {
     }
 
 //    public static void main(String[] args) throws ParseException {
-//
-//        Anh anh = new AnhRepository().getOne(1);
-//        System.out.println(anh.toString());
-//        Anh anh = new Anh();
-//        anh.setUrlAnh("01062003");
-//        anh.setCover(true);
+//        HangDienThoai hdt = new HangDienThoai();
+//        hdt.setMaHangDT("HDT001");
+//        hdt.setTenHang("HTC");
+//        hdt.setDeleted(false);
 //        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-//
-//        anh.setCreatedAt(format.parse("2022-11-21"));
-//
-//        anh.setDeleted(false);
-//
-//        anh.setUpdatedAt(format.parse("2022-11-21"));
-//
-//        anh.setMaAnh("A001");
-//        new AnhRepository().add(anh);
-//
-//        List<Anh> lst = new AnhRepository().getAll();
-//        for (Anh x : lst) {
-//            System.out.println(x.toString());
+//        hdt.setCreatedAt(format.parse("2022-11-23"));
+//        hdt.setUpdatedAt(format.parse("2022-11-22"));
+//        
+//        new HangDienThoaiRepository().add(hdt);
+//        
+//        List<HangDienThoai> lst = new HangDienThoaiRepository().getAll();
+//        
+//        for (HangDienThoai hangDienThoai : lst) {
+//            System.out.println(hangDienThoai.toString());
 //        }
 //    }
 }

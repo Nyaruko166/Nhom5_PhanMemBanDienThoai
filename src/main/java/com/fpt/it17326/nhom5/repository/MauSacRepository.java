@@ -1,8 +1,7 @@
 package com.fpt.it17326.nhom5.repository;
 
 import com.fpt.it17326.nhom5.config.HibernateConfig;
-import com.fpt.it17326.nhom5.domainmodel.Anh;
-import com.fpt.it17326.nhom5.response.AnhResponse;
+import com.fpt.it17326.nhom5.domainmodel.MauSac;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -14,29 +13,30 @@ import org.hibernate.Transaction;
  * AowVN_Nyaruko
  *
  */
-public class AnhRepository {
+public class MauSacRepository {
 
     private Session session = HibernateConfig.getFACTORY().openSession();
 
-    private String fromTable = "FROM Anh";
+    private String fromTable = "FROM MauSac";
 
-    public List<Anh> getAll() {
-        Query query = session.createQuery(fromTable, Anh.class);
+    public List<MauSac> getAll() {
+        Query query = session.createQuery(fromTable);
         return query.getResultList();
     }
 
-    public Anh getOne(String MaAnh) {
-        String sql = fromTable + " WHERE MaAnh =: MaAnh1";
+    public MauSac getOne(String MaMauSac) {
+        String sql = fromTable + " WHERE MaMauSac =: id";
+
         Query query = session.createQuery(sql);
-        query.setParameter("MaAnh1", MaAnh);
-        return (Anh) query.getSingleResult();
+        query.setParameter("id", MaMauSac);
+        return (MauSac) query.getSingleResult();
     }
 
-    public Boolean add(Anh anh) {
+    public Boolean add(MauSac ms) {
         Transaction transaction = null;
         try ( Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
-            session.save(anh);
+            session.save(ms);
             transaction.commit();
             return true;
         } catch (Exception e) {
@@ -45,11 +45,11 @@ public class AnhRepository {
         return null;
     }
 
-    public Boolean update(Anh anh) {
+    public Boolean update(MauSac ms) {
         Transaction transaction = null;
         try ( Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
-            session.saveOrUpdate(anh);
+            session.saveOrUpdate(ms);
             transaction.commit();
             return true;
         } catch (Exception e) {
@@ -58,12 +58,12 @@ public class AnhRepository {
         return null;
     }
 
-    public Boolean delete(Anh anh) {
+    public Boolean delete(MauSac ms) {
         Transaction transaction = null;
         try ( Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
-            anh.setDeleted(true);
-            session.update(anh);
+            ms.setDeleted(true);
+            session.update(ms);
             transaction.commit();
             return true;
         } catch (Exception e) {
@@ -73,25 +73,21 @@ public class AnhRepository {
     }
 
 //    public static void main(String[] args) throws ParseException {
+//        MauSacRepository mauSacRepository = new MauSacRepository();
 //
-//        Anh anh = new AnhRepository().getOne(1);
-//        System.out.println(anh.toString());
-//        Anh anh = new Anh();
-//        anh.setUrlAnh("01062003");
-//        anh.setCover(true);
+//        MauSac ms = mauSacRepository.getOne("C29F2974-37C6-417E-85AE-310182D856C0");
+//        System.out.println(ms.toString());
+//        MauSac ms = new MauSac();
 //        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//        ms.setTenMauSac("Hồng");
+//        ms.setCreatedAt(format.parse("2022-11-20"));
+//        ms.setDeleted(false);
+//        ms.setUpdatedAt(format.parse("2022-11-22"));
+//        ms.setMaMauSac("05641DA4-6706-4AA9-B007-875FDF74220B");
+//        mauSacRepository.update(ms);
 //
-//        anh.setCreatedAt(format.parse("2022-11-21"));
-//
-//        anh.setDeleted(false);
-//
-//        anh.setUpdatedAt(format.parse("2022-11-21"));
-//
-//        anh.setMaAnh("A001");
-//        new AnhRepository().add(anh);
-//
-//        List<Anh> lst = new AnhRepository().getAll();
-//        for (Anh x : lst) {
+//        List<MauSac> lstms = mauSacRepository.getAll();
+//        for (MauSac x : lstms) {
 //            System.out.println(x.toString());
 //        }
 //    }

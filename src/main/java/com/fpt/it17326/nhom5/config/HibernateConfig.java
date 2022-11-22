@@ -1,5 +1,9 @@
 package com.fpt.it17326.nhom5.config;
 
+import com.fpt.it17326.nhom5.domainmodel.Anh;
+import com.fpt.it17326.nhom5.domainmodel.HangDienThoai;
+import com.fpt.it17326.nhom5.domainmodel.LoaiSP;
+import com.fpt.it17326.nhom5.domainmodel.MauSac;
 import java.util.Properties;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -25,6 +29,11 @@ public class HibernateConfig {
         conf.setProperties(properties);
         //Add @Entity
         //conf.addAnnotatedClass(*);
+        //conf.addAnnotatedClass(*.class);
+        conf.addAnnotatedClass(Anh.class);
+        conf.addAnnotatedClass(MauSac.class);
+        conf.addAnnotatedClass(LoaiSP.class);
+        conf.addAnnotatedClass(HangDienThoai.class);
         
 
         ServiceRegistry registry = new StandardServiceRegistryBuilder()

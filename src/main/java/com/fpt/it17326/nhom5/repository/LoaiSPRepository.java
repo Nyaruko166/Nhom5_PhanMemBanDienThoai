@@ -1,8 +1,7 @@
 package com.fpt.it17326.nhom5.repository;
 
 import com.fpt.it17326.nhom5.config.HibernateConfig;
-import com.fpt.it17326.nhom5.domainmodel.Anh;
-import com.fpt.it17326.nhom5.response.AnhResponse;
+import com.fpt.it17326.nhom5.domainmodel.LoaiSP;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -14,29 +13,29 @@ import org.hibernate.Transaction;
  * AowVN_Nyaruko
  *
  */
-public class AnhRepository {
+public class LoaiSPRepository {
 
     private Session session = HibernateConfig.getFACTORY().openSession();
 
-    private String fromTable = "FROM Anh";
+    private String fromTable = "FROM LoaiSP";
 
-    public List<Anh> getAll() {
-        Query query = session.createQuery(fromTable, Anh.class);
+    public List<LoaiSP> getAll() {
+        Query query = session.createQuery(fromTable);
         return query.getResultList();
     }
 
-    public Anh getOne(String MaAnh) {
-        String sql = fromTable + " WHERE MaAnh =: MaAnh1";
+    public LoaiSP getOne(String MaLoaiSP) {
+        String sql = fromTable + " WHERE MaLoaiSP =: MaLoaiSP";
         Query query = session.createQuery(sql);
-        query.setParameter("MaAnh1", MaAnh);
-        return (Anh) query.getSingleResult();
+        query.setParameter("MaLoaiSP", MaLoaiSP);
+        return (LoaiSP) query.getSingleResult();
     }
 
-    public Boolean add(Anh anh) {
+    public Boolean add(LoaiSP lsp) {
         Transaction transaction = null;
         try ( Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
-            session.save(anh);
+            session.save(lsp);
             transaction.commit();
             return true;
         } catch (Exception e) {
@@ -45,11 +44,11 @@ public class AnhRepository {
         return null;
     }
 
-    public Boolean update(Anh anh) {
+    public Boolean update(LoaiSP lsp) {
         Transaction transaction = null;
         try ( Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
-            session.saveOrUpdate(anh);
+            session.saveOrUpdate(lsp);
             transaction.commit();
             return true;
         } catch (Exception e) {
@@ -58,12 +57,12 @@ public class AnhRepository {
         return null;
     }
 
-    public Boolean delete(Anh anh) {
+    public Boolean delete(LoaiSP lsp) {
         Transaction transaction = null;
         try ( Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
-            anh.setDeleted(true);
-            session.update(anh);
+            lsp.setDeleted(true);
+            session.update(lsp);
             transaction.commit();
             return true;
         } catch (Exception e) {
@@ -73,25 +72,21 @@ public class AnhRepository {
     }
 
 //    public static void main(String[] args) throws ParseException {
-//
-//        Anh anh = new AnhRepository().getOne(1);
-//        System.out.println(anh.toString());
-//        Anh anh = new Anh();
-//        anh.setUrlAnh("01062003");
-//        anh.setCover(true);
+//        LoaiSPRepository loaiSPRepository = new LoaiSPRepository();
+//        LoaiSP lsp = new LoaiSP();
+//        lsp.setId("C04F905E-7DD7-40DE-B829-36F4DD4FB6B9");
+//        lsp.setMaLoaiSP("LSP002");
+//        lsp.setTenDanhMuc("Máy Tính");
+//        lsp.setMota("May Tinh dok");
+//        lsp.setDeleted(false);
 //        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//        lsp.setCreatedAt(format.parse("2022-11-23"));
+//        lsp.setUpdatedAt(format.parse("2022-11-22"));
 //
-//        anh.setCreatedAt(format.parse("2022-11-21"));
+//        loaiSPRepository.update(lsp);
 //
-//        anh.setDeleted(false);
-//
-//        anh.setUpdatedAt(format.parse("2022-11-21"));
-//
-//        anh.setMaAnh("A001");
-//        new AnhRepository().add(anh);
-//
-//        List<Anh> lst = new AnhRepository().getAll();
-//        for (Anh x : lst) {
+//        List<LoaiSP> lst = loaiSPRepository.getAll();
+//        for (LoaiSP x : lst) {
 //            System.out.println(x.toString());
 //        }
 //    }
