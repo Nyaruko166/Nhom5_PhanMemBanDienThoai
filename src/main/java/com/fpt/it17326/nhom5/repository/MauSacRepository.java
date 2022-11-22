@@ -25,10 +25,10 @@ public class MauSacRepository {
     }
 
     public MauSac getOne(String MaMauSac) {
-        String sql = fromTable + " WHERE MaMauSac =: id";
+        String sql = fromTable + " WHERE MaMauSac =: MaMauSac1";
 
         Query query = session.createQuery(sql);
-        query.setParameter("id", MaMauSac);
+        query.setParameter("MaMauSac1", MaMauSac);
         return (MauSac) query.getSingleResult();
     }
 

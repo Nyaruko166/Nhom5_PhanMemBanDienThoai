@@ -12,13 +12,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-
 /**
  * AowVN_Nyaruko
- *
- */
+ **/
+
 @Entity
-@Table(name = "Anh")
+@Table (name = "Anh")
 @Getter
 @Setter
 @AllArgsConstructor

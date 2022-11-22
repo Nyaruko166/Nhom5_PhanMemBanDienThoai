@@ -12,13 +12,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-
 /**
  * AowVN_Nyaruko
- *
- */
+ **/
+
 @Entity
-@Table(name = "HangDienThoai")
+@Table (name = "HangDienThoai")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -46,3 +45,4 @@ public class HangDienThoai {
     @Column(name = "UpdatedAt")
     private Date updatedAt;
 }
+
