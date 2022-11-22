@@ -29,7 +29,7 @@ public class Ram {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column (name = "Id")
-    private Long id;
+    private int id;
     
     @Column (name = "MaRam")
     private String maRam;

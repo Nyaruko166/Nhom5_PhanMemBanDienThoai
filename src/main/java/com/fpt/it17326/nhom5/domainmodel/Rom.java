@@ -29,7 +29,7 @@ public class Rom {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column (name = "Id")
-    private Long id;
+    private int id;
     
     @Column (name = "MaRom")
     private String maRom;
