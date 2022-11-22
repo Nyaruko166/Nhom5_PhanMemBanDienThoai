@@ -38,7 +38,7 @@ public class LoaiSP {
     private String tenDanhMuc;
     
     @Column(name = "Mota")
-    private String mota;
+    private String moTa;
     
     @Column(name = "CreatedAt")
     private Date createdAt;
