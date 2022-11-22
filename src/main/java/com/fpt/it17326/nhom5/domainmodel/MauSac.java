@@ -27,7 +27,7 @@ public class MauSac {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column (name = "MaMauSac")
-    private Long maMauSac;
+    private String maMauSac;
 
     @Column (name = "TenMauSac")
     private String tenMauSac;

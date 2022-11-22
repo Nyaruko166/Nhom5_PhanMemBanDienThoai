@@ -28,7 +28,7 @@ public class Imei {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column (name = "MaIMel")
-    private Long maImel;
+    private String maImel;
 
     @Column (name = "TenIMel")
     private String tenImel;

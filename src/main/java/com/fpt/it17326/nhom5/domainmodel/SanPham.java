@@ -29,7 +29,7 @@ public class SanPham {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column (name = "MaSP")
-    private Long maSP;
+    private String maSP;
 
     @Column (name = "TenSP")
     private String tenSP;

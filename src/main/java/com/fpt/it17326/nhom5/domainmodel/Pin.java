@@ -27,7 +27,7 @@ public class Pin {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column (name = "MaPin")
-    private Long maPin;
+    private String maPin;
 
     @Column (name = "TenPin")
     private String tenPin;

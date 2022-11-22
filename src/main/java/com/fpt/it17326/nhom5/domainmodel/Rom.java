@@ -27,7 +27,7 @@ public class Rom {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column (name = "MaRom")
-    private Long maRom;
+    private String maRom;
 
     @Column (name = "TenRom")
     private String tenRom;

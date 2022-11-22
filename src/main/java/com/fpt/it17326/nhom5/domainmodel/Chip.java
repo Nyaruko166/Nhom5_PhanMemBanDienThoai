@@ -27,7 +27,7 @@ public class Chip {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column (name = "MaChip")
-    private Long maChip;
+    private String maChip;
 
     @Column (name = "TenChip")
     private String tenChip;

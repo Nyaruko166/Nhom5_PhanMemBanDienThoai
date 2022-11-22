@@ -282,7 +282,7 @@ public class ViewSanPham extends javax.swing.JFrame {
             .addGroup(pl_homeLayout.createSequentialGroup()
                 .addGap(310, 310, 310)
                 .addComponent(jButton7)
-                .addContainerGap(417, Short.MAX_VALUE))
+                .addContainerGap(414, Short.MAX_VALUE))
         );
 
         pl_FullChucNang.add(pl_home, "home");
@@ -295,17 +295,17 @@ public class ViewSanPham extends javax.swing.JFrame {
         pl_sanpham.setLayout(pl_sanphamLayout);
         pl_sanphamLayout.setHorizontalGroup(
             pl_sanphamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pl_sanphamLayout.createSequentialGroup()
-                .addContainerGap(500, Short.MAX_VALUE)
+            .addGroup(pl_sanphamLayout.createSequentialGroup()
+                .addGap(363, 363, 363)
                 .addComponent(jButton8)
-                .addGap(431, 431, 431))
+                .addContainerGap(605, Short.MAX_VALUE))
         );
         pl_sanphamLayout.setVerticalGroup(
             pl_sanphamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pl_sanphamLayout.createSequentialGroup()
-                .addGap(294, 294, 294)
+                .addGap(197, 197, 197)
                 .addComponent(jButton8)
-                .addContainerGap(433, Short.MAX_VALUE))
+                .addContainerGap(527, Short.MAX_VALUE))
         );
 
         pl_FullChucNang.add(pl_sanpham, "sanpham");
@@ -661,7 +661,7 @@ public class ViewSanPham extends javax.swing.JFrame {
             .addGroup(pl_hoadonLayout.createSequentialGroup()
                 .addGap(303, 303, 303)
                 .addComponent(jButton9)
-                .addContainerGap(424, Short.MAX_VALUE))
+                .addContainerGap(421, Short.MAX_VALUE))
         );
 
         pl_FullChucNang.add(pl_hoadon, "hoadon");
@@ -684,7 +684,7 @@ public class ViewSanPham extends javax.swing.JFrame {
             .addGroup(pl_khuyenmaiLayout.createSequentialGroup()
                 .addGap(331, 331, 331)
                 .addComponent(jButton10)
-                .addContainerGap(396, Short.MAX_VALUE))
+                .addContainerGap(393, Short.MAX_VALUE))
         );
 
         pl_FullChucNang.add(pl_khuyenmai, "khuyenmai");
@@ -705,7 +705,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         pl_nhanvienLayout.setVerticalGroup(
             pl_nhanvienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pl_nhanvienLayout.createSequentialGroup()
-                .addContainerGap(381, Short.MAX_VALUE)
+                .addContainerGap(378, Short.MAX_VALUE)
                 .addComponent(jButton11)
                 .addGap(346, 346, 346))
         );
@@ -728,7 +728,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         pl_khachhangLayout.setVerticalGroup(
             pl_khachhangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pl_khachhangLayout.createSequentialGroup()
-                .addContainerGap(388, Short.MAX_VALUE)
+                .addContainerGap(385, Short.MAX_VALUE)
                 .addComponent(jButton12)
                 .addGap(339, 339, 339))
         );
@@ -751,7 +751,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         pl_thongkeLayout.setVerticalGroup(
             pl_thongkeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pl_thongkeLayout.createSequentialGroup()
-                .addContainerGap(398, Short.MAX_VALUE)
+                .addContainerGap(395, Short.MAX_VALUE)
                 .addComponent(jButton13)
                 .addGap(329, 329, 329))
         );

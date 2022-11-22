@@ -27,7 +27,7 @@ public class HangDienThoai {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column (name = "MaHang")
-    private Long maHang;
+    private String maHang;
 
     @Column (name = "TenHang")
     private String tenHang;

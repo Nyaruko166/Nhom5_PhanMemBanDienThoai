@@ -27,7 +27,7 @@ public class Ram {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column (name = "MaRam")
-    private Long maRam;
+    private String maRam;
 
     @Column (name = "TenRam")
     private String tenRam;
