@@ -28,7 +28,7 @@ public class HangDienThoai {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
-    private String id;
+    private Long id;
 
     @Column(name = "MaHangDT")
     private String maHangDT;

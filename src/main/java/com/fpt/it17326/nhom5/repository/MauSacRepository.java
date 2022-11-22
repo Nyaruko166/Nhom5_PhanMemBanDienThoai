@@ -75,16 +75,21 @@ public class MauSacRepository {
 //    public static void main(String[] args) throws ParseException {
 //        MauSacRepository mauSacRepository = new MauSacRepository();
 //
-//        MauSac ms = mauSacRepository.getOne("C29F2974-37C6-417E-85AE-310182D856C0");
-//        System.out.println(ms.toString());
+////        MauSac ms = mauSacRepository.getOne("C29F2974-37C6-417E-85AE-310182D856C0");
+////        System.out.println(ms.toString());
+//
+//
+//
 //        MauSac ms = new MauSac();
 //        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-//        ms.setTenMauSac("Hồng");
+//        
+//        ms.setId("EB1BA049-BD08-46C1-9A72-1DB8F945A378");
+//        ms.setTenMauSac("buoiiii");
 //        ms.setCreatedAt(format.parse("2022-11-20"));
 //        ms.setDeleted(false);
 //        ms.setUpdatedAt(format.parse("2022-11-22"));
 //        ms.setMaMauSac("05641DA4-6706-4AA9-B007-875FDF74220B");
-//        mauSacRepository.update(ms);
+//        mauSacRepository.delete(ms);
 //
 //        List<MauSac> lstms = mauSacRepository.getAll();
 //        for (MauSac x : lstms) {

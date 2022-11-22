@@ -18,7 +18,7 @@ import lombok.ToString;
  *
  */
 @Entity
-@Table (name = "ROM")
+@Table (name = "TrangThaiHoaDon")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -29,7 +29,7 @@ public class TrangThaiHoaDon {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column (name = "Id")
-    private String id;
+    private Long id;
     
     @Column (name = "MaTT")
     private String maTT;

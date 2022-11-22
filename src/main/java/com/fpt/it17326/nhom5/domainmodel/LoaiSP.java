@@ -28,7 +28,7 @@ public class LoaiSP {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
-    private String id;
+    private Long id;
     
     @Column(name = "MaLoaiSP")
     private String maLoaiSP;
