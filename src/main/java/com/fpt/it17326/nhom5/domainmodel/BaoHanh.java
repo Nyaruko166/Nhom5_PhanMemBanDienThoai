@@ -41,7 +41,7 @@ public class BaoHanh {
     private Long hanBaoHanh;
 
     @Column (name = "TrangThai")
-    private Boolean trangThai;
+    private boolean trangThai;
 
     @Column (name = "CreatedAt")
     private Date createdAt;
