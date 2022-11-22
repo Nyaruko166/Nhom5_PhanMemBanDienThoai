@@ -1,5 +1,7 @@
 package com.fpt.it17326.nhom5.domainmodel;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -84,12 +86,12 @@ public class SanPham {
     private Pin idPin;
 
     @Column (name = "CreatedAt")
-    private String createdAt;
+    private Date createdAt;
 
     @Column (name = "Deleted")
     private Boolean deleted;
 
     @Column (name = "UpdatedAt")
-    private String updatedAt;
+    private Date updatedAt;
 
 }
