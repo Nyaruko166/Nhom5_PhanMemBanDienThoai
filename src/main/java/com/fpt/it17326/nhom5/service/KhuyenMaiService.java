@@ -8,6 +8,6 @@ package com.fpt.it17326.nhom5.service;
  *
  * @author ngock
  */
-public class KhuyenMaiService {
+public interface KhuyenMaiService {
     
 }
