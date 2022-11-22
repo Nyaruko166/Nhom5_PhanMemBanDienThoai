@@ -31,7 +31,7 @@ public class SanPham {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column (name = "Id")
-    private String id;
+    private Long id;
     
     @Column (name = "MaSP")
     private String maSP;
@@ -41,49 +41,45 @@ public class SanPham {
 
     @Column (name = "DonGia")
     private Float donGia;
-
-    @ManyToOne
-    @JoinColumn (name = "IdBH", referencedColumnName = "IdBH")
-    private BaoHanh maBH;
     
     @ManyToOne
-    @JoinColumn (name = "IdImei", referencedColumnName = "IdImei")
+    @JoinColumn (name = "IdImei", referencedColumnName = "Id")
     private Imei imei;
 
     @Column (name = "MoTa")
     private String moTa;
 
     @ManyToOne
-    @JoinColumn (name = "IdAnh", referencedColumnName = "IdAnh")
-    private Anh idAnh;
+    @JoinColumn (name = "IdAnh", referencedColumnName = "Id")
+    private Anh anh;
 
     @ManyToOne
-    @JoinColumn (name = "IdLoaiSP", referencedColumnName = "IdLoaiSP")
-    private LoaiSP idLoaiSP;
+    @JoinColumn (name = "IdLoaiSP", referencedColumnName = "Id")
+    private LoaiSP loaiSP;
 
     @ManyToOne
-    @JoinColumn (name = "IdMauSac", referencedColumnName = "IdMauSac")
-    private MauSac idMauSac;
+    @JoinColumn (name = "IdMauSac", referencedColumnName = "Id")
+    private MauSac mauSac;
 
     @ManyToOne
-    @JoinColumn (name = "IdHang", referencedColumnName = "IdHang")
-    private HangDienThoai idHang;
+    @JoinColumn (name = "IdHang", referencedColumnName = "Id")
+    private HangDienThoai hangdt;
 
     @ManyToOne
-    @JoinColumn (name = "IdChip", referencedColumnName = "IdChip")
-    private Chip idChip;
+    @JoinColumn (name = "IdChip", referencedColumnName = "Id")
+    private Chip chip;
 
     @ManyToOne
-    @JoinColumn (name = "IdRam", referencedColumnName = "IdRam")
-    private Ram idRam;
+    @JoinColumn (name = "IdRam", referencedColumnName = "Id")
+    private Ram ram;
 
     @ManyToOne
-    @JoinColumn (name = "IdRom", referencedColumnName = "IdRom")
-    private Rom idRom;
+    @JoinColumn (name = "IdRom", referencedColumnName = "Id")
+    private Rom rom;
 
     @ManyToOne
-    @JoinColumn (name = "IdPin", referencedColumnName = "IdPin")
-    private Pin idPin;
+    @JoinColumn (name = "IdPin", referencedColumnName = "Id")
+    private Pin pin;
 
     @Column (name = "CreatedAt")
     private Date createdAt;

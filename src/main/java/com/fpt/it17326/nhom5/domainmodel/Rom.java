@@ -18,7 +18,7 @@ import lombok.ToString;
  **/
 
 @Entity
-@Table (name = "ROM")
+@Table (name = "Rom")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -29,7 +29,7 @@ public class Rom {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column (name = "Id")
-    private String id;
+    private Long id;
     
     @Column (name = "MaRom")
     private String maRom;
