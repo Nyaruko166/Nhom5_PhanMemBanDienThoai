@@ -28,9 +28,9 @@ public class AnhResponse {
     public AnhResponse(Anh anh) {
         this.maAnh = anh.getMaAnh();
         this.urlAnh = anh.getUrlAnh();
-        this.cover = anh.getCover();
+        this.cover = anh.isCover();
         this.createAt = anh.getCreatedAt();
-        this.deleted = anh.getDeleted();
+        this.deleted = anh.isCover();
         this.updateAt = anh.getUpdatedAt();
     }
 

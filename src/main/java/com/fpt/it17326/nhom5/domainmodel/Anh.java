@@ -26,26 +26,25 @@ import lombok.ToString;
 public class Anh {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
-    @Column (name = "Id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "Id")
     private String id;
     
-    @Column (name = "MaAnh")
+    @Column(name = "MaAnh")
     private String maAnh;
-
-    @Column (name = "UrlAnh")
+    
+    @Column(name = "UrlAnh")
     private String urlAnh;
-
-    @Column (name = "Cover")
-    private Boolean cover;
-
-    @Column (name = "CreatedAt")
+    
+    @Column(name = "Cover")
+    private boolean cover;
+    
+    @Column(name = "CreatedAt")
     private Date createdAt;
-
-    @Column (name = "Deleted")
-    private Boolean deleted;
-
-    @Column (name = "UpdatedAt")
+    
+    @Column(name = "Deleted")
+    private boolean deleted;
+    
+    @Column(name = "UpdatedAt")
     private Date updatedAt;
-
 }
