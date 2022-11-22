@@ -28,6 +28,9 @@ public class Anh {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "Id")
+    private String Id;
+    
     @Column(name = "MaAnh")
     private String MaAnh;
     

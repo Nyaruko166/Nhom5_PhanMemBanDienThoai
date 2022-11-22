@@ -52,4 +52,10 @@ public class AnhServiceImpl implements AnhService {
             return "Delete thất bại";
         }
     }
+
+    @Override
+    public AnhResponse getOne(String MaAnh) {
+        AnhResponse anh = new AnhResponse(AnhRepository.getOne(MaAnh));
+        return anh;
+    }
 }

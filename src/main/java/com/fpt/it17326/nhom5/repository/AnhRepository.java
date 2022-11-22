@@ -25,7 +25,7 @@ public class AnhRepository {
         return query.getResultList();
     }
 
-    public Anh getOne(Integer MaAnh) {
+    public Anh getOne(String MaAnh) {
         String sql = fromTable + " WHERE MaAnh =: MaAnh1";
         Query query = session.createQuery(sql);
         query.setParameter("MaAnh1", MaAnh);
@@ -77,7 +77,7 @@ public class AnhRepository {
 //        Anh anh = new AnhRepository().getOne(1);
 //        System.out.println(anh.toString());
 //        Anh anh = new Anh();
-//        anh.setUrlAnh("64981105");
+//        anh.setUrlAnh("01062003");
 //        anh.setCover(true);
 //        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 //
@@ -87,8 +87,8 @@ public class AnhRepository {
 //
 //        anh.setUpdatedAt(format.parse("2022-11-21"));
 //
-//        anh.setMaAnh("6F1A16BA-FA3E-4383-BCAC-B938CD87A1D9");
-//        new AnhRepository().delete(anh);
+//        anh.setMaAnh("A001");
+//        new AnhRepository().add(anh);
 //
 //        List<Anh> lst = new AnhRepository().getAll();
 //        for (Anh x : lst) {

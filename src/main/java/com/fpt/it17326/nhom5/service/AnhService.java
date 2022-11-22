@@ -12,6 +12,8 @@ public interface AnhService {
 
     List<AnhResponse> getAll();
 
+    AnhResponse getOne(String MaAnh);
+            
     String add(Anh anh);
 
     String update(Anh anh);
