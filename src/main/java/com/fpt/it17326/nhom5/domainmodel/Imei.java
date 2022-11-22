@@ -17,7 +17,7 @@ import lombok.ToString;
  **/
 
 @Entity
-@Table (name = "IMEL")
+@Table (name = "Imei")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -27,10 +27,13 @@ public class Imei {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    @Column (name = "MaIMel")
+    @Column (name = "Id")
+    private String id;
+    
+    @Column (name = "MaImei")
     private String maImel;
 
-    @Column (name = "TenIMel")
+    @Column (name = "TenImei")
     private String tenImel;
 
     @Column (name = "CreatedAt")

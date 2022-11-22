@@ -16,7 +16,7 @@ import lombok.ToString;
  **/
 
 @Entity
-@Table (name = "PIN")
+@Table (name = "Pin")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -26,6 +26,9 @@ public class Pin {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @Column (name = "Id")
+    private String id;
+    
     @Column (name = "MaPin")
     private String maPin;
 

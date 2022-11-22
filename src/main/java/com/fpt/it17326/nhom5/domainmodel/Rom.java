@@ -26,6 +26,9 @@ public class Rom {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @Column (name = "Id")
+    private String id;
+    
     @Column (name = "MaRom")
     private String maRom;
 

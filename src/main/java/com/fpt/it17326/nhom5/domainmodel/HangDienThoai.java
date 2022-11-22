@@ -26,6 +26,9 @@ public class HangDienThoai {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @Column (name = "Id")
+    private String id;
+    
     @Column (name = "MaHang")
     private String maHang;
 

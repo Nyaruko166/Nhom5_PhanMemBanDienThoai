@@ -16,7 +16,7 @@ import lombok.ToString;
  **/
 
 @Entity
-@Table (name = "RAM")
+@Table (name = "Ram")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -26,6 +26,9 @@ public class Ram {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @Column (name = "Id")
+    private String id;
+    
     @Column (name = "MaRam")
     private String maRam;
 

@@ -26,6 +26,9 @@ public class LoaiSP {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @Column (name = "Id")
+    private String id;
+    
     @Column (name = "MaLoaiSP")
     private String maLoaiSP;
 

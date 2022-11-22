@@ -22,7 +22,7 @@ public class ChipRepository {
     private String fromTable = "FROM Chip"; //HQL
     
     public Chip getOne(String id) {
-        String sql = fromTable + "WHERE id =: id"; 
+        String sql = fromTable + "WHERE Id =: id"; 
         Query query = session.createQuery(sql, Chip.class);
         query.setParameter("id", id); 
         return (Chip) query.getSingleResult();

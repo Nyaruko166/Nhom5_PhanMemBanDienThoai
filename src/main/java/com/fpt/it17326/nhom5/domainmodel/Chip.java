@@ -26,6 +26,9 @@ public class Chip {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @Column (name = "Id")
+    private String id;
+    
     @Column (name = "MaChip")
     private String maChip;
 
