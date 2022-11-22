@@ -129,6 +129,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         pn_Menu.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         bthome.setBackground(new java.awt.Color(0, 204, 255));
+        bthome.setForeground(new java.awt.Color(255, 255, 255));
         bthome.setText("Home");
         bthome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,7 +137,7 @@ public class ViewSanPham extends javax.swing.JFrame {
             }
         });
 
-        btsanpham.setBackground(new java.awt.Color(51, 51, 0));
+        btsanpham.setBackground(new java.awt.Color(0, 204, 255));
         btsanpham.setForeground(new java.awt.Color(255, 255, 255));
         btsanpham.setText("Sản Phẩm");
         btsanpham.addActionListener(new java.awt.event.ActionListener() {
@@ -145,6 +146,8 @@ public class ViewSanPham extends javax.swing.JFrame {
             }
         });
 
+        btbanhang.setBackground(new java.awt.Color(0, 204, 255));
+        btbanhang.setForeground(new java.awt.Color(255, 255, 255));
         btbanhang.setText("Bán Hàng");
         btbanhang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,6 +155,8 @@ public class ViewSanPham extends javax.swing.JFrame {
             }
         });
 
+        bthoadon.setBackground(new java.awt.Color(0, 204, 255));
+        bthoadon.setForeground(new java.awt.Color(255, 255, 255));
         bthoadon.setText("Hóa Đơn");
         bthoadon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -159,6 +164,8 @@ public class ViewSanPham extends javax.swing.JFrame {
             }
         });
 
+        btkhuyenmai.setBackground(new java.awt.Color(0, 204, 255));
+        btkhuyenmai.setForeground(new java.awt.Color(255, 255, 255));
         btkhuyenmai.setText("Khuyến mãi");
         btkhuyenmai.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -166,6 +173,8 @@ public class ViewSanPham extends javax.swing.JFrame {
             }
         });
 
+        btnhanvien.setBackground(new java.awt.Color(0, 204, 255));
+        btnhanvien.setForeground(new java.awt.Color(255, 255, 255));
         btnhanvien.setText("Nhân Viên");
         btnhanvien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -173,6 +182,8 @@ public class ViewSanPham extends javax.swing.JFrame {
             }
         });
 
+        btkhachhang.setBackground(new java.awt.Color(0, 204, 255));
+        btkhachhang.setForeground(new java.awt.Color(255, 255, 255));
         btkhachhang.setText("Khách Hàng");
         btkhachhang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -180,6 +191,8 @@ public class ViewSanPham extends javax.swing.JFrame {
             }
         });
 
+        btthongke.setBackground(new java.awt.Color(0, 204, 255));
+        btthongke.setForeground(new java.awt.Color(255, 255, 255));
         btthongke.setText("Thống kê");
         btthongke.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -187,6 +200,8 @@ public class ViewSanPham extends javax.swing.JFrame {
             }
         });
 
+        btthoat.setBackground(new java.awt.Color(0, 204, 255));
+        btthoat.setForeground(new java.awt.Color(255, 255, 255));
         btthoat.setText("Thoát");
         btthoat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
