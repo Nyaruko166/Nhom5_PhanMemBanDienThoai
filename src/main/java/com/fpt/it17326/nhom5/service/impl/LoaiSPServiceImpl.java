@@ -37,27 +37,27 @@ public class LoaiSPServiceImpl implements LoaiSPService {
     @Override
     public String add(LoaiSP lsp) {
         if (loaiSPRepository.add(lsp)) {
-            return "Add thành công";
+            return "Thêm thành công";
         } else {
-            return "Add thất bại";
+            return "Thêm thất bại";
         }
     }
 
     @Override
     public String update(LoaiSP lsp) {
         if (loaiSPRepository.update(lsp)) {
-            return "Update thành công";
+            return "Sửa thành công";
         } else {
-            return "Update thất bại";
+            return "Sửa thất bại";
         }
     }
 
     @Override
     public String delete(LoaiSP lsp) {
         if (loaiSPRepository.delete(lsp)) {
-            return "Delete thành công";
+            return "Xóa thành công";
         } else {
-            return "Delete thất bại";
+            return "Xóa thất bại";
         }
     }
 }
