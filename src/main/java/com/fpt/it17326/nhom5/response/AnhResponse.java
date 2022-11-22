@@ -30,7 +30,7 @@ public class AnhResponse {
         this.urlAnh = anh.getUrlAnh();
         this.cover = anh.isCover();
         this.createAt = anh.getCreatedAt();
-        this.deleted = anh.isCover();
+        this.deleted = anh.isDeleted();
         this.updateAt = anh.getUpdatedAt();
     }
 

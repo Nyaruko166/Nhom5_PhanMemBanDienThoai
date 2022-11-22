@@ -32,15 +32,16 @@ public class ChipServiceImpl implements ChipService{
 
     @Override
     public ChipResponse getOne(String MaChip) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ChipResponse chip = new ChipResponse(chipRepository.getOne(MaChip));
+        return chip;
     }
 
     @Override
     public String add(Chip chip) {
         if (chipRepository.add(chip)) {
-            return "Add thành công";
+            return "Thêm thành công";
         } else {
-            return "Add thất bại";
+            return "Thêm thất bại";
         }
     }
 

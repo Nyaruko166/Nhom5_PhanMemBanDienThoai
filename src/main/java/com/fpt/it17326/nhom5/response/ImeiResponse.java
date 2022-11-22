@@ -21,9 +21,9 @@ public class ImeiResponse {
     
     private String maImei;
     private String tenImei;
-    private Date CreatedAt;
-    private boolean Deleted;
-    private Date UpdatedAt;
+    private Date createdAt;
+    private boolean deleted;
+    private Date updatedAt;
 
     public ImeiResponse() {
     }
@@ -31,9 +31,9 @@ public class ImeiResponse {
     public ImeiResponse(Imei imei) {
         this.maImei = imei.getMaImel();
         this.tenImei = imei.getTenImel();
-        this.CreatedAt = imei.getCreatedAt();
-        this.Deleted = imei.getDeleted();
-        this.UpdatedAt = imei.getUpdatedAt();
+        this.createdAt = imei.getCreatedAt();
+        this.deleted = imei.isDeleted();
+        this.updatedAt = imei.getUpdatedAt();
     }
     
     

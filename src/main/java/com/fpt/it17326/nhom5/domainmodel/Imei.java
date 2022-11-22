@@ -42,7 +42,7 @@ public class Imei {
     private Date createdAt;
 
     @Column (name = "Deleted")
-    private Boolean deleted;
+    private boolean deleted;
 
     @Column (name = "UpdatedAt")
     private Date updatedAt;
