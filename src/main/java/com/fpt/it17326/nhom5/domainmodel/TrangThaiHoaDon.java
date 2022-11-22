@@ -32,10 +32,10 @@ public class TrangThaiHoaDon {
     private String id;
     
     @Column (name = "MaTT")
-    private String maRom;
+    private String maTT;
 
     @Column (name = "TinhTrang")
-    private String tenRom;
+    private String tinhTrang;
 
     
 }
