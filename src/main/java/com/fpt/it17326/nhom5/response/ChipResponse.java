@@ -32,7 +32,7 @@ public class ChipResponse {
         this.maChip = chip.getMaChip();
         this.tenChip = chip.getTenChip();
         this.createAt = chip.getCreatedAt();
-        this.deleted = chip.getDeleted();
+        this.deleted = chip.isDeleted();
         this.updateAt = chip.getUpdatedAt();
     }
     

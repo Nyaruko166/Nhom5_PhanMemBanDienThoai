@@ -32,7 +32,7 @@ public class PinResponse {
         this.MaPin = pin.getMaPin();
         this.TenPin = pin.getTenPin();
         this.CreatedAt = pin.getCreatedAt();
-        this.Deleted = pin.getDeleted();
+        this.Deleted = pin.isDeleted();
         this.UpdatedAt = pin.getUpdatedAt();
     }
     
