@@ -131,6 +131,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         bthome.setBackground(new java.awt.Color(0, 204, 255));
         bthome.setForeground(new java.awt.Color(255, 255, 255));
         bthome.setText("Home");
+        bthome.setBorder(null);
         bthome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bthomeActionPerformed(evt);
@@ -220,8 +221,12 @@ public class ViewSanPham extends javax.swing.JFrame {
             .addGap(0, 114, Short.MAX_VALUE)
         );
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Họ và tên");
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Mã");
 
         javax.swing.GroupLayout pn_MenuLayout = new javax.swing.GroupLayout(pn_Menu);
