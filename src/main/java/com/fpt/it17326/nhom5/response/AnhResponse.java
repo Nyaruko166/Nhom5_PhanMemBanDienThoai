@@ -15,24 +15,23 @@ import lombok.ToString;
 @ToString
 public class AnhResponse {
 
-    private String maAnh;
-    private String urlAnh;
-    private boolean cover;
-    private Date createAt;
-    private boolean deleted;
+    private String MaAnh;
+    private String UrlAnh;
+    private boolean Cover;
+    private Date CreateAt;
+    private boolean Deleted;
     private Date UpdateAt;
 
     public AnhResponse() {
     }
 
     public AnhResponse(Anh anh) {
-        this.maAnh = anh.getMaAnh();
-        this.urlAnh = anh.getUrlAnh();
-        this.cover = anh.isCover();
-        this.createAt = anh.getCreatedAt();
-        this.deleted = isDeleted();
+        this.MaAnh = anh.getMaAnh();
+        this.UrlAnh = anh.getUrlAnh();
+        this.Cover = anh.isCover();
+        this.CreateAt = anh.getCreatedAt();
+        this.Deleted = isDeleted();
         this.UpdateAt = anh.getUpdatedAt();
     }
-    
-    
+
 }
