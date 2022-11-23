@@ -29,7 +29,7 @@ public class Ram {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column (name = "Id")
-    private String id;
+    private int id;
     
     @Column (name = "MaRam")
     private String maRam;
@@ -41,7 +41,7 @@ public class Ram {
     private Date createdAt;
 
     @Column (name = "Deleted")
-    private Boolean deleted;
+    private boolean deleted;
 
     @Column (name = "UpdatedAt")
     private Date updatedAt;

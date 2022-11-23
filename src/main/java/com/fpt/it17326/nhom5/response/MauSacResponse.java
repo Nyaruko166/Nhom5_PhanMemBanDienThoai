@@ -4,6 +4,7 @@ import com.fpt.it17326.nhom5.domainmodel.MauSac;
 import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * AowVN_Nyaruko
@@ -11,23 +12,24 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@ToString
 public class MauSacResponse {
 
-    private String MaMauSac;
-    private String TenMauSac;
-    private Date CreatedAt;
-    private boolean Deleted;
-    private Date UpdatedAt;
+    private String maMauSac;
+    private String tenMauSac;
+    private Date createdAt;
+    private boolean deleted;
+    private Date updatedAt;
 
     public MauSacResponse() {
     }
 
     public MauSacResponse(MauSac ms) {
-        this.MaMauSac = ms.getMaMauSac();
-        this.TenMauSac = ms.getTenMauSac();
-        this.CreatedAt = ms.getCreatedAt();
-        this.Deleted = ms.getDeleted();
-        this.UpdatedAt = ms.getUpdatedAt();
+        this.maMauSac = ms.getMaMauSac();
+        this.tenMauSac = ms.getTenMauSac();
+        this.createdAt = ms.getCreatedAt();
+        this.deleted = ms.isDeleted();
+        this.updatedAt = ms.getUpdatedAt();
     }
 
 }

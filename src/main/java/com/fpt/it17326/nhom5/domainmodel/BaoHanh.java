@@ -29,7 +29,7 @@ public class BaoHanh {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column (name = "Id")
-    private String id;
+    private int id;
     
     @Column (name = "MaBaoHanh")
     private String maBaoHanh;
@@ -41,13 +41,13 @@ public class BaoHanh {
     private Long hanBaoHanh;
 
     @Column (name = "TrangThai")
-    private Boolean trangThai;
+    private boolean trangThai;
 
     @Column (name = "CreatedAt")
     private Date createdAt;
 
     @Column (name = "Deleted")
-    private Boolean deleted;
+    private boolean deleted;
 
     @Column (name = "UpdatedAt")
     private Date updatedAt;

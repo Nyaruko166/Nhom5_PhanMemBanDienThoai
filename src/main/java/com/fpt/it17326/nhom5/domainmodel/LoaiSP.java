@@ -1,7 +1,6 @@
 package com.fpt.it17326.nhom5.domainmodel;
 
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,27 +24,27 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class LoaiSP {
-
+    
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    @Column (name = "Id")
-    private String id;
+    @Column(name = "Id")
+    private int id;
     
-    @Column (name = "MaLoaiSP")
+    @Column(name = "MaLoaiSP")
     private String maLoaiSP;
-
-    @Column (name = "TenDanhMuc")
+    
+    @Column(name = "TenDanhMuc")
     private String tenDanhMuc;
-
-    @Column (name = "Mota")
+    
+    @Column(name = "Mota")
     private String moTa;
-
-    @Column (name = "CreatedAt")
+    
+    @Column(name = "CreatedAt")
     private Date createdAt;
-
-    @Column (name = "Deleted")
-    private Boolean deleted;
-
-    @Column (name = "UpdatedAt")
+    
+    @Column(name = "Deleted")
+    private boolean deleted;
+    
+    @Column(name = "UpdatedAt")
     private Date updatedAt;
 }

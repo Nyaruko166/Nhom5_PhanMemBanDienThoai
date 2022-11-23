@@ -30,7 +30,7 @@ public class Imei {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column (name = "Id")
-    private String id;
+    private Long id;
     
     @Column (name = "MaImei")
     private String maImel;
@@ -42,7 +42,7 @@ public class Imei {
     private Date createdAt;
 
     @Column (name = "Deleted")
-    private Boolean deleted;
+    private boolean deleted;
 
     @Column (name = "UpdatedAt")
     private Date updatedAt;

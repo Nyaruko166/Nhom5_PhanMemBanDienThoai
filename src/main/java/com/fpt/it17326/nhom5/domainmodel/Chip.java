@@ -18,7 +18,7 @@ import lombok.ToString;
  **/
 
 @Entity
-@Table (name = "CHIP")
+@Table (name = "Chip")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -29,7 +29,7 @@ public class Chip {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column (name = "Id")
-    private String id;
+    private int id;
     
     @Column (name = "MaChip")
     private String maChip;
@@ -41,7 +41,7 @@ public class Chip {
     private Date createdAt;
 
     @Column (name = "Deleted")
-    private Boolean deleted;
+    private boolean deleted;
 
     @Column (name = "UpdatedAt")
     private Date updatedAt;

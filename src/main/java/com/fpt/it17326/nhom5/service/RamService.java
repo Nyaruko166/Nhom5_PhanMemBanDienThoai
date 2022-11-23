@@ -4,10 +4,23 @@
  */
 package com.fpt.it17326.nhom5.service;
 
+import com.fpt.it17326.nhom5.domainmodel.Ram;
+import com.fpt.it17326.nhom5.response.RamResponse;
+import java.util.List;
+
 /**
  *
  * @author youngboizseetinh
  */
 public interface RamService {
     
+     List<RamResponse> getAll();
+
+    RamResponse getOne(String MaRam);
+            
+    String add(Ram ram);
+
+    String update(Ram ram);
+
+    String delete(Ram ram);
 }

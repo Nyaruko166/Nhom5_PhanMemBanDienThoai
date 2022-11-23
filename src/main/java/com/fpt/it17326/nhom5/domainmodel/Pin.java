@@ -29,7 +29,7 @@ public class Pin {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column (name = "Id")
-    private String id;
+    private int id;
     
     @Column (name = "MaPin")
     private String maPin;
@@ -41,7 +41,7 @@ public class Pin {
     private Date createdAt;
 
     @Column (name = "Deleted")
-    private Boolean deleted;
+    private boolean deleted;
 
     @Column (name = "UpdatedAt")
     private Date updatedAt;

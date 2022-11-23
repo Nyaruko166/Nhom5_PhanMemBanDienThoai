@@ -21,10 +21,10 @@ public class ChipRepository {
     
     private String fromTable = "FROM Chip"; //HQL
     
-    public Chip getOne(String id) {
-        String sql = fromTable + "WHERE Id =: id"; 
+    public Chip getOne(String MaChip) {
+        String sql = fromTable + "WHERE MaChip =: MaChip1"; 
         Query query = session.createQuery(sql, Chip.class);
-        query.setParameter("id", id); 
+        query.setParameter("MaChip1", MaChip); 
         return (Chip) query.getSingleResult();
     }
     
