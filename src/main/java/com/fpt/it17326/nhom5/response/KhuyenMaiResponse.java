@@ -19,6 +19,7 @@ import lombok.ToString;
 @ToString
 public class KhuyenMaiResponse {
 
+    private int id;
     private String maKM;
     private String tenKM;
     private Float soTienGiam;
@@ -32,6 +33,7 @@ public class KhuyenMaiResponse {
     }
 
     public KhuyenMaiResponse(KhuyenMai km) {
+        this.id = km.getId();
         this.maKM = km.getMaKM();
         this.tenKM = km.getTenKM();
         this.soTienGiam = km.getSoTienGiam();
@@ -42,4 +44,7 @@ public class KhuyenMaiResponse {
         this.updatedAt = km.getUpdatedAt();
     }
 
+    public Object[] toDataRow() {
+        return new Object[]{id, maKM, tenKM, soTienGiam, ngayBatDau, ngayKetThuc, "Hoạt động"};
+    }
 }

@@ -4,6 +4,12 @@
  */
 package com.fpt.it17326.nhom5.view;
 
+import com.fpt.it17326.nhom5.response.KhuyenMaiResponse;
+import com.fpt.it17326.nhom5.service.KhuyenMaiService;
+import com.fpt.it17326.nhom5.service.impl.KhuyenMaiServiceImpl;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author PHAM DAC THANG
@@ -13,10 +19,22 @@ public class ViewSanPham extends javax.swing.JFrame {
     /**
      * Creates new form BanHang
      */
+    DefaultTableModel dfm;
+    private KhuyenMaiService khuyenMaiService;
+    List<KhuyenMaiResponse> lists;
     public ViewSanPham() {
         initComponents();
+        khuyenMaiService = new KhuyenMaiServiceImpl();
+        lists = khuyenMaiService.getAll();
+        showData(lists);
+        
     }
-
+public void showData(List<KhuyenMaiResponse> lst) {
+        dfm.setRowCount(0);
+        for (KhuyenMaiResponse khuyenMaiResponse : lst) {
+            dfm.addRow(khuyenMaiResponse.toDataRow());
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -227,7 +245,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         jButton21 = new javax.swing.JButton();
         jPanel28 = new javax.swing.JPanel();
         jScrollPane15 = new javax.swing.JScrollPane();
-        jTable14 = new javax.swing.JTable();
+        tbl_KhuyenMai = new javax.swing.JTable();
         jTextField28 = new javax.swing.JTextField();
         jButton22 = new javax.swing.JButton();
         jButton41 = new javax.swing.JButton();
@@ -2052,7 +2070,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         jPanel28.setBackground(new java.awt.Color(255, 255, 255));
         jPanel28.setBorder(javax.swing.BorderFactory.createTitledBorder("BẢNG SẢN PHẨM"));
 
-        jTable14.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_KhuyenMai.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -2060,7 +2078,7 @@ public class ViewSanPham extends javax.swing.JFrame {
                 "id", "Mã KM", "TÊN KHUYẾN MÃI", "GIẢM GIÁ(%)", "Ngày bắt đầu", "Ngày kết thúc", "TRẠNG THÁI"
             }
         ));
-        jScrollPane15.setViewportView(jTable14);
+        jScrollPane15.setViewportView(tbl_KhuyenMai);
 
         jButton22.setBackground(new java.awt.Color(255, 255, 255));
         jButton22.setText("KHUYẾN MÃI ĐÃ XÓA");
@@ -3125,7 +3143,6 @@ public class ViewSanPham extends javax.swing.JFrame {
     private javax.swing.JTable jTable11;
     private javax.swing.JTable jTable12;
     private javax.swing.JTable jTable13;
-    private javax.swing.JTable jTable14;
     private javax.swing.JTable jTable15;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
@@ -3193,5 +3210,6 @@ public class ViewSanPham extends javax.swing.JFrame {
     private javax.swing.JPanel pl_thongke;
     private javax.swing.JPanel pn_Menu;
     private javax.swing.JPanel pn_Tong;
+    private javax.swing.JTable tbl_KhuyenMai;
     // End of variables declaration//GEN-END:variables
 }
