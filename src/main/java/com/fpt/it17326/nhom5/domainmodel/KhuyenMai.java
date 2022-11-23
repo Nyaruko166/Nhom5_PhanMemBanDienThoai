@@ -14,11 +14,11 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
+ * AowVN_Nyaruko
  *
- * @author ngock
  */
 @Entity
-@Table(name = "KHUYENMAI")
+@Table (name = "KhuyenMai")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -27,25 +27,32 @@ import lombok.ToString;
 public class KhuyenMai {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @Column(name = "Id")
     private int id;
-
+    
+    @Column(name = "MaKM")
+    private String maKM;
+    
     @Column(name = "TenKM")
-    private String TenKM;
-
+    private String tenKM;
+    
     @Column(name = "SoTienGiam")
-    private float SoTienGiam;
+    private Float soTienGiam;
+    
     @Column(name = "NgayBatDau")
-    private Date NgayBatDau;
-
+    private Date ngayBatDau;
+    
     @Column(name = "NgayKetThuc")
-    private Date NgayKetThuc;
+    private Date ngayKetThuc;
+    
     @Column(name = "CreatedAt")
-    private Date CreatedAt;
+    private Date createdAt;
+    
     @Column(name = "Deleted")
-    private int Deleted;
-
+    private boolean deleted;
+    
     @Column(name = "UpdatedAt")
-    private Date UpdatedAt;
+    private Date updatedAt;
+    
 }

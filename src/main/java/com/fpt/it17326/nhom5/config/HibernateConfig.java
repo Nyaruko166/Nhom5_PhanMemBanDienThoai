@@ -1,6 +1,15 @@
 package com.fpt.it17326.nhom5.config;
 
-import com.fpt.it17326.nhom5.domainmodel.KhuyenMai;
+import com.fpt.it17326.nhom5.domainmodel.Anh;
+import com.fpt.it17326.nhom5.domainmodel.Chip;
+import com.fpt.it17326.nhom5.domainmodel.HangDienThoai;
+import com.fpt.it17326.nhom5.domainmodel.LoaiSP;
+import com.fpt.it17326.nhom5.domainmodel.MauSac;
+import com.fpt.it17326.nhom5.domainmodel.NhanVien;
+import com.fpt.it17326.nhom5.domainmodel.Pin;
+import com.fpt.it17326.nhom5.domainmodel.Ram;
+import com.fpt.it17326.nhom5.domainmodel.Rom;
+import com.fpt.it17326.nhom5.domainmodel.TrangThaiHoaDon;
 import java.util.Properties;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -20,12 +29,23 @@ public class HibernateConfig {
         properties.put(Environment.DRIVER, "com.microsoft.sqlserver.jdbc.SQLServerDriver");
         properties.put(Environment.URL, "jdbc:sqlserver://localhost:1433;databaseName=QUANLYBANDIENTHOAI");
         properties.put(Environment.USER, "sa");
-        properties.put(Environment.PASS, "sa");
+        properties.put(Environment.PASS, "123456");
         properties.put(Environment.SHOW_SQL, "true");
 
         conf.setProperties(properties);
         //Add @Entity
-        conf.addAnnotatedClass(KhuyenMai.class);
+        //conf.addAnnotatedClass(*);
+        //conf.addAnnotatedClass(*.class);
+        conf.addAnnotatedClass(Anh.class);
+        conf.addAnnotatedClass(MauSac.class);
+        conf.addAnnotatedClass(LoaiSP.class);
+        conf.addAnnotatedClass(HangDienThoai.class);
+        conf.addAnnotatedClass(NhanVien.class);
+        conf.addAnnotatedClass(TrangThaiHoaDon.class);
+        conf.addAnnotatedClass(Ram.class);
+        conf.addAnnotatedClass(Rom.class);
+        conf.addAnnotatedClass(Chip.class);
+        conf.addAnnotatedClass(Pin.class);
         
 
         ServiceRegistry registry = new StandardServiceRegistryBuilder()

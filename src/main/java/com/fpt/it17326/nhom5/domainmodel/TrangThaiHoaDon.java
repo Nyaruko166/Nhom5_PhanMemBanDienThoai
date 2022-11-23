@@ -1,5 +1,6 @@
 package com.fpt.it17326.nhom5.domainmodel;
 
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,19 +18,24 @@ import lombok.ToString;
  *
  */
 @Entity
-@Table(name = "TRANGTHAIHOADON")
+@Table (name = "TrangThaiHoaDon")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 public class TrangThaiHoaDon {
-
+       
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "MATT")
-    private int MATT;
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @Column (name = "Id")
+    private int id;
+    
+    @Column (name = "MaTT")
+    private String maTT;
 
-    @Column(name = "TinhTrang")
-    private String TinhTrang;
+    @Column (name = "TinhTrang")
+    private String tinhTrang;
+
+    
 }
