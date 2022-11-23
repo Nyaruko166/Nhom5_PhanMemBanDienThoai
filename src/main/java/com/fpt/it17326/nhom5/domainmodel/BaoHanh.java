@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,6 +33,14 @@ public class BaoHanh {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column (name = "Id")
     private int id;
+    
+//    @ManyToOne 
+//    @JoinColumn (name = "IdHang", referencedColumnName = "Id")
+//    private int idHang;
+    
+//    @ManyToOne 
+//    @JoinColumn (name = "IdSP", referencedColumnName = "Id")
+//    private SanPham sanPham;
     
     @Column (name = "MaBaoHanh")
     private String maBaoHanh;

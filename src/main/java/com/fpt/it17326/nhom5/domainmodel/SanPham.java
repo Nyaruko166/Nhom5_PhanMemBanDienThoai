@@ -80,6 +80,10 @@ public class SanPham {
     @ManyToOne
     @JoinColumn (name = "IdPin", referencedColumnName = "Id")
     private Pin pin;
+    
+    @ManyToOne
+    @JoinColumn (name = "IdBaoHanh", referencedColumnName = "Id")
+    private BaoHanh baoHanh;
 
     @Column (name = "CreatedAt")
     private Date createdAt;
