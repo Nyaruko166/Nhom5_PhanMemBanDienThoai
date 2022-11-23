@@ -24,6 +24,7 @@ public class ViewSanPham extends javax.swing.JFrame {
     List<KhuyenMaiResponse> lists;
     public ViewSanPham() {
         initComponents();
+        dfm = (DefaultTableModel) tbl_KhuyenMai.getModel();
         khuyenMaiService = new KhuyenMaiServiceImpl();
         lists = khuyenMaiService.getAll();
         showData(lists);
