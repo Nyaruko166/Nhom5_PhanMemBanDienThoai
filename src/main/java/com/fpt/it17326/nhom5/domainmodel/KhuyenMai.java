@@ -55,4 +55,6 @@ public class KhuyenMai {
     @Column(name = "UpdatedAt")
     private Date updatedAt;
     
+    
+    
 }

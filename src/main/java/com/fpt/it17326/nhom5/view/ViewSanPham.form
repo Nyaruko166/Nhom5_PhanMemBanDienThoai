@@ -371,7 +371,7 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace pref="68" max="32767" attributes="0"/>
+                          <EmptySpace pref="70" max="32767" attributes="0"/>
                           <Component id="jTabbedPane1" min="-2" pref="980" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -2043,7 +2043,7 @@
                                           <Component id="jRadioButton1" min="-2" pref="98" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
                                           <Component id="jRadioButton2" min="-2" pref="136" max="-2" attributes="0"/>
-                                          <EmptySpace pref="100" max="32767" attributes="0"/>
+                                          <EmptySpace pref="104" max="32767" attributes="0"/>
                                           <Component id="jRadioButton3" min="-2" pref="98" max="-2" attributes="0"/>
                                       </Group>
                                       <Component id="jPanel1" max="32767" attributes="0"/>
@@ -2739,7 +2739,7 @@
                               </Group>
                               <Component id="jPanel15" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="78" max="32767" attributes="0"/>
+                          <EmptySpace pref="80" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="32767" attributes="0"/>
@@ -3157,7 +3157,7 @@
                           </Group>
                           <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                           <Component id="jPanel28" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="90" max="32767" attributes="0"/>
+                          <EmptySpace pref="79" max="32767" attributes="0"/>
                           <Component id="jPanel29" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
                       </Group>
@@ -3192,30 +3192,20 @@
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="dc_NgayBayDau" alignment="0" min="-2" pref="162" max="-2" attributes="0"/>
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Component id="txt_TenKM" pref="162" max="32767" attributes="0"/>
                                           <Component id="txt_MaKM" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <Component id="jLabel38" min="-2" pref="117" max="-2" attributes="0"/>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="txt_GiamGia" min="-2" pref="145" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel39" min="-2" pref="117" max="-2" attributes="0"/>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="rbt_NgungHoatDong" min="-2" pref="141" max="-2" attributes="0"/>
-                                                  <Component id="rbt_HoatDong" min="-2" pref="137" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                      </Group>
+                                      <Component id="jLabel38" min="-2" pref="117" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="txt_GiamGia" min="-2" pref="145" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="dc_NgayKetThuc" min="-2" pref="162" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="dc_NgayKetThuc" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="dc_NgayBayDau" alignment="0" pref="214" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
                               <EmptySpace pref="85" max="32767" attributes="0"/>
                           </Group>
@@ -3233,18 +3223,14 @@
                                           <Component id="jLabel38" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="txt_GiamGia" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLabel23" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="txt_TenKM" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel39" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="rbt_HoatDong" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="rbt_NgungHoatDong" min="-2" max="-2" attributes="0"/>
-                                          <Component id="dc_NgayBayDau" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
+                                      <Component id="dc_NgayBayDau" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="jLabel56" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -3258,7 +3244,7 @@
                                       <Component id="dc_NgayKetThuc" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="62" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -3275,8 +3261,32 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txt_TenKM">
+                      <Properties>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
+                            <BevelBorder>
+                              <Color PropertyName="highlightOuter" blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
+                              <Color PropertyName="highlightInner" blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
+                              <Color PropertyName="shadowOuter" blue="0" green="0" id="black" palette="1" red="0" type="palette"/>
+                              <Color PropertyName="shadowInner" blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
+                            </BevelBorder>
+                          </Border>
+                        </Property>
+                      </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txt_MaKM">
+                      <Properties>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
+                            <BevelBorder>
+                              <Color PropertyName="highlightOuter" blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
+                              <Color PropertyName="highlightInner" blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
+                              <Color PropertyName="shadowOuter" blue="0" green="0" id="black" palette="1" red="0" type="palette"/>
+                              <Color PropertyName="shadowInner" blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
+                            </BevelBorder>
+                          </Border>
+                        </Property>
+                      </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel38">
                       <Properties>
@@ -3284,26 +3294,17 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txt_GiamGia">
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel39">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="TR&#x1ea0;NG TH&#xc1;I"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JRadioButton" name="rbt_HoatDong">
-                      <Properties>
-                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                          <ComponentRef name="buttonGroup1"/>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
+                            <BevelBorder>
+                              <Color PropertyName="highlightOuter" blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
+                              <Color PropertyName="highlightInner" blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
+                              <Color PropertyName="shadowOuter" blue="0" green="0" id="black" palette="1" red="0" type="palette"/>
+                              <Color PropertyName="shadowInner" blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
+                            </BevelBorder>
+                          </Border>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="&#x110;ANG HO&#x1ea0;T &#x110;&#x1ed8;NG"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JRadioButton" name="rbt_NgungHoatDong">
-                      <Properties>
-                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                          <ComponentRef name="buttonGroup1"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="NG&#x1eea;NG HO&#x1ea0;T &#x110;&#x1ed8;NG"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel56">
@@ -3317,8 +3318,32 @@
                       </Properties>
                     </Component>
                     <Component class="com.toedter.calendar.JDateChooser" name="dc_NgayBayDau">
+                      <Properties>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
+                            <BevelBorder>
+                              <Color PropertyName="highlightOuter" blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
+                              <Color PropertyName="highlightInner" blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
+                              <Color PropertyName="shadowOuter" blue="0" green="0" id="black" palette="1" red="0" type="palette"/>
+                              <Color PropertyName="shadowInner" blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
+                            </BevelBorder>
+                          </Border>
+                        </Property>
+                      </Properties>
                     </Component>
                     <Component class="com.toedter.calendar.JDateChooser" name="dc_NgayKetThuc">
+                      <Properties>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
+                            <BevelBorder>
+                              <Color PropertyName="highlightOuter" blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
+                              <Color PropertyName="highlightInner" blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
+                              <Color PropertyName="shadowOuter" blue="0" green="0" id="black" palette="1" red="0" type="palette"/>
+                              <Color PropertyName="shadowInner" blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
+                            </BevelBorder>
+                          </Border>
+                        </Property>
+                      </Properties>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -3357,7 +3382,7 @@
                               <Component id="btn_Sua" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                               <Component id="btn_Xoa" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="71" max="32767" attributes="0"/>
+                              <EmptySpace pref="82" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -3414,12 +3439,12 @@
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="jButton22" min="-2" pref="175" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jButton41" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jButton41" min="-2" pref="175" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jTextField28" min="-2" pref="173" max="-2" attributes="0"/>
+                              <Component id="txt_SearchKM" min="-2" pref="173" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                               <Component id="jButton43" min="-2" pref="66" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
@@ -3432,10 +3457,10 @@
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jTextField28" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txt_SearchKM" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jButton22" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jButton41" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jButton43" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jButton41" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace pref="22" max="32767" attributes="0"/>
                               <Component id="jScrollPane15" min="-2" pref="211" max="-2" attributes="0"/>
@@ -3455,13 +3480,13 @@
                           <Properties>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                               <Table columnCount="7" rowCount="0">
-                                <Column editable="true" title="id" type="java.lang.Object"/>
-                                <Column editable="true" title="M&#xe3; KM" type="java.lang.Object"/>
-                                <Column editable="true" title="T&#xca;N KHUY&#x1ebe;N M&#xc3;I" type="java.lang.Object"/>
-                                <Column editable="true" title="GI&#x1ea2;M GI&#xc1;(%)" type="java.lang.Object"/>
-                                <Column editable="true" title="Ng&#xe0;y b&#x1eaf;t &#x111;&#x1ea7;u" type="java.lang.Object"/>
-                                <Column editable="true" title="Ng&#xe0;y k&#x1ebf;t th&#xfa;c" type="java.lang.Object"/>
-                                <Column editable="true" title="TR&#x1ea0;NG TH&#xc1;I" type="java.lang.Object"/>
+                                <Column editable="false" title="" type="java.lang.Object"/>
+                                <Column editable="false" title="M&#xe3; KM" type="java.lang.Object"/>
+                                <Column editable="false" title="T&#xca;N KHUY&#x1ebe;N M&#xc3;I" type="java.lang.Object"/>
+                                <Column editable="false" title="GI&#x1ea2;M GI&#xc1;(%)" type="java.lang.Object"/>
+                                <Column editable="false" title="Ng&#xe0;y b&#x1eaf;t &#x111;&#x1ea7;u" type="java.lang.Object"/>
+                                <Column editable="false" title="Ng&#xe0;y k&#x1ebf;t th&#xfa;c" type="java.lang.Object"/>
+                                <Column editable="false" title="TR&#x1ea0;NG TH&#xc1;I" type="java.lang.Object"/>
                               </Table>
                             </Property>
                             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -3510,23 +3535,18 @@
                         </Component>
                       </SubComponents>
                     </Container>
-                    <Component class="javax.swing.JTextField" name="jTextField28">
+                    <Component class="javax.swing.JTextField" name="txt_SearchKM">
                     </Component>
                     <Component class="javax.swing.JButton" name="jButton22">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="KHUY&#x1ebe;N M&#xc3;I &#x110;&#xc3; X&#xd3;A"/>
+                        <Property name="text" type="java.lang.String" value="KHUY&#x1ebe;N M&#xc3;I &#x110;&#xc3; H&#x1ebe;T H&#x1ea0;N"/>
                       </Properties>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="jButton41">
-                      <Properties>
-                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="HO&#x1ea0;T &#x110;&#x1ed8;NG L&#x1ea0;I"/>
-                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton22ActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="jButton43">
                       <Properties>
@@ -3535,6 +3555,20 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="T&#xcc;M"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton43ActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="jButton41">
+                      <Properties>
+                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="QUAY L&#x1ea0;I"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton41ActionPerformed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -3590,7 +3624,7 @@
                                   <Component id="jPanel31" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jPanel30" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="0" pref="42" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="55" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -4320,7 +4354,7 @@
                               <Component id="jPanel39" max="32767" attributes="0"/>
                               <Component id="jPanel35" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="63" max="32767" attributes="0"/>
+                          <EmptySpace pref="65" max="32767" attributes="0"/>
                       </Group>
                       <Component id="jPanel41" alignment="1" max="32767" attributes="0"/>
                   </Group>

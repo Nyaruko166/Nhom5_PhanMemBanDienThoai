@@ -45,6 +45,10 @@ public class KhuyenMaiResponse {
     }
 
     public Object[] toDataRow() {
-        return new Object[]{id, maKM, tenKM, soTienGiam, ngayBatDau, ngayKetThuc, "Hoạt động"};
+        String trangThai = "Hoạt động";
+        if (deleted==false) {
+            trangThai = "Đã ngừng hoạt động";
+        }
+        return new Object[]{id,maKM, tenKM, soTienGiam, ngayBatDau, ngayKetThuc, trangThai};
     }
 }
