@@ -17,6 +17,7 @@ import org.hibernate.query.Query;
  * @author youngboizseetinh
  */
 public class KhuyenMaiRepository {
+
     private Session session = HibernateConfig.getFACTORY().openSession();
 
     private String fromTable = "FROM KhuyenMai";
@@ -25,38 +26,54 @@ public class KhuyenMaiRepository {
         Query query = session.createQuery(fromTable);
         return query.getResultList();
     }
+
     public List<KhuyenMai> getAllTrue() {
         Query query = session.createQuery(fromTable + " where Deleted = 'true'");
         return query.getResultList();
     }
+
     public List<KhuyenMai> getAllFalse() {
         Query query = session.createQuery(fromTable + " where Deleted = 'false'");
         return query.getResultList();
     }
 
-    public KhuyenMaiResponse getOne(int id) {
+    public KhuyenMai getOne(int id) {
         String sql = fromTable + " WHERE id=:id";
         Query query = session.createQuery(sql);
         query.setParameter("id", id);
-        return (KhuyenMaiResponse) query.getSingleResult();
+        return (KhuyenMai) query.getSingleResult();
     }
 
     public Boolean add(KhuyenMai km) {
         Transaction transaction = null;
-        try (Session session = HibernateConfig.getFACTORY().openSession()) {
+        int affectedRows = 0;
+        try ( Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
-            session.save(km);
-            transaction.commit();
-            return true;
+            String hql = "UPDATE [dbo].[KhuyenMai]\n"
+                    + "   SET [MaKM] =:Ma\n"
+                    + "      ,[TenKM] =:TenKM\n"
+                    + "      ,[SoTienGiam] =:SoTienGiam\n"
+                    + "      ,[NgayBatDau] =:NgayBatDau\n"
+                    + "      ,[NgayKetThuc] =:NgayKetThuc\n"
+                    + "      ,[UpdatedAt] =:Upda\n"
+                    + " WHERE id=:id";
+            Query query = session.createQuery(hql);
+            query.setParameter("id", km.getId());
+            query.setParameter("TenKM", km.getTenKM());
+            query.setParameter("SoTienGiam", km.getSoTienGiam());
+            query.setParameter("NgayBatDau", km.getNgayBatDau());
+            query.setParameter("NgayKetThuc", km.getNgayKetThuc());
+            query.setParameter("Upda", km.getUpdatedAt());
+            affectedRows = query.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return affectedRows > 0;
     }
 
     public Boolean update(KhuyenMai km) {
         Transaction transaction = null;
-        try (Session session = HibernateConfig.getFACTORY().openSession()) {
+        try ( Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
             session.saveOrUpdate(km);
             transaction.commit();
@@ -67,15 +84,17 @@ public class KhuyenMaiRepository {
         return null;
     }
 
-    public Boolean delete(KhuyenMai km) {
+    public Boolean delete(int id) {
         Transaction transaction = null;
-        try (Session session = HibernateConfig.getFACTORY().openSession()) {
-            km.setDeleted(false);
-            update(km);
-            return true;
+        int affectedRows = 0;
+        try ( Session session = HibernateConfig.getFACTORY().openSession()) {
+            transaction = session.beginTransaction();
+            String hql = "update KhuyenMai set Deleted = 'false' where id =:id";
+            Query query = session.createQuery(hql);
+            query.setParameter("id", id);
+            affectedRows = query.executeUpdate();
         } catch (Exception e) {
-            e.printStackTrace();
         }
-        return null;
+        return affectedRows > 0;
     }
 }

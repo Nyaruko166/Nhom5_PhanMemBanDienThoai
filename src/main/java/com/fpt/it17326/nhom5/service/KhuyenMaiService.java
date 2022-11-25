@@ -26,5 +26,5 @@ public interface KhuyenMaiService {
 
     String update(KhuyenMai km);
 
-    String delete(KhuyenMai km);
+    String delete(int km);
 }

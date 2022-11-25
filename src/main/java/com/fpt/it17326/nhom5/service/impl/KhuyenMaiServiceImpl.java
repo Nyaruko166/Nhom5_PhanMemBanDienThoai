@@ -27,7 +27,7 @@ public class KhuyenMaiServiceImpl implements KhuyenMaiService {
 
     @Override
     public KhuyenMaiResponse getOne(int MaKM) {
-        KhuyenMaiResponse lsp = new KhuyenMaiRepository().getOne(MaKM);
+        KhuyenMaiResponse lsp = new KhuyenMaiResponse(khuyenMaiRepository.getOne(MaKM));
         return lsp;
     }
 
@@ -50,7 +50,7 @@ public class KhuyenMaiServiceImpl implements KhuyenMaiService {
     }
 
     @Override
-    public String delete(KhuyenMai km) {
+    public String delete(int km) {
         if (khuyenMaiRepository.delete(km)) {
             return "Xóa thành công";
         } else {

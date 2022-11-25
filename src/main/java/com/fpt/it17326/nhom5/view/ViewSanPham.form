@@ -3480,10 +3480,10 @@
                           <Properties>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                               <Table columnCount="7" rowCount="0">
-                                <Column editable="false" title="" type="java.lang.Object"/>
+                                <Column editable="false" title="ID" type="java.lang.Object"/>
                                 <Column editable="false" title="M&#xe3; KM" type="java.lang.Object"/>
                                 <Column editable="false" title="T&#xca;N KHUY&#x1ebe;N M&#xc3;I" type="java.lang.Object"/>
-                                <Column editable="false" title="GI&#x1ea2;M GI&#xc1;(%)" type="java.lang.Object"/>
+                                <Column editable="false" title="GI&#x1ea2;M GI&#xc1;(%)" type="java.lang.String"/>
                                 <Column editable="false" title="Ng&#xe0;y b&#x1eaf;t &#x111;&#x1ea7;u" type="java.lang.Object"/>
                                 <Column editable="false" title="Ng&#xe0;y k&#x1ebf;t th&#xfa;c" type="java.lang.Object"/>
                                 <Column editable="false" title="TR&#x1ea0;NG TH&#xc1;I" type="java.lang.Object"/>
@@ -3532,6 +3532,9 @@
                               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbl_KhuyenMaiMouseClicked"/>
+                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>

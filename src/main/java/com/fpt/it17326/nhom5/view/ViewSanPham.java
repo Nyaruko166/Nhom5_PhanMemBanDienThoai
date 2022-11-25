@@ -8,7 +8,9 @@ import com.fpt.it17326.nhom5.domainmodel.KhuyenMai;
 import com.fpt.it17326.nhom5.response.KhuyenMaiResponse;
 import com.fpt.it17326.nhom5.service.KhuyenMaiService;
 import com.fpt.it17326.nhom5.service.impl.KhuyenMaiServiceImpl;
+import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -35,10 +37,10 @@ public class ViewSanPham extends javax.swing.JFrame {
 
     }
 
-  
     public KhuyenMai getData() {
         KhuyenMai khuyenMai = new KhuyenMai();
         khuyenMai.setMaKM(txt_MaKM.getText());
+        khuyenMai.setTenKM(txt_TenKM.getText());
         khuyenMai.setNgayBatDau(dc_NgayBayDau.getDate());
         khuyenMai.setNgayKetThuc(dc_NgayKetThuc.getDate());
         khuyenMai.setSoTienGiam(Float.parseFloat(txt_GiamGia.getText()));
@@ -2089,15 +2091,27 @@ public class ViewSanPham extends javax.swing.JFrame {
 
             },
             new String [] {
-                "", "Mã KM", "TÊN KHUYẾN MÃI", "GIẢM GIÁ(%)", "Ngày bắt đầu", "Ngày kết thúc", "TRẠNG THÁI"
+                "ID", "Mã KM", "TÊN KHUYẾN MÃI", "GIẢM GIÁ(%)", "Ngày bắt đầu", "Ngày kết thúc", "TRẠNG THÁI"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false
             };
 
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tbl_KhuyenMai.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_KhuyenMaiMouseClicked(evt);
             }
         });
         jScrollPane15.setViewportView(tbl_KhuyenMai);
@@ -2924,20 +2938,48 @@ public class ViewSanPham extends javax.swing.JFrame {
     private void btn_XoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaActionPerformed
         int row = tbl_KhuyenMai.getSelectedRow();
         KhuyenMaiResponse khuyenMai = khuyenMaiService.getOne((int) dfm.getValueAt(row, 0));
+        khuyenMaiService.delete(khuyenMai.getId());
         lists.remove(row);
         lists2.add(khuyenMai);
-        khuyenMai.setDeleted(false);
+        showData(lists);
 
- 
-       
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_XoaActionPerformed
 
     private void btn_SuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SuaActionPerformed
+        int index = tbl_KhuyenMai.getSelectedRow();
+        if (index == -1) {
+            JOptionPane.showMessageDialog(rootPane, "Bạn chưa chọn hàng cần update!");
+        } else {
+            KhuyenMai khuyenMai = getData();
+            khuyenMai.setId((int) dfm.getValueAt(index, 0));
+            khuyenMai.setMaKM(txt_MaKM.getText());
+            khuyenMai.setTenKM(txt_TenKM.getText());
+            khuyenMai.setNgayBatDau(dc_NgayBayDau.getDate());
+            khuyenMai.setNgayKetThuc(dc_NgayKetThuc.getDate());
+            khuyenMai.setSoTienGiam(Float.parseFloat(txt_GiamGia.getText()));
+            khuyenMai.setUpdatedAt(java.util.Calendar.getInstance().getTime());
+            if (dc_NgayKetThuc.getDate().after(java.util.Calendar.getInstance().getTime()) || dc_NgayKetThuc.getDate().equals(java.util.Calendar.getInstance().getTime())) {
+                khuyenMai.setDeleted(true);
+            } else if (dc_NgayKetThuc.getDate().before(java.util.Calendar.getInstance().getTime())) {
+                khuyenMai.setDeleted(false);
+            }
+            khuyenMaiService.update(khuyenMai);
+            showData(lists);
+            JOptionPane.showMessageDialog(this, "Update thành công!");
+        }
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_SuaActionPerformed
 
     private void btn_ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemActionPerformed
+
+        try {
+            KhuyenMai khuyenMai = getData();
+            JOptionPane.showMessageDialog(this, khuyenMaiService.add(khuyenMai));
+            showData(lists);
+        } catch (Exception e) {
+
+        }
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_ThemActionPerformed
 
@@ -2958,6 +3000,16 @@ public class ViewSanPham extends javax.swing.JFrame {
         txt_TenKM.setText(khuyenMai.getTenKM());
 // TODO add your handling code here:
     }//GEN-LAST:event_jButton43ActionPerformed
+
+    private void tbl_KhuyenMaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_KhuyenMaiMouseClicked
+        int index = tbl_KhuyenMai.getSelectedRow();
+        txt_MaKM.setText((String) dfm.getValueAt(index, 1));
+        txt_TenKM.setText((String) dfm.getValueAt(index, 2));
+        txt_GiamGia.setText(dfm.getValueAt(index, 3).toString());
+        dc_NgayBayDau.setDate((Date) dfm.getValueAt(index, 4));
+        dc_NgayKetThuc.setDate((Date) dfm.getValueAt(index, 5));
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tbl_KhuyenMaiMouseClicked
 
     /**
      * @param args the command line arguments
