@@ -1,7 +1,5 @@
 package com.fpt.it17326.nhom5.domainmodel;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,7 +17,7 @@ import lombok.ToString;
  **/
 
 @Entity
-@Table (name = "Imei")
+@Table (name = "IMEL")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -29,21 +27,18 @@ public class Imei {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    @Column (name = "Id")
-    private Long id;
-    
-    @Column (name = "MaImei")
+    @Column (name = "MaIMel")
     private String maImel;
 
-    @Column (name = "TenImei")
+    @Column (name = "TenIMel")
     private String tenImel;
 
     @Column (name = "CreatedAt")
-    private Date createdAt;
+    private String createdAt;
 
     @Column (name = "Deleted")
-    private boolean deleted;
+    private Boolean deleted;
 
     @Column (name = "UpdatedAt")
-    private Date updatedAt;
+    private String updatedAt;
 }

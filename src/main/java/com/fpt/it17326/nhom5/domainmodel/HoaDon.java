@@ -33,9 +33,9 @@ public class HoaDon {
     @Column(name = "Id")
     private int id;
 
-    @ManyToOne
-    @JoinColumn(name = "IdBH", referencedColumnName = "Id")
-    private BaoHanh baoHanh;
+//    @ManyToOne
+//    @JoinColumn(name = "IdBH", referencedColumnName = "Id")
+//    private BaoHanh baoHanh;
 
     @Column(name = "MaHD")
     private String maHD;
@@ -72,4 +72,19 @@ public class HoaDon {
 
     @Column(name = "UpdatedAt")
     private Date updatedAt;
+
+    public HoaDon(String maHD, TrangThaiHoaDon trangThaiHoaDon) {
+        this.maHD = maHD;
+        this.trangThaiHoaDon = trangThaiHoaDon;
+    }
+
+    public HoaDon(String maHD, String tenKH, TrangThaiHoaDon trangThaiHoaDon, NhanVien nhanVien, Float tongTien) {
+        this.maHD = maHD;
+        this.tenKH = tenKH;
+        this.trangThaiHoaDon = trangThaiHoaDon;
+        this.nhanVien = nhanVien;
+        this.tongTien = tongTien;
+    }
+
+    
 }
