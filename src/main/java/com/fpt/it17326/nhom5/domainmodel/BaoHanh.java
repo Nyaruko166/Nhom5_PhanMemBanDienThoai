@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -52,4 +54,11 @@ public class BaoHanh {
     @Column (name = "UpdatedAt")
     private Date updatedAt;
 
+    @ManyToOne
+    @JoinColumn (name = "IdHang", referencedColumnName = "Id")
+    private HangDienThoai hangDienThoai;
+    
+    @ManyToOne
+    @JoinColumn (name = "IdSP", referencedColumnName = "Id")
+    private SanPham sanPham;
 }
