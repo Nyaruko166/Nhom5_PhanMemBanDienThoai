@@ -20,34 +20,28 @@ import lombok.ToString;
  *
  */
 @Entity
-@Table(name = "DoiTra")
+@Table(name = "ImeiDaBan")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class DoiTra {
+public class ImeiDaBan {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
     private int id;
 
-    @Column(name = "MaDoiTra")
-    private String maDoiTra;
-
     @ManyToOne
-    @JoinColumn(name = "IdHD", referencedColumnName = "Id")
-    private HoaDon hoaDon;
+    @JoinColumn(name = "IdHoaDonChiTiet", referencedColumnName = "Id")
+    private HoaDonChiTiet hoaDonChiTiet;
 
-    @Column(name = "LyDoDoiTra")
-    private String liDoDoiTra;
+    @Column(name = "MaImei")
+    private String maImei;
 
-    @Column(name = "HanDoiTra")
-    private Long hanDoiTra;
-
-    @Column(name = "TrangThai")
-    private boolean trangThai;
+    @Column(name = "Imei")
+    private String imei;
 
     @Column(name = "CreatedAt")
     private Date createdAt;

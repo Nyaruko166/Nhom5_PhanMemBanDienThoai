@@ -34,8 +34,8 @@ public class Ram {
     @Column (name = "MaRam")
     private String maRam;
 
-    @Column (name = "TenRam")
-    private String tenRam;
+    @Column (name = "DungLuong")
+    private String dungLuong;
 
     @Column (name = "CreatedAt")
     private Date createdAt;
