@@ -2,6 +2,7 @@ package com.fpt.it17326.nhom5.config;
 
 import com.fpt.it17326.nhom5.domainmodel.Anh;
 import com.fpt.it17326.nhom5.domainmodel.Chip;
+import com.fpt.it17326.nhom5.domainmodel.GiamTheoSP;
 import com.fpt.it17326.nhom5.domainmodel.HangDienThoai;
 import com.fpt.it17326.nhom5.domainmodel.KhuyenMai;
 import com.fpt.it17326.nhom5.domainmodel.LoaiSP;
@@ -48,6 +49,7 @@ public class HibernateConfig {
         conf.addAnnotatedClass(Chip.class);
         conf.addAnnotatedClass(Pin.class);
         conf.addAnnotatedClass(KhuyenMai.class);
+        conf.addAnnotatedClass(GiamTheoSP.class);
 
         ServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .applySettings(conf.getProperties()).build();
@@ -59,7 +61,7 @@ public class HibernateConfig {
         return FACTORY;
     }
 
-//    public static void main(String[] args) {
-//        getFACTORY();
-//    }
+    public static void main(String[] args) {
+        getFACTORY();
+    }
 }

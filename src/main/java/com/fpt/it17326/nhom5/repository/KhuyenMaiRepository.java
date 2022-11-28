@@ -7,6 +7,8 @@ package com.fpt.it17326.nhom5.repository;
 import com.fpt.it17326.nhom5.config.HibernateConfig;
 import com.fpt.it17326.nhom5.domainmodel.KhuyenMai;
 import com.fpt.it17326.nhom5.response.KhuyenMaiResponse;
+import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -44,31 +46,17 @@ public class KhuyenMaiRepository {
         return (KhuyenMai) query.getSingleResult();
     }
 
-    public Boolean add(KhuyenMai km) {
+    public Boolean addTheoHoaDon(KhuyenMai km) {
         Transaction transaction = null;
-        int affectedRows = 0;
         try ( Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
-            String hql = "UPDATE [dbo].[KhuyenMai]\n"
-                    + "   SET [MaKM] =:Ma\n"
-                    + "      ,[TenKM] =:TenKM\n"
-                    + "      ,[SoTienGiam] =:SoTienGiam\n"
-                    + "      ,[NgayBatDau] =:NgayBatDau\n"
-                    + "      ,[NgayKetThuc] =:NgayKetThuc\n"
-                    + "      ,[UpdatedAt] =:Upda\n"
-                    + " WHERE id=:id";
-            Query query = session.createQuery(hql);
-            query.setParameter("id", km.getId());
-            query.setParameter("TenKM", km.getTenKM());
-            query.setParameter("SoTienGiam", km.getSoTienGiam());
-            query.setParameter("NgayBatDau", km.getNgayBatDau());
-            query.setParameter("NgayKetThuc", km.getNgayKetThuc());
-            query.setParameter("Upda", km.getUpdatedAt());
-            affectedRows = query.executeUpdate();
+            session.save(km);
+            transaction.commit();
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return affectedRows > 0;
+        return null;
     }
 
     public Boolean update(KhuyenMai km) {
@@ -84,17 +72,21 @@ public class KhuyenMaiRepository {
         return null;
     }
 
-    public Boolean delete(int id) {
+    public Boolean delete(KhuyenMai chip) {
         Transaction transaction = null;
-        int affectedRows = 0;
-        try ( Session session = HibernateConfig.getFACTORY().openSession()) {
+        try (Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
-            String hql = "update KhuyenMai set Deleted = 'false' where id =:id";
-            Query query = session.createQuery(hql);
-            query.setParameter("id", id);
-            affectedRows = query.executeUpdate();
+            session.delete(chip);
+            transaction.commit();
+            return true;
         } catch (Exception e) {
+            e.printStackTrace(System.out);
         }
-        return affectedRows > 0;
+        return null;
+    }
+    public static void main(String[] args) {
+        KhuyenMaiRepository khuyenMaiRepository = new KhuyenMaiRepository();
+        KhuyenMai khuyenMai = new KhuyenMai(3,"KM00110", "Khuyen mai", true,false,Float.max(100, 10000),Float.max(100, 10000), java.util.Calendar.getInstance().getTime(), java.util.Calendar.getInstance().getTime(), java.util.Calendar.getInstance().getTime(), true, null);
+        khuyenMaiRepository.delete(khuyenMai);
     }
 }

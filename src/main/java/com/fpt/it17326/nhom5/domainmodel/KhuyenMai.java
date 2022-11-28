@@ -18,7 +18,7 @@ import lombok.ToString;
  *
  */
 @Entity
-@Table (name = "KhuyenMai")
+@Table(name = "KhuyenMai")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -27,34 +27,41 @@ import lombok.ToString;
 public class KhuyenMai {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
     private int id;
-    
+
     @Column(name = "MaKM")
     private String maKM;
-    
+
     @Column(name = "TenKM")
     private String tenKM;
+
+    @Column(name = "LoaiGiamGia")
+    private Boolean loaiGiamGia;
+
+    @Column(name = "HinhThucGiamGia")
+    private Boolean hinhThucGiamGia;
     
     @Column(name = "SoTienGiam")
     private Float soTienGiam;
     
+    @Column(name = "GiaTriDonHangToiThieu")
+    private Float giaTriDonHangToiThieu;
+    
     @Column(name = "NgayBatDau")
     private Date ngayBatDau;
-    
+
     @Column(name = "NgayKetThuc")
     private Date ngayKetThuc;
-    
+
     @Column(name = "CreatedAt")
     private Date createdAt;
-    
+
     @Column(name = "Deleted")
-    private boolean deleted;
-    
+    private Boolean deleted;
+
     @Column(name = "UpdatedAt")
     private Date updatedAt;
-    
-    
-    
+
 }

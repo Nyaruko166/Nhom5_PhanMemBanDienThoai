@@ -32,8 +32,8 @@ public class KhuyenMaiServiceImpl implements KhuyenMaiService {
     }
 
     @Override
-    public String add(KhuyenMai km) {
-        if (khuyenMaiRepository.add(km)) {
+    public String addTheoHoaDon(KhuyenMai km) {
+        if (khuyenMaiRepository.addTheoHoaDon(km)) {
             return "Thêm thành công";
         } else {
             return "Thêm thất bại";
@@ -50,7 +50,7 @@ public class KhuyenMaiServiceImpl implements KhuyenMaiService {
     }
 
     @Override
-    public String delete(int km) {
+    public String delete(KhuyenMai km) {
         if (khuyenMaiRepository.delete(km)) {
             return "Xóa thành công";
         } else {

@@ -20,11 +20,11 @@ public interface KhuyenMaiService {
 
     List<KhuyenMaiResponse> getAllFalse();
 
-    KhuyenMaiResponse getOne(int MaKM);
+    KhuyenMaiResponse getOne(int id);
 
-    String add(KhuyenMai km);
+    String addTheoHoaDon(KhuyenMai km);
 
     String update(KhuyenMai km);
 
-    String delete(int km);
+    String delete(KhuyenMai km);
 }
