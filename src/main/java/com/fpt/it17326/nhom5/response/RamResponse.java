@@ -20,7 +20,7 @@ import lombok.ToString;
 public class RamResponse {
     
     private String maRam;
-    private String tenRam;
+    private String dungLuong;
     private Date CreatedAt;
     private boolean Deleted;
     private Date UpdatedAt;
@@ -30,7 +30,7 @@ public class RamResponse {
 
     public RamResponse(Ram ram) {
         this.maRam = ram.getMaRam();
-        this.tenRam = ram.getTenRam();
+        this.dungLuong = ram.getDungLuong();
         this.CreatedAt = ram.getCreatedAt();
         this.Deleted = ram.isDeleted();
         this.UpdatedAt = ram.getUpdatedAt();

@@ -36,9 +36,6 @@ public class Anh {
     @Column(name = "UrlAnh")
     private String urlAnh;
     
-    @Column(name = "Cover")
-    private boolean cover;
-    
     @Column(name = "CreatedAt")
     private Date createdAt;
     

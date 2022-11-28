@@ -24,14 +24,12 @@ public class SanPhamResponse {
     private String tenSP;
     private Float donGia;
     private int soLuong;
-    private int tenImei;
     private String moTa;
     private String tenAnh;
-    private String maLoaiSP;
     private String tenMauSac;
     private String tenHang;
     private String tenChip;
-    private String tenRam;
+    private String dungLuong;
     private String tenRom;
     private String tenPin;
     private Date CreatedAt;
@@ -47,14 +45,12 @@ public class SanPhamResponse {
         this.tenSP = sp.getTenSP();
         this.donGia = sp.getDonGia();
         this.soLuong = sp.getSoLuong();
-        this.tenImei = sp.getImei();
         this.moTa = sp.getMoTa();
         this.tenAnh = sp.getAnh().getMaAnh();
-        this.maLoaiSP = sp.getLoaiSP().getMaLoaiSP();
         this.tenMauSac = sp.getMauSac().getTenMauSac();
         this.tenHang = sp.getHangdt().getTenHang();
         this.tenChip = sp.getChip().getTenChip();
-        this.tenRam = sp.getRam().getTenRam();
+        this.dungLuong = sp.getRam().getDungLuong();
         this.tenRom = sp.getRom().getTenRom();
         this.tenPin = sp.getPin().getTenPin();
         this.CreatedAt = sp.getCreatedAt();
@@ -63,7 +59,7 @@ public class SanPhamResponse {
     }
 
     public Object[] toDataRow() {
-        return new Object[]{maSP, tenSP, donGia,soLuong, tenImei, moTa, tenAnh, maLoaiSP, tenMauSac, tenHang, tenChip, tenRam, tenRom, tenPin};
+        return new Object[]{maSP, tenSP, donGia,soLuong, moTa, tenAnh, tenMauSac, tenHang, tenChip, dungLuong, tenRom, tenPin};
     }
 
 }

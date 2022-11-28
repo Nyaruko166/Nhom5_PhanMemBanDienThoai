@@ -46,9 +46,6 @@ public class SanPham {
     
     @Column (name = "SoLuong")
     private int soLuong;
-    
-    @Column (name = "IdImei")
-    private int Imei;
 
     @Column (name = "MoTa")
     private String moTa;
@@ -56,10 +53,6 @@ public class SanPham {
     @ManyToOne
     @JoinColumn (name = "IdAnh", referencedColumnName = "Id")
     private Anh anh;
-
-    @ManyToOne
-    @JoinColumn (name = "IdLoaiSP", referencedColumnName = "Id")
-    private LoaiSP loaiSP;
 
     @ManyToOne
     @JoinColumn (name = "IdMauSac", referencedColumnName = "Id")
@@ -94,15 +87,13 @@ public class SanPham {
     @Column (name = "UpdatedAt")
     private Date updatedAt;
 
-    public SanPham(String maSP, String tenSP, Float donGia, int soLuong, int Imei, String moTa, Anh anh, LoaiSP loaiSP, MauSac mauSac, HangDienThoai hangdt, Chip chip, Ram ram, Rom rom, Pin pin, Date createdAt, boolean deleted, Date updatedAt) {
+    public SanPham(String maSP, String tenSP, Float donGia, int soLuong, String moTa, Anh anh, MauSac mauSac, HangDienThoai hangdt, Chip chip, Ram ram, Rom rom, Pin pin, Date createdAt, boolean deleted, Date updatedAt) {
         this.maSP = maSP;
         this.tenSP = tenSP;
         this.donGia = donGia;
         this.soLuong = soLuong;
-        this.Imei = Imei;
         this.moTa = moTa;
         this.anh = anh;
-        this.loaiSP = loaiSP;
         this.mauSac = mauSac;
         this.hangdt = hangdt;
         this.chip = chip;

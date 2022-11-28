@@ -17,7 +17,6 @@ public class AnhResponse {
 
     private String maAnh;
     private String urlAnh;
-    private boolean cover;
     private Date createAt;
     private boolean deleted;
     private Date updateAt;
@@ -28,7 +27,6 @@ public class AnhResponse {
     public AnhResponse(Anh anh) {
         this.maAnh = anh.getMaAnh();
         this.urlAnh = anh.getUrlAnh();
-        this.cover = anh.isCover();
         this.createAt = anh.getCreatedAt();
         this.deleted = anh.isDeleted();
         this.updateAt = anh.getUpdatedAt();
