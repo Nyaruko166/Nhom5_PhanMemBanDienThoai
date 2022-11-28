@@ -19,10 +19,12 @@ import lombok.ToString;
 @ToString
 public class SanPhamResponse {
 
+    private int id;
     private String maSP;
     private String tenSP;
     private Float donGia;
-    private String tenImei;
+    private int soLuong;
+    private int tenImei;
     private String moTa;
     private String tenAnh;
     private String maLoaiSP;
@@ -40,10 +42,12 @@ public class SanPhamResponse {
     }
 
     public SanPhamResponse(SanPham sp) {
+        this.id = sp.getId();
         this.maSP = sp.getMaSP();
         this.tenSP = sp.getTenSP();
         this.donGia = sp.getDonGia();
-        this.tenImei = sp.getImei().getTenImel();
+        this.soLuong = sp.getSoLuong();
+        this.tenImei = sp.getImei();
         this.moTa = sp.getMoTa();
         this.tenAnh = sp.getAnh().getMaAnh();
         this.maLoaiSP = sp.getLoaiSP().getMaLoaiSP();
@@ -56,6 +60,10 @@ public class SanPhamResponse {
         this.CreatedAt = sp.getCreatedAt();
         this.Deleted = sp.isDeleted();
         this.UpdatedAt = sp.getUpdatedAt();
+    }
+
+    public Object[] toDataRow() {
+        return new Object[]{maSP, tenSP, donGia,soLuong, tenImei, moTa, tenAnh, maLoaiSP, tenMauSac, tenHang, tenChip, tenRam, tenRom, tenPin};
     }
 
 }

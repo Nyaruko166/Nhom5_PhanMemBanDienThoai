@@ -26,7 +26,7 @@ public class HoaDonResponse {
     }
 
     public HoaDonResponse(HoaDon hd) {
-        this.maBaoHanh = hd.getBaoHanh().getMaBaoHanh();
+
         this.maHD = hd.getMaHD();
         this.tenKH = hd.getTenKH();
         this.sdt = hd.getSdt();
@@ -38,6 +38,16 @@ public class HoaDonResponse {
         this.createdAt = hd.getCreatedAt();
         this.deleted = hd.isDeleted();
         this.updatedAt = hd.getUpdatedAt();
+    }
+
+    public HoaDonResponse(String maTT) {
+        this.maTT = maTT;
+    }
+
+    public HoaDonResponse(String maHD, String maTT, String maNV) {
+        this.maHD = maHD;
+        this.maTT = maTT;
+        this.maNV = maNV;
     }
     
     

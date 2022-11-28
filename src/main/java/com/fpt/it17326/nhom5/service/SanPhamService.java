@@ -23,4 +23,7 @@ public interface SanPhamService {
     String update(SanPham sp);
 
     String delete(SanPham sp);
+    
+    String updateSL(SanPham sp, int sl);
+
 }

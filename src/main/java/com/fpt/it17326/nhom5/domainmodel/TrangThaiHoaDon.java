@@ -1,4 +1,4 @@
-package com.fpt.it17326.nhom5.domainmodel;
+    package com.fpt.it17326.nhom5.domainmodel;
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -37,5 +37,8 @@ public class TrangThaiHoaDon {
     @Column (name = "TinhTrang")
     private String tinhTrang;
 
-    
+    public TrangThaiHoaDon(String maTT) {
+        this.maTT = maTT;
+    }
+
 }

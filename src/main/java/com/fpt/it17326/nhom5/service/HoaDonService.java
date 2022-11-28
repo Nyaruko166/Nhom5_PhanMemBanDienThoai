@@ -12,7 +12,7 @@ import java.util.List;
 public interface HoaDonService {
     List<HoaDonResponse> getAll();
 
-    HoaDonResponse getOne(String MaHoaDon);
+    HoaDon getOne(String MaHoaDon);
 
     String add(HoaDon hd);
 

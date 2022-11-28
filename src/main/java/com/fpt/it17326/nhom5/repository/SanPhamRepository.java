@@ -34,9 +34,16 @@ public class SanPhamRepository {
         return (SanPham) query.getSingleResult();
     }
 
+    public SanPham getOne(int id) {
+        String sql = fromTable + " WHERE Id =: id";
+
+        Query query = session.createQuery(sql);
+        query.setParameter("id", id);
+        return (SanPham) query.getSingleResult();
+    }
     public Boolean add(SanPham sp) {
         Transaction transaction = null;
-        try (Session session = HibernateConfig.getFACTORY().openSession()) {
+        try ( Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
             session.save(sp);
             transaction.commit();
@@ -49,7 +56,7 @@ public class SanPhamRepository {
 
     public Boolean update(SanPham sp) {
         Transaction transaction = null;
-        try (Session session = HibernateConfig.getFACTORY().openSession()) {
+        try ( Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
             session.saveOrUpdate(sp);
             transaction.commit();
@@ -62,7 +69,7 @@ public class SanPhamRepository {
 
     public Boolean delete(SanPham sp) {
         Transaction transaction = null;
-        try (Session session = HibernateConfig.getFACTORY().openSession()) {
+        try ( Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
             sp.setDeleted(true);
             session.update(sp);
@@ -72,5 +79,28 @@ public class SanPhamRepository {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public Boolean updateSL(SanPham sp, int sl) {
+        boolean update = false;
+        try ( Session session = HibernateConfig.getFACTORY().openSession()) {
+            Transaction tran = session.beginTransaction();
+            try {
+                String hql = "UPDATE SanPham SET SoLuong = :sl";
+                Query query = session.createQuery(hql);
+                query.setParameter("sl", sl);
+                int check = query.executeUpdate();
+                if (check == 0) {
+                    update = false;
+
+                }
+                tran.commit();
+                update = true;
+            } catch (Exception e) {
+                e.printStackTrace();
+                tran.rollback();
+            }
+        }
+        return update;
     }
 }
