@@ -63,7 +63,8 @@ public class ChipRepository {
         Transaction transaction = null;
         try (Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
-            session.delete(chip);
+            chip.setDeleted(true);
+            session.update(chip);
             transaction.commit();
             return true;
         } catch (Exception e) {

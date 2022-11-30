@@ -38,7 +38,6 @@ public class NhanVienResponse {
         this.email = nv.getEmail();
         this.queQuan = nv.getQueQuan();
         this.ngaySinh = nv.getNgaySinh();
-        this.luong = nv.getLuong();
         this.taiKhoan = nv.getTaiKhoan();
         this.matKhau = nv.getMatKhau();
         this.createdAt = nv.getCreatedAt();

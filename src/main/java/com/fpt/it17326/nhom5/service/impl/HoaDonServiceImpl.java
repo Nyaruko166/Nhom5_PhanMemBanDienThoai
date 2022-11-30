@@ -19,22 +19,37 @@ public class HoaDonServiceImpl implements HoaDonService {
     public List<HoaDonResponse> getAll() {
         List<HoaDonResponse> lst = new ArrayList<>();
         List<HoaDon> lstHD = hoaDonRepository.getAll();
+        // todo start
+        return null;
+        // todo end
     }
 
     @Override
     public HoaDonResponse getOne(String MaHoaDon) {
+        // todo start
+        return null;
+        // todo end
     }
 
     @Override
     public String add(HoaDon hd) {
+        // todo start
+        return null;
+        // todo end
     }
 
     @Override
     public String update(HoaDon hd) {
+        // todo start
+        return null;
+        // todo end
     }
 
     @Override
     public String delete(HoaDon hd) {
+        // todo start
+        return null;
+        // todo end
     }
 
 }

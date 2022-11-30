@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -34,8 +35,8 @@ public class Ram {
     @Column (name = "MaRam")
     private String maRam;
 
-    @Column (name = "TenRam")
-    private String tenRam;
+    @Column (name = "DungLuong")
+    private String dungLuong;
 
     @Column (name = "CreatedAt")
     private Date createdAt;

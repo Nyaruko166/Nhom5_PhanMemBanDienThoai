@@ -30,7 +30,7 @@ public class HangDienThoai {
     @Column(name = "Id")
     private int id;
 
-    @Column(name = "MaHangDT")
+    @Column(name = "MaHang")
     private String maHangDT;
 
     @Column(name = "TenHang")

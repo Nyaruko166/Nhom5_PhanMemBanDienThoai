@@ -61,8 +61,8 @@ public class HangDienThoaiRepository {
         Transaction transaction = null;
         try ( Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
+            hdt.setDeleted(true);
             session.update(hdt);
-            transaction.commit();
             return true;
         } catch (Exception e) {
             e.printStackTrace();

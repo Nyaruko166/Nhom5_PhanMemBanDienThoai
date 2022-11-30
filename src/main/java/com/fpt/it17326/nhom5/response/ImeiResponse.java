@@ -30,7 +30,7 @@ public class ImeiResponse {
 
     public ImeiResponse(Imei imei) {
         this.maImei = imei.getMaImel();
-        this.tenImei = imei.getTenImel();
+        this.tenImei = imei.getImei();
         this.createdAt = imei.getCreatedAt();
         this.deleted = imei.isDeleted();
         this.updatedAt = imei.getUpdatedAt();

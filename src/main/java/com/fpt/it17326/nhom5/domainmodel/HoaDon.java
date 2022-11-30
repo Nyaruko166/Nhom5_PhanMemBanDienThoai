@@ -33,12 +33,12 @@ public class HoaDon {
     @Column(name = "Id")
     private int id;
 
-    @ManyToOne
-    @JoinColumn(name = "IdBH", referencedColumnName = "Id")
-    private BaoHanh baoHanh;
-
     @Column(name = "MaHD")
     private String maHD;
+
+    @ManyToOne
+    @JoinColumn(name = "IdNV", referencedColumnName = "Id")
+    private NhanVien nhanVien;
 
     @Column(name = "TenKH")
     private String tenKH;
@@ -46,20 +46,8 @@ public class HoaDon {
     @Column(name = "SDT")
     private String sdt;
 
-    @ManyToOne
-    @JoinColumn(name = "IdTT", referencedColumnName = "Id")
-    private TrangThaiHoaDon trangThaiHoaDon;
-
-    @Column(name = "GhiChu")
-    private String ghiChu;
-
-    @ManyToOne
-    @JoinColumn(name = "IdKM", referencedColumnName = "Id")
-    private KhuyenMai khuyenMai;
-
-    @ManyToOne
-    @JoinColumn(name = "IdNV", referencedColumnName = "Id")
-    private NhanVien nhanVien;
+    @Column(name = "TrangThai")
+    private boolean trangThai;
 
     @Column(name = "TongTien")
     private Float tongTien;

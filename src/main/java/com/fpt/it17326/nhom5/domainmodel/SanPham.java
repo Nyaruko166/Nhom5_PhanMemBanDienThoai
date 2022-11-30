@@ -41,10 +41,6 @@ public class SanPham {
 
     @Column (name = "DonGia")
     private Float donGia;
-    
-    @ManyToOne
-    @JoinColumn (name = "IdImei", referencedColumnName = "Id")
-    private Imei imei;
 
     @Column (name = "MoTa")
     private String moTa;
@@ -52,10 +48,6 @@ public class SanPham {
     @ManyToOne
     @JoinColumn (name = "IdAnh", referencedColumnName = "Id")
     private Anh anh;
-
-    @ManyToOne
-    @JoinColumn (name = "IdLoaiSP", referencedColumnName = "Id")
-    private LoaiSP loaiSP;
 
     @ManyToOne
     @JoinColumn (name = "IdMauSac", referencedColumnName = "Id")
@@ -80,11 +72,10 @@ public class SanPham {
     @ManyToOne
     @JoinColumn (name = "IdPin", referencedColumnName = "Id")
     private Pin pin;
-    
-    @ManyToOne
-    @JoinColumn (name = "IdBaoHanh", referencedColumnName = "Id")
-    private BaoHanh baoHanh;
 
+    @Column (name = "SoLuong")
+    private int soLuong;    
+    
     @Column (name = "CreatedAt")
     private Date createdAt;
 

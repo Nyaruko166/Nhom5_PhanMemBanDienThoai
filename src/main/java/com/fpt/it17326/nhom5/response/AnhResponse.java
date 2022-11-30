@@ -28,7 +28,6 @@ public class AnhResponse {
     public AnhResponse(Anh anh) {
         this.maAnh = anh.getMaAnh();
         this.urlAnh = anh.getUrlAnh();
-        this.cover = anh.isCover();
         this.createAt = anh.getCreatedAt();
         this.deleted = anh.isDeleted();
         this.updateAt = anh.getUpdatedAt();

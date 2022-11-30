@@ -53,9 +53,6 @@ public class NhanVien {
     @Column(name = "NgaySinh")
     private String ngaySinh;
     
-    @Column(name = "Luong")
-    private String luong;
-    
     @Column(name = "TaiKhoan")
     private String taiKhoan;
     

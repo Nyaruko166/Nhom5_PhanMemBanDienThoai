@@ -63,6 +63,7 @@ public class ImeiRepository {
         Transaction transaction = null;
         try (Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
+            imei.setDeleted(true);
             session.update(imei);
             transaction.commit();
             return true;
