@@ -15,6 +15,10 @@ import java.util.List;
 public interface ChipService {
     
     List<ChipResponse> getAll();
+    
+    List<Chip> getAllChip();
+    
+    List<Chip> getDeletedChip();
 
     ChipResponse getOne(String MaChip);
             

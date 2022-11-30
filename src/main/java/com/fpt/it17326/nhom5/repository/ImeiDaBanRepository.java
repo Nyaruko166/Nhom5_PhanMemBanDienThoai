@@ -18,7 +18,6 @@ import org.hibernate.query.Query;
 public class ImeiDaBanRepository {
 
     private Session session = HibernateConfig.getFACTORY().openSession();
-
     private String fromTable = "FROM ImeiDaBan";
 
     public List<ImeiDaBan> getAll() {

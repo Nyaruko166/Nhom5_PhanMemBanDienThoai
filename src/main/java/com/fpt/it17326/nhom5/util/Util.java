@@ -16,7 +16,7 @@ import java.util.Date;
 public class Util {
 
     public static void createFolderImageUpload() {
-        File theDir = new File("images");
+        File theDir = new File("pictures");
         if (!theDir.exists()) {
             theDir.mkdirs();
         }
@@ -24,7 +24,7 @@ public class Util {
 
     public static void uploadImage(String path) {
         File source = new File(path);
-        File dest = new File("images\\" + source.getName());
+        File dest = new File("pictures\\" + source.getName());
         try {
             Files.copy(source.toPath(), dest.toPath());
         } catch (IOException e) {

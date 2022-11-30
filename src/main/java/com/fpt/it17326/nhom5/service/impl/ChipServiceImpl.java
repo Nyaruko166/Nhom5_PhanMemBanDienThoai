@@ -62,5 +62,15 @@ public class ChipServiceImpl implements ChipService{
             return "Xóa thất bại";
         }
     }
+
+    @Override
+    public List<Chip> getAllChip() {
+        return chipRepository.getAll();
+    }
+
+    @Override
+    public List<Chip> getDeletedChip() {
+        return chipRepository.getAllDeleted();
+    }
     
 }

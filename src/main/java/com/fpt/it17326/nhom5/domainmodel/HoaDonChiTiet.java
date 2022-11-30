@@ -1,5 +1,6 @@
 package com.fpt.it17326.nhom5.domainmodel;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,28 +27,28 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class HoaDonChiTiet {
+public class HoaDonChiTiet implements Serializable {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    @Column (name = "Id")
+    @Column(name = "Id")
     private int id;
     
     @ManyToOne
-    @JoinColumn (name = "IdHD", referencedColumnName = "Id")
+    @JoinColumn(name = "IdHD", referencedColumnName = "Id")
     private HoaDon hoaDon;
     
     @ManyToOne
-    @JoinColumn (name = "IdSP", referencedColumnName = "Id")
+    @JoinColumn(name = "IdSP", referencedColumnName = "Id")
     private SanPham sp;
     
-    @Column (name = "TenSP")
+    @Column(name = "TenSP")
     private String tenSP;
     
-    @Column (name = "SoLuong")
+    @Column(name = "SoLuong")
     private int soLuong;
     
-    @Column (name = "DonGia")
+    @Column(name = "DonGia")
     private Float donGia;
     
     @Column(name = "CreatedAt")

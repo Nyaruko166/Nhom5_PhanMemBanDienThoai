@@ -17,7 +17,6 @@ public class AnhResponse {
 
     private String maAnh;
     private String urlAnh;
-    private boolean cover;
     private Date createAt;
     private boolean deleted;
     private Date updateAt;

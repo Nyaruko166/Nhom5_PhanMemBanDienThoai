@@ -67,4 +67,10 @@ public class NhanVien {
 
     @Column(name = "UpdatedAt")
     private Date updatedAt;
+
+    public NhanVien(int id) {
+        this.id = id;
+    }
+    
+    
 }

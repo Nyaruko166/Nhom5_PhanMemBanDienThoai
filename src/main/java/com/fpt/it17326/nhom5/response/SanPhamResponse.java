@@ -19,6 +19,7 @@ import lombok.ToString;
 @ToString
 public class SanPhamResponse {
 
+    private int id;
     private String maSP;
     private String tenSP;
     private Float donGia;
@@ -39,6 +40,7 @@ public class SanPhamResponse {
     }
 
     public SanPhamResponse(SanPham sp) {
+        this.id = sp.getId();
         this.maSP = sp.getMaSP();
         this.tenSP = sp.getTenSP();
         this.donGia = sp.getDonGia();
@@ -55,5 +57,9 @@ public class SanPhamResponse {
         this.Deleted = sp.isDeleted();
         this.UpdatedAt = sp.getUpdatedAt();
     }
+
+     public Object[] toDataRow() {
+         return new Object[]{maSP, tenSP, tenHang,dungLuong, tenRom, tenMauSac, donGia};
+     }
 
 }

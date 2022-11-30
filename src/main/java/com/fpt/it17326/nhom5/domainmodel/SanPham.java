@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -84,5 +86,23 @@ public class SanPham {
 
     @Column (name = "UpdatedAt")
     private Date updatedAt;
+
+    public SanPham(String maSP, String tenSP, Float donGia, int soLuong, String moTa, Anh anh, MauSac mauSac, HangDienThoai hangdt, Chip chip, Ram ram, Rom rom, Pin pin, Date createdAt, boolean deleted, Date updatedAt) {
+        this.maSP = maSP;
+        this.tenSP = tenSP;
+        this.donGia = donGia;
+        this.soLuong = soLuong;
+        this.moTa = moTa;
+        this.anh = anh;
+        this.mauSac = mauSac;
+        this.hangdt = hangdt;
+        this.chip = chip;
+        this.ram = ram;
+        this.rom = rom;
+        this.pin = pin;
+        this.createdAt = createdAt;
+        this.deleted = deleted;
+        this.updatedAt = updatedAt;
+    }
 
 }

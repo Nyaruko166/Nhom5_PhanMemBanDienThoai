@@ -20,7 +20,6 @@ public class NhanVienResponse {
     private String email;
     private String queQuan;
     private String ngaySinh;
-    private String luong;
     private String taiKhoan;
     private String matKhau;
     private Date createdAt;

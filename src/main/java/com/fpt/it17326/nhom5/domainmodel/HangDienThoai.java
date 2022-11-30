@@ -31,7 +31,7 @@ public class HangDienThoai {
     private int id;
 
     @Column(name = "MaHang")
-    private String maHangDT;
+    private String maHang;
 
     @Column(name = "TenHang")
     private String tenHang;

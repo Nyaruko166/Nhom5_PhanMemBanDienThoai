@@ -49,6 +49,11 @@ public class DemoDialog extends javax.swing.JDialog {
     private PinService pinService;
     private HangDienThoaiService hangDienThoaiService;
     private MauSacService mauSacService;
+    
+    List<Chip> listChip;
+    List<Chip> listChipDeleted;
+    
+    private int selectedRow;
 
     /**
      * Creates new form DemoDialog
@@ -79,7 +84,10 @@ public class DemoDialog extends javax.swing.JDialog {
     public void loadData() {
         String txt = lblTitle.getText();
         if (txt.equalsIgnoreCase("chip")) {
-            getAllChip();
+            listChip = chipService.getAllChip();
+            getAllChip(listChip);
+            listChipDeleted = chipService.getDeletedChip();
+            getAllChipDeleted(listChipDeleted);
         } else if (txt.equalsIgnoreCase("Ram")) {
             getAllRam();
         } else if (txt.equalsIgnoreCase("Rom")) {
@@ -109,14 +117,22 @@ public class DemoDialog extends javax.swing.JDialog {
         this.setVisible(true);
     }
 
-    public void getAllChip() {
-        List<ChipResponse> listChip = chipService.getAll();
+    public void getAllChip(List<Chip> listChip) {
         ArrayList<Object[]> rows = new ArrayList<>();
-        for (ChipResponse chipResponse : listChip) {
-            Object[] row = {chipResponse.getMaChip(), chipResponse.getTenChip(),};
+        for (Chip chip : listChip) {
+            Object[] row = {chip.getMaChip(), chip.getTenChip(),};
             rows.add(row);
         }
         loadTableSPChiTiet(rows);
+    }
+    
+    public void getAllChipDeleted(List<Chip> listChip) {
+        ArrayList<Object[]> rows = new ArrayList<>();
+        for (Chip chip : listChip) {
+            Object[] row = {chip.getMaChip(), chip.getTenChip(),};
+            rows.add(row);
+        }
+        loadTableDeleted(rows);
     }
 
     public void getAllRom() {
@@ -153,7 +169,7 @@ public class DemoDialog extends javax.swing.JDialog {
         List<HangDienThoaiResponse> listHangDT = hangDienThoaiService.getAll();
         ArrayList<Object[]> rows = new ArrayList<>();
         for (HangDienThoaiResponse hangDienThoaiResponse : listHangDT) {
-            Object[] row = {hangDienThoaiResponse.getMaHangDT(), hangDienThoaiResponse.getTenHang(),};
+            Object[] row = {hangDienThoaiResponse.getMaHang(), hangDienThoaiResponse.getTenHang(),};
             rows.add(row);
         }
         loadTableSPChiTiet(rows);
@@ -171,6 +187,14 @@ public class DemoDialog extends javax.swing.JDialog {
 
     public void loadTableSPChiTiet(ArrayList<Object[]> rows) {
         DefaultTableModel dtm = (DefaultTableModel) tblSetting.getModel();
+        dtm.setRowCount(0);
+        for (Object[] data : rows) {
+            dtm.addRow(data);
+        }
+    }
+    
+    public void loadTableDeleted(ArrayList<Object[]> rows) {
+        DefaultTableModel dtm = (DefaultTableModel) tblLuuTru.getModel();
         dtm.setRowCount(0);
         for (Object[] data : rows) {
             dtm.addRow(data);
@@ -414,10 +438,11 @@ public class DemoDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void updateChip() {
+    public void updateChip(int id) {
         String ma = txtMa.getText();
         String ten = txtTen.getText();
         Chip chip = Chip.builder()
+                .id(id)
                 .maChip(ma)
                 .tenChip(ten)
                 .deleted(false)
@@ -426,7 +451,8 @@ public class DemoDialog extends javax.swing.JDialog {
         String result = chipService.update(chip);
         JOptionPane.showMessageDialog(this, result);
         if (result.contains("thành công")) {
-            loadData();
+            listChip.set(selectedRow, chip);
+            getAllChip(listChip);
         }
     }
 
@@ -464,7 +490,7 @@ public class DemoDialog extends javax.swing.JDialog {
         String ma = txtMa.getText();
         String ten = txtTen.getText();
         HangDienThoai hdt = new HangDienThoai();
-        hdt.setMaHangDT(ma);
+        hdt.setMaHang(ma);
         hdt.setTenHang(ten);
         hdt.setDeleted(false);
         hdt.setUpdatedAt(Util.getCurrentDate());
@@ -515,7 +541,8 @@ public class DemoDialog extends javax.swing.JDialog {
         int option = JOptionPane.showConfirmDialog(this, "Xác nhận sửa", "Sửa dữ liệu", JOptionPane.OK_CANCEL_OPTION);
         if (option == 0) {
             if (lblTitle.getText().equalsIgnoreCase("Chip")) {
-                updateChip();
+                int id = listChip.get(row).getId();
+                updateChip(id);
             } else if (lblTitle.getText().equalsIgnoreCase("Ram")) {
                 updateRam();
             } else if (lblTitle.getText().equalsIgnoreCase("Rom")) {
@@ -580,7 +607,7 @@ public class DemoDialog extends javax.swing.JDialog {
         String ma = txtMa.getText();
         String ten = txtTen.getText();
         HangDienThoai hdt = new HangDienThoai();
-        hdt.setMaHangDT(ma);
+        hdt.setMaHang(ma);
         hdt.setTenHang(ten);
         hdt.setDeleted(false);
         hdt.setCreatedAt(Util.getCurrentDate());
@@ -641,10 +668,11 @@ public class DemoDialog extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnThemActionPerformed
 
-    public void deleteChip() {
+    public void deleteChip(int id) {
         String ma = txtMa.getText();
         String ten = txtTen.getText();
         Chip chip = new Chip();
+        chip.setId(id);
         chip.setMaChip(ma);
         chip.setTenChip(ten);
         chip.setDeleted(true);
@@ -652,7 +680,12 @@ public class DemoDialog extends javax.swing.JDialog {
         String result = chipService.delete(chip);
         JOptionPane.showMessageDialog(this, result);
         if (result.contains("thành công")) {
-            loadData();
+            listChip.remove(selectedRow);
+            getAllChip(listChip);
+            
+            listChipDeleted.add(chip);
+            getAllChipDeleted(listChipDeleted);
+            selectedRow = -1;
         }
     }
 
@@ -690,7 +723,7 @@ public class DemoDialog extends javax.swing.JDialog {
         String ma = txtMa.getText();
         String ten = txtTen.getText();
         HangDienThoai hdt = new HangDienThoai();
-        hdt.setMaHangDT(ma);
+        hdt.setMaHang(ma);
         hdt.setTenHang(ten);
         hdt.setDeleted(true);
         hdt.setUpdatedAt(Util.getCurrentDate());
@@ -741,7 +774,8 @@ public class DemoDialog extends javax.swing.JDialog {
         int option = JOptionPane.showConfirmDialog(this, "Xác nhận xóa", "Xóa dữ liệu", JOptionPane.OK_CANCEL_OPTION);
         if (option == 0) {
             if (lblTitle.getText().equalsIgnoreCase("Chip")) {
-                deleteChip();
+                int id = listChip.get(row).getId();
+                deleteChip(id);
             } else if (lblTitle.getText().equalsIgnoreCase("Ram")) {
                 deleteRam();
             } else if (lblTitle.getText().equalsIgnoreCase("Rom")) {
@@ -760,6 +794,7 @@ public class DemoDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
         DefaultTableModel dtm = (DefaultTableModel) tblSetting.getModel();
         int row = tblSetting.getSelectedRow();
+        selectedRow = row;
         txtMa.setText(dtm.getValueAt(row, 0).toString());
         txtTen.setText(dtm.getValueAt(row, 1).toString());
 

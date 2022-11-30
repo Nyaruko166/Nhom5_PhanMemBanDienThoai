@@ -3,6 +3,10 @@ package com.fpt.it17326.nhom5.config;
 import com.fpt.it17326.nhom5.domainmodel.Anh;
 import com.fpt.it17326.nhom5.domainmodel.Chip;
 import com.fpt.it17326.nhom5.domainmodel.HangDienThoai;
+import com.fpt.it17326.nhom5.domainmodel.HoaDon;
+import com.fpt.it17326.nhom5.domainmodel.HoaDonChiTiet;
+import com.fpt.it17326.nhom5.domainmodel.ImeiDaBan;
+import com.fpt.it17326.nhom5.domainmodel.KhuyenMai;
 import com.fpt.it17326.nhom5.domainmodel.MauSac;
 import com.fpt.it17326.nhom5.domainmodel.NhanVien;
 import com.fpt.it17326.nhom5.domainmodel.Pin;
@@ -38,13 +42,17 @@ public class HibernateConfig {
         conf.addAnnotatedClass(Anh.class);
         conf.addAnnotatedClass(MauSac.class);
         conf.addAnnotatedClass(HangDienThoai.class);
+        conf.addAnnotatedClass(Chip.class);
         conf.addAnnotatedClass(NhanVien.class);
         conf.addAnnotatedClass(Ram.class);
         conf.addAnnotatedClass(Rom.class);
         conf.addAnnotatedClass(Chip.class);
         conf.addAnnotatedClass(Pin.class);
         conf.addAnnotatedClass(SanPham.class);
-        
+        conf.addAnnotatedClass(HoaDon.class);
+        conf.addAnnotatedClass(HoaDonChiTiet.class);
+        conf.addAnnotatedClass(KhuyenMai.class);
+        conf.addAnnotatedClass(ImeiDaBan.class);
 
         ServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .applySettings(conf.getProperties()).build();

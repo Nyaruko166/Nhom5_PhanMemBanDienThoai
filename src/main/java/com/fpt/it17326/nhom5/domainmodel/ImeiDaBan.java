@@ -20,11 +20,11 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
+ * AowVN_Nyaruko
  *
- * @author youngboizseetinh
  */
 @Entity
-@Table (name = "ImeiDaBan")
+@Table(name = "ImeiDaBan")
 @Getter
 @Setter
 @AllArgsConstructor

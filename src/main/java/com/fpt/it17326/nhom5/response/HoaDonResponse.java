@@ -9,6 +9,7 @@ import com.fpt.it17326.nhom5.domainmodel.NhanVien;
 import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  *
@@ -16,10 +17,11 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@ToString
 public class HoaDonResponse {
 
-    private String maHoaDon;
-    private NhanVien nhanVien;
+    private String maHD;
+    private String maNV;
     private String tenKH;
     private String sdt;
     private boolean trangThai;
@@ -32,8 +34,8 @@ public class HoaDonResponse {
     }
 
     public HoaDonResponse(HoaDon hd) {
-        this.maHoaDon = hd.getMaHD();
-        this.nhanVien = hd.getNhanVien();
+        this.maHD = hd.getMaHD();
+        this.maNV = hd.getNhanVien().getMaNhanVien();
         this.tenKH = hd.getTenKH();
         this.sdt = hd.getSdt();
         this.trangThai = hd.isTrangThai();
@@ -42,7 +44,13 @@ public class HoaDonResponse {
         this.deleted = hd.isDeleted();
         this.updatedAt = hd.getUpdatedAt();
     }
-    
-    
 
+//    public HoaDonResponse(String maTT) {
+//        this.maTT = maTT;
+//    }
+//    public HoaDonResponse(String maHD, String maTT, String maNV) {
+//        this.maHD = maHD;
+//        this.maTT = maTT;
+//        this.maNV = maNV;
+//    }
 }

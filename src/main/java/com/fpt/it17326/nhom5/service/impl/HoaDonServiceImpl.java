@@ -12,44 +12,54 @@ import java.util.List;
  *
  */
 public class HoaDonServiceImpl implements HoaDonService {
-
+    
     private HoaDonRepository hoaDonRepository = new HoaDonRepository();
-
+    
     @Override
     public List<HoaDonResponse> getAll() {
         List<HoaDonResponse> lst = new ArrayList<>();
         List<HoaDon> lstHD = hoaDonRepository.getAll();
-        // todo start
-        return null;
-        // todo end
+        for (HoaDon hoaDon : lstHD) {
+            HoaDonResponse ms = new HoaDonResponse(hoaDon);
+            lst.add(ms);
+        }
+        return lst;
     }
-
+    
     @Override
-    public HoaDonResponse getOne(String MaHoaDon) {
-        // todo start
-        return null;
-        // todo end
+    public HoaDon getOne(String MaHoaDon) {
+        return hoaDonRepository.getOne(MaHoaDon);
     }
-
+    
     @Override
     public String add(HoaDon hd) {
-        // todo start
-        return null;
-        // todo end
+        
+        boolean add = hoaDonRepository.add(hd);
+        if(add){
+            return "Tạo thành công";
+        }else{
+            return "Tạo thất bại";
+        }
     }
-
+    
     @Override
     public String update(HoaDon hd) {
-        // todo start
-        return null;
-        // todo end
+        boolean update = hoaDonRepository.update(hd);
+        if(update){
+            return "Sửa thành công";
+        }else{
+            return "Sửa thất bại";
+        }
     }
-
+    
     @Override
     public String delete(HoaDon hd) {
-        // todo start
-        return null;
-        // todo end
+        boolean delete = hoaDonRepository.delete(hd);
+        if(delete){
+            return "Xóa thành công";
+        }else{
+            return "Xóa thất bại";
+        }
     }
-
+    
 }
