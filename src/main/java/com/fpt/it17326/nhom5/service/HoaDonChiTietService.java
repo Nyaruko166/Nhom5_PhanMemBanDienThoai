@@ -4,6 +4,7 @@
  */
 package com.fpt.it17326.nhom5.service;
 
+import com.fpt.it17326.nhom5.domainmodel.HoaDonChiTiet;
 import com.fpt.it17326.nhom5.response.HangDienThoaiResponse;
 import com.fpt.it17326.nhom5.response.HoaDonChiTietResponse;
 import com.fpt.it17326.nhom5.response.ThongkeResponse;
@@ -14,6 +15,12 @@ import java.util.List;
  * @author PHAM DAC THANG
  */
 public interface HoaDonChiTietService {
-     public List<ThongkeResponse> getAll1() ;
-      public List<ThongkeResponse> getAllimeidaban();
+
+    List<HoaDonChiTiet> getAll();
+
+    HoaDonChiTiet getOne(String Id);
+
+    public List<ThongkeResponse> getAll1();
+
+    public List<ThongkeResponse> getAllimeidaban();
 }

@@ -4,15 +4,9 @@
  */
 package com.fpt.it17326.nhom5.view;
 
-import com.fpt.it17326.nhom5.domainmodel.Anh;
 import com.fpt.it17326.nhom5.domainmodel.Chip;
 import com.fpt.it17326.nhom5.domainmodel.HangDienThoai;
 import com.fpt.it17326.nhom5.domainmodel.SanPham;
-import com.fpt.it17326.nhom5.response.ChipResponse;
-import com.fpt.it17326.nhom5.response.HangDienThoaiResponse;
-import com.fpt.it17326.nhom5.response.PinResponse;
-import com.fpt.it17326.nhom5.response.RamResponse;
-import com.fpt.it17326.nhom5.response.RomResponse;
 import com.fpt.it17326.nhom5.response.SanPhamResponse;
 import com.fpt.it17326.nhom5.service.ChipService;
 import com.fpt.it17326.nhom5.service.HangDienThoaiService;
@@ -27,21 +21,20 @@ import com.fpt.it17326.nhom5.service.impl.RamServiceImpl;
 import com.fpt.it17326.nhom5.service.impl.RomServiceImpl;
 import com.fpt.it17326.nhom5.service.impl.SanPhamServiceImpl;
 import com.fpt.it17326.nhom5.util.Util;
-import java.io.File;
-import java.util.List;
 import javax.swing.JFileChooser;
-import javax.swing.table.DefaultTableModel;
 
 import com.fpt.it17326.nhom5.domainmodel.HoaDon;
+import com.fpt.it17326.nhom5.domainmodel.HoaDonChiTiet;
 import com.fpt.it17326.nhom5.domainmodel.Imei;
+import com.fpt.it17326.nhom5.domainmodel.ImeiDaBan;
 import com.fpt.it17326.nhom5.domainmodel.MauSac;
 import com.fpt.it17326.nhom5.domainmodel.NhanVien;
 import com.fpt.it17326.nhom5.domainmodel.Pin;
 import com.fpt.it17326.nhom5.domainmodel.Ram;
 import com.fpt.it17326.nhom5.domainmodel.Rom;
+import com.fpt.it17326.nhom5.repository.ImeiDaBanRepository;
 import com.fpt.it17326.nhom5.response.HoaDonResponse;
 import com.fpt.it17326.nhom5.response.ImeiResponse;
-import com.fpt.it17326.nhom5.response.MauSacResponse;
 import com.fpt.it17326.nhom5.response.ThongkeResponse;
 import com.fpt.it17326.nhom5.service.HoaDonChiTietService;
 import com.fpt.it17326.nhom5.service.HoaDonService;
@@ -51,58 +44,31 @@ import com.fpt.it17326.nhom5.service.impl.HoaDonChiTietServiceImpl;
 import com.fpt.it17326.nhom5.service.impl.HoaDonServiceImpl;
 import com.fpt.it17326.nhom5.service.impl.ImeiServiceImpl;
 import com.fpt.it17326.nhom5.service.impl.MauSacServiceImpl;
-import com.fpt.it17326.nhom5.view.DialogImei;
-import java.awt.Color;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
 import java.text.DecimalFormat;
-import java.text.FieldPosition;
 import java.text.NumberFormat;
-import java.text.ParsePosition;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
-
-
 
 //  ---------------------Thang
-
 import java.awt.Color;
 import java.awt.Image;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.plaf.basic.BasicButtonUI;
 import javax.swing.table.DefaultTableModel;
-
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
-import javax.mail.internet.AddressException;
 import javax.swing.JOptionPane;
 import javax.swing.table.JTableHeader;
 
@@ -112,6 +78,10 @@ import javax.swing.table.JTableHeader;
  */
 public class ViewSanPham extends javax.swing.JFrame {
 
+    private String MaHoaDon;
+    private DefaultTableModel dtmHDImei;
+    private DefaultTableModel dtmHoaDon;
+    private DefaultTableModel dtmHDSP;
     private ChipService chipService;
     private PinService pinService;
     private RamService ramService;
@@ -134,7 +104,6 @@ public class ViewSanPham extends javax.swing.JFrame {
     private List<ImeiResponse> listImei;
 
     // chi
-    private DefaultTableModel dtmHoaDon;
     private DefaultTableModel dtmSP = new DefaultTableModel();
     private DefaultTableModel dtmGH = new DefaultTableModel();
     private DefaultTableModel dtmHD = new DefaultTableModel();
@@ -144,23 +113,25 @@ public class ViewSanPham extends javax.swing.JFrame {
     private List<HoaDonResponse> listHoaDon = new ArrayList<>();
     private List<String> listHoaDonTreo = new ArrayList<>();
     private SanPhamService sanPhamService = new SanPhamServiceImpl();
-    private HoaDonService hoaDonService = new HoaDonServiceImpl();;
+    private HoaDonService hoaDonService = new HoaDonServiceImpl();
+    ;
     Color bgColo = new Color(0, 0, 102);
 
-    
-    
     //------Thang
-    
-      DefaultTableModel defaultTable;
+    DefaultTableModel defaultTable;
     HoaDonChiTietService HoaDonChiTietService = new HoaDonChiTietServiceImpl();
     HoaDonService HoaDonService = new HoaDonServiceImpl();
 
     private List<ThongkeResponse> listThongke = new ArrayList<>();
+
     /**
      * Creates new form BanHang
      */
     public ViewSanPham() {
         initComponents();
+        dtmHoaDon = (DefaultTableModel) tblHoaDon.getModel();
+        dtmHDSP = (DefaultTableModel) tblSP.getModel();
+        dtmHDImei = (DefaultTableModel) tblImei.getModel();
         listImei = new ArrayList<>();
         initService();
         tblSanPhamBanHang.setModel(dtmSP);
@@ -178,14 +149,9 @@ public class ViewSanPham extends javax.swing.JFrame {
 
         loadProductForm();
         Util.createFolderImageUpload();
-        
-        
-        
-        
+
         //-------Thang
-        
-        
-         loadbangthongke();
+        loadbangthongke();
         loadbangthongkeimei();
     }
 
@@ -270,14 +236,14 @@ public class ViewSanPham extends javax.swing.JFrame {
     public void loadImageToLabel(String path, boolean hasRoot) {
         BufferedImage img = null;
         String userDirectory = new File("").getAbsolutePath();
-        
+
         try {
             if (hasRoot) {
-                img = ImageIO.read(new File(userDirectory + "\\" +path));
+                img = ImageIO.read(new File(userDirectory + "\\" + path));
             } else {
                 img = ImageIO.read(new File(path));
             }
-            
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -311,7 +277,7 @@ public class ViewSanPham extends javax.swing.JFrame {
             dtmSP.addRow(sanPhamResponse.toDataRow());
         }
     }
-    
+
     public void getAllSanPham() {
         listSanPham = sanPhamService.getAll();
         listSp = sanPhamService.getAllSanPham();
@@ -323,10 +289,10 @@ public class ViewSanPham extends javax.swing.JFrame {
         dtm.setRowCount(0);
         for (SanPhamResponse item : listSanPham) {
             Object[] row = {
-//                item.getMaSP(),
+                //                item.getMaSP(),
                 item.getTenSP(),
                 item.getTenHang(),
-                item.getTenChip(),               
+                item.getTenChip(),
                 item.getDungLuong(),
                 item.getTenRom(),
                 item.getTenPin(),
@@ -337,8 +303,7 @@ public class ViewSanPham extends javax.swing.JFrame {
             dtm.addRow(row);
         }
     }
-    
-    
+
     public class DialogResponse {
 
         public void getListImeiResponse(List<Imei> _imeis) {
@@ -353,7 +318,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         }
 
     }
-    
+
     // Tung End///////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void initService() {
         chipService = new ChipServiceImpl();
@@ -366,9 +331,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         imeiService = new ImeiServiceImpl();
     }
 
-    
 //
-
     private void showDataGH(List<SanPhamResponse> listGioHang) {
         dtmGH.setRowCount(0);
         for (SanPhamResponse sanPhamResponse : listGioHang) {
@@ -376,7 +339,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         }
     }
 
-    //@QuanPM_PH27325
+    //@QuanPM_PH27325 START
     //===============================Code hoá đơn===========================================
     private void setuptblHD() {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -390,19 +353,73 @@ public class ViewSanPham extends javax.swing.JFrame {
 
             }
             convert = format.format(x.getCreatedAt());
-            dtmHoaDon.addRow(new Object[]{x.getMaHD(), x.getMaNV(), x.getTenKH(), x.getSdt(), StrTT, x.getTongTien(), convert});
-        }
+            dtmHoaDon.addRow(new Object[]{x.getMaHD(), x.getMaNV(), x.getTenKH(), x.getSdt(), StrTT, String.format("%,.0f", x.getTongTien()) + " VND", convert});
 
+        }
+    }
+
+    private void sortHD() {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        List<HoaDonResponse> lstHD = hoaDonService.getAll();
+        dtmHoaDon.setRowCount(0);
+        Date From = jdateFrom.getDate();
+        Date To = jdateTo.getDate();
+        for (HoaDonResponse x : lstHD) {
+            if (x.getCreatedAt().after(From) && x.getCreatedAt().before(To)) {
+//                System.out.println("cac");
+                String StrTT = "Chưa thanh toán";
+                if (x.isTrangThai()) {
+                    StrTT = "Đã thanh toán";
+                }
+                String convert = format.format(x.getCreatedAt());
+                dtmHoaDon.addRow(new Object[]{x.getMaHD(), x.getMaNV(), x.getTenKH(), x.getSdt(), StrTT, String.format("%,.0f", x.getTongTien()) + " VND", convert});
+            }
+        }
+    }
+
+    private void showhdct() {
+        int index = tblHoaDon.getSelectedRow();
+        dtmHDImei.setRowCount(0);
+        dtmHDSP.setRowCount(0);
+        MaHoaDon = tblHoaDon.getValueAt(index, 0).toString();
+        HoaDon hd = hoaDonService.getOne(MaHoaDon);
+        List<HoaDonChiTiet> lsthdct = HoaDonChiTietService.getAll();
+        for (HoaDonChiTiet x : lsthdct) {
+            if (x.getHoaDon().getId() == hd.getId()) {
+                dtmHDSP.addRow(new Object[]{x.getTenSP(), String.format("%,.0f", x.getDonGia()) + " VND", x.getSoLuong(), String.format("%,.0f", x.getDonGia() * x.getSoLuong()) + " VND"});
+            }
+        }
+    }
+
+    private void showimei() {
+        dtmHDImei.setRowCount(0);
+        ImeiDaBanRepository imeiDaBanRepository = new ImeiDaBanRepository();
+        int index = tblSP.getSelectedRow();
+        String TenSP = tblSP.getValueAt(index, 0).toString();
+        List<ImeiDaBan> lstImei = imeiDaBanRepository.getAll();
+        HoaDon hd = hoaDonService.getOne(MaHoaDon);
+        List<HoaDonChiTiet> lsthdct = HoaDonChiTietService.getAll();
+        List<HoaDonChiTiet> lsthd = new ArrayList<>();
+        for (HoaDonChiTiet x : lsthdct) {
+            if (x.getHoaDon().getId() == hd.getId()) {
+                lsthd.add(x);
+            }
+        }
+        for (ImeiDaBan x : lstImei) {
+            for (HoaDonChiTiet y : lsthd) {
+                if (x.getHoaDonChiTiet().getId() == y.getId()) {
+                    if (x.getHoaDonChiTiet().getTenSP().equals(TenSP)) {
+                        dtmHDImei.addRow(new Object[]{x.getImei()});
+                    }
+                }
+            }
+        }
     }
 //======================================================================================
-    
-    
-    
-    
-    
+//@QuanPM_PH27325 END
+
     //--------------Thang
-    
-      public void loadbangthongke() {
+    public void loadbangthongke() {
         defaultTable = (DefaultTableModel) tbbangthongke.getModel();
         listThongke = HoaDonChiTietService.getAll1();
 
@@ -410,7 +427,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         tftieudetongdonhang.setText("TỔNG ĐƠN HÀNG");
         tfchitietdonhang.setText("CHI TIẾT ĐƠN HÀNG");
         tftieudetongdoanhthu.setText("DOANH THU");
-     //   tftongdonhang.setText(String.valueOf(HoaDonService.getAll1().size()));
+        //   tftongdonhang.setText(String.valueOf(HoaDonService.getAll1().size()));
         int tc = 0;
         int dh = 0;
         for (HoaDonResponse hd : HoaDonService.getAll1()) {
@@ -418,7 +435,7 @@ public class ViewSanPham extends javax.swing.JFrame {
                 tc = tc + 1;
             }
         }
-          tftongdonhang.setText(String.valueOf(tc));
+        tftongdonhang.setText(String.valueOf(tc));
         tfdonthanhcong.setText(" " + String.valueOf(tc));
         tfdondahuy.setText(" 0");
         int solg = 0;
@@ -461,7 +478,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         tftieudetongdonhang.setText("TỔNG ĐƠN HÀNG");
         tfchitietdonhang.setText("CHI TIẾT ĐƠN HÀNG");
         tftieudetongdoanhthu.setText("DOANH THU");
-       // tftongdonhang.setText(String.valueOf(HoaDonService.getAll1().size()));
+        // tftongdonhang.setText(String.valueOf(HoaDonService.getAll1().size()));
         int tc = 0;
         int dh = 0;
         for (HoaDonResponse hd : HoaDonService.getAll1()) {
@@ -469,7 +486,7 @@ public class ViewSanPham extends javax.swing.JFrame {
                 tc = tc + 1;
             }
         }
-            tftongdonhang.setText(String.valueOf(tc));
+        tftongdonhang.setText(String.valueOf(tc));
         tfdonthanhcong.setText("" + String.valueOf(tc));
         tfdondahuy.setText("0");
         int solg = 0;
@@ -520,7 +537,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         tftieudetongdonhang.setText("TỔNG ĐƠN HÀNG");
         tfchitietdonhang.setText("CHI TIẾT ĐƠN HÀNG");
         tftieudetongdoanhthu.setText("DOANH THU");
-   //     tftongdonhang.setText(String.valueOf(HoaDonService.getAll1().size()));
+        //     tftongdonhang.setText(String.valueOf(HoaDonService.getAll1().size()));
         int tc = 0;
         int dh = 0;
         for (HoaDonResponse hd : HoaDonService.getAll1()) {
@@ -528,7 +545,7 @@ public class ViewSanPham extends javax.swing.JFrame {
                 tc = tc + 1;
             }
         }
-              tftongdonhang.setText(String.valueOf(tc));
+        tftongdonhang.setText(String.valueOf(tc));
         tfdonthanhcong.setText(" " + String.valueOf(tc));
         tfdondahuy.setText("0");
         int solg = 0;
@@ -569,18 +586,9 @@ public class ViewSanPham extends javax.swing.JFrame {
 
         loadbangthongkeimei();
 
-    
-
-    
-    
     }
-    
-    
 
-        
-        
-        
-        public void loadbangthongkeimei() {
+    public void loadbangthongkeimei() {
 
         defaultTable = (DefaultTableModel) tbbangthongkeimai.getModel();
         listThongke = HoaDonChiTietService.getAllimeidaban();
@@ -603,7 +611,6 @@ public class ViewSanPham extends javax.swing.JFrame {
         }
 
     }
-
 
     public void timkiemthongke() {
         defaultTable = (DefaultTableModel) tbbangthongke.getModel();
@@ -687,7 +694,7 @@ public class ViewSanPham extends javax.swing.JFrame {
             for (int i = 0; i < listThongke.size(); i = i + 1) {
 
                 if (listThongke.get(i).getMaHD().equalsIgnoreCase(tftimkiemthongke.getText())) {
-                    defaultTable.addRow(new Object[]{ok + 1,   // check sau
+                    defaultTable.addRow(new Object[]{ok + 1, // check sau
                         listThongke.get(i).getMaHD(),
                         listThongke.get(i).getMaImei(),
                         listThongke.get(i).getImei(),
@@ -803,7 +810,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         int tc = 0;
 
         for (HoaDonResponse hd : HoaDonService.getAll1()) {
-            if (sosanhngaytrongkhoang0(chuyenngaymuatk(hd.getCreatedAt()))  && hd.isTrangThai()) {
+            if (sosanhngaytrongkhoang0(chuyenngaymuatk(hd.getCreatedAt())) && hd.isTrangThai()) {
                 tc = tc + 1;
             }
         }
@@ -1036,8 +1043,8 @@ public class ViewSanPham extends javax.swing.JFrame {
             msg.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(toEmail, false));
             msg.setSubject("THONG BAO DOANH THU: NHOM 5 BAN DIEN THOAI  [ " + tfngaybatdauthongke.getText() + " DEN " + tfketthucngaythongke.getText() + " ]");
-           
-            String  baocao="TONG DOANH THU "+"[ " + tfngaybatdauthongke.getText() + " DEN " + tfketthucngaythongke.getText() + " ]" + "\n"
+
+            String baocao = "TONG DOANH THU " + "[ " + tfngaybatdauthongke.getText() + " DEN " + tfketthucngaythongke.getText() + " ]" + "\n"
                     + "--------------------------------------------------------------------------\n"
                     + "TONG DON HANG                            : " + tftongdonhang.getText() + "\n"
                     + "THANH CONG                                   :" + tfdonthanhcong.getText() + "\n"
@@ -1048,7 +1055,7 @@ public class ViewSanPham extends javax.swing.JFrame {
                     + "TONG DOANH THU                           : " + tfdoanhthu.getText() + "\n";
             msg.setText(baocao);
             msg.setSentDate(new Date());
-               int xuat = JOptionPane.showConfirmDialog(this,baocao);
+            int xuat = JOptionPane.showConfirmDialog(this, baocao);
 
             if (xuat == 0) {
                 Transport.send(msg);
@@ -1063,7 +1070,6 @@ public class ViewSanPham extends javax.swing.JFrame {
         }
 
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -1216,6 +1222,11 @@ public class ViewSanPham extends javax.swing.JFrame {
         jLabel58 = new javax.swing.JLabel();
         txtTimKiem = new javax.swing.JTextField();
         pLoc = new javax.swing.JPanel();
+        jdateFrom = new com.toedter.calendar.JDateChooser();
+        jdateTo = new com.toedter.calendar.JDateChooser();
+        jButton1 = new javax.swing.JButton();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
         btnExcel = new javax.swing.JButton();
         pl_khuyenmai = new javax.swing.JPanel();
         jPanel26 = new javax.swing.JPanel();
@@ -2879,6 +2890,11 @@ public class ViewSanPham extends javax.swing.JFrame {
                 "Mã HD", "Mã NV", "Tên KH", "SDT", "Trạng Thái", "Tổng Tiền", "Ngày Tạo"
             }
         ));
+        tblHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblHoaDonMouseClicked(evt);
+            }
+        });
         jScrollPane13.setViewportView(tblHoaDon);
         if (tblHoaDon.getColumnModel().getColumnCount() > 0) {
             tblHoaDon.getColumnModel().getColumn(0).setPreferredWidth(30);
@@ -2913,6 +2929,11 @@ public class ViewSanPham extends javax.swing.JFrame {
                 "Tên SP", "Đơn Giá", "Số Lượng", "Thành Tiền"
             }
         ));
+        tblSP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblSPMouseClicked(evt);
+            }
+        });
         jScrollPane14.setViewportView(tblSP);
         if (tblSP.getColumnModel().getColumnCount() > 0) {
             tblSP.getColumnModel().getColumn(0).setPreferredWidth(100);
@@ -2969,15 +2990,54 @@ public class ViewSanPham extends javax.swing.JFrame {
         pLoc.setBackground(new java.awt.Color(255, 255, 255));
         pLoc.setBorder(javax.swing.BorderFactory.createTitledBorder("Lọc theo ngày tạo"));
 
+        jdateFrom.setDateFormatString("yyyy-MM-dd");
+
+        jdateTo.setDateFormatString("yyyy-MM-dd");
+
+        jButton1.setText("Lọc");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel27.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel27.setText("Từ:");
+
+        jLabel28.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel28.setText("Đến:");
+
         javax.swing.GroupLayout pLocLayout = new javax.swing.GroupLayout(pLoc);
         pLoc.setLayout(pLocLayout);
         pLocLayout.setHorizontalGroup(
             pLocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 559, Short.MAX_VALUE)
+            .addGroup(pLocLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jdateFrom, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addComponent(jLabel28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jdateTo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38))
         );
         pLocLayout.setVerticalGroup(
             pLocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 48, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pLocLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pLocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jdateTo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                    .addComponent(jdateFrom, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pLocLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(pLocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel27)
+                            .addComponent(jLabel28))))
+                .addContainerGap())
         );
 
         btnExcel.setText("Excel");
@@ -4028,7 +4088,6 @@ public class ViewSanPham extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_pn_TongAncestorAdded
 
-    
 
     private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
         // TODO add your handling code here:
@@ -4334,7 +4393,7 @@ public class ViewSanPham extends javax.swing.JFrame {
 
         List<SanPhamResponse> lstSP = sanPhamService.getAll();
         showData(lstSP);
-        
+
     }//GEN-LAST:event_btnThemSanPhamActionPerformed
 
     private void btnSuaSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaSanPhamActionPerformed
@@ -4369,7 +4428,6 @@ public class ViewSanPham extends javax.swing.JFrame {
         cbbMauSac.setSelectedIndex(0);
     }//GEN-LAST:event_btnXoaFormSanPhamActionPerformed
 
-    
 
     private void btnDesignImeiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesignImeiActionPerformed
         // TODO add your handling code here:
@@ -4583,10 +4641,23 @@ public class ViewSanPham extends javax.swing.JFrame {
     }//GEN-LAST:event_tblSanPhamBanHangMouseClicked
 
     private void btnThemSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemSanPhamMouseClicked
-        
+
     }//GEN-LAST:event_btnThemSanPhamMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        sortHD();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void tblHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonMouseClicked
+        showhdct();
+    }//GEN-LAST:event_tblHoaDonMouseClicked
+
+    private void tblSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSPMouseClicked
+        showimei();
+    }//GEN-LAST:event_tblSPMouseClicked
 // đợi
-    private void clear(){
+
+    private void clear() {
         txtTenKh.setText("");
         txtTongTienHang.setText("");
         txtKhuyenMai.setText("");
@@ -4595,6 +4666,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         txtTienKhachDua.setText("");
         txtTienThua.setText("");
     }
+
     /**
      * @param args the command line arguments
      */
@@ -4705,6 +4777,7 @@ public class ViewSanPham extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbbPin;
     private javax.swing.JComboBox<String> cbbRam;
     private javax.swing.JComboBox<String> cbbRom;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
@@ -4749,6 +4822,8 @@ public class ViewSanPham extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
@@ -4850,6 +4925,8 @@ public class ViewSanPham extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField41;
     private javax.swing.JTextField jTextField43;
     private javax.swing.JTextField jTextField8;
+    private com.toedter.calendar.JDateChooser jdateFrom;
+    private com.toedter.calendar.JDateChooser jdateTo;
     private javax.swing.JLabel lb_Tendetai;
     private javax.swing.JLabel lblAnh;
     private javax.swing.JLabel lblAnh1;
