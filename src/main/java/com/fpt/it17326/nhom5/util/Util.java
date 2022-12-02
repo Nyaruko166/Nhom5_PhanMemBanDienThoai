@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Date;
+import net.bytebuddy.utility.RandomString;
 
 /**
  *
@@ -22,9 +23,13 @@ public class Util {
         }
     }
 
-    public static void uploadImage(String path) {
+    public static void uploadImage(String path, boolean hasRoot) {
         File source = new File(path);
+        String userDirectory = new File("").getAbsolutePath();
         File dest = new File("pictures\\" + source.getName());
+        if (hasRoot) {
+            dest = new File(userDirectory + "\\pictures\\" + source.getName());
+        }
         try {
             Files.copy(source.toPath(), dest.toPath());
         } catch (IOException e) {
@@ -35,5 +40,10 @@ public class Util {
     public static Date getCurrentDate() {
         Date date = new Date();
         return date;
+    }
+    
+    public static String randomString() {
+        String generatedString = RandomString.make(10);
+        return generatedString;
     }
 }

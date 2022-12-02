@@ -30,10 +30,10 @@ public class SanPhamServiceImpl implements SanPhamService {
         return lst;
     }
     
-    @Override
-    public SanPhamResponse getOne(String MaSP) {
-        return new SanPhamResponse(sanPhamRepository.getOne(MaSP));
-    }
+//    @Override
+//    public SanPhamResponse getOne(String tenSP) {
+//        return new SanPhamResponse(sanPhamRepository.getOne(tenSP));
+//    }
     
     @Override
     public String add(SanPham sp) {
@@ -71,5 +71,25 @@ public class SanPhamServiceImpl implements SanPhamService {
             return "Thêm sản phẩm thất bại";
         }
         
+    }
+
+    @Override
+    public List<SanPham> getAllSanPham() {
+        return sanPhamRepository.getAll();
+    }
+
+    @Override
+    public List<SanPham> getDeletedSanPham() {
+        return sanPhamRepository.getAllDeleted();
+    }
+
+    @Override
+    public SanPhamResponse getOne(String tenSP) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public SanPham getSPLast() {
+        return sanPhamRepository.getSPLast();
     }
 }

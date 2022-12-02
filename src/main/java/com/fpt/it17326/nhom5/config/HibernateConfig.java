@@ -5,6 +5,7 @@ import com.fpt.it17326.nhom5.domainmodel.Chip;
 import com.fpt.it17326.nhom5.domainmodel.HangDienThoai;
 import com.fpt.it17326.nhom5.domainmodel.HoaDon;
 import com.fpt.it17326.nhom5.domainmodel.HoaDonChiTiet;
+import com.fpt.it17326.nhom5.domainmodel.Imei;
 import com.fpt.it17326.nhom5.domainmodel.ImeiDaBan;
 import com.fpt.it17326.nhom5.domainmodel.KhuyenMai;
 import com.fpt.it17326.nhom5.domainmodel.MauSac;
@@ -53,6 +54,7 @@ public class HibernateConfig {
         conf.addAnnotatedClass(HoaDonChiTiet.class);
         conf.addAnnotatedClass(KhuyenMai.class);
         conf.addAnnotatedClass(ImeiDaBan.class);
+        conf.addAnnotatedClass(Imei.class);
 
         ServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .applySettings(conf.getProperties()).build();

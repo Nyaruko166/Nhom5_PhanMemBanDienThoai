@@ -14,7 +14,11 @@ import java.util.List;
  */
 public interface RamService {
     
-     List<RamResponse> getAll();
+    List<RamResponse> getAll();
+    
+    List<Ram> getAllRam();
+    
+    List<Ram> getDeletedRam();
 
     RamResponse getOne(String MaRam);
             

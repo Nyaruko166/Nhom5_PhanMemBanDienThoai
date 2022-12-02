@@ -58,4 +58,14 @@ public class AnhServiceImpl implements AnhService {
         AnhResponse anh = new AnhResponse(AnhRepository.getOne(MaAnh));
         return anh;
     }
+
+    @Override
+    public List<Anh> getAllAnh() {
+        return AnhRepository.getAll();
+    }
+
+    @Override
+    public List<Anh> getDeletedAnh() {
+        return AnhRepository.getAllDeleted();
+    }
 }

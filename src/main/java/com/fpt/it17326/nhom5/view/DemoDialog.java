@@ -52,6 +52,16 @@ public class DemoDialog extends javax.swing.JDialog {
     
     List<Chip> listChip;
     List<Chip> listChipDeleted;
+    List<Ram> listRam;
+    List<Ram> listRamDeleted;
+    List<Rom> listRom;
+    List<Rom> listRomDeleted;
+    List<MauSac> listMauSac;
+    List<MauSac> listMauSacDeleted;
+    List<HangDienThoai> listHangDT;
+    List<HangDienThoai> listHangDTDeleted;
+    List<Pin> listPin;
+    List<Pin> listPinDeleted;
     
     private int selectedRow;
 
@@ -65,6 +75,8 @@ public class DemoDialog extends javax.swing.JDialog {
         if (headers != null) {
             setHeaderColumn(headers);
         }
+        //Code này của bảng sản phẩm chi tiết khum động zô////////////////////////////////////////////////////////
+        
         lblTitle.setText(title);
         lblMa.setText(ma);
         lblTen.setText(ten);
@@ -89,15 +101,30 @@ public class DemoDialog extends javax.swing.JDialog {
             listChipDeleted = chipService.getDeletedChip();
             getAllChipDeleted(listChipDeleted);
         } else if (txt.equalsIgnoreCase("Ram")) {
-            getAllRam();
+            listRam = ramService.getAllRam();
+            getAllRam(listRam);
+            listRamDeleted = ramService.getDeletedRam();
+            getAllRamDeleted(listRamDeleted);
         } else if (txt.equalsIgnoreCase("Rom")) {
-            getAllRom();
+            listRom = romService.getAllRom();
+            getAllRom(listRom);
+            listRomDeleted = romService.getDeletedRom();
+            getAllRomDeleted(listRomDeleted);
         } else if (txt.equalsIgnoreCase("Pin")) {
-            getAllPin();
+            listPin = pinService.getAllPin();
+            getAllPin(listPin);
+            listPinDeleted = pinService.getDeletedPin();
+            getAllPinDeleted(listPinDeleted);
         } else if (txt.equalsIgnoreCase("Hãng")) {
-            getAllHangDT();
+            listHangDT = hangDienThoaiService.getAllHangDT();
+            getAllHangDT(listHangDT);
+            listHangDTDeleted = hangDienThoaiService.getDeletedHangDT();
+            getAllHangDTDeleted(listHangDTDeleted);
         } else if (txt.equalsIgnoreCase("Màu sắc")) {
-            getAllMauSac();
+            listMauSac = mauSacService.getAllMauSac();
+            getAllMauSac(listMauSac);
+            listMauSacDeleted = mauSacService.getDeletedMauSac();
+            getAllMauSacDeleted(listMauSacDeleted);
         }
     }
 
@@ -135,54 +162,94 @@ public class DemoDialog extends javax.swing.JDialog {
         loadTableDeleted(rows);
     }
 
-    public void getAllRom() {
-        List<RomResponse> listRom = romService.getAll();
+    public void getAllRom(List<Rom> listRom) {
         ArrayList<Object[]> rows = new ArrayList<>();
-        for (RomResponse romResponse : listRom) {
-            Object[] row = {romResponse.getMaRom(), romResponse.getTenRom(),};
+        for (Rom rom : listRom) {
+            Object[] row = {rom.getMaRom(), rom.getTenRom(),};
             rows.add(row);
         }
         loadTableSPChiTiet(rows);
     }
 
-    public void getAllRam() {
-        List<RamResponse> listRam = ramService.getAll();
+    public void getAllRomDeleted(List<Rom> listRom) {
         ArrayList<Object[]> rows = new ArrayList<>();
-        for (RamResponse ramResponse : listRam) {
-            Object[] row = {ramResponse.getMaRam(), ramResponse.getDungLuong(),};
+        for (Rom rom : listRom) {
+            Object[] row = {rom.getMaRom(), rom.getTenRom(),};
+            rows.add(row);
+        }
+        loadTableDeleted(rows);
+    }
+    
+    public void getAllRam(List<Ram> listRam) {
+        ArrayList<Object[]> rows = new ArrayList<>();
+        for (Ram ram : listRam) {
+            Object[] row = {ram.getMaRam(), ram.getDungLuong(),};
             rows.add(row);
         }
         loadTableSPChiTiet(rows);
     }
 
-    public void getAllPin() {
-        List<PinResponse> listPin = pinService.getAll();
+    public void getAllRamDeleted(List<Ram> listRam) {
         ArrayList<Object[]> rows = new ArrayList<>();
-        for (PinResponse pinResponse : listPin) {
-            Object[] row = {pinResponse.getMaPin(), pinResponse.getTenPin(),};
+        for (Ram ram : listRam) {
+            Object[] row = {ram.getMaRam(), ram.getDungLuong(),};
+            rows.add(row);
+        }
+        loadTableDeleted(rows);
+    }
+    
+    public void getAllHangDT(List<HangDienThoai> listHangDT) {
+        ArrayList<Object[]> rows = new ArrayList<>();
+        for (HangDienThoai hdt : listHangDT) {
+            Object[] row = {hdt.getMaHang(), hdt.getTenHang(),};
+            rows.add(row);
+        }
+        loadTableSPChiTiet(rows);
+    }
+    
+    public void getAllHangDTDeleted(List<HangDienThoai> listHangDT) {
+        ArrayList<Object[]> rows = new ArrayList<>();
+        for (HangDienThoai hdt : listHangDT) {
+            Object[] row = {hdt.getMaHang(), hdt.getTenHang(),};
+            rows.add(row);
+        }
+        loadTableDeleted(rows);
+    }
+
+    public void getAllMauSac(List<MauSac> listMauSac) {
+        ArrayList<Object[]> rows = new ArrayList<>();
+        for (MauSac ms : listMauSac) {
+            Object[] row = {ms.getMaMauSac(), ms.getTenMauSac(),};
             rows.add(row);
         }
         loadTableSPChiTiet(rows);
     }
 
-    public void getAllHangDT() {
-        List<HangDienThoaiResponse> listHangDT = hangDienThoaiService.getAll();
+    public void getAllMauSacDeleted(List<MauSac> listMauSac) {
         ArrayList<Object[]> rows = new ArrayList<>();
-        for (HangDienThoaiResponse hangDienThoaiResponse : listHangDT) {
-            Object[] row = {hangDienThoaiResponse.getMaHang(), hangDienThoaiResponse.getTenHang(),};
+        for (MauSac ms : listMauSac) {
+            Object[] row = {ms.getMaMauSac(), ms.getTenMauSac(),};
+            rows.add(row);
+        }
+        loadTableDeleted(rows);
+    }
+    
+    public void getAllPin(List<Pin> listPin) {
+        ArrayList<Object[]> rows = new ArrayList<>();
+        for (Pin pin : listPin) {
+            Object[] row = {pin.getMaPin(), pin.getTenPin(),};
             rows.add(row);
         }
         loadTableSPChiTiet(rows);
     }
 
-    public void getAllMauSac() {
-        List<MauSacResponse> listMauSac = mauSacService.getAll();
+    public void getAllPinDeleted(List<Pin> listPin) {
         ArrayList<Object[]> rows = new ArrayList<>();
-        for (MauSacResponse mauSacService : listMauSac) {
-            Object[] data = {mauSacService.getMaMauSac(), mauSacService.getTenMauSac(),};
-            rows.add(data);
+        for (Pin pin : listPin) {
+            Object[] row = {pin.getMaPin(), pin.getTenPin(),};
+            rows.add(row);
         }
-        loadTableSPChiTiet(rows);
+        loadTableDeleted(rows);
     }
 
     public void loadTableSPChiTiet(ArrayList<Object[]> rows) {
@@ -231,37 +298,52 @@ public class DemoDialog extends javax.swing.JDialog {
         btnRestore = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
 
         lblTitle.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
+        lblTitle.setForeground(new java.awt.Color(0, 0, 102));
         lblTitle.setText("Chip");
 
+        jTabbedPane1.setForeground(new java.awt.Color(0, 0, 102));
         jTabbedPane1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
+        lblMa.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblMa.setForeground(new java.awt.Color(0, 0, 102));
         lblMa.setText("Mã Chip");
 
+        lblTen.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblTen.setForeground(new java.awt.Color(0, 0, 102));
         lblTen.setText("Tên Chip");
 
-        btnThem.setIcon(new javax.swing.ImageIcon("D:\\Study\\FALL_2022\\PRO1041_DuAn1\\OnTap\\QuanLyDienThoaiNhom5\\Nhom5_QuanLyDienThoai\\images\\add.png")); // NOI18N
+        txtMa.setForeground(new java.awt.Color(0, 0, 102));
+
+        txtTen.setForeground(new java.awt.Color(0, 0, 102));
+
+        btnThem.setBackground(new java.awt.Color(0, 0, 102));
+        btnThem.setIcon(new javax.swing.ImageIcon("D:\\Study\\FALL_2022\\PRO1041_DuAn1\\OnTap\\CodeTung\\Nhom5_QuanLyDienThoai\\images\\add.png")); // NOI18N
         btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThemActionPerformed(evt);
             }
         });
 
-        btnSua.setIcon(new javax.swing.ImageIcon("D:\\Study\\FALL_2022\\PRO1041_DuAn1\\OnTap\\QuanLyDienThoaiNhom5\\Nhom5_QuanLyDienThoai\\images\\update.png")); // NOI18N
+        btnSua.setBackground(new java.awt.Color(0, 0, 102));
+        btnSua.setIcon(new javax.swing.ImageIcon("D:\\Study\\FALL_2022\\PRO1041_DuAn1\\OnTap\\CodeTung\\Nhom5_QuanLyDienThoai\\images\\update.png")); // NOI18N
         btnSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSuaActionPerformed(evt);
             }
         });
 
-        btnXoa.setIcon(new javax.swing.ImageIcon("D:\\Study\\FALL_2022\\PRO1041_DuAn1\\OnTap\\QuanLyDienThoaiNhom5\\Nhom5_QuanLyDienThoai\\images\\delete.png")); // NOI18N
+        btnXoa.setBackground(new java.awt.Color(0, 0, 102));
+        btnXoa.setIcon(new javax.swing.ImageIcon("D:\\Study\\FALL_2022\\PRO1041_DuAn1\\OnTap\\CodeTung\\Nhom5_QuanLyDienThoai\\images\\delete.png")); // NOI18N
         btnXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnXoaActionPerformed(evt);
             }
         });
 
+        tblSetting.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tblSetting.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -281,6 +363,8 @@ public class DemoDialog extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
+        tblSetting.setGridColor(new java.awt.Color(0, 0, 102));
+        tblSetting.setSelectionBackground(new java.awt.Color(255, 0, 51));
         tblSetting.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblSettingMouseClicked(evt);
@@ -339,9 +423,15 @@ public class DemoDialog extends javax.swing.JDialog {
 
         jTabbedPane1.addTab("Chi Tiết", jPanel1);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 102));
         jLabel1.setText("Tìm Kiếm");
 
-        btnSearch.setIcon(new javax.swing.ImageIcon("D:\\Study\\FALL_2022\\PRO1041_DuAn1\\OnTap\\QuanLyDienThoaiNhom5\\Nhom5_QuanLyDienThoai\\images\\search.png")); // NOI18N
+        txtTimKiem.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtTimKiem.setForeground(new java.awt.Color(0, 0, 102));
+
+        btnSearch.setBackground(new java.awt.Color(0, 0, 102));
+        btnSearch.setIcon(new javax.swing.ImageIcon("D:\\Study\\FALL_2022\\PRO1041_DuAn1\\OnTap\\CodeTung\\Nhom5_QuanLyDienThoai\\images\\search.png")); // NOI18N
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSearchActionPerformed(evt);
@@ -364,13 +454,17 @@ public class DemoDialog extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
+        tblLuuTru.setGridColor(new java.awt.Color(0, 0, 102));
+        tblLuuTru.setSelectionBackground(new java.awt.Color(255, 0, 51));
         jScrollPane2.setViewportView(tblLuuTru);
         if (tblLuuTru.getColumnModel().getColumnCount() > 0) {
             tblLuuTru.getColumnModel().getColumn(0).setResizable(false);
             tblLuuTru.getColumnModel().getColumn(1).setResizable(false);
         }
 
-        btnRestore.setIcon(new javax.swing.ImageIcon("D:\\Study\\FALL_2022\\PRO1041_DuAn1\\OnTap\\QuanLyDienThoaiNhom5\\Nhom5_QuanLyDienThoai\\images\\restore.png")); // NOI18N
+        btnRestore.setBackground(new java.awt.Color(0, 0, 102));
+        btnRestore.setForeground(new java.awt.Color(0, 0, 102));
+        btnRestore.setIcon(new javax.swing.ImageIcon("D:\\Study\\FALL_2022\\PRO1041_DuAn1\\OnTap\\CodeTung\\Nhom5_QuanLyDienThoai\\images\\restore.png")); // NOI18N
         btnRestore.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRestoreActionPerformed(evt);
@@ -406,7 +500,7 @@ public class DemoDialog extends javax.swing.JDialog {
                         .addComponent(txtTimKiem))
                     .addComponent(btnRestore))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -456,10 +550,11 @@ public class DemoDialog extends javax.swing.JDialog {
         }
     }
 
-    public void updateRam() {
+    public void updateRam(int id) {
         String ma = txtMa.getText();
         String ten = txtTen.getText();
         Ram ram = new Ram();
+        ram.setId(id);
         ram.setMaRam(ma);
         ram.setDungLuong(ten);
         ram.setDeleted(false);
@@ -467,14 +562,16 @@ public class DemoDialog extends javax.swing.JDialog {
         String result = ramService.update(ram);
         JOptionPane.showMessageDialog(this, result);
         if (result.contains("thành công")) {
-            loadData();
+            listRam.set(selectedRow, ram);
+            getAllRam(listRam);
         }
     }
 
-    public void updateRom() {
+    public void updateRom(int id) {
         String ma = txtMa.getText();
         String ten = txtTen.getText();
         Rom rom = new Rom();
+        rom.setId(id);
         rom.setMaRom(ma);
         rom.setTenRom(ten);
         rom.setDeleted(false);
@@ -482,14 +579,16 @@ public class DemoDialog extends javax.swing.JDialog {
         String result = romService.update(rom);
         JOptionPane.showMessageDialog(this, result);
         if (result.contains("thành công")) {
-            loadData();
+            listRom.set(selectedRow, rom);
+            getAllRom(listRom);
         }
     }
 
-    public void updateHang() {
+    public void updateHang(int id) {
         String ma = txtMa.getText();
         String ten = txtTen.getText();
         HangDienThoai hdt = new HangDienThoai();
+        hdt.setId(id);
         hdt.setMaHang(ma);
         hdt.setTenHang(ten);
         hdt.setDeleted(false);
@@ -497,14 +596,16 @@ public class DemoDialog extends javax.swing.JDialog {
         String result = hangDienThoaiService.update(hdt);
         JOptionPane.showMessageDialog(this, result);
         if (result.contains("thành công")) {
-            loadData();
+            listHangDT.set(selectedRow, hdt);
+            getAllHangDT(listHangDT);
         }
     }
 
-    public void updateMauSac() {
+    public void updateMauSac(int id) {
         String ma = txtMa.getText();
         String ten = txtTen.getText();
         MauSac ms = new MauSac();
+        ms.setId(id);
         ms.setMaMauSac(ma);
         ms.setTenMauSac(ten);
         ms.setDeleted(false);
@@ -512,14 +613,16 @@ public class DemoDialog extends javax.swing.JDialog {
         String result = mauSacService.update(ms);
         JOptionPane.showMessageDialog(this, result);
         if (result.contains("thành công")) {
-            loadData();
+            listMauSac.set(selectedRow, ms);
+            getAllMauSac(listMauSac);
         }
     }
 
-    public void updatePin() {
+    public void updatePin(int id) {
         String ma = txtMa.getText();
         String ten = txtTen.getText();
         Pin pin = new Pin();
+        pin.setId(id);
         pin.setMaPin(ma);
         pin.setTenPin(ten);
         pin.setDeleted(false);
@@ -527,7 +630,8 @@ public class DemoDialog extends javax.swing.JDialog {
         String result = pinService.update(pin);
         JOptionPane.showMessageDialog(this, result);
         if (result.contains("thành công")) {
-            loadData();
+            listPin.set(selectedRow, pin);
+            getAllPin(listPin);
         }
     }
 
@@ -544,15 +648,20 @@ public class DemoDialog extends javax.swing.JDialog {
                 int id = listChip.get(row).getId();
                 updateChip(id);
             } else if (lblTitle.getText().equalsIgnoreCase("Ram")) {
-                updateRam();
+                int id = listRam.get(row).getId();
+                updateRam(id);
             } else if (lblTitle.getText().equalsIgnoreCase("Rom")) {
-                updateRom();
+                int id = listRom.get(row).getId();
+                updateRom(id);
             } else if (lblTitle.getText().equalsIgnoreCase("Màu sắc")) {
-                updateMauSac();
+                int id = listMauSac.get(row).getId();
+                updateMauSac(id);
             } else if (lblTitle.getText().equalsIgnoreCase("Hãng")) {
-                updateHang();
+                int id = listHangDT.get(row).getId();
+                updateHang(id);
             } else if (lblTitle.getText().equalsIgnoreCase("Pin")) {
-                updatePin();
+                int id = listPin.get(row).getId();
+                updatePin(id);
             }
         }
     }//GEN-LAST:event_btnSuaActionPerformed
@@ -682,17 +791,17 @@ public class DemoDialog extends javax.swing.JDialog {
         if (result.contains("thành công")) {
             listChip.remove(selectedRow);
             getAllChip(listChip);
-            
             listChipDeleted.add(chip);
             getAllChipDeleted(listChipDeleted);
             selectedRow = -1;
         }
     }
 
-    public void deleteRam() {
+    public void deleteRam(int id) {
         String ma = txtMa.getText();
         String ten = txtTen.getText();
         Ram ram = new Ram();
+        ram.setId(id);
         ram.setMaRam(ma);
         ram.setDungLuong(ten);
         ram.setDeleted(true);
@@ -700,14 +809,19 @@ public class DemoDialog extends javax.swing.JDialog {
         String result = ramService.delete(ram);
         JOptionPane.showMessageDialog(this, result);
         if (result.contains("thành công")) {
-            loadData();
+            listRam.remove(selectedRow);
+            getAllRam(listRam);
+            listRamDeleted.add(ram);
+            getAllRamDeleted(listRamDeleted);
+            selectedRow = -1;
         }
     }
 
-    public void deleteRom() {
+    public void deleteRom(int id) {
         String ma = txtMa.getText();
         String ten = txtTen.getText();
         Rom rom = new Rom();
+        rom.setId(id);
         rom.setMaRom(ma);
         rom.setTenRom(ten);
         rom.setDeleted(true);
@@ -715,7 +829,11 @@ public class DemoDialog extends javax.swing.JDialog {
         String result = romService.delete(rom);
         JOptionPane.showMessageDialog(this, result);
         if (result.contains("thành công")) {
-            loadData();
+            listRom.remove(selectedRow);
+            getAllRom(listRom);
+            listRomDeleted.add(rom);
+            getAllRamDeleted(listRamDeleted);
+            selectedRow = -1;
         }
     }
 
@@ -777,14 +895,19 @@ public class DemoDialog extends javax.swing.JDialog {
                 int id = listChip.get(row).getId();
                 deleteChip(id);
             } else if (lblTitle.getText().equalsIgnoreCase("Ram")) {
-                deleteRam();
+                int id = listRam.get(row).getId();
+                deleteRam(id);
             } else if (lblTitle.getText().equalsIgnoreCase("Rom")) {
-                deleteRom();
+                int id = listRom.get(row).getId();
+                deleteRom(id);
             } else if (lblTitle.getText().equalsIgnoreCase("Màu sắc")) {
+                int id = listMauSac.get(row).getId();
                 deleteMauSac();
             } else if (lblTitle.getText().equalsIgnoreCase("Hãng")) {
+                int id = listHangDT.get(row).getId();
                 deleteHangDT();
             } else if (lblTitle.getText().equalsIgnoreCase("Pin")) {
+                int id = listPin.get(row).getId();
                 deletePin();
             }
         }

@@ -59,4 +59,14 @@ public class MauSacServiceImpl implements MauSacService {
             return "Xóa thất bại";
         }
     }
+
+    @Override
+    public List<MauSac> getAllMauSac() {
+        return MauSacRepository.getAll();
+    }
+
+    @Override
+    public List<MauSac> getDeletedMauSac() {
+        return MauSacRepository.getAllDeleted();
+    }
 }

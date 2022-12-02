@@ -15,7 +15,7 @@ import java.util.List;
 public interface ImeiDaBanService {
     
     List<ImeiDaBanResponse> getAll();
-
+    
     ImeiDaBanResponse getOne(String MaImei);
 
     String add(ImeiDaBan imeiDaBan);
