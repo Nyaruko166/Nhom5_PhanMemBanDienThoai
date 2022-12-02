@@ -12,6 +12,10 @@ public interface HangDienThoaiService {
 
     List<HangDienThoaiResponse> getAll();
 
+    List<HangDienThoai> getAllHangDT();
+    
+    List<HangDienThoai> getDeletedHangDT();
+    
     HangDienThoaiResponse getOne(String MaAnh);
 
     String add(HangDienThoai hdt);

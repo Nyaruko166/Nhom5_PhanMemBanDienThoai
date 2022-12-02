@@ -46,9 +46,9 @@ public class HoaDonServiceImpl implements HoaDonService {
     public String update(HoaDon hd) {
         boolean update = hoaDonRepository.update(hd);
         if(update){
-            return "Update thành công";
+            return "Sửa thành công";
         }else{
-            return "Update thất bại";
+            return "Sửa thất bại";
         }
     }
     
@@ -56,9 +56,9 @@ public class HoaDonServiceImpl implements HoaDonService {
     public String delete(HoaDon hd) {
         boolean delete = hoaDonRepository.delete(hd);
         if(delete){
-            return "Delete thành công";
+            return "Xóa thành công";
         }else{
-            return "Delete thất bại";
+            return "Xóa thất bại";
         }
     }
     

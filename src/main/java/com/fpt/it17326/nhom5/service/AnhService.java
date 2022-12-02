@@ -12,6 +12,10 @@ public interface AnhService {
 
     List<AnhResponse> getAll();
 
+    List<Anh> getAllAnh();
+    
+    List<Anh> getDeletedAnh();
+    
     AnhResponse getOne(String MaAnh);
             
     String add(Anh anh);

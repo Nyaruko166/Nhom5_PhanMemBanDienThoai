@@ -37,7 +37,7 @@ public class HoaDonRepository {
 //        }
 //    }
     public HoaDon getOne(String MaHoaDon) {
-        String sql = fromTable + " WHERE MaHoaDon =: MaHoaDon";
+        String sql = fromTable + " WHERE MaHD =: MaHoaDon";
         Query query = session.createQuery(sql);
         query.setParameter("MaHoaDon", MaHoaDon);
         return (HoaDon) query.getSingleResult();

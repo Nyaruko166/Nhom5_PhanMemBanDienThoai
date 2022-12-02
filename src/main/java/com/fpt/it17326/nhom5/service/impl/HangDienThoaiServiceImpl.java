@@ -59,4 +59,14 @@ public class HangDienThoaiServiceImpl implements HangDienThoaiService {
         }
     }
 
+    @Override
+    public List<HangDienThoai> getAllHangDT() {
+        return hangDienThoaiRepository.getAll();
+    }
+
+    @Override
+    public List<HangDienThoai> getDeletedHangDT() {
+        return hangDienThoaiRepository.getAllDeleted();
+    }
+
 }
