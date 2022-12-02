@@ -63,4 +63,14 @@ public class RamServiceImpl implements RamService {
         }
     }
 
+    @Override
+    public List<Ram> getAllRam() {
+        return ramRepository.getAll();
+    }
+
+    @Override
+    public List<Ram> getDeletedRam() {
+        return ramRepository.getAllDeleted();
+    }
+
 }

@@ -21,10 +21,17 @@ public class AnhRepository {
     private String fromTable = "FROM Anh";
 
     public List<Anh> getAll() {
-        Query query = session.createQuery(fromTable, Anh.class);
+        String sql = fromTable + " WHERE deleted = 0";
+        Query query = session.createQuery(sql);
         return query.getResultList();
     }
-
+    
+    public List<Anh> getAllDeleted() {
+        String sql = fromTable + " WHERE deleted = 1";
+        Query query = session.createQuery(sql);
+        return query.getResultList();
+    }
+    
     public Anh getOne(String MaAnh) {
         String sql = fromTable + " WHERE MaAnh =: MaAnh1";
         Query query = session.createQuery(sql);

@@ -20,7 +20,14 @@ public class MauSacRepository {
     private String fromTable = "FROM MauSac";
 
     public List<MauSac> getAll() {
-        Query query = session.createQuery(fromTable);
+        String sql = fromTable + " WHERE deleted = 0";
+        Query query = session.createQuery(sql);
+        return query.getResultList();
+    }
+    
+    public List<MauSac> getAllDeleted() {
+        String sql = fromTable + " WHERE deleted = 1";
+        Query query = session.createQuery(sql);
         return query.getResultList();
     }
 

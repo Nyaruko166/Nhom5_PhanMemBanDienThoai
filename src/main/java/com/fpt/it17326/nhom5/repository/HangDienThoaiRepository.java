@@ -20,7 +20,14 @@ public class HangDienThoaiRepository {
     private String fromTable = "FROM HangDienThoai";
 
     public List<HangDienThoai> getAll() {
-        Query query = session.createQuery(fromTable);
+        String sql = fromTable + " WHERE deleted = 0";
+        Query query = session.createQuery(sql);
+        return query.getResultList();
+    }
+    
+    public List<HangDienThoai> getAllDeleted() {
+        String sql = fromTable + " WHERE deleted = 1";
+        Query query = session.createQuery(sql);
         return query.getResultList();
     }
 
@@ -61,8 +68,8 @@ public class HangDienThoaiRepository {
         Transaction transaction = null;
         try ( Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
+            hdt.setDeleted(true);
             session.update(hdt);
-            transaction.commit();
             return true;
         } catch (Exception e) {
             e.printStackTrace();

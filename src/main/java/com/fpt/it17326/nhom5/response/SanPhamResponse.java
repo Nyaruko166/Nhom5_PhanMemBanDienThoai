@@ -19,19 +19,19 @@ import lombok.ToString;
 @ToString
 public class SanPhamResponse {
 
-    private int id;
+    //private int id;
     private String maSP;
     private String tenSP;
     private Float donGia;
-    private int soLuong;
     private String moTa;
-    private String tenAnh;
+    private String maAnh;
     private String tenMauSac;
     private String tenHang;
     private String tenChip;
     private String dungLuong;
     private String tenRom;
     private String tenPin;
+    private int soLuong;
     private Date CreatedAt;
     private boolean Deleted;
     private Date UpdatedAt;
@@ -40,26 +40,26 @@ public class SanPhamResponse {
     }
 
     public SanPhamResponse(SanPham sp) {
-        this.id = sp.getId();
+        //this.id = sp.getId();
         this.maSP = sp.getMaSP();
         this.tenSP = sp.getTenSP();
         this.donGia = sp.getDonGia();
-        this.soLuong = sp.getSoLuong();
         this.moTa = sp.getMoTa();
-        this.tenAnh = sp.getAnh().getMaAnh();
+        this.maAnh = sp.getUrlAnh();
         this.tenMauSac = sp.getMauSac().getTenMauSac();
         this.tenHang = sp.getHangdt().getTenHang();
         this.tenChip = sp.getChip().getTenChip();
         this.dungLuong = sp.getRam().getDungLuong();
         this.tenRom = sp.getRom().getTenRom();
         this.tenPin = sp.getPin().getTenPin();
+        this.soLuong = sp.getSoLuong();
         this.CreatedAt = sp.getCreatedAt();
         this.Deleted = sp.isDeleted();
         this.UpdatedAt = sp.getUpdatedAt();
     }
 
-    public Object[] toDataRow() {
-        return new Object[]{maSP, tenSP, donGia,soLuong, moTa, tenAnh, tenMauSac, tenHang, tenChip, dungLuong, tenRom, tenPin};
-    }
+     public Object[] toDataRow() {
+         return new Object[]{tenSP, tenHang, tenChip, dungLuong, tenRom, tenPin, tenMauSac, soLuong,moTa, donGia};
+     }
 
 }

@@ -22,7 +22,14 @@ public class RamRepository {
     private String fromTable = "FROM Ram";
 
     public List<Ram> getAll() {
-        Query query = session.createQuery(fromTable);
+        String sql = fromTable + " WHERE deleted = 0";
+        Query query = session.createQuery(sql);
+        return query.getResultList();
+    }
+    
+    public List<Ram> getAllDeleted() {
+        String sql = fromTable + " WHERE deleted = 1";
+        Query query = session.createQuery(sql);
         return query.getResultList();
     }
 

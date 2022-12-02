@@ -30,27 +30,27 @@ import lombok.ToString;
 public class HoaDonChiTiet implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
     private int id;
-
+    
     @ManyToOne
     @JoinColumn(name = "IdHD", referencedColumnName = "Id")
     private HoaDon hoaDon;
-
+    
     @ManyToOne
     @JoinColumn(name = "IdSP", referencedColumnName = "Id")
-    private SanPham sanPham;
-
+    private SanPham sp;
+    
     @Column(name = "TenSP")
-    private String TenSP;
-
+    private String tenSP;
+    
     @Column(name = "SoLuong")
     private int soLuong;
-
+    
     @Column(name = "DonGia")
     private Float donGia;
-
+    
     @Column(name = "CreatedAt")
     private Date createdAt;
 
@@ -59,5 +59,4 @@ public class HoaDonChiTiet implements Serializable {
 
     @Column(name = "UpdatedAt")
     private Date updatedAt;
-
 }

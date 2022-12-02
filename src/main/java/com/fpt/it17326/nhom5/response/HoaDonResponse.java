@@ -1,14 +1,19 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package com.fpt.it17326.nhom5.response;
 
 import com.fpt.it17326.nhom5.domainmodel.HoaDon;
+import com.fpt.it17326.nhom5.domainmodel.NhanVien;
 import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 /**
- * AowVN_Nyaruko
  *
+ * @author youngboizseetinh
  */
 @Getter
 @Setter

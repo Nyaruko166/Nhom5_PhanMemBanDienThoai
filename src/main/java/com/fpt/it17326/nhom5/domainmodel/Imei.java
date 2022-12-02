@@ -1,10 +1,14 @@
 package com.fpt.it17326.nhom5.domainmodel;
 
+import com.fpt.it17326.nhom5.util.Util;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,7 +21,7 @@ import lombok.ToString;
  **/
 
 @Entity
-@Table (name = "IMEL")
+@Table (name = "Imei")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -27,18 +31,34 @@ public class Imei {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    @Column (name = "MaIMel")
+    @Column (name = "Id")
+    private Long id;
+    
+    @Column (name = "MaImei")
     private String maImel;
 
-    @Column (name = "TenIMel")
-    private String tenImel;
+    @Column (name = "Imei")
+    private String imei;
 
+    @ManyToOne
+    @JoinColumn (name = "IdSP", referencedColumnName = "Id")
+    private SanPham sanPham;
+    
+    @Column (name = "TrangThai")
+    private boolean trangThai;
+    
     @Column (name = "CreatedAt")
-    private String createdAt;
+    private Date createdAt;
 
     @Column (name = "Deleted")
-    private Boolean deleted;
+    private boolean deleted;
 
     @Column (name = "UpdatedAt")
-    private String updatedAt;
+    private Date updatedAt;
+    
+    public void setCommonData() {
+        this.deleted = false;
+        this.createdAt = Util.getCurrentDate();
+        this.maImel = Util.randomString();
+    }
 }

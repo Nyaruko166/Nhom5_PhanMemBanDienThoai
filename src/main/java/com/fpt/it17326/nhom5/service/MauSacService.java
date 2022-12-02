@@ -12,6 +12,10 @@ public interface MauSacService {
 
     List<MauSacResponse> getAll();
 
+    List<MauSac> getAllMauSac();
+    
+    List<MauSac> getDeletedMauSac();
+    
     MauSacResponse getOne(String MaMauSac);
     
     String add(MauSac ms);
