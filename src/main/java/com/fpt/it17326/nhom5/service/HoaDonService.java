@@ -19,4 +19,5 @@ public interface HoaDonService {
     String update(HoaDon hd);
 
     String delete(HoaDon hd);
+     public List<HoaDonResponse> getAll1() ;
 }
