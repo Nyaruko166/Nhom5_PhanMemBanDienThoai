@@ -1,9 +1,66 @@
 package com.fpt.it17326.nhom5.domainmodel;
 
-/**
- * AowVN_Nyaruko
- **/
 
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+
+
+
+@Entity
+@Table (name = "BaoHanh")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class BaoHanh {
+
+    @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @Column (name = "Id")
+    private int id;
+    
+    @Column (name = "MaBaoHanh")
+    private String maBaoHanh;
+
+    @Column (name = "NoiDungBaoHanh")
+    private String noiDungBaoHanh;
+
+    @Column (name = "HanBaoHanh")
+    private Long hanBaoHanh;
+
+    @Column (name = "TrangThai")
+    private boolean trangThai;
+
+    @Column (name = "CreatedAt")
+    private Date createdAt;
+
+    @Column (name = "Deleted")
+    private boolean deleted;
+
+    @Column (name = "UpdatedAt")
+    private Date updatedAt;
+
+    @ManyToOne
+    @JoinColumn (name = "IdHang", referencedColumnName = "Id")
+    private HangDienThoai hangDienThoai;
+    
+    @ManyToOne
+    @JoinColumn (name = "IdSP", referencedColumnName = "Id")
+    private SanPham sanPham;
 
 }

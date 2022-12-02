@@ -2,17 +2,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.fpt.it17326.nhom5.View;
+package com.fpt.it17326.nhom5.view;
 
-import com.fpt.it17326.nhom5.Response.ViewTaiKhoanResponse;
-import com.fpt.it17326.nhom5.Service.Impl.ViewTaiKhoanServiceImpl;
-import com.fpt.it17326.nhom5.Service.ViewTaiKhoanSerVice;
-import com.fpt.it17326.nhom5.domainmodel.TaiKhoan;
+import com.fpt.it17326.nhom5.Response.NhanVienResponse;
+import com.fpt.it17326.nhom5.Service.Impl.NhanVienServiceImpl;
+import com.fpt.it17326.nhom5.domainmodel.NhanVien;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import com.fpt.it17326.nhom5.Service.NhanVienService;
 
 /**
  *
@@ -20,15 +20,15 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ViewDangKi extends javax.swing.JFrame {
     private DefaultTableModel dtm=new DefaultTableModel();
-    private List<ViewTaiKhoanResponse> lists = new ArrayList<>();
-    private ViewTaiKhoanSerVice dvtk =new ViewTaiKhoanServiceImpl();
+    private List<NhanVienResponse> lists = new ArrayList<>();
+    private NhanVienService dvtk =new NhanVienServiceImpl();
     /**
      * Creates new form ViewDangKi
      */
     public ViewDangKi() {
         initComponents();
 //        tblDangKi.setModel(dtm);
-//        String header[]={"id","Ho ten","TenCV","Email","TaiKhoan","MatKhau","CreatedAt","Deleted","UpdatedAt"};
+//        String header[]={"id","Ho ten","TenCV","Email","NhanVien","MatKhau","CreatedAt","Deleted","UpdatedAt"};
 //        dtm.setColumnIdentifiers(header);
 //        lists=dvtk.getAll();
 //        showData(lists);
@@ -38,7 +38,7 @@ public class ViewDangKi extends javax.swing.JFrame {
 //    private void showData(List<ViewTaiKhoanResponse> listshow){
 //        dtm= (DefaultTableModel) tblDangKi.getModel();
 //        dtm.setRowCount(0);
-//        for (ViewTaiKhoanResponse viewTaiKhoanResponse : listshow) {
+//        for (NhanVienResponse viewTaiKhoanResponse : listshow) {
 //            dtm.addRow(viewTaiKhoanResponse.toRowData());
 //        }
 //    }
@@ -315,13 +315,13 @@ public class ViewDangKi extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "matkhau toi thieu 8 ki tu vs toi da 16 ki tu");
             return;
         }
-        for (ViewTaiKhoanResponse list : lists) {
+        for (NhanVienResponse list : lists) {
             if(list.getEmail().contains(email)){
                 JOptionPane.showMessageDialog(this, "Email da ton tai");
                 return;
             }
         }
-        for (ViewTaiKhoanResponse list : lists) {
+        for (NhanVienResponse list : lists) {
             if (list.getTaiKhoan().contains(taikhoan)) {
                 JOptionPane.showMessageDialog(this, "tai khoan da ton tai");
               return;
@@ -332,11 +332,11 @@ public class ViewDangKi extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Mat khau khong khop");
             return;
         }
-       TaiKhoan tk = new TaiKhoan(hoten,"KhachHang", email, taikhoan, matkhau, create, false);
+       NhanVien tk = new NhanVien(hoten,"KhachHang", email, taikhoan, matkhau, create, false);
        
        
         JOptionPane.showMessageDialog(this, dvtk.add(tk));
-        lists = dvtk.getAll();
+//        lists = dvtk.getAll();
        
         
          
@@ -387,6 +387,7 @@ public class ViewDangKi extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ViewDangKi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
