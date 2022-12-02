@@ -19,7 +19,7 @@ import lombok.ToString;
 @ToString
 public class SanPhamResponse {
 
-    //private int id;
+    private int id;
     private String maSP;
     private String tenSP;
     private Float donGia;
@@ -40,7 +40,7 @@ public class SanPhamResponse {
     }
 
     public SanPhamResponse(SanPham sp) {
-        //this.id = sp.getId();
+        this.id = sp.getId();
         this.maSP = sp.getMaSP();
         this.tenSP = sp.getTenSP();
         this.donGia = sp.getDonGia();
