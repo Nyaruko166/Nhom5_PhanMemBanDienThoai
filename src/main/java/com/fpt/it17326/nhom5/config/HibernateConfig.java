@@ -14,6 +14,7 @@ import com.fpt.it17326.nhom5.domainmodel.Pin;
 import com.fpt.it17326.nhom5.domainmodel.Ram;
 import com.fpt.it17326.nhom5.domainmodel.Rom;
 import com.fpt.it17326.nhom5.domainmodel.SanPham;
+import com.fpt.it17326.nhom5.domainmodel.SanPhamGiamGia;
 import java.util.Properties;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -55,7 +56,7 @@ public class HibernateConfig {
         conf.addAnnotatedClass(KhuyenMai.class);
         conf.addAnnotatedClass(ImeiDaBan.class);
         conf.addAnnotatedClass(Imei.class);
-
+conf.addAnnotatedClass(SanPhamGiamGia.class);
         ServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .applySettings(conf.getProperties()).build();
         FACTORY = conf.buildSessionFactory(registry);
@@ -66,7 +67,7 @@ public class HibernateConfig {
         return FACTORY;
     }
 
-//    public static void main(String[] args) {
-//        getFACTORY();
-//    }
+    public static void main(String[] args) {
+        getFACTORY();
+    }
 }
