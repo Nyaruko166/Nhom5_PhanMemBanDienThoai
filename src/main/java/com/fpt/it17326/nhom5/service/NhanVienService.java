@@ -1,22 +1,25 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
+ */
 package com.fpt.it17326.nhom5.service;
 
-import com.fpt.it17326.nhom5.domainmodel.NhanVien;
 import com.fpt.it17326.nhom5.response.NhanVienResponse;
+import com.fpt.it17326.nhom5.domainmodel.NhanVien;
 import java.util.List;
 
 /**
- * AowVN_Nyaruko
  *
+ * @author Tu
  */
 public interface NhanVienService {
-
-    List<NhanVienResponse> getAll();
-
-    NhanVienResponse getOne(String MaNhanVien);
-
-    String add(NhanVien nv);
-
-    String update(NhanVien nv);
-
-    String delete(NhanVien nv);
+    List<NhanVien> getAll();
+    List<NhanVien> getListTaiKhoan();
+    String add(NhanVien tk);
+    String update(NhanVien tk);
+    NhanVien getOne(String Email);
+     
+//    String DangNhap(NhanVien tk);
+//    String update(NhanVien tk, String id);
+//    String delete(NhanVien tk);
 }
