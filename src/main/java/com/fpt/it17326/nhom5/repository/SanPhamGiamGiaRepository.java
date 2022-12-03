@@ -17,27 +17,34 @@ import org.hibernate.query.Query;
  */
 public class SanPhamGiamGiaRepository {
 
-    private Session session = HibernateConfig.getFACTORY().openSession();
+   private Session session = HibernateConfig.getFACTORY().openSession();
 
-    private String fromTable = "FROM SanPhamGiamGia";
+    private String fromTable = " FROM SanPhamGiamGia";
 
     public List<SanPhamGiamGia> getAll() {
-        Query query = session.createQuery(fromTable);
+        javax.persistence.Query query = session.createQuery(fromTable, SanPhamGiamGia.class);
         return query.getResultList();
     }
+     public List<SanPhamGiamGia> getAllSP(int idKM) {
+        String sql = fromTable + " WHERE idKM = "+ idKM;
+        javax.persistence.Query query = session.createQuery(sql);
+        return  query.getResultList();
+    }
+     
 
-    public SanPhamGiamGia getOne(String MaImei) {
-        String sql = fromTable + " WHERE MaImei =: MaImei1";
-        Query query = session.createQuery(sql);
-        query.setParameter("MaImei1", MaImei);
+
+    public SanPhamGiamGia getOne(String MaAnh) {
+        String sql = fromTable + " WHERE MaAnh =: MaAnh1";
+        javax.persistence.Query query = session.createQuery(sql);
+        query.setParameter("MaAnh1", MaAnh);
         return (SanPhamGiamGia) query.getSingleResult();
     }
 
-    public Boolean add(SanPhamGiamGia sanPhamGiamGia) {
+    public Boolean add(SanPhamGiamGia anh) {
         Transaction transaction = null;
-        try (Session session = HibernateConfig.getFACTORY().openSession()) {
+        try ( Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
-            session.save(sanPhamGiamGia);
+            session.save(anh);
             transaction.commit();
             return true;
         } catch (Exception e) {
@@ -46,11 +53,11 @@ public class SanPhamGiamGiaRepository {
         return null;
     }
 
-    public Boolean update(SanPhamGiamGia sanPhamGiamGia) {
+    public Boolean update(SanPhamGiamGia anh) {
         Transaction transaction = null;
-        try (Session session = HibernateConfig.getFACTORY().openSession()) {
+        try ( Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
-            session.saveOrUpdate(sanPhamGiamGia);
+            session.saveOrUpdate(anh);
             transaction.commit();
             return true;
         } catch (Exception e) {
@@ -59,15 +66,15 @@ public class SanPhamGiamGiaRepository {
         return null;
     }
 
-    public Boolean delete(SanPhamGiamGia sanPhamGiamGia) {
+    public Boolean delete(SanPhamGiamGia anh) {
         Transaction transaction = null;
         try (Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
-            session.update(sanPhamGiamGia);
+            session.delete(anh);
             transaction.commit();
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            e.printStackTrace(System.out);
         }
         return null;
     }

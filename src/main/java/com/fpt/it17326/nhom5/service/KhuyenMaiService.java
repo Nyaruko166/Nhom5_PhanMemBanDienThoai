@@ -14,11 +14,15 @@ import java.util.List;
  */
 public interface KhuyenMaiService {
 
-    List<KhuyenMaiResponse> getAll();
+    List<KhuyenMai> getAll();
 
-    KhuyenMaiResponse getOne(String MaKM);
+    List<KhuyenMaiResponse> getAllTrue();
 
-    String add(KhuyenMai km);
+    List<KhuyenMaiResponse> getAllFalse();
+
+    KhuyenMaiResponse getOne(int id);
+
+    String addTheoHoaDon(KhuyenMai km);
 
     String update(KhuyenMai km);
 
