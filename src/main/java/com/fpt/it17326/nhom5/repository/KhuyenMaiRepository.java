@@ -16,7 +16,7 @@ import org.hibernate.query.Query;
  * @author youngboizseetinh
  */
 public class KhuyenMaiRepository {
-    private Session session = HibernateConfig.getFACTORY().openSession();
+     private Session session = HibernateConfig.getFACTORY().openSession();
 
     private String fromTable = "FROM KhuyenMai";
 
@@ -24,17 +24,32 @@ public class KhuyenMaiRepository {
         Query query = session.createQuery(fromTable);
         return query.getResultList();
     }
+    public List<KhuyenMai> getAllTrue() {
+        Query query = session.createQuery(fromTable + " where Deleted = 'true' order by id desc");
+        return query.getResultList();
+    }
 
-    public KhuyenMai getOne(String MaKM) {
-        String sql = fromTable + " WHERE MaKM =: MaKM1";
+    public List<KhuyenMai> getAllFalse() {
+        Query query = session.createQuery(fromTable + " where Deleted = 'false' order by id desc");
+        return query.getResultList();
+    }
+
+    public KhuyenMai getOne(int id) {
+        String sql = fromTable + " WHERE id=:id";
         Query query = session.createQuery(sql);
-        query.setParameter("MaKM1", MaKM);
+        query.setParameter("id", id);
+        return (KhuyenMai) query.getSingleResult();
+    }
+    public KhuyenMai getOne(String maKM) {
+        String sql = fromTable + " WHERE maKM=:id";
+        Query query = session.createQuery(sql);
+        query.setParameter("id", maKM);
         return (KhuyenMai) query.getSingleResult();
     }
 
-    public Boolean add(KhuyenMai km) {
+    public Boolean addTheoHoaDon(KhuyenMai km) {
         Transaction transaction = null;
-        try (Session session = HibernateConfig.getFACTORY().openSession()) {
+        try ( Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
             session.save(km);
             transaction.commit();
@@ -47,10 +62,11 @@ public class KhuyenMaiRepository {
 
     public Boolean update(KhuyenMai km) {
         Transaction transaction = null;
-        try (Session session = HibernateConfig.getFACTORY().openSession()) {
+        try ( Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
             session.saveOrUpdate(km);
             transaction.commit();
+            session.save(km);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -58,17 +74,18 @@ public class KhuyenMaiRepository {
         return null;
     }
 
-    public Boolean delete(KhuyenMai km) {
+    public Boolean delete(KhuyenMai chip) {
         Transaction transaction = null;
         try (Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
-            km.setDeleted(true);
-            session.update(km);
+            session.delete(chip);
             transaction.commit();
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            e.printStackTrace(System.out);
         }
         return null;
     }
+
+    
 }

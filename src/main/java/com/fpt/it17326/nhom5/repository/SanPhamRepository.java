@@ -25,13 +25,27 @@ public class SanPhamRepository {
 
     private String fromTable = "FROM SanPham";
 
+    public SanPham getOneSP(String MaSanPham) {
+        String sql = fromTable + " WHERE TenSP =:TenSP";
+        Query query = session.createQuery(sql);
+        query.setParameter("TenSP", MaSanPham);
+        return (SanPham) query.getSingleResult();
+    }
+
+    public SanPham getOneMa(int MaSanPham) {
+        String sql = fromTable + " WHERE id =:TenSP";
+        Query query = session.createQuery(sql);
+        query.setParameter("TenSP", MaSanPham);
+        return (SanPham) query.getSingleResult();
+    }
+
     @Async
     public List<SanPham> getAll() {
         String sql = fromTable + " WHERE deleted = 0";
         Query query = session.createQuery(sql);
         return query.getResultList();
     }
-    
+
     public List<SanPham> getAllDeleted() {
         String sql = fromTable + " WHERE deleted = 1";
         Query query = session.createQuery(sql);
@@ -54,7 +68,7 @@ public class SanPhamRepository {
         query.setMaxResults(1);
         return (SanPham) query.getSingleResult();
     }
-    
+
     public SanPham getOne(int id) {
         String sql = fromTable + " WHERE Id =: id";
 
@@ -62,6 +76,7 @@ public class SanPhamRepository {
         query.setParameter("id", id);
         return (SanPham) query.getSingleResult();
     }
+
     @Async
     public Boolean add(SanPham sp) {
         Transaction transaction = null;
