@@ -245,6 +245,55 @@ public class ViewSanPham extends javax.swing.JFrame {
 
     }
 
+    private void showData(List<SanPhamResponse> listSanPham) {
+        dtmSP.setRowCount(0);
+        for (SanPhamResponse sanPhamResponse : listSanPham) {
+//            dtmSP.addRow(sanPhamResponse.toDataRow());
+        }
+    }
+    
+    public void getAllSanPham() {
+        listSanPham = sanPhamService.getAll();
+        listSp = sanPhamService.getAllSanPham();
+    }
+
+    public void loadTableSanPham() {
+        getAllSanPham();
+        DefaultTableModel dtm = (DefaultTableModel) tblSanPham2.getModel();
+        dtm.setRowCount(0);
+        for (SanPhamResponse item : listSanPham) {
+            Object[] row = {
+//                item.getMaSP(),
+                item.getTenSP(),
+                item.getTenHang(),
+                item.getTenChip(),               
+                item.getDungLuong(),
+                item.getTenRom(),
+                item.getTenPin(),
+                item.getTenMauSac(),
+                item.getSoLuong(),
+                item.getMoTa(),
+                item.getDonGia(),};
+            dtm.addRow(row);
+        }
+    }
+    
+    
+    public class DialogResponse {
+
+        public void getListImeiResponse(List<Imei> _imeis) {
+            imeis = _imeis;
+            listImei = new ArrayList<>();
+            for (Imei imei : _imeis) {
+                ImeiResponse i = new ImeiResponse(imei);
+                listImei.add(i);
+            }
+            txtSoLuong.setText(String.valueOf(listImei.size()));
+            getAllImei(listImei);
+        }
+
+    }
+    
     // Tung End///////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void initService() {
         chipService = new ChipServiceImpl();
@@ -257,12 +306,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         imeiService = new ImeiServiceImpl();
     }
 
-    private void showData(List<SanPhamResponse> listSanPham) {
-        dtmSP.setRowCount(0);
-        for (SanPhamResponse sanPhamResponse : listSanPham) {
-//            dtmSP.addRow(sanPhamResponse.toDataRow());
-        }
-    }
+    
 //
 
     private void showDataGH(List<SanPhamResponse> listGioHang) {
@@ -2981,31 +3025,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_pn_TongAncestorAdded
 
-    public void getAllSanPham() {
-        listSanPham = sanPhamService.getAll();
-        listSp = sanPhamService.getAllSanPham();
-    }
-
-    public void loadTableSanPham() {
-        getAllSanPham();
-        DefaultTableModel dtm = (DefaultTableModel) tblSanPham2.getModel();
-        dtm.setRowCount(0);
-        for (SanPhamResponse item : listSanPham) {
-            Object[] row = {
-//                item.getMaSP(),
-                item.getTenSP(),
-                item.getTenHang(),
-                item.getTenChip(),               
-                item.getDungLuong(),
-                item.getTenRom(),
-                item.getTenPin(),
-                item.getTenMauSac(),
-                item.getSoLuong(),
-                item.getMoTa(),
-                item.getDonGia(),};
-            dtm.addRow(row);
-        }
-    }
+    
 
     private void txtTienKHTraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTienKHTraActionPerformed
         // TODO add your handling code here:
@@ -3474,20 +3494,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         cbbMauSac.setSelectedIndex(0);
     }//GEN-LAST:event_btnXoaFormSanPhamActionPerformed
 
-    public class DialogResponse {
-
-        public void getListImeiResponse(List<Imei> _imeis) {
-            imeis = _imeis;
-            listImei = new ArrayList<>();
-            for (Imei imei : _imeis) {
-                ImeiResponse i = new ImeiResponse(imei);
-                listImei.add(i);
-            }
-            txtSoLuong.setText(String.valueOf(listImei.size()));
-            getAllImei(listImei);
-        }
-
-    }
+    
 
     private void btnDesignImeiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesignImeiActionPerformed
         // TODO add your handling code here:

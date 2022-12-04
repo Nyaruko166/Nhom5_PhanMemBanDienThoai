@@ -93,6 +93,11 @@ public class DemoDialog extends javax.swing.JDialog {
         mauSacService = new MauSacServiceImpl();
     }
 
+    public boolean checkValid(String ma, String ten) {
+        ten = txtMa.getText();
+        return false;
+    }
+    
     public void loadData() {
         String txt = lblTitle.getText();
         if (txt.equalsIgnoreCase("chip")) {
