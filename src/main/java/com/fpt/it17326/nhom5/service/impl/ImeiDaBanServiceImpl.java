@@ -33,6 +33,11 @@ public class ImeiDaBanServiceImpl implements ImeiDaBanService {
     }
 
     @Override
+    public List<ImeiDaBan> getAll1() {
+        return imeiDaBanRepository.getAll();
+    }
+
+    @Override
     public ImeiDaBanResponse getOne(String MaImei) {
         ImeiDaBanResponse lsp = new ImeiDaBanResponse(imeiDaBanRepository.getOne(MaImei));
         return lsp;

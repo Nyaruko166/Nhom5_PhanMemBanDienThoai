@@ -44,11 +44,13 @@ import com.fpt.it17326.nhom5.response.KhuyenMaiResponse;
 import com.fpt.it17326.nhom5.response.ThongkeResponse;
 import com.fpt.it17326.nhom5.service.HoaDonChiTietService;
 import com.fpt.it17326.nhom5.service.HoaDonService;
+import com.fpt.it17326.nhom5.service.ImeiDaBanService;
 import com.fpt.it17326.nhom5.service.ImeiService;
 import com.fpt.it17326.nhom5.service.KhuyenMaiService;
 import com.fpt.it17326.nhom5.service.MauSacService;
 import com.fpt.it17326.nhom5.service.impl.HoaDonChiTietServiceImpl;
 import com.fpt.it17326.nhom5.service.impl.HoaDonServiceImpl;
+import com.fpt.it17326.nhom5.service.impl.ImeiDaBanServiceImpl;
 import com.fpt.it17326.nhom5.service.impl.ImeiServiceImpl;
 import com.fpt.it17326.nhom5.service.impl.KhuyenMaiServiceImpl;
 import com.fpt.it17326.nhom5.service.impl.MauSacServiceImpl;
@@ -109,7 +111,7 @@ public class ViewSanPham extends javax.swing.JFrame {
     private MauSacService mauSacService;
     private ImeiService imeiService;
     private String urlAnh;
-
+    private ImeiDaBanService imeiDaBanService;
     private List<Chip> listChip;
     private List<Pin> listPin;
     private List<Ram> listRam;
@@ -148,6 +150,7 @@ public class ViewSanPham extends javax.swing.JFrame {
     public ViewSanPham() {
         initComponents();
         showDataKM6();
+        imeiDaBanService = new ImeiDaBanServiceImpl();
         SanPhamRepository giaRepository = new SanPhamRepository();
         SanPham sanPham = giaRepository.getOneMa(4);
         sanPham.setTenSP("NOKIA");
@@ -540,10 +543,9 @@ public class ViewSanPham extends javax.swing.JFrame {
 
     private void showimei() {
         dtmHDImei.setRowCount(0);
-        ImeiDaBanRepository imeiDaBanRepository = new ImeiDaBanRepository();
         int index = tblSP.getSelectedRow();
         String TenSP = tblSP.getValueAt(index, 0).toString();
-        List<ImeiDaBan> lstImei = imeiDaBanRepository.getAll();
+        List<ImeiDaBan> lstImei = imeiDaBanService.getAll1();
         HoaDon hd = hoaDonService.getOne(MaHoaDon);
         List<HoaDonChiTiet> lsthdct = HoaDonChiTietService.getAll();
         List<HoaDonChiTiet> lsthd = new ArrayList<>();

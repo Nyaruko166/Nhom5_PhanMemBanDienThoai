@@ -35,7 +35,7 @@ public class HibernateConfig {
         properties.put(Environment.URL, "jdbc:sqlserver://localhost:1433;databaseName=QUANLYBANDIENTHOAI");
         properties.put(Environment.USER, "sa");
         properties.put(Environment.PASS, "123456");
-        properties.put(Environment.SHOW_SQL, "true");
+        properties.put(Environment.SHOW_SQL, "false");
         conf.setProperties(properties);
         //Add @Entity
         //conf.addAnnotatedClass(*);
@@ -67,7 +67,7 @@ public class HibernateConfig {
         return FACTORY;
     }
 
-    public static void main(String[] args) {
-        getFACTORY();
-    }
+//    public static void main(String[] args) {
+//        getFACTORY();
+//    }
 }
