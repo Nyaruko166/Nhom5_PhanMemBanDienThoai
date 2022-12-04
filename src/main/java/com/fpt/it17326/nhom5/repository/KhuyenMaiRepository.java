@@ -6,9 +6,6 @@ package com.fpt.it17326.nhom5.repository;
 
 import com.fpt.it17326.nhom5.config.HibernateConfig;
 import com.fpt.it17326.nhom5.domainmodel.KhuyenMai;
-import com.fpt.it17326.nhom5.response.KhuyenMaiResponse;
-import java.time.Instant;
-import java.util.Date;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -19,8 +16,7 @@ import org.hibernate.query.Query;
  * @author youngboizseetinh
  */
 public class KhuyenMaiRepository {
-
-    private Session session = HibernateConfig.getFACTORY().openSession();
+     private Session session = HibernateConfig.getFACTORY().openSession();
 
     private String fromTable = "FROM KhuyenMai";
 
@@ -28,14 +24,13 @@ public class KhuyenMaiRepository {
         Query query = session.createQuery(fromTable);
         return query.getResultList();
     }
-
     public List<KhuyenMai> getAllTrue() {
-        Query query = session.createQuery(fromTable + " where Deleted = 'true'");
+        Query query = session.createQuery(fromTable + " where Deleted = 'true' order by id desc");
         return query.getResultList();
     }
 
     public List<KhuyenMai> getAllFalse() {
-        Query query = session.createQuery(fromTable + " where Deleted = 'false'");
+        Query query = session.createQuery(fromTable + " where Deleted = 'false' order by id desc");
         return query.getResultList();
     }
 
@@ -43,6 +38,12 @@ public class KhuyenMaiRepository {
         String sql = fromTable + " WHERE id=:id";
         Query query = session.createQuery(sql);
         query.setParameter("id", id);
+        return (KhuyenMai) query.getSingleResult();
+    }
+    public KhuyenMai getOne(String maKM) {
+        String sql = fromTable + " WHERE maKM=:id";
+        Query query = session.createQuery(sql);
+        query.setParameter("id", maKM);
         return (KhuyenMai) query.getSingleResult();
     }
 
@@ -65,6 +66,7 @@ public class KhuyenMaiRepository {
             transaction = session.beginTransaction();
             session.saveOrUpdate(km);
             transaction.commit();
+            session.save(km);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -84,9 +86,6 @@ public class KhuyenMaiRepository {
         }
         return null;
     }
-    public static void main(String[] args) {
-        KhuyenMaiRepository khuyenMaiRepository = new KhuyenMaiRepository();
-        KhuyenMai khuyenMai = new KhuyenMai(3,"KM00110", "Khuyen mai", true,false,Float.max(100, 10000),Float.max(100, 10000), java.util.Calendar.getInstance().getTime(), java.util.Calendar.getInstance().getTime(), java.util.Calendar.getInstance().getTime(), true, null);
-        khuyenMaiRepository.delete(khuyenMai);
-    }
+
+    
 }

@@ -41,9 +41,7 @@ public class KhuyenMaiResponse {
         this.tenKM = km.getTenKM();
         this.soTienGiam = km.getSoTienGiam();
         this.ngayBatDau = km.getNgayBatDau();
-        this.giaTriDonHangToiThieu=km.getGiaTriDonHangToiThieu();
         this.loaiGiamGia=km.getDeleted();
-        this.hinhThucGiamGia=km.getHinhThucGiamGia();
         this.ngayKetThuc = km.getNgayKetThuc();
         this.createdAt = km.getCreatedAt();
         this.deleted = km.getDeleted();
@@ -51,14 +49,11 @@ public class KhuyenMaiResponse {
     }
 
     public Object[] toDataRow() {
-        String trangThai = "Hoạt động";
+        String trangThai = "Đã ngừng hoạt động";
         if (deleted==false) {
-            trangThai = "Đã ngừng hoạt động";
+            trangThai = "Hoạt động";
         }
-        String loaiGiamGiaa = "Theo sản phẩm";
-        if (loaiGiamGia == true) {
-            loaiGiamGiaa="Theo hóa đơn";
-        }
-        return new Object[]{id,loaiGiamGiaa, tenKM, maKM,soTienGiam, ngayBatDau + " đến " + ngayKetThuc, trangThai};
+        return new Object[]{id, tenKM, maKM,String.format("%,.0f", soTienGiam) + " %", ngayBatDau + " đến " + ngayKetThuc, trangThai};
     }
+
 }

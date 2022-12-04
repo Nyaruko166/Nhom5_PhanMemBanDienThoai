@@ -16,6 +16,10 @@ public interface RomService {
     
      List<RomResponse> getAll();
 
+     List<Rom> getAllRom();
+     
+     List<Rom> getDeletedRom();
+     
     RomResponse getOne(String MaRom);
             
     String add(Rom rom);

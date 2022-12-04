@@ -13,7 +13,7 @@ import lombok.Setter;
 @Setter
 public class HangDienThoaiResponse {
 
-    private String maHangDT;
+    private String maHang;
     private String tenHang;
     private Date createdAt;
     private boolean deleted;
@@ -23,7 +23,7 @@ public class HangDienThoaiResponse {
     }
 
     public HangDienThoaiResponse(HangDienThoai hdt) {
-        this.maHangDT = hdt.getMaHangDT();
+        this.maHang = hdt.getMaHang();
         this.tenHang = hdt.getTenHang();
         this.createdAt = hdt.getCreatedAt();
         this.deleted = hdt.isDeleted();

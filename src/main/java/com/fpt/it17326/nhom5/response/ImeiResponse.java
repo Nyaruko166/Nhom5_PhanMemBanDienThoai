@@ -20,7 +20,7 @@ import lombok.ToString;
 public class ImeiResponse {
     
     private String maImei;
-    private String tenImei;
+    private String imei;
     private Date createdAt;
     private boolean deleted;
     private Date updatedAt;
@@ -30,7 +30,7 @@ public class ImeiResponse {
 
     public ImeiResponse(Imei imei) {
         this.maImei = imei.getMaImel();
-        this.tenImei = imei.getTenImel();
+        this.imei = imei.getImei();
         this.createdAt = imei.getCreatedAt();
         this.deleted = imei.isDeleted();
         this.updatedAt = imei.getUpdatedAt();

@@ -15,6 +15,10 @@ import java.util.List;
 public interface PinService {
 
     List<PinResponse> getAll();
+    
+    List<Pin> getAllPin();
+    
+    List<Pin> getDeletedPin();
 
     PinResponse getOne(String MaPin);
 

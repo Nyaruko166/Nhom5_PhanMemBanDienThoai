@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @author youngboizseetinh
  */
-public class KhuyenMaiServiceImpl implements KhuyenMaiService {
+public class KhuyenMaiServiceImpl  implements KhuyenMaiService{
 
     KhuyenMaiRepository khuyenMaiRepository = new KhuyenMaiRepository();
 
@@ -83,5 +83,5 @@ public class KhuyenMaiServiceImpl implements KhuyenMaiService {
 
         return lst;
     }
-
+    
 }

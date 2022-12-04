@@ -16,9 +16,9 @@ import java.util.List;
  * @author youngboizseetinh
  */
 public class SanPhamServiceImpl implements SanPhamService {
-
+    
     private SanPhamRepository sanPhamRepository = new SanPhamRepository();
-
+    
     @Override
     public List<SanPhamResponse> getAll() {
         List<SanPham> listSP = sanPhamRepository.getAll();
@@ -29,12 +29,12 @@ public class SanPhamServiceImpl implements SanPhamService {
         }
         return lst;
     }
-
-    @Override
-    public SanPhamResponse getOne(String MaSP) {
-        return new SanPhamResponse(sanPhamRepository.getOne(MaSP));
-    }
-
+    
+//    @Override
+//    public SanPhamResponse getOne(String tenSP) {
+//        return new SanPhamResponse(sanPhamRepository.getOne(tenSP));
+//    }
+    
     @Override
     public String add(SanPham sp) {
         if (sanPhamRepository.add(sp)) {
@@ -43,7 +43,7 @@ public class SanPhamServiceImpl implements SanPhamService {
             return "Thêm thất bại";
         }
     }
-
+    
     @Override
     public String update(SanPham sp) {
         if (sanPhamRepository.update(sp)) {
@@ -52,7 +52,7 @@ public class SanPhamServiceImpl implements SanPhamService {
             return "Sửa thất bại";
         }
     }
-
+    
     @Override
     public String delete(SanPham sp) {
         if (sanPhamRepository.delete(sp)) {
@@ -60,5 +60,36 @@ public class SanPhamServiceImpl implements SanPhamService {
         } else {
             return "Xoá thất bại";
         }
+    }
+    
+    @Override
+    public String updateSL(SanPham sp, int sl) {
+        
+        if (sanPhamRepository.updateSL(sp, sl)) {
+            return "Thêm sản phẩm thành công";
+        } else {
+            return "Thêm sản phẩm thất bại";
+        }
+        
+    }
+
+    @Override
+    public List<SanPham> getAllSanPham() {
+        return sanPhamRepository.getAll();
+    }
+
+    @Override
+    public List<SanPham> getDeletedSanPham() {
+        return sanPhamRepository.getAllDeleted();
+    }
+
+    @Override
+    public SanPhamResponse getOne(String tenSP) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public SanPham getSPLast() {
+        return sanPhamRepository.getSPLast();
     }
 }

@@ -15,7 +15,16 @@ import java.util.List;
 public interface ImeiService {
 
     List<ImeiResponse> getAll();
+    
+    List<Imei> getAllImei();
+    
+    List<Imei> getDeletedImei();
 
+    List<Imei> getAllImeiBySanPham(int idSP);
+//    
+//    List<Imei> getAllImeiDeletedBySanPham(int idSP);
+    
+    
     ImeiResponse getOne(String MaImei);
 
     String add(Imei imei);
