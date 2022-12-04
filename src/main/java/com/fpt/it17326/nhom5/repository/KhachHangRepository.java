@@ -29,11 +29,11 @@ public class KhachHangRepository {
         return (KhachHang) query.getSingleResult();
     }
 
-    public Boolean add(HoaDon hd) {
+    public Boolean add(KhachHang kh) {
         Transaction transaction = null;
         try ( Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
-            session.save(hd);
+            session.save(kh);
             transaction.commit();
             return true;
         } catch (Exception e) {
@@ -42,11 +42,11 @@ public class KhachHangRepository {
         return null;
     }
     
-    public Boolean update(HoaDon hd) {
+    public Boolean update(KhachHang kh) {
         Transaction transaction = null;
         try ( Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
-            session.saveOrUpdate(hd);
+            session.saveOrUpdate(kh);
             transaction.commit();
             return true;
         } catch (Exception e) {
@@ -55,12 +55,12 @@ public class KhachHangRepository {
         return null;
     }
     
-    public Boolean delete(HoaDon hd) {
+    public Boolean delete(KhachHang kh) {
         Transaction transaction = null;
         try ( Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
-            hd.setDeleted(true);
-            session.update(hd);
+            kh.setDeleted(true);
+            session.update(kh);
             transaction.commit();
             return true;
         } catch (Exception e) {

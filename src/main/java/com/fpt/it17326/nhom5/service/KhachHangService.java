@@ -12,7 +12,7 @@ public interface KhachHangService {
 
     List<KhachHangResponse> getAll();
 
-    KhachHang getOne(String MaHoaDon);
+    KhachHang getOne(String MaKH);
 
     String add(KhachHang kh);
 
