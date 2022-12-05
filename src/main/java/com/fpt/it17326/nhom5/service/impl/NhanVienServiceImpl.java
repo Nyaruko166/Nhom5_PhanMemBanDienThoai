@@ -19,17 +19,17 @@ public class NhanVienServiceImpl implements NhanVienService {
 
     NhanVienRepository nhanVienRepository = new NhanVienRepository();
 
-//    @Override
-//    public List<NhanVien> getAll() {
-////       List<NhanVien> responses = new ArrayList<>();
-////        List<NhanVien> lists = vtkr.getAll();
-////        for (NhanVien tk : lists) {
-////             vpr=new NhanVienResponse(tk);
-////            responses.add(vpr);
-////        }
-////        return responses;
-//            return vtkr.getAll();
-//    }
+    @Override
+    public List<NhanVien> getAll1() {
+//       List<NhanVien> responses = new ArrayList<>();
+//        List<NhanVien> lists = vtkr.getAll();
+//        for (NhanVien tk : lists) {
+//             vpr=new NhanVienResponse(tk);
+//            responses.add(vpr);
+//        }
+//        return responses;
+        return nhanVienRepository.getAll();
+    }
 //
 //    @Override
 //    public String add(NhanVien tk) {
@@ -67,9 +67,10 @@ public class NhanVienServiceImpl implements NhanVienService {
 ////        }
 //    }
 //
+
     @Override
     public String DangNhap(NhanVien tk) {
-        if(tk.getTaiKhoan().trim().isEmpty()){
+        if (tk.getTaiKhoan().trim().isEmpty()) {
             return "username khong duoc de trong";
         }
         return null;
@@ -86,11 +87,13 @@ public class NhanVienServiceImpl implements NhanVienService {
 //        }
 //        }
 //
+
     @Override
     public List<NhanVien> getListTaiKhoan() {
         return nhanVienRepository.getAll();
     }
 //
+
     @Override
     public NhanVien getOne(String Email) {
         return nhanVienRepository.getOne(Email);
@@ -111,25 +114,25 @@ public class NhanVienServiceImpl implements NhanVienService {
     @Override
     public List<NhanVienResponse> getAllTrue() {
         List<NhanVien> listNV = nhanVienRepository.getAllTrue();
-           List<NhanVienResponse> list = new ArrayList<>();
+        List<NhanVienResponse> list = new ArrayList<>();
 
-            for (NhanVien x : listNV) {
-                NhanVienResponse nv = new NhanVienResponse(x);
-                list.add(nv);
-            }
-            return list;
+        for (NhanVien x : listNV) {
+            NhanVienResponse nv = new NhanVienResponse(x);
+            list.add(nv);
+        }
+        return list;
     }
 
     @Override
     public List<NhanVienResponse> getAllFalse() {
         List<NhanVien> listNV = nhanVienRepository.getAllFalse();
-           List<NhanVienResponse> list = new ArrayList<>();
-       
-            for (NhanVien x : listNV) {
-                NhanVienResponse nv = new NhanVienResponse(x);
-                list.add(nv);
-            }
-            return list;
+        List<NhanVienResponse> list = new ArrayList<>();
+
+        for (NhanVien x : listNV) {
+            NhanVienResponse nv = new NhanVienResponse(x);
+            list.add(nv);
+        }
+        return list;
     }
 
     @Override
@@ -153,7 +156,8 @@ public class NhanVienServiceImpl implements NhanVienService {
             return "Sửa thành công";
         } else {
             return "Sửa thất bại";
-        }    }
+        }
+    }
 
     @Override
     public String delete(NhanVien nv) {
@@ -164,7 +168,4 @@ public class NhanVienServiceImpl implements NhanVienService {
         }
     }
 
-    
-
-   
 }

@@ -13,18 +13,21 @@ import java.util.List;
  * @author Tu
  */
 public interface NhanVienService {
-//    List<NhanVien> getAll();
+
+    List<NhanVien> getAll1();
+
     List<NhanVien> getListTaiKhoan();
 //    String add(NhanVien tk);
 //    String update(NhanVien tk);
+
     NhanVien getOne(String Email);
-     
+
     String DangNhap(NhanVien tk);
 //    String update(NhanVien tk, String id);
 //    String delete(NhanVien tk);
-    
+
     List<NhanVienResponse> getAll();
-    
+
     List<NhanVienResponse> getAllTrue();
 
     List<NhanVienResponse> getAllFalse();
