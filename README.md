@@ -1,7 +1,7 @@
 
 # Nhóm 5 Bán Điện Thoại
 
-App bán điện thoại code bằng Java
+Phần mềm bán điện thoại code bằng Java
 
 
 ## Thành Viên

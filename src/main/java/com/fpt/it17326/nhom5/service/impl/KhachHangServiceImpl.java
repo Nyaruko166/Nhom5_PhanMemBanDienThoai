@@ -14,13 +14,14 @@ import java.util.List;
 public class KhachHangServiceImpl implements KhachHangService {
 
     private KhachHangRepository KhachHangRepository = new KhachHangRepository();
-    
+
     @Override
     public List<KhachHangResponse> getAll() {
         List<KhachHangResponse> lst = new ArrayList<>();
         List<KhachHang> lstKH = KhachHangRepository.getAll();
         for (KhachHang x : lstKH) {
-            lst.add(new KhachHangResponse(x));
+            KhachHangResponse kh = new KhachHangResponse(x);
+            lst.add(kh);
         }
         return lst;
     }
