@@ -10,11 +10,14 @@ import java.util.List;
 import javax.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author youngboizseetinh
  */
+@Repository
 public class ChipRepository {
     
     private Session session = HibernateConfig.getFACTORY().openSession();
@@ -29,7 +32,14 @@ public class ChipRepository {
     }
     
     public List<Chip> getAll() {
-        Query query = session.createQuery(fromTable);
+        String sql = fromTable + " WHERE deleted = 0";
+        Query query = session.createQuery(sql);
+        return query.getResultList();
+    }
+    
+    public List<Chip> getAllDeleted() {
+        String sql = fromTable + " WHERE deleted = 1";
+        Query query = session.createQuery(sql);
         return query.getResultList();
     }
     
@@ -46,6 +56,7 @@ public class ChipRepository {
         return null;
     }
     
+    @Async
     public Boolean update(Chip chip) {
         Transaction transaction = null;
         try (Session session = HibernateConfig.getFACTORY().openSession()) {
@@ -63,7 +74,8 @@ public class ChipRepository {
         Transaction transaction = null;
         try (Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
-            session.delete(chip);
+            chip.setDeleted(true);
+            session.update(chip);
             transaction.commit();
             return true;
         } catch (Exception e) {

@@ -1,5 +1,6 @@
 package com.fpt.it17326.nhom5.domainmodel;
 
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,33 +30,43 @@ import lombok.ToString;
 @ToString
 public class KhuyenMai {
 
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
     private int id;
-    
-    @Column (name = "MaKM")
+
+    @Column(name = "MaKM")
     private String maKM;
+
+    @Column(name = "TenKM")
+    private String tenKM;
+
+    @Column(name = "LoaiGiamGia")
+    private Boolean loaiGiamGia;
+
+    @Column(name = "HinhThucGiamGia")
+    private Boolean hinhThucGiamGia;
     
-    @Column (name = "TenKM")
-    private String tenKH;
-    
-    @Column (name = "SoTienGiam")
+    @Column(name = "SoTienGiam")
     private Float soTienGiam;
     
-    @Column (name = "NgayBatDau")
-    private String ngayBatDau;
+    @Column(name = "GiaTriDonHangToiThieu")
+    private Float giaTriDonHangToiThieu;
     
-    @Column (name = "NgayKetThuc")
-    private String ngayKetThuc;
-    
-    @Column (name = "CreatedAt")
-    private String createAt;
-    
-    @Column (name = "Deleted")
-    private boolean deleted;
-    
+    @Column(name = "NgayBatDau")
+    private Date ngayBatDau;
+
+    @Column(name = "NgayKetThuc")
+    private Date ngayKetThuc;
+
+    @Column(name = "CreatedAt")
+    private Date createdAt;
+
+    @Column(name = "Deleted")
+    private Boolean deleted;
+
     @Column(name = "UpdatedAt")
-    private String updateAt;
+    private Date updatedAt;
     
 }

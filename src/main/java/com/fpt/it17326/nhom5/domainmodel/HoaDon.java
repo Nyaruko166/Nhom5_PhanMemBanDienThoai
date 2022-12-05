@@ -33,33 +33,25 @@ public class HoaDon {
     @Column(name = "Id")
     private int id;
 
-//    @ManyToOne
-//    @JoinColumn(name = "IdBH", referencedColumnName = "Id")
-//    private BaoHanh baoHanh;
-
     @Column(name = "MaHD")
     private String maHD;
 
+    @ManyToOne
+    @JoinColumn(name = "IdNV", referencedColumnName = "Id")
+    private NhanVien nhanVien;
+
+    @ManyToOne
+    @JoinColumn(name = "IdKH", referencedColumnName = "Id")
+    private KhachHang khachHang;
+    
     @Column(name = "TenKH")
     private String tenKH;
 
     @Column(name = "SDT")
     private String sdt;
 
-    @ManyToOne
-    @JoinColumn(name = "IdTT", referencedColumnName = "Id")
-    private TrangThaiHoaDon trangThaiHoaDon;
-
-    @Column(name = "GhiChu")
-    private String ghiChu;
-
-    @ManyToOne
-    @JoinColumn(name = "IdKM", referencedColumnName = "Id")
-    private KhuyenMai khuyenMai;
-
-    @ManyToOne
-    @JoinColumn(name = "IdNV", referencedColumnName = "Id")
-    private NhanVien nhanVien;
+    @Column(name = "TrangThai")
+    private boolean trangThai;
 
     @Column(name = "TongTien")
     private Float tongTien;
@@ -73,18 +65,23 @@ public class HoaDon {
     @Column(name = "UpdatedAt")
     private Date updatedAt;
 
-    public HoaDon(String maHD, TrangThaiHoaDon trangThaiHoaDon) {
-        this.maHD = maHD;
-        this.trangThaiHoaDon = trangThaiHoaDon;
-    }
-
-    public HoaDon(String maHD, String tenKH, TrangThaiHoaDon trangThaiHoaDon, NhanVien nhanVien, Float tongTien) {
+//    public HoaDon(String maHD, TrangThaiHoaDon trangThaiHoaDon) {
+//        this.maHD = maHD;
+//        this.trangThaiHoaDon = trangThaiHoaDon;
+//    }
+//
+//    public HoaDon(String maHD, String tenKH, TrangThaiHoaDon trangThaiHoaDon, NhanVien nhanVien, Float tongTien) {
+//        this.maHD = maHD;
+//        this.tenKH = tenKH;
+//        this.trangThaiHoaDon = trangThaiHoaDon;
+//        this.nhanVien = nhanVien;
+//        this.tongTien = tongTien;
+//    }
+        public HoaDon(String maHD, String tenKH, NhanVien nhanVien, Float tongTien) {
         this.maHD = maHD;
         this.tenKH = tenKH;
-        this.trangThaiHoaDon = trangThaiHoaDon;
+//        this.trangThaiHoaDon = trangThaiHoaDon;
         this.nhanVien = nhanVien;
         this.tongTien = tongTien;
     }
-
-    
 }

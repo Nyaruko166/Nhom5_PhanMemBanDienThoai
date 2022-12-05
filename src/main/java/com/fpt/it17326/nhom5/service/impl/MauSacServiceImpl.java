@@ -36,27 +36,37 @@ public class MauSacServiceImpl implements MauSacService {
     @Override
     public String add(MauSac ms) {
         if (MauSacRepository.add(ms)) {
-            return "Add thành công";
+            return "Thêm thành công";
         } else {
-            return "Add thất bại";
+            return "Thêm thất bại";
         }
     }
 
     @Override
     public String update(MauSac ms) {
         if (MauSacRepository.update(ms)) {
-            return "Update thành công";
+            return "Sửa thành công";
         } else {
-            return "Update thất bại";
+            return "Sửa thất bại";
         }
     }
 
     @Override
     public String delete(MauSac ms) {
         if (MauSacRepository.delete(ms)) {
-            return "Delete thành công";
+            return "Xóa thành công";
         } else {
-            return "Delete thất bại";
+            return "Xóa thất bại";
         }
+    }
+
+    @Override
+    public List<MauSac> getAllMauSac() {
+        return MauSacRepository.getAll();
+    }
+
+    @Override
+    public List<MauSac> getDeletedMauSac() {
+        return MauSacRepository.getAllDeleted();
     }
 }

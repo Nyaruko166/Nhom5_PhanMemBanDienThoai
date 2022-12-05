@@ -62,5 +62,15 @@ public class RomServiceImpl implements RomService{
             return "Xóa thất bại";
         }
     }
+
+    @Override
+    public List<Rom> getAllRom() {
+        return romRepository.getAll();
+    }
+
+    @Override
+    public List<Rom> getDeletedRom() {
+        return romRepository.getAllDeleted();
+    }
     
 }

@@ -24,7 +24,14 @@ public class RomRepository {
     private String fromTable = "FROM Rom";
 
     public List<Rom> getAll() {
-        Query query = session.createQuery(fromTable);
+        String sql = fromTable + " WHERE deleted = 0";
+        Query query = session.createQuery(sql);
+        return query.getResultList();
+    }
+    
+    public List<Rom> getAllDeleted() {
+        String sql = fromTable + " WHERE deleted = 1";
+        Query query = session.createQuery(sql);
         return query.getResultList();
     }
 

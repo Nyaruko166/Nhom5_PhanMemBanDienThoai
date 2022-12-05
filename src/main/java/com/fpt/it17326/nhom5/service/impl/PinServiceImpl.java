@@ -64,4 +64,14 @@ public class PinServiceImpl implements PinService {
         }
     }
 
+    @Override
+    public List<Pin> getAllPin() {
+        return pinRepository.getAll();
+    }
+
+    @Override
+    public List<Pin> getDeletedPin() {
+        return pinRepository.getAllDeleted();
+    }
+
 }

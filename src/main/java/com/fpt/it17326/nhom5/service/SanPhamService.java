@@ -15,9 +15,15 @@ import java.util.List;
 public interface SanPhamService {
 
     List<SanPhamResponse> getAll();
+    
+    List<SanPham> getAllSanPham();
+    
+    List<SanPham> getDeletedSanPham();
+    
+    SanPhamResponse getOne(String tenSP);
 
-    SanPhamResponse getOne(String MaSP);
-
+    public SanPham getSPLast();
+    
     String add(SanPham sp);
 
     String update(SanPham sp);
