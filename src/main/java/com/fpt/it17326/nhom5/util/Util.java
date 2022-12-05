@@ -15,6 +15,7 @@ import net.bytebuddy.utility.RandomString;
  * @author youngboizseetinh
  */
 public class Util {
+    public static final String SLASH = "/";
 
     public static void createFolderImageUpload() {
         File theDir = new File("pictures");
@@ -22,7 +23,7 @@ public class Util {
             theDir.mkdirs();
         }
     }
-    
+
     public static String getNameFileFromPath(String fileName, boolean isFile) {
         // "t.u.n.g.jpg"; => ["tung", "jpg"] tung.jpg
         String result = "";
@@ -38,12 +39,12 @@ public class Util {
         }
         return result;
     }
-    
+
 
     public static void uploadImage(String path, String name) {
         File source = new File(path);
-        String userDirectory = new File("").getAbsolutePath();        
-        File dest = new File("pictures\\" + name);
+        String userDirectory = new File("").getAbsolutePath();
+        File dest = new File("pictures" + SLASH + name);
         try {
             Files.copy(source.toPath(), dest.toPath());
         } catch (IOException e) {
@@ -55,7 +56,7 @@ public class Util {
         Date date = new Date();
         return date;
     }
-    
+
     public static String randomString() {
         String generatedString = RandomString.make(10);
         return generatedString;

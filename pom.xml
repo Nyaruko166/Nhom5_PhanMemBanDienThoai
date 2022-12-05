@@ -48,17 +48,28 @@
             <artifactId>jcalendar</artifactId>
             <version>1.4</version>
         </dependency>
-        
-              <dependency>
-   <groupId>org.apache.commons</groupId>
-   <artifactId>commons-lang3</artifactId>
-   <version>3.1</version>
+
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>5.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>5.2.0</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.1</version>
             <type>jar</type>
         </dependency>
-        
-        
-        
-     <dependency>
+
+
+        <dependency>
             <groupId>javax.mail</groupId>
             <artifactId>mail</artifactId>
             <version>1.4</version>

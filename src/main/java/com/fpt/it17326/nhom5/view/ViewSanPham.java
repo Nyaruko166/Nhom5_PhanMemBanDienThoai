@@ -84,6 +84,7 @@ import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 import javax.swing.JOptionPane;
 import javax.swing.table.JTableHeader;
+import com.fpt.it17326.nhom5.util.Util;
 
 /**
  *
@@ -384,11 +385,11 @@ public class ViewSanPham extends javax.swing.JFrame {
 
     public void loadImageToLabel(String path, boolean hasRoot) {
         BufferedImage img = null;
-        String userDirectory = new File("").getAbsolutePath() + "\\pictures";
+        String userDirectory = new File("").getAbsolutePath() + Util.SLASH +"pictures";
 
         try {
             if (hasRoot) {
-                img = ImageIO.read(new File(userDirectory + "\\" + path));
+                img = ImageIO.read(new File(userDirectory + Util.SLASH + path));
             } else {
                 img = ImageIO.read(new File(path));
             }
@@ -4710,23 +4711,26 @@ public class ViewSanPham extends javax.swing.JFrame {
 
     private void btnThemSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemSanPhamActionPerformed
         // TODO add your handling code here:
-        int option = JOptionPane.showConfirmDialog(null, "Xác nhận xóa", "Xóa dữ liệu", JOptionPane.OK_CANCEL_OPTION);
+        int option = JOptionPane.showConfirmDialog(null, "Xác nhận thêm", "Xóa dữ liệu", JOptionPane.OK_CANCEL_OPTION);
         if (option == 0) {
             SanPham sp = buildRequestProduct();
             sp.setMaSP(Util.randomString());
-            //String result = sanPhamService.add(sp);
-            SanPham last = sanPhamService.getSPLast();
-            addImei(imeis, last);
-            Util.uploadImage(urlUploadAnh, urlAnh);
-            loadTableSanPham();
-            List<SanPhamResponse> lstSP = sanPhamService.getAll();
-            showData(lstSP);
+            String result = sanPhamService.add(sp);
+            JOptionPane.showMessageDialog(this, result);
+            if (result.contains("thành công")) {
+                SanPham last = sanPhamService.getSPLast();
+                addImei(imeis, last);
+                Util.uploadImage(urlUploadAnh, urlAnh);
+                loadTableSanPham();
+                List<SanPhamResponse> lstSP = sanPhamService.getAll();
+                showData(lstSP);
+            }
         }
     }//GEN-LAST:event_btnThemSanPhamActionPerformed
 
     private void btnSuaSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaSanPhamActionPerformed
         // TODO add your handling code here:
-        int option = JOptionPane.showConfirmDialog(null, "Xác nhận xóa", "Xóa dữ liệu", JOptionPane.OK_CANCEL_OPTION);
+        int option = JOptionPane.showConfirmDialog(null, "Xác nhận sửa", "Xóa dữ liệu", JOptionPane.OK_CANCEL_OPTION);
         if (option == 0) {
             SanPham sp = buildRequestProduct();
             sp.setMaSP(listSp.get(tblSanPham2.getSelectedRow()).getMaSP());
@@ -4757,20 +4761,13 @@ public class ViewSanPham extends javax.swing.JFrame {
             sp.setMaSP(listSp.get(tblSanPham2.getSelectedRow()).getMaSP());
             sp.setId(listSp.get(tblSanPham2.getSelectedRow()).getId());
             String result = sanPhamService.delete(sp);
+            JOptionPane.showMessageDialog(this, result);
             if (result.contains("thành công")) {
                 listSanPhamDeleted = sanPhamService.getDeletedSanPham();
                 getAllSanPhamLuuTru(listSanPhamDeleted);
                 listSp = sanPhamService.getAllSanPham();
                 listSanPham = sanPhamService.getAll();
-//                listSanPhamDeleted.add(sp);
-//                listSp.remove(row);
-//
-//                listSp.set(tblSanPham2.getSelectedRow(), sp);
-//                listSanPham.set(tblSanPham2.getSelectedRow(), new SanPhamResponse(sp));
-//
                 loadProductTable();
-//                getAllSanPhamLuuTru(listSanPhamDeleted);
-//                tblSanPham2.clearSelection();
             }
         }
         //SanPham sp = new
