@@ -89,7 +89,7 @@ public class DialogImei extends javax.swing.JDialog {
         jLabel4.setText("Imei");
 
         btnThemImei.setBackground(new java.awt.Color(0, 0, 102));
-        btnThemImei.setIcon(new javax.swing.ImageIcon("D:\\Study\\FALL_2022\\PRO1041_DuAn1\\OnTap\\CodeTung\\Nhom5_QuanLyDienThoai\\images\\add.png")); // NOI18N
+        btnThemImei.setIcon(new javax.swing.ImageIcon("C:\\Users\\youngboizseetinh\\Downloads\\CodeMoiNhatNe\\Nhom5_QuanLyDienThoai\\images\\add.png")); // NOI18N
         btnThemImei.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThemImeiActionPerformed(evt);
@@ -97,7 +97,7 @@ public class DialogImei extends javax.swing.JDialog {
         });
 
         btnXoaImei.setBackground(new java.awt.Color(0, 0, 102));
-        btnXoaImei.setIcon(new javax.swing.ImageIcon("D:\\Study\\FALL_2022\\PRO1041_DuAn1\\OnTap\\CodeTung\\Nhom5_QuanLyDienThoai\\images\\delete.png")); // NOI18N
+        btnXoaImei.setIcon(new javax.swing.ImageIcon("C:\\Users\\youngboizseetinh\\Downloads\\CodeMoiNhatNe\\Nhom5_QuanLyDienThoai\\images\\delete.png")); // NOI18N
         btnXoaImei.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnXoaImeiActionPerformed(evt);
@@ -135,7 +135,7 @@ public class DialogImei extends javax.swing.JDialog {
         }
 
         btnSave.setBackground(new java.awt.Color(0, 0, 102));
-        btnSave.setIcon(new javax.swing.ImageIcon("D:\\Study\\FALL_2022\\PRO1041_DuAn1\\OnTap\\CodeTung\\Nhom5_QuanLyDienThoai\\images\\add.png")); // NOI18N
+        btnSave.setIcon(new javax.swing.ImageIcon("C:\\Users\\youngboizseetinh\\Downloads\\CodeMoiNhatNe\\Nhom5_QuanLyDienThoai\\images\\save.png")); // NOI18N
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveActionPerformed(evt);

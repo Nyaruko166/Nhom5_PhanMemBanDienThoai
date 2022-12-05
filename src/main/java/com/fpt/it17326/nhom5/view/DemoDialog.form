@@ -182,7 +182,7 @@
                   <Color blue="66" green="0" red="0" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="D:\Study\FALL_2022\PRO1041_DuAn1\OnTap\CodeTung\Nhom5_QuanLyDienThoai\images\add.png"/>
+                  <Image iconType="2" name="C:\Users\youngboizseetinh\Downloads\CodeMoiNhatNe\Nhom5_QuanLyDienThoai\images\add.png"/>
                 </Property>
               </Properties>
               <Events>
@@ -195,7 +195,7 @@
                   <Color blue="66" green="0" red="0" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="D:\Study\FALL_2022\PRO1041_DuAn1\OnTap\CodeTung\Nhom5_QuanLyDienThoai\images\update.png"/>
+                  <Image iconType="2" name="C:\Users\youngboizseetinh\Downloads\CodeMoiNhatNe\Nhom5_QuanLyDienThoai\images\update.png"/>
                 </Property>
               </Properties>
               <Events>
@@ -208,7 +208,7 @@
                   <Color blue="66" green="0" red="0" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="D:\Study\FALL_2022\PRO1041_DuAn1\OnTap\CodeTung\Nhom5_QuanLyDienThoai\images\delete.png"/>
+                  <Image iconType="2" name="C:\Users\youngboizseetinh\Downloads\CodeMoiNhatNe\Nhom5_QuanLyDienThoai\images\delete.png"/>
                 </Property>
               </Properties>
               <Events>
@@ -342,7 +342,7 @@
                   <Color blue="66" green="0" red="0" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="D:\Study\FALL_2022\PRO1041_DuAn1\OnTap\CodeTung\Nhom5_QuanLyDienThoai\images\search.png"/>
+                  <Image iconType="2" name="C:\Users\youngboizseetinh\Downloads\CodeMoiNhatNe\Nhom5_QuanLyDienThoai\images\search.png"/>
                 </Property>
               </Properties>
               <Events>
@@ -400,7 +400,7 @@
                   <Color blue="66" green="0" red="0" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="D:\Study\FALL_2022\PRO1041_DuAn1\OnTap\CodeTung\Nhom5_QuanLyDienThoai\images\restore.png"/>
+                  <Image iconType="2" name="C:\Users\youngboizseetinh\Downloads\CodeMoiNhatNe\Nhom5_QuanLyDienThoai\images\restore.png"/>
                 </Property>
               </Properties>
               <Events>

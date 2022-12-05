@@ -46,7 +46,7 @@ public class HoaDonServiceImpl implements HoaDonService {
     public String update(HoaDon hd) {
         boolean update = hoaDonRepository.update(hd);
         if(update){
-            return "Sửa thành công";
+            return "Thành công";
         }else{
             return "Sửa thất bại";
         }
@@ -61,5 +61,14 @@ public class HoaDonServiceImpl implements HoaDonService {
             return "Xóa thất bại";
         }
     }
-    
+      @Override
+    public List<HoaDonResponse> getAll1() {
+        List<HoaDonResponse> lst = new ArrayList<>();
+        List<HoaDon> lstHD = hoaDonRepository.getAll();
+        for (HoaDon hoaDon : lstHD) {
+            HoaDonResponse ms = new HoaDonResponse(hoaDon);
+            lst.add(ms);
+        }
+        return lst;
+    }
 }

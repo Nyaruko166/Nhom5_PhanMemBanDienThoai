@@ -73,4 +73,11 @@ public class HoaDon {
 //        this.nhanVien = nhanVien;
 //        this.tongTien = tongTien;
 //    }
+        public HoaDon(String maHD, String tenKH, NhanVien nhanVien, Float tongTien) {
+        this.maHD = maHD;
+        this.tenKH = tenKH;
+//        this.trangThaiHoaDon = trangThaiHoaDon;
+        this.nhanVien = nhanVien;
+        this.tongTien = tongTien;
+    }
 }

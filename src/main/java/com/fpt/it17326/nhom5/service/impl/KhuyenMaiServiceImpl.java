@@ -18,29 +18,22 @@ import java.util.List;
 public class KhuyenMaiServiceImpl  implements KhuyenMaiService{
 
     KhuyenMaiRepository khuyenMaiRepository = new KhuyenMaiRepository();
-    
+
     @Override
-    public List<KhuyenMaiResponse> getAll() {
+    public List<KhuyenMai> getAll() {
         List<KhuyenMai> listKM = khuyenMaiRepository.getAll();
-        List<KhuyenMaiResponse> lst = new ArrayList<>();
-
-        for (KhuyenMai x : listKM) {
-            KhuyenMaiResponse km = new KhuyenMaiResponse(x);
-            lst.add(km);
-        }
-
-        return lst;
+        return listKM;
     }
 
     @Override
-    public KhuyenMaiResponse getOne(String MaKM) {
+    public KhuyenMaiResponse getOne(int MaKM) {
         KhuyenMaiResponse lsp = new KhuyenMaiResponse(khuyenMaiRepository.getOne(MaKM));
         return lsp;
     }
 
     @Override
-    public String add(KhuyenMai km) {
-        if (khuyenMaiRepository.add(km)) {
+    public String addTheoHoaDon(KhuyenMai km) {
+        if (khuyenMaiRepository.addTheoHoaDon(km)) {
             return "Thêm thành công";
         } else {
             return "Thêm thất bại";
@@ -63,6 +56,32 @@ public class KhuyenMaiServiceImpl  implements KhuyenMaiService{
         } else {
             return "Xóa thất bại";
         }
+    }
+
+    @Override
+    public List<KhuyenMaiResponse> getAllTrue() {
+        List<KhuyenMai> listKM = khuyenMaiRepository.getAllTrue();
+        List<KhuyenMaiResponse> lst = new ArrayList<>();
+
+        for (KhuyenMai x : listKM) {
+            KhuyenMaiResponse km = new KhuyenMaiResponse(x);
+            lst.add(km);
+        }
+
+        return lst;
+    }
+
+    @Override
+    public List<KhuyenMaiResponse> getAllFalse() {
+        List<KhuyenMai> listKM = khuyenMaiRepository.getAllFalse();
+        List<KhuyenMaiResponse> lst = new ArrayList<>();
+
+        for (KhuyenMai x : listKM) {
+            KhuyenMaiResponse km = new KhuyenMaiResponse(x);
+            lst.add(km);
+        }
+
+        return lst;
     }
     
 }
