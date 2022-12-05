@@ -164,7 +164,6 @@ public class DialogImei extends javax.swing.JDialog {
         btnExcel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnExcel.setForeground(new java.awt.Color(255, 255, 255));
         btnExcel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/excel.png"))); // NOI18N
-        btnExcel.setText("Excel");
         btnExcel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExcelActionPerformed(evt);
