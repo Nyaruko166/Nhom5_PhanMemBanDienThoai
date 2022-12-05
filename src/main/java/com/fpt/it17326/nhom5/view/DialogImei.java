@@ -12,11 +12,28 @@ import com.fpt.it17326.nhom5.service.impl.ImeiServiceImpl;
 import com.fpt.it17326.nhom5.util.Util;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import javax.swing.JOptionPane;
+import java.util.Map;
+
+import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 import com.fpt.it17326.nhom5.view.ViewSanPham.DialogResponse;
+//import javax.swing;
 
 /**
  *
@@ -32,7 +49,7 @@ public class DialogImei extends javax.swing.JDialog {
     private List<Imei> listImeiDeleted;
     private int selectedRow;
     private DialogResponse response;
-    
+
     public DialogImei(java.awt.Frame parent, boolean modal, DialogResponse response, List<ImeiResponse> imeiResponses) {
         super(parent, modal);
         initComponents();
@@ -48,7 +65,7 @@ public class DialogImei extends javax.swing.JDialog {
         this.response = response;
         setScreenCenter();
     }
-    
+
     public void getImeiList(List<ImeiResponse> imeiResponses) {
         for (ImeiResponse imeiResponse : imeiResponses) {
             Imei imei = new Imei();
@@ -57,7 +74,7 @@ public class DialogImei extends javax.swing.JDialog {
         }
         loadTableImei();
     }
-    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -264,7 +281,7 @@ public class DialogImei extends javax.swing.JDialog {
 //        int option = JOptionPane.showConfirmDialog(this, "Xác nhận thêm", "Thêm dữ liệu", JOptionPane.OK_CANCEL_OPTION);
 //        if (option == 0) {
 //            //addImei();
-//            
+//
 //        }
         String imeiStr = txtImei.getText();
         if (imeiStr.trim().length() == 0) {
@@ -295,7 +312,47 @@ public class DialogImei extends javax.swing.JDialog {
 
     private void btnExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcelActionPerformed
         // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+        FileFilter filter = new FileNameExtensionFilter("Excel file", "xls", "xlsx");
+        fileChooser.setFileFilter(filter);
+        int result = fileChooser.showOpenDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            ArrayList<String> data = readExcel(fileChooser.getSelectedFile().getAbsolutePath());
+            listImei = new ArrayList<>();
+            for (String item : data) {
+                Imei imei = new Imei();
+                imei.setImei(item);
+                listImei.add(imei);
+            }
+            loadTableImei();
+        }
     }//GEN-LAST:event_btnExcelActionPerformed
+
+    private ArrayList<String> readExcel(String fileLocation) {
+        ArrayList<String> data = new ArrayList<>();
+        try {
+            FileInputStream file = new FileInputStream(new File(fileLocation));
+            Workbook workbook = new XSSFWorkbook(file);
+            Sheet sheet = workbook.getSheetAt(0);
+            int i = 0;
+            for (Row row : sheet) {
+                for (Cell cell : row) {
+                    switch (cell.getCellType()) {
+                        case STRING:
+                            data.add(cell.getStringCellValue());
+                            break;
+                        // case NUMERIC: ... break;
+                        // case BOOLEAN: ... break;
+                        // case FORMULA: ... break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        } catch (IOException e) {
+        }
+        return data;
+    }
 
     public void setScreenCenter() {
         final Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -332,7 +389,7 @@ public class DialogImei extends javax.swing.JDialog {
 //    public void addImei() {
 //        String ma = txtMa.getText();
 //        String ten = txtImei.getText();
-//        String tenSP = 
+//        String tenSP =
 //        SanPham sp = new SanPham();
 //        Imei imei = new Imei();
 //        imei.setMaImel(ma);
@@ -353,7 +410,7 @@ public class DialogImei extends javax.swing.JDialog {
 //        /* Set the Nimbus look and feel */
 //        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
 //        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
 //         */
 //        try {
 //            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
