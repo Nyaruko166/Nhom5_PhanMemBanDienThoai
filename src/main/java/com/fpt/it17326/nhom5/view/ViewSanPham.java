@@ -1399,10 +1399,10 @@ public class ViewSanPham extends javax.swing.JFrame {
         jPanel8 = new javax.swing.JPanel();
         jTextField8 = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
-        jButton8 = new javax.swing.JButton();
+        btnTimKiemSanPhamDeleted = new javax.swing.JButton();
         jScrollPane18 = new javax.swing.JScrollPane();
         tblSanPhamLuuTru = new javax.swing.JTable();
-        jButton14 = new javax.swing.JButton();
+        btnRestoreSanPham = new javax.swing.JButton();
         pl_banhang = new javax.swing.JPanel();
         rdoChoThanhToan = new javax.swing.JRadioButton();
         rdoDaHuy = new javax.swing.JRadioButton();
@@ -1649,7 +1649,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         lblHome.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblHome.setForeground(new java.awt.Color(255, 255, 255));
         lblHome.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-// lblHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/home.png"))); // NOI18N
+        lblHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/home.png"))); // NOI18N
         lblHome.setText("HOME");
         lblHome.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 
@@ -1685,7 +1685,7 @@ public class ViewSanPham extends javax.swing.JFrame {
 
         lblSanPham.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblSanPham.setForeground(new java.awt.Color(255, 255, 255));
-// lblSanPham.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/smartphone.png"))); // NOI18N
+        lblSanPham.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/smartphone.png"))); // NOI18N
         lblSanPham.setText("SẢN PHẨM");
 
         javax.swing.GroupLayout pn_SanPhamLayout = new javax.swing.GroupLayout(pn_SanPham);
@@ -1720,7 +1720,7 @@ public class ViewSanPham extends javax.swing.JFrame {
 
         lblBanHang.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblBanHang.setForeground(new java.awt.Color(255, 255, 255));
-// lblBanHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/shopping-cart.png"))); // NOI18N
+        lblBanHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/shopping-cart.png"))); // NOI18N
         lblBanHang.setText("BÁN HÀNG");
 
         javax.swing.GroupLayout pn_BanHangLayout = new javax.swing.GroupLayout(pn_BanHang);
@@ -1755,7 +1755,7 @@ public class ViewSanPham extends javax.swing.JFrame {
 
         lblHoaDon.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblHoaDon.setForeground(new java.awt.Color(255, 255, 255));
-// lblHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/invoice.png"))); // NOI18N
+        lblHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/invoice.png"))); // NOI18N
         lblHoaDon.setText("HÓA ĐƠN");
 
         javax.swing.GroupLayout pn_HoaDonLayout = new javax.swing.GroupLayout(pn_HoaDon);
@@ -1790,7 +1790,7 @@ public class ViewSanPham extends javax.swing.JFrame {
 
         lblKhuyenMai.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblKhuyenMai.setForeground(new java.awt.Color(255, 255, 255));
-// lblKhuyenMai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/discount.png"))); // NOI18N
+        lblKhuyenMai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/discount.png"))); // NOI18N
         lblKhuyenMai.setText("KHUYẾN MÃI");
 
         javax.swing.GroupLayout pn_KhuyenMaiLayout = new javax.swing.GroupLayout(pn_KhuyenMai);
@@ -1825,7 +1825,7 @@ public class ViewSanPham extends javax.swing.JFrame {
 
         lblNhanVien.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblNhanVien.setForeground(new java.awt.Color(255, 255, 255));
-// lblNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/staff.png"))); // NOI18N
+        lblNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/staff.png"))); // NOI18N
         lblNhanVien.setText("NHÂN VIÊN");
 
         javax.swing.GroupLayout pn_NhanVienLayout = new javax.swing.GroupLayout(pn_NhanVien);
@@ -1860,7 +1860,7 @@ public class ViewSanPham extends javax.swing.JFrame {
 
         lblThongTinCaNhan.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblThongTinCaNhan.setForeground(new java.awt.Color(255, 255, 255));
-// lblThongTinCaNhan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/user.png"))); // NOI18N
+        lblThongTinCaNhan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/user.png"))); // NOI18N
         lblThongTinCaNhan.setText("THÔNG TIN CÁ NHÂN");
 
         javax.swing.GroupLayout pn_ThongTinCaNhanLayout = new javax.swing.GroupLayout(pn_ThongTinCaNhan);
@@ -1895,7 +1895,7 @@ public class ViewSanPham extends javax.swing.JFrame {
 
         lblThongKe.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblThongKe.setForeground(new java.awt.Color(255, 255, 255));
-// lblThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/trend.png"))); // NOI18N
+        lblThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/trend.png"))); // NOI18N
         lblThongKe.setText("THỐNG KÊ");
 
         javax.swing.GroupLayout pn_ThongKeLayout = new javax.swing.GroupLayout(pn_ThongKe);
@@ -1930,7 +1930,7 @@ public class ViewSanPham extends javax.swing.JFrame {
 
         lblThoat.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblThoat.setForeground(new java.awt.Color(255, 255, 255));
-// lblThoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/exit.png"))); // NOI18N
+        lblThoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/exit.png"))); // NOI18N
         lblThoat.setText("THOÁT");
 
         javax.swing.GroupLayout pn_ThoatLayout = new javax.swing.GroupLayout(pn_Thoat);
@@ -2083,7 +2083,7 @@ public class ViewSanPham extends javax.swing.JFrame {
 
         btnSearchSanPham.setBackground(new java.awt.Color(0, 0, 102));
         btnSearchSanPham.setForeground(new java.awt.Color(0, 0, 102));
-// btnSearchSanPham.setIcon(new javax.swing.ImageIcon("D:\\Study\\FALL_2022\\PRO1041_DuAn1\\OnTap\\CodeTung\\Nhom5_QuanLyDienThoai\\images\\search.png")); // NOI18N
+        btnSearchSanPham.setIcon(new javax.swing.ImageIcon("D:\\Study\\FALL_2022\\PRO1041_DuAn1\\OnTap\\CodeTung\\Nhom5_QuanLyDienThoai\\images\\search.png")); // NOI18N
         btnSearchSanPham.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSearchSanPhamActionPerformed(evt);
@@ -2159,7 +2159,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         cbbMauSac.setForeground(new java.awt.Color(0, 0, 102));
 
         btnDesignChip.setBackground(new java.awt.Color(0, 0, 102));
-// btnDesignChip.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/edit.png"))); // NOI18N
+        btnDesignChip.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/edit.png"))); // NOI18N
         btnDesignChip.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDesignChipActionPerformed(evt);
@@ -2167,7 +2167,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         });
 
         btnDesignMauSac.setBackground(new java.awt.Color(0, 0, 102));
-// btnDesignMauSac.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/edit.png"))); // NOI18N
+        btnDesignMauSac.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/edit.png"))); // NOI18N
         btnDesignMauSac.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDesignMauSacActionPerformed(evt);
@@ -2175,7 +2175,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         });
 
         btnDesignRam.setBackground(new java.awt.Color(0, 0, 102));
-// btnDesignRam.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/edit.png"))); // NOI18N
+        btnDesignRam.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/edit.png"))); // NOI18N
         btnDesignRam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDesignRamActionPerformed(evt);
@@ -2183,7 +2183,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         });
 
         btnDesignPin.setBackground(new java.awt.Color(0, 0, 102));
-// btnDesignPin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/edit.png"))); // NOI18N
+        btnDesignPin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/edit.png"))); // NOI18N
         btnDesignPin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDesignPinActionPerformed(evt);
@@ -2191,7 +2191,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         });
 
         btnDesignRom.setBackground(new java.awt.Color(0, 0, 102));
-// btnDesignRom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/edit.png"))); // NOI18N
+        btnDesignRom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/edit.png"))); // NOI18N
         btnDesignRom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDesignRomActionPerformed(evt);
@@ -2199,7 +2199,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         });
 
         btnDesignHang.setBackground(new java.awt.Color(0, 0, 102));
-// btnDesignHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/edit.png"))); // NOI18N
+        btnDesignHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/edit.png"))); // NOI18N
         btnDesignHang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDesignHangActionPerformed(evt);
@@ -2207,7 +2207,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         });
 
         btnNext.setBackground(new java.awt.Color(0, 0, 102));
-// btnNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/next.png"))); // NOI18N
+        btnNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/next.png"))); // NOI18N
         btnNext.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNextActionPerformed(evt);
@@ -2215,7 +2215,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         });
 
         btnLast.setBackground(new java.awt.Color(0, 0, 102));
-// btnLast.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/last.png"))); // NOI18N
+        btnLast.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/last.png"))); // NOI18N
         btnLast.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLastActionPerformed(evt);
@@ -2223,7 +2223,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         });
 
         btnLast1.setBackground(new java.awt.Color(0, 0, 102));
-// btnLast1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/first.png"))); // NOI18N
+        btnLast1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/first.png"))); // NOI18N
         btnLast1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLast1ActionPerformed(evt);
@@ -2231,7 +2231,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         });
 
         btnNext2.setBackground(new java.awt.Color(0, 0, 102));
-// btnNext2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/previus.png"))); // NOI18N
+        btnNext2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/previus.png"))); // NOI18N
         btnNext2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNext2ActionPerformed(evt);
@@ -2247,9 +2247,9 @@ public class ViewSanPham extends javax.swing.JFrame {
                 .addComponent(btnLast1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(113, 113, 113)
                 .addComponent(btnNext2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(111, 111, 111)
+                .addGap(103, 103, 103)
                 .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnLast, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -2363,7 +2363,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         );
 
         btnDesignAnh.setBackground(new java.awt.Color(0, 0, 102));
-// btnDesignAnh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/edit.png"))); // NOI18N
+        btnDesignAnh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/edit.png"))); // NOI18N
         btnDesignAnh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDesignAnhActionPerformed(evt);
@@ -2386,7 +2386,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         jLabel13.setText("DS imei");
 
         btnDesignImei.setBackground(new java.awt.Color(0, 0, 102));
-// btnDesignImei.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/edit.png"))); // NOI18N
+        btnDesignImei.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/edit.png"))); // NOI18N
         btnDesignImei.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDesignImeiActionPerformed(evt);
@@ -2405,7 +2405,7 @@ public class ViewSanPham extends javax.swing.JFrame {
 
         btnThemSanPham.setBackground(new java.awt.Color(0, 0, 102));
         btnThemSanPham.setForeground(new java.awt.Color(0, 0, 102));
-// btnThemSanPham.setIcon(new javax.swing.ImageIcon("D:\\Study\\FALL_2022\\PRO1041_DuAn1\\OnTap\\CodeTung\\Nhom5_QuanLyDienThoai\\images\\add.png")); // NOI18N
+        btnThemSanPham.setIcon(new javax.swing.ImageIcon("D:\\Study\\FALL_2022\\PRO1041_DuAn1\\OnTap\\CodeTung\\Nhom5_QuanLyDienThoai\\images\\add.png")); // NOI18N
         btnThemSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnThemSanPhamMouseClicked(evt);
@@ -2419,7 +2419,7 @@ public class ViewSanPham extends javax.swing.JFrame {
 
         btnSuaSanPham.setBackground(new java.awt.Color(0, 0, 102));
         btnSuaSanPham.setForeground(new java.awt.Color(0, 0, 102));
-// btnSuaSanPham.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/update.png"))); // NOI18N
+        btnSuaSanPham.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/update.png"))); // NOI18N
         btnSuaSanPham.setEnabled(false);
         btnSuaSanPham.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2428,7 +2428,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         });
 
         btnXoaSanPham.setBackground(new java.awt.Color(0, 0, 102));
-// btnXoaSanPham.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/delete.png"))); // NOI18N
+        btnXoaSanPham.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/delete.png"))); // NOI18N
         btnXoaSanPham.setEnabled(false);
         btnXoaSanPham.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2437,7 +2437,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         });
 
         btnXoaFormSanPham.setBackground(new java.awt.Color(0, 0, 102));
-// btnXoaFormSanPham.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/reset.png"))); // NOI18N
+        btnXoaFormSanPham.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/reset.png"))); // NOI18N
         btnXoaFormSanPham.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnXoaFormSanPhamActionPerformed(evt);
@@ -2581,8 +2581,13 @@ public class ViewSanPham extends javax.swing.JFrame {
         jLabel20.setForeground(new java.awt.Color(0, 0, 102));
         jLabel20.setText("Tìm Kiếm");
 
-        jButton8.setBackground(new java.awt.Color(0, 0, 102));
-// jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/search.png"))); // NOI18N
+        btnTimKiemSanPhamDeleted.setBackground(new java.awt.Color(0, 0, 102));
+        btnTimKiemSanPhamDeleted.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/search.png"))); // NOI18N
+        btnTimKiemSanPhamDeleted.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimKiemSanPhamDeletedActionPerformed(evt);
+            }
+        });
 
         tblSanPhamLuuTru.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tblSanPhamLuuTru.setModel(new javax.swing.table.DefaultTableModel(
@@ -2590,11 +2595,11 @@ public class ViewSanPham extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Tên SP", "Đơn giá", "Mô tả", "Màu Sắc", "Hãng", "Chip", "Ram", "Rom", "Pin", "Số Lượng", "Ngày Xóa"
+                "Tên SP", "Đơn giá", "Mô tả", "Ảnh", "Màu Sắc", "Hãng", "Chip", "Ram", "Rom", "Pin", "Số Lượng", "Ngày Xóa"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -2620,10 +2625,16 @@ public class ViewSanPham extends javax.swing.JFrame {
             tblSanPhamLuuTru.getColumnModel().getColumn(8).setResizable(false);
             tblSanPhamLuuTru.getColumnModel().getColumn(9).setResizable(false);
             tblSanPhamLuuTru.getColumnModel().getColumn(10).setResizable(false);
+            tblSanPhamLuuTru.getColumnModel().getColumn(11).setResizable(false);
         }
 
-        jButton14.setBackground(new java.awt.Color(0, 0, 102));
-// jButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/restore.png"))); // NOI18N
+        btnRestoreSanPham.setBackground(new java.awt.Color(0, 0, 102));
+        btnRestoreSanPham.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/restore.png"))); // NOI18N
+        btnRestoreSanPham.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRestoreSanPhamActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -2639,9 +2650,9 @@ public class ViewSanPham extends javax.swing.JFrame {
                             .addGroup(jPanel8Layout.createSequentialGroup()
                                 .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btnTimKiemSanPhamDeleted, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnRestoreSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
@@ -2652,11 +2663,11 @@ public class ViewSanPham extends javax.swing.JFrame {
                         .addGap(17, 17, 17)
                         .addComponent(jLabel20)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton14))
+                        .addComponent(btnRestoreSanPham))
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGap(40, 40, 40)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnTimKiemSanPhamDeleted, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jTextField8))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -5157,6 +5168,14 @@ public class ViewSanPham extends javax.swing.JFrame {
     private void tblSanPhamLuuTruMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamLuuTruMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_tblSanPhamLuuTruMouseClicked
+
+    private void btnRestoreSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestoreSanPhamActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRestoreSanPhamActionPerformed
+
+    private void btnTimKiemSanPhamDeletedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemSanPhamDeletedActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnTimKiemSanPhamDeletedActionPerformed
 // đợi
 
     private void clear() {
@@ -5265,12 +5284,14 @@ public class ViewSanPham extends javax.swing.JFrame {
     private javax.swing.JButton btnLast1;
     private javax.swing.JButton btnNext;
     private javax.swing.JButton btnNext2;
+    private javax.swing.JButton btnRestoreSanPham;
     private javax.swing.JButton btnSearchSanPham;
     private javax.swing.JButton btnSuaSanPham;
     private javax.swing.JButton btnTaoHoaDon;
     private javax.swing.JButton btnThanhToan;
     private javax.swing.JButton btnThemSanPham;
     private javax.swing.JButton btnTim;
+    private javax.swing.JButton btnTimKiemSanPhamDeleted;
     private javax.swing.JButton btnXoaFormSanPham;
     private javax.swing.JButton btnXoaSanPham;
     private javax.swing.ButtonGroup buttonGroup1;
@@ -5287,7 +5308,6 @@ public class ViewSanPham extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton44;
     private javax.swing.JButton jButton45;
@@ -5300,7 +5320,6 @@ public class ViewSanPham extends javax.swing.JFrame {
     private javax.swing.JButton jButton52;
     private javax.swing.JButton jButton53;
     private javax.swing.JButton jButton54;
-    private javax.swing.JButton jButton8;
     private javax.swing.JComboBox<String> jComboBox10;
     private javax.swing.JComboBox<String> jComboBox11;
     private javax.swing.JFrame jFrame1;
