@@ -34,7 +34,6 @@ import com.fpt.it17326.nhom5.domainmodel.Pin;
 import com.fpt.it17326.nhom5.domainmodel.Ram;
 import com.fpt.it17326.nhom5.domainmodel.Rom;
 import com.fpt.it17326.nhom5.domainmodel.SanPhamGiamGia;
-import com.fpt.it17326.nhom5.repository.ImeiDaBanRepository;
 import com.fpt.it17326.nhom5.repository.KhuyenMaiRepository;
 import com.fpt.it17326.nhom5.repository.SanPhamGiamGiaRepository;
 import com.fpt.it17326.nhom5.repository.SanPhamRepository;
@@ -64,10 +63,14 @@ import java.time.LocalDateTime;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -82,19 +85,24 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.JTableHeader;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
  * @author PHAM DAC THANG
  */
 public class ViewSanPham extends javax.swing.JFrame {
-
+    
     DefaultTableModel dfm;
     DefaultTableModel dfm2;
     DefaultTableModel dfm3;
     private KhuyenMaiService khuyenMaiService;
-
+    
     List<KhuyenMaiResponse> lists;
     List<KhuyenMaiResponse> lists2;
     List<SanPham> sanPham;
@@ -141,7 +149,7 @@ public class ViewSanPham extends javax.swing.JFrame {
     DefaultTableModel defaultTable;
     HoaDonChiTietService HoaDonChiTietService = new HoaDonChiTietServiceImpl();
     HoaDonService HoaDonService = new HoaDonServiceImpl();
-
+    
     private List<ThongkeResponse> listThongke = new ArrayList<>();
 
     /**
@@ -149,6 +157,7 @@ public class ViewSanPham extends javax.swing.JFrame {
      */
     public ViewSanPham() {
         initComponents();
+        seticon();
         showDataKM6();
         imeiDaBanService = new ImeiDaBanServiceImpl();
         SanPhamRepository giaRepository = new SanPhamRepository();
@@ -184,7 +193,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         txtTienKHTra.setEditable(false);
         dtmHoaDon = (DefaultTableModel) tblHoaDon.getModel();
         designTableSanPham();
-
+        
         loadProductForm();
         Util.createFolderImageUpload();
 
@@ -210,22 +219,22 @@ public class ViewSanPham extends javax.swing.JFrame {
         tbl_SanPhamGiamGia.getTableHeader().setFont(new Font("Segoe", Font.BOLD, 12));
         tbl_SanPhamGiamGia.setRowHeight(20);
     }
-
+    
     public void showDataKM2(List<KhuyenMaiResponse> lst) {
         dfm.setRowCount(0);
         for (KhuyenMaiResponse khuyenMaiResponse : lst) {
             dfm.addRow(khuyenMaiResponse.toDataRow());
         }
     }
-
+    
     private void showDataKM3(List<SanPhamResponse> listSanPham) {
         dfm3.setRowCount(0);
         for (SanPhamResponse sanPhamResponse : listSanPham) {
-
+            
             dfm3.addRow(sanPhamResponse.toDataRow2());
         }
     }
-
+    
     private void showDataKM4() {
         SanPhamGiamGiaRepository giaRepository = new SanPhamGiamGiaRepository();
         int index = tbl_KhuyenMai.getSelectedRow();
@@ -237,7 +246,7 @@ public class ViewSanPham extends javax.swing.JFrame {
                 }
             }
         }
-
+        
         KhuyenMaiResponse khuyenMaiResponse = khuyenMaiService.getOne((int) dfm.getValueAt(index, 0));
         txt_TenKM.setText(khuyenMaiResponse.getTenKM());
         txt_MaGiamGia.setText(khuyenMaiResponse.getMaKM());
@@ -245,7 +254,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         dtc_TuNgay.setDate(khuyenMaiResponse.getNgayBatDau());
         dtc_DenNgay.setDate(khuyenMaiResponse.getNgayKetThuc());
     }
-
+    
     private KhuyenMai getDataKM() {
         KhuyenMai khuyenMai = new KhuyenMai();
         khuyenMai.setMaKM(txt_MaGiamGia.getText());
@@ -253,7 +262,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         khuyenMai.setCreatedAt(java.util.Calendar.getInstance().getTime());
         khuyenMai.setUpdatedAt(null);
         khuyenMai.setNgayBatDau(dtc_TuNgay.getDate());
-
+        
         khuyenMai.setNgayKetThuc(dtc_DenNgay.getDate());
         khuyenMai.setSoTienGiam(Float.parseFloat(txt_MucGiam.getText()));
         if (dtc_DenNgay.getDate().after(java.util.Calendar.getInstance().getTime()) || dtc_DenNgay.getDate().equals(java.util.Calendar.getInstance().getTime())) {
@@ -265,7 +274,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         khuyenMai.setHinhThucGiamGia(Boolean.TRUE);
         return khuyenMai;
     }
-
+    
     public void showDataKM5() {
         int index2 = tbl_KhuyenMaiNgungHoatDong.getSelectedRow();
         SanPhamGiamGiaRepository giaRepository = new SanPhamGiamGiaRepository();
@@ -284,7 +293,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         dtc_TuNgay.setDate(khuyenMaiResponse.getNgayBatDau());
         dtc_DenNgay.setDate(khuyenMaiResponse.getNgayKetThuc());
     }
-
+    
     public void showDataKM6() {
         KhuyenMaiRepository khuyenMaiRepository = new KhuyenMaiRepository();
         List<KhuyenMai> khuyenMais = khuyenMaiRepository.getAll();
@@ -303,7 +312,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         header.setBackground(Color.BLACK);
         header.setForeground(Color.BLACK);
     }
-
+    
     public void loadProductForm() {
         imeis = new ArrayList<>();
         listSp = sanPhamService.getAllSanPham();
@@ -316,7 +325,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         getAllMauSac();
 //        getAllImei();
     }
-
+    
     public void loadProductTable() {
         DefaultTableModel dtm = (DefaultTableModel) tblSanPham2.getModel();
         dtm.setRowCount(0);
@@ -325,67 +334,67 @@ public class ViewSanPham extends javax.swing.JFrame {
             dtm.addRow(row);
         }
     }
-
+    
     public void getAllChip() {
         listChip = chipService.getAllChip();
         for (Chip chip : listChip) {
             cbbChip.addItem(chip.getTenChip());
         }
     }
-
+    
     public void getAllRam() {
         listRam = ramService.getAllRam();
         for (Ram item : listRam) {
             cbbRam.addItem(item.getDungLuong());
         }
     }
-
+    
     public void getAllRom() {
         listRom = romService.getAllRom();
         for (Rom item : listRom) {
             cbbRom.addItem(item.getTenRom());
         }
     }
-
+    
     public void getAllPin() {
         listPin = pinService.getAllPin();
         for (Pin item : listPin) {
             cbbPin.addItem(item.getTenPin());
         }
     }
-
+    
     public void getAllHang() {
         listHangDT = hangDienThoaiService.getAllHangDT();
         for (HangDienThoai item : listHangDT) {
             cbbHang.addItem(item.getTenHang());
         }
     }
-
+    
     public void getAllMauSac() {
         listMauSac = mauSacService.getAllMauSac();
         for (MauSac item : listMauSac) {
             cbbMauSac.addItem(item.getTenMauSac());
         }
     }
-
+    
     public void getAllImei(List<ImeiResponse> listImei) {
         cbbDSImei.removeAllItems();
         for (ImeiResponse item : listImei) {
             cbbDSImei.addItem(item.getImei());
         }
     }
-
+    
     public void loadImageToLabel(String path, boolean hasRoot) {
         BufferedImage img = null;
         String userDirectory = new File("").getAbsolutePath();
-
+        
         try {
             if (hasRoot) {
                 img = ImageIO.read(new File(userDirectory + "\\" + path));
             } else {
                 img = ImageIO.read(new File(path));
             }
-
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -393,7 +402,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         ImageIcon icon = new ImageIcon(dimg);
         lblAnhSanPham.setIcon(icon);
     }
-
+    
     public void addImei(List<Imei> list, SanPham sp) {
         for (Imei imei : list) {
             imei.setSanPham(sp);
@@ -401,7 +410,7 @@ public class ViewSanPham extends javax.swing.JFrame {
             imeiService.add(imei);
         }
     }
-
+    
     public void getImeiByProduct(int id) {
         imeis = imeiService.getAllImeiBySanPham(id);
         listImei = new ArrayList<>();
@@ -410,16 +419,16 @@ public class ViewSanPham extends javax.swing.JFrame {
             listImei.add(new ImeiResponse(imei));
             cbbDSImei.addItem(imei.getImei());
         }
-
+        
     }
-
+    
     private void showData(List<SanPhamResponse> listSanPham) {
         dtmSP.setRowCount(0);
         for (SanPhamResponse sanPhamResponse : listSanPham) {
             dtmSP.addRow(sanPhamResponse.toDataRow());
         }
     }
-
+    
     private void showData2(List<SanPhamResponse> listSanPham, String maKM) {
         dtmSP.setRowCount(0);
         listSanPham = sanPhamService.getAll();
@@ -427,12 +436,12 @@ public class ViewSanPham extends javax.swing.JFrame {
             dtmSP.addRow(sanPhamResponse.toDataRow3(maKM));
         }
     }
-
+    
     public void getAllSanPham() {
         listSanPham = sanPhamService.getAll();
         listSp = sanPhamService.getAllSanPham();
     }
-
+    
     public void loadTableSanPham() {
         getAllSanPham();
         DefaultTableModel dtm = (DefaultTableModel) tblSanPham2.getModel();
@@ -453,9 +462,9 @@ public class ViewSanPham extends javax.swing.JFrame {
             dtm.addRow(row);
         }
     }
-
+    
     public class DialogResponse {
-
+        
         public void getListImeiResponse(List<Imei> _imeis) {
             imeis = _imeis;
             listImei = new ArrayList<>();
@@ -466,7 +475,7 @@ public class ViewSanPham extends javax.swing.JFrame {
             txtSoLuong.setText(String.valueOf(listImei.size()));
             getAllImei(listImei);
         }
-
+        
     }
 
     // Tung End///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -500,14 +509,14 @@ public class ViewSanPham extends javax.swing.JFrame {
             String StrTT = "Chưa thanh toán";
             if (x.isTrangThai()) {
                 StrTT = "Đã thanh toán";
-
+                
             }
             convert = format.format(x.getCreatedAt());
-            dtmHoaDon.addRow(new Object[]{x.getMaHD(), x.getMaNV(), x.getTenKH(), x.getSdt(), StrTT, String.format("%,.0f", x.getTongTien()) + " VND", convert});
-
+            dtmHoaDon.addRow(new Object[]{x.getMaHD(), x.getMaNV(), x.getMaKH(), x.getTenKH(), x.getSdt(), StrTT, String.format("%,.0f", x.getTongTien()) + " VND", convert});
+            
         }
     }
-
+    
     private void sortHD() {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         List<HoaDonResponse> lstHD = hoaDonService.getAll();
@@ -526,7 +535,7 @@ public class ViewSanPham extends javax.swing.JFrame {
             }
         }
     }
-
+    
     private void showhdct() {
         int index = tblHoaDon.getSelectedRow();
         dtmHDImei.setRowCount(0);
@@ -540,7 +549,7 @@ public class ViewSanPham extends javax.swing.JFrame {
             }
         }
     }
-
+    
     private void showimei() {
         dtmHDImei.setRowCount(0);
         int index = tblSP.getSelectedRow();
@@ -563,6 +572,91 @@ public class ViewSanPham extends javax.swing.JFrame {
                 }
             }
         }
+    }
+    
+    private void exportexcel() {
+        //Chọn nơi lưu file
+        JFileChooser excelFileChooser = new JFileChooser("C:\\Users\\Admin\\Desktop");
+        excelFileChooser.setDialogTitle("Save as");
+        FileNameExtensionFilter filefilter = new FileNameExtensionFilter("EXCEL FILES", "xls", "xlsx", "xlsm");
+        excelFileChooser.setFileFilter(filefilter);
+        int check = excelFileChooser.showSaveDialog(null);
+
+        //Check khi ấn nút save
+        if (check == JFileChooser.APPROVE_OPTION) {
+            FileOutputStream FOS = null;
+            BufferedOutputStream BOS = null;
+            XSSFWorkbook excelJtableExporter = null;
+            try {
+                excelJtableExporter = new XSSFWorkbook();
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd_MM_yyyy HH:mm:ss");
+                LocalDateTime now = LocalDateTime.now();
+                XSSFSheet excelSheet = excelJtableExporter.createSheet("HoaDon");
+                //Lấy số dòng, cột tblHoaDon
+                for (int i = 0; i < dtmHoaDon.getRowCount(); i++) {
+                    XSSFRow excelRow = excelSheet.createRow(i);
+                    for (int j = 0; j < dtmHoaDon.getColumnCount(); j++) {
+                        XSSFCell excelCell = excelRow.createCell(j);
+                        
+                        excelCell.setCellValue(dtmHoaDon.getValueAt(i, j).toString());
+                    }
+                }
+                
+//                XSSFSheet excelSheet1 = excelJtableExporter.createSheet("HoaDonChiTiet");
+//                //Lấy số dòng, cột tblHoaDonCT
+//                for (int i = 0; i < dtmHDSP.getRowCount(); i++) {
+//                    XSSFRow excelRow = excelSheet.createRow(i);
+//                    for (int j = 0; j < dtmHDSP.getColumnCount(); j++) {
+//                        XSSFCell excelCell = excelRow.createCell(j);
+//                        
+//                        excelCell.setCellValue(dtmHDSP.getValueAt(i, j).toString());
+//                    }
+//                }
+//                
+//                XSSFSheet excelSheet2 = excelJtableExporter.createSheet("ImeiDaBan");
+//                //Lấy số dòng, cột tblImeiDaBan
+//                for (int i = 0; i < dtmHDImei.getRowCount(); i++) {
+//                    XSSFRow excelRow = excelSheet.createRow(i);
+//                    for (int j = 0; j < dtmHDImei.getColumnCount(); j++) {
+//                        XSSFCell excelCell = excelRow.createCell(j);
+//                        
+//                        excelCell.setCellValue(dtmHDImei.getValueAt(i, j).toString());
+//                    }
+//                }
+                
+                FOS = new FileOutputStream(excelFileChooser.getSelectedFile() + ".xlsx");
+                BOS = new BufferedOutputStream(FOS);
+                excelJtableExporter.write(BOS);
+                JOptionPane.showMessageDialog(this, "Xuất Thành Công!!!!");
+            } catch (FileNotFoundException ex) {
+                ex.printStackTrace();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            } finally {
+                try {
+                    if (BOS != null) {
+                        BOS.close();
+                    }
+                    
+                    if (FOS != null) {
+                        FOS.close();
+                    }
+                    
+                    if (excelJtableExporter != null) {
+                        excelJtableExporter.close();
+                    }
+                    
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            
+        }
+    }
+    
+    private void seticon() {
+        ImageIcon icon = new ImageIcon("images\\excel.png");
+        lblicon.setIcon(icon);
     }
 //======================================================================================
 //@QuanPM_PH27325 END
@@ -598,10 +692,10 @@ public class ViewSanPham extends javax.swing.JFrame {
         tfsoluongsanphambanthongke.setText("" + solg);
         //----------------------------------------------------------------------
         defaultTable.setRowCount(0);
-
+        
         if (listThongke.size() > 0) {
             for (int i = 0; i < listThongke.size(); i = i + 1) {
-
+                
                 double a = (double) (listThongke.get(i).getDonGia() * 1);
                 defaultTable.addRow(new Object[]{i + 1, listThongke.get(i).getMaSP(),
                     listThongke.get(i).getMaHD(),
@@ -611,14 +705,14 @@ public class ViewSanPham extends javax.swing.JFrame {
                     String.format("%,.2f", listThongke.get(i).thanhtien()) + " VND",
                     listThongke.get(i).chuyenngaymua()
                 });
-
+                
             }
         } else {
             System.err.println("list.size=  " + listThongke.size());
         }
-
+        
     }
-
+    
     public void loadbangthongketangdantheothanhtien() {
         defaultTable = (DefaultTableModel) tbbangthongke.getModel();
         listThongke = HoaDonChiTietService.getAll1();
@@ -655,10 +749,10 @@ public class ViewSanPham extends javax.swing.JFrame {
                 }
         );
         defaultTable.setRowCount(0);
-
+        
         if (listThongke.size() > 0) {
             for (int i = 0; i < listThongke.size(); i = i + 1) {
-
+                
                 double a = (double) (listThongke.get(i).getDonGia() * 1);
                 defaultTable.addRow(new Object[]{i + 1, listThongke.get(i).getMaSP(),
                     listThongke.get(i).getMaHD(),
@@ -668,16 +762,16 @@ public class ViewSanPham extends javax.swing.JFrame {
                     String.format("%,.2f", listThongke.get(i).thanhtien()) + " VND",
                     listThongke.get(i).chuyenngaymua()
                 });
-
+                
             }
         } else {
             System.err.println("list.size=  " + listThongke.size());
         }
-
+        
         loadbangthongkeimei();
-
+        
     }
-
+    
     public void loadbangthongkegiamdantheothanhtien() {
         defaultTable = (DefaultTableModel) tbbangthongke.getModel();
         listThongke = HoaDonChiTietService.getAll1();
@@ -714,10 +808,10 @@ public class ViewSanPham extends javax.swing.JFrame {
                 }
         );
         defaultTable.setRowCount(0);
-
+        
         if (listThongke.size() > 0) {
             for (int i = 0; i < listThongke.size(); i = i + 1) {
-
+                
                 double a = (double) (listThongke.get(i).getDonGia() * 1);
                 defaultTable.addRow(new Object[]{i + 1, listThongke.get(i).getMaSP(),
                     listThongke.get(i).getMaHD(),
@@ -727,40 +821,40 @@ public class ViewSanPham extends javax.swing.JFrame {
                     String.format("%,.2f", listThongke.get(i).thanhtien()) + " VND",
                     listThongke.get(i).chuyenngaymua()
                 });
-
+                
             }
         } else {
             System.err.println("list.size=  " + listThongke.size());
         }
-
+        
         loadbangthongkeimei();
-
+        
     }
-
+    
     public void loadbangthongkeimei() {
-
+        
         defaultTable = (DefaultTableModel) tbbangthongkeimai.getModel();
         listThongke = HoaDonChiTietService.getAllimeidaban();
-
+        
         defaultTable.setRowCount(0);
         if (listThongke.size() > 0) {
             for (int i = 0; i < listThongke.size(); i = i + 1) {
-
+                
                 defaultTable.addRow(new Object[]{i + 1,
                     listThongke.get(i).getMaHD(),
                     listThongke.get(i).getMaImei(),
                     listThongke.get(i).getImei(),
                     listThongke.get(i).chuyenngaymua()
                 });
-
+                
             }
-
+            
         } else {
             System.err.println("list.size=  " + listThongke.size());
         }
-
+        
     }
-
+    
     public void timkiemthongke() {
         defaultTable = (DefaultTableModel) tbbangthongke.getModel();
         listThongke = HoaDonChiTietService.getAll1();
@@ -772,7 +866,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         for (HoaDonResponse hd : HoaDonService.getAll1()) {
             if (hd.getMaHD().equals(tftimkiemthongke.getText())) {
                 th = th + 1;
-
+                
             }
         }
         if (th == 1) {
@@ -782,7 +876,7 @@ public class ViewSanPham extends javax.swing.JFrame {
             tftongdonhang.setText("1");
             tfdonthanhcong.setText(" " + 1);
             tfdondahuy.setText("0");
-
+            
             for (ThongkeResponse t : listThongke) {
                 if (t.getMaHD().equals(tftimkiemthongke.getText())) {
                     solg = solg + t.getSoLuong();
@@ -792,7 +886,7 @@ public class ViewSanPham extends javax.swing.JFrame {
             String doanhthu = String.format("%,.2f", tong) + " VND";
             tfdoanhthu.setText(doanhthu);
             tfsoluongsanphambanthongke.setText("" + solg);
-
+            
         } else {
             tftongdonhang.setText("0");
             tfdonthanhcong.setText(" " + 0);
@@ -806,7 +900,7 @@ public class ViewSanPham extends javax.swing.JFrame {
 
         //----------------------------------------------------------------------
         defaultTable.setRowCount(0);
-
+        
         if (listThongke.size() > 0) {
             int io = 0;
             for (int i = 0; i < listThongke.size(); i = i + 1) {
@@ -820,9 +914,9 @@ public class ViewSanPham extends javax.swing.JFrame {
                         String.format("%,.2f", listThongke.get(i).thanhtien()) + " VND",
                         listThongke.get(i).chuyenngaymua()
                     });
-
+                    
                 }
-
+                
             }
         } else {
             System.err.println("list.size=  " + listThongke.size());
@@ -832,16 +926,16 @@ public class ViewSanPham extends javax.swing.JFrame {
         timkiemimei();  // 
 
     }
-
+    
     public void timkiemimei() {
-
+        
         defaultTable = (DefaultTableModel) tbbangthongkeimai.getModel();
         listThongke = HoaDonChiTietService.getAllimeidaban();
         defaultTable.setRowCount(0);
         if (listThongke.size() > 0) {
             int ok = 0;
             for (int i = 0; i < listThongke.size(); i = i + 1) {
-
+                
                 if (listThongke.get(i).getMaHD().equalsIgnoreCase(tftimkiemthongke.getText())) {
                     defaultTable.addRow(new Object[]{ok + 1, // check sau
                         listThongke.get(i).getMaHD(),
@@ -851,30 +945,30 @@ public class ViewSanPham extends javax.swing.JFrame {
                     });
                 }
             }
-
+            
         } else {
             System.err.println("list.size=  " + listThongke.size());
         }
     }
-
+    
     public int sosanhngaybtvskt() throws ParseException {
-
+        
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-
+        
         Date date1 = sdf.parse(tfngaybatdauthongke.getText());
-
+        
         Date date2 = sdf.parse(tfketthucngaythongke.getText());
-
+        
         int a = date1.compareTo(date2);
         // bằng   date1=date2 thi 0
         //  date1 có trước date2 thì -1
         // còn lại 1
 
         return a;
-
+        
     }
     int kt = 0;
-
+    
     public boolean checktimkiemtheokhoangtime() throws ParseException {
         if (tfngaybatdauthongke.getText().isBlank()) {
             JOptionPane.showMessageDialog(this, "Ngày bắt đầu không để trống");
@@ -907,9 +1001,9 @@ public class ViewSanPham extends javax.swing.JFrame {
             }
         }
     }
-
+    
     public String chuyenngaymuatk(Date s) {
-
+        
         try {
             Date date = new SimpleDateFormat("yyyy-MM-dd").parse(s.toString());
             SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
@@ -918,9 +1012,9 @@ public class ViewSanPham extends javax.swing.JFrame {
         } catch (Exception e) {
             return "";
         }
-
+        
     }
-
+    
     public void loadbangthongtheotimkiemkhoangtime0() throws ParseException {
         defaultTable = (DefaultTableModel) tbbangthongke.getModel();
         listThongke = HoaDonChiTietService.getAll1();
@@ -929,16 +1023,16 @@ public class ViewSanPham extends javax.swing.JFrame {
         tftieudetongdonhang.setText("TỔNG ĐƠN HÀNG");
         tfchitietdonhang.setText("CHI TIẾT ĐƠN HÀNG");
         tftieudetongdoanhthu.setText("DOANH THU");
-
+        
         int solg = 0;
         double tong = 0;
         //----------------------------------------------------------------------
         defaultTable.setRowCount(0);
-
+        
         if (listThongke.size() > 0) {
             for (int i = 0; i < listThongke.size(); i = i + 1) {
                 if (sosanhngaytrongkhoang0(listThongke.get(i).chuyenngaymua())) {
-
+                    
                     solg = listThongke.get(i).getSoLuong() + solg;
                     tong = listThongke.get(i).thanhtien() + tong;
                     double a = (double) (listThongke.get(i).getDonGia() * 1);
@@ -955,9 +1049,9 @@ public class ViewSanPham extends javax.swing.JFrame {
         } else {
             System.err.println("list.size=  " + listThongke.size());
         }
-
+        
         int tc = 0;
-
+        
         for (HoaDonResponse hd : HoaDonService.getAll1()) {
             if (sosanhngaytrongkhoang0(chuyenngaymuatk(hd.getCreatedAt())) && hd.isTrangThai()) {
                 tc = tc + 1;
@@ -966,7 +1060,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         tftongdonhang.setText("" + tc);
         tfdonthanhcong.setText(" " + String.valueOf(tc));
         tfdondahuy.setText(" 0");
-
+        
         String doanhthu = String.format("%,.2f", tong) + " VND";
         tfdoanhthu.setText(doanhthu);
         tfsoluongsanphambanthongke.setText("" + solg);
@@ -985,15 +1079,15 @@ public class ViewSanPham extends javax.swing.JFrame {
                         listThongke.get(i).getImei(),
                         listThongke.get(i).chuyenngaymua()
                     });
-
+                    
                 }
             }
         } else {
             System.err.println("list.size=  " + listThongke.size());
         }
-
+        
     }
-
+    
     public void loadbangthongtheotimkiemkhoangtime1() throws ParseException {
         defaultTable = (DefaultTableModel) tbbangthongke.getModel();
         listThongke = HoaDonChiTietService.getAll1();
@@ -1002,19 +1096,19 @@ public class ViewSanPham extends javax.swing.JFrame {
         tftieudetongdonhang.setText("TỔNG ĐƠN HÀNG");
         tfchitietdonhang.setText("CHI TIẾT ĐƠN HÀNG");
         tftieudetongdoanhthu.setText("DOANH THU");
-
+        
         int solg = 0;
         double tong = 0;
         //----------------------------------------------------------------------
         defaultTable.setRowCount(0);
-
+        
         if (listThongke.size() > 0) {
             for (int i = 0; i < listThongke.size(); i = i + 1) {
                 if (sosanhngaytrongkhoang1(listThongke.get(i).chuyenngaymua())) {
-
+                    
                     solg = listThongke.get(i).getSoLuong() + solg;
                     tong = listThongke.get(i).thanhtien() + tong;
-
+                    
                     double a = (double) (listThongke.get(i).getDonGia() * 1);
                     defaultTable.addRow(new Object[]{i + 1, listThongke.get(i).getMaSP(),
                         listThongke.get(i).getMaHD(),
@@ -1029,9 +1123,9 @@ public class ViewSanPham extends javax.swing.JFrame {
         } else {
             System.err.println("list.size=  " + listThongke.size());
         }
-
+        
         int tc = 0;
-
+        
         for (HoaDonResponse hd : HoaDonService.getAll1()) {
             if (sosanhngaytrongkhoang1(chuyenngaymuatk(hd.getCreatedAt())) && hd.isTrangThai()) {
                 tc = tc + 1;
@@ -1040,11 +1134,11 @@ public class ViewSanPham extends javax.swing.JFrame {
         tftongdonhang.setText("" + tc);
         tfdonthanhcong.setText(" " + String.valueOf(tc));
         tfdondahuy.setText(" 0");
-
+        
         String doanhthu = String.format("%,.2f", tong) + " VND";
         tfdoanhthu.setText(doanhthu);
         tfsoluongsanphambanthongke.setText("" + solg);
-
+        
         defaultTable = (DefaultTableModel) tbbangthongkeimai.getModel();
         listThongke = HoaDonChiTietService.getAllimeidaban();
         defaultTable.setRowCount(0);
@@ -1058,24 +1152,24 @@ public class ViewSanPham extends javax.swing.JFrame {
                         listThongke.get(i).getImei(),
                         listThongke.get(i).chuyenngaymua()
                     });
-
+                    
                 }
             }
         } else {
             System.err.println("list.size=  " + listThongke.size());
         }
-
+        
     }
-
+    
     public boolean sosanhngaytrongkhoang1(String ec) throws ParseException {
-
+        
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-
+        
         Date date1 = sdf.parse(tfngaybatdauthongke.getText());
-
+        
         Date date2 = sdf.parse(tfketthucngaythongke.getText());
         Date date3 = sdf.parse(ec);
-
+        
         int a = date1.compareTo(date2);
         // bằng   date1=date2 thi 0
         //  date1 có trước date2 thì -1
@@ -1085,18 +1179,18 @@ public class ViewSanPham extends javax.swing.JFrame {
         } else {
             return false;
         }
-
+        
     }
-
+    
     public boolean sosanhngaytrongkhoang0(String ec) throws ParseException {
-
+        
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-
+        
         Date date1 = sdf.parse(tfngaybatdauthongke.getText());
-
+        
         Date date2 = sdf.parse(tfketthucngaythongke.getText());
         Date date3 = sdf.parse(ec);
-
+        
         int a = date1.compareTo(date2);
         // bằng   date1=date2 thi 0
         //  date1 có trước date2 thì -1
@@ -1106,14 +1200,14 @@ public class ViewSanPham extends javax.swing.JFrame {
         } else {
             return false;
         }
-
+        
     }
-
+    
     public boolean checknhapngaybatdauthongke() {
         SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
         df.setLenient(false);
         String ntn = "[0-9-]{0,20}";
-
+        
         try {
             Date ngay = df.parse(tfngaybatdauthongke.getText());
             if (tfngaybatdauthongke.getText().matches(ntn) == true) {
@@ -1125,7 +1219,7 @@ public class ViewSanPham extends javax.swing.JFrame {
                 return false;
                 //  TFNGAYSINH.setBackground(Color.YELLOW);
             }
-
+            
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, " Ngày bắt đầu không đúng định dạng (dd-MM-yyyy)");
             //TFNGAYSINH.setBackground(Color.YELLOW);
@@ -1133,12 +1227,12 @@ public class ViewSanPham extends javax.swing.JFrame {
             return false;
         }
     }
-
+    
     public boolean checknhapngayketthucthongke() {
         SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
         df.setLenient(false);
         String ntn = "[0-9-]{0,20}";
-
+        
         try {
             Date ngay = df.parse(tfketthucngaythongke.getText());
             if (tfketthucngaythongke.getText().matches(ntn) == true) {
@@ -1150,7 +1244,7 @@ public class ViewSanPham extends javax.swing.JFrame {
                 return false;
                 //  TFNGAYSINH.setBackground(Color.YELLOW);
             }
-
+            
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, " Ngày kết thúc không đúng định dạng ngáyinh(dd-MM-yyyy)");
             //TFNGAYSINH.setBackground(Color.YELLOW);
@@ -1158,9 +1252,9 @@ public class ViewSanPham extends javax.swing.JFrame {
             return false;
         }
     }
-
+    
     public void guibaocao() {
-
+        
         final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
         // Get a Properties object
         Properties props = System.getProperties();
@@ -1192,7 +1286,7 @@ public class ViewSanPham extends javax.swing.JFrame {
             msg.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(toEmail, false));
             msg.setSubject("THONG BAO DOANH THU: NHOM 5 BAN DIEN THOAI  [ " + tfngaybatdauthongke.getText() + " DEN " + tfketthucngaythongke.getText() + " ]");
-
+            
             String baocao = "TONG DOANH THU " + "[ " + tfngaybatdauthongke.getText() + " DEN " + tfketthucngaythongke.getText() + " ]" + "\n"
                     + "--------------------------------------------------------------------------\n"
                     + "TONG DON HANG                            : " + tftongdonhang.getText() + "\n"
@@ -1205,19 +1299,19 @@ public class ViewSanPham extends javax.swing.JFrame {
             msg.setText(baocao);
             msg.setSentDate(new Date());
             int xuat = JOptionPane.showConfirmDialog(this, baocao);
-
+            
             if (xuat == 0) {
                 Transport.send(msg);
                 JOptionPane.showMessageDialog(this, "GỬI BÁO CÁO THÀNH CÔNG");
             } else {
                 JOptionPane.showMessageDialog(this, "ĐÃ DỪNG BÁO CÁO");
             }
-
+            
         } catch (MessagingException e) {
             JOptionPane.showMessageDialog(this, "LỖI GỬI THÔNG BÁO ");
             System.out.println("LỖI :    " + e);
         }
-
+        
     }
 
     /**
@@ -1424,7 +1518,8 @@ public class ViewSanPham extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
-        btnExcel = new javax.swing.JButton();
+        btnExport = new javax.swing.JPanel();
+        lblicon = new javax.swing.JLabel();
         pl_khuyenmai = new javax.swing.JPanel();
         pl_khuyenmai5 = new javax.swing.JPanel();
         jPanel29 = new javax.swing.JPanel();
@@ -2887,7 +2982,7 @@ public class ViewSanPham extends javax.swing.JFrame {
                         .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 22, Short.MAX_VALUE))))
+                        .addGap(0, 96, Short.MAX_VALUE))))
         );
 
         jTabbedPane1.addTab("Sản Phẩm", jPanel7);
@@ -2976,7 +3071,7 @@ public class ViewSanPham extends javax.swing.JFrame {
                             .addComponent(jTextField8))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(172, Short.MAX_VALUE))
+                .addContainerGap(176, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Lưu Trữ", jPanel8);
@@ -3487,7 +3582,7 @@ public class ViewSanPham extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Mã HD", "Mã NV", "Tên KH", "SDT", "Trạng Thái", "Tổng Tiền", "Ngày Tạo"
+                "Mã HD", "Mã NV", "Mã KH", "Tên KH", "SDT", "Trạng Thái", "Tổng Tiền", "Ngày Tạo"
             }
         ));
         tblHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -3499,7 +3594,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         if (tblHoaDon.getColumnModel().getColumnCount() > 0) {
             tblHoaDon.getColumnModel().getColumn(0).setPreferredWidth(30);
             tblHoaDon.getColumnModel().getColumn(1).setPreferredWidth(30);
-            tblHoaDon.getColumnModel().getColumn(2).setPreferredWidth(100);
+            tblHoaDon.getColumnModel().getColumn(3).setPreferredWidth(100);
         }
 
         javax.swing.GroupLayout pHoaDonLayout = new javax.swing.GroupLayout(pHoaDon);
@@ -3640,7 +3735,37 @@ public class ViewSanPham extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        btnExcel.setText("Excel");
+        btnExport.setBackground(new java.awt.Color(0, 0, 102));
+        btnExport.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnExportMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnExportMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnExportMouseExited(evt);
+            }
+        });
+
+        lblicon.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        javax.swing.GroupLayout btnExportLayout = new javax.swing.GroupLayout(btnExport);
+        btnExport.setLayout(btnExportLayout);
+        btnExportLayout.setHorizontalGroup(
+            btnExportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnExportLayout.createSequentialGroup()
+                .addGap(53, 53, 53)
+                .addComponent(lblicon)
+                .addContainerGap(54, Short.MAX_VALUE))
+        );
+        btnExportLayout.setVerticalGroup(
+            btnExportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnExportLayout.createSequentialGroup()
+                .addContainerGap(13, Short.MAX_VALUE)
+                .addComponent(lblicon)
+                .addGap(12, 12, 12))
+        );
 
         javax.swing.GroupLayout pl_hoadonLayout = new javax.swing.GroupLayout(pl_hoadon);
         pl_hoadon.setLayout(pl_hoadonLayout);
@@ -3659,12 +3784,12 @@ public class ViewSanPham extends javax.swing.JFrame {
                         .addGroup(pl_hoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel58)
                             .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1152, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1157, Short.MAX_VALUE)
                         .addComponent(pLoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(153, 153, 153)
-                        .addComponent(btnExcel)
-                        .addGap(94, 94, 94)))
-                .addContainerGap(1072, Short.MAX_VALUE))
+                        .addGap(102, 102, 102)
+                        .addComponent(btnExport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(110, 110, 110)))
+                .addContainerGap(1078, Short.MAX_VALUE))
         );
         pl_hoadonLayout.setVerticalGroup(
             pl_hoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3679,15 +3804,15 @@ public class ViewSanPham extends javax.swing.JFrame {
                                 .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(pLoc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pl_hoadonLayout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(btnExcel)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(28, 28, 28)
+                        .addComponent(btnExport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(pHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pl_hoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pImei, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pl_FullChucNang.add(pl_hoadon, "hoadon");
@@ -4229,7 +4354,7 @@ public class ViewSanPham extends javax.swing.JFrame {
                 .addComponent(jPanel32, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel33, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
 
         pl_FullChucNang.add(pl_nhanvien, "nhanvien");
@@ -4706,7 +4831,7 @@ public class ViewSanPham extends javax.swing.JFrame {
             .addGroup(pl_thongkeLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel35, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -4771,7 +4896,7 @@ public class ViewSanPham extends javax.swing.JFrame {
     private void pn_TongAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_pn_TongAncestorAdded
         // TODO add your handling code here:
     }//GEN-LAST:event_pn_TongAncestorAdded
-
+    
 
     private void btnDesignAnhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesignAnhActionPerformed
         // TODO add your handling code here:
@@ -4822,7 +4947,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         String[] hearder = {"Mã Hãng", "Tên Hãng"};
         DemoDialog dialog = new DemoDialog(this, rootPaneCheckingEnabled, "Hãng", hearder, "Mã Hãng", "Tên Hãng");
     }//GEN-LAST:event_btnDesignHangActionPerformed
-
+    
 
     private void pn_HomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pn_HomeMouseClicked
         // TODO add your handling code here:
@@ -5033,17 +5158,17 @@ public class ViewSanPham extends javax.swing.JFrame {
         String pincbb = cbbPin.getSelectedItem().toString();
         String hdtcbb = cbbHang.getSelectedItem().toString();
         String mscbb = cbbMauSac.getSelectedItem().toString();
-
+        
         Ram ram = listRam.get(cbbRam.getSelectedIndex());
-
+        
         Rom rom = listRom.get(cbbRom.getSelectedIndex());
-
+        
         MauSac ms = listMauSac.get(cbbMauSac.getSelectedIndex());
-
+        
         Pin pin = listPin.get(cbbPin.getSelectedIndex());
-
+        
         HangDienThoai hdt = listHangDT.get(cbbHang.getSelectedIndex());
-
+        
         Chip chip = listChip.get(cbbChip.getSelectedIndex());
 
 //        Anh anh = new Anh();
@@ -5067,7 +5192,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         addImei(imeis, last);
 //        Util.uploadImage(urlAnh, true);
         loadTableSanPham();
-
+        
         List<SanPhamResponse> lstSP = sanPhamService.getAll();
         showData(lstSP);
 
@@ -5086,7 +5211,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         }
         int option = JOptionPane.showConfirmDialog(null, "Xác nhận xóa", "Xóa dữ liệu", JOptionPane.OK_CANCEL_OPTION);
         if (option == 0) {
-
+            
         }
         //SanPham sp = new
     }//GEN-LAST:event_btnXoaSanPhamActionPerformed
@@ -5104,7 +5229,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         cbbHang.setSelectedIndex(0);
         cbbMauSac.setSelectedIndex(0);
     }//GEN-LAST:event_btnXoaFormSanPhamActionPerformed
-
+    
 
     private void btnDesignImeiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesignImeiActionPerformed
         // TODO add your handling code here:
@@ -5119,9 +5244,9 @@ public class ViewSanPham extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Không được để trống");
             return;
         }
-
+        
         if (rootPaneCheckingEnabled) {
-
+            
         }
     }//GEN-LAST:event_btnSearchSanPhamActionPerformed
 
@@ -5139,24 +5264,24 @@ public class ViewSanPham extends javax.swing.JFrame {
 
     private void jButton53ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton53ActionPerformed
         try {
-
+            
             if (checktimkiemtheokhoangtime()) {
                 if (kt == 0) {
                     loadbangthongtheotimkiemkhoangtime0();
                 } else {
                     loadbangthongtheotimkiemkhoangtime1();
-
+                    
                 }
-
+                
             }
-
+            
         } catch (ParseException ex) {
             Logger.getLogger(ViewSanPham.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton53ActionPerformed
 
     private void jButton54ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton54ActionPerformed
-
+        
         guibaocao();
 
         //
@@ -5166,7 +5291,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         if (tftimkiemthongke.getText().isBlank()) {
             JOptionPane.showMessageDialog(this, "Hãy Nhập MÃ HÓA ĐƠN");
         } else {
-
+            
             timkiemthongke();
         }
     }//GEN-LAST:event_jButton13ActionPerformed
@@ -5276,7 +5401,7 @@ public class ViewSanPham extends javax.swing.JFrame {
             if (sanPhamResponse.getTenSP().equalsIgnoreCase(tim)) {
                 listTim.add(sanPhamResponse);
             }
-
+            
         }
         showData(listTim);
     }//GEN-LAST:event_btnTimActionPerformed
@@ -5306,7 +5431,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         sp1.setDungLuong(sp.getDungLuong());
         listGioHang.add(sp1);
         dtmSP.setRowCount(0);
-
+        
         showData(listSanPham);
         showDataGH(listGioHang);
         //DialogImeiBanHang dialogImeiBanHang = new DialogImeiBanHang(this, rootPaneCheckingEnabled);
@@ -5351,7 +5476,7 @@ public class ViewSanPham extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập lại ngày");
             return;
         }
-
+        
         for (KhuyenMai list : khuyenMaiService.getAll()) {
             if (list.getMaKM().equals(khuyenMai.getMaKM())) {
                 JOptionPane.showMessageDialog(this, "Vui lòng nhập lại,mã khuyến mãi đã trùng");
@@ -5427,7 +5552,7 @@ public class ViewSanPham extends javax.swing.JFrame {
             showDataKM2(lists2);
             showDataKM3(listSanPham);
             JOptionPane.showMessageDialog(this, "Sửa thành công!");
-
+            
         }        // TODO add your handling code here:
     }//GEN-LAST:event_bt_suaKMActionPerformed
 
@@ -5471,6 +5596,18 @@ public class ViewSanPham extends javax.swing.JFrame {
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void btnExportMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExportMouseEntered
+        btnExport.setBackground(Color.red);
+    }//GEN-LAST:event_btnExportMouseEntered
+
+    private void btnExportMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExportMouseExited
+        btnExport.setBackground(new Color(0, 0, 102));
+    }//GEN-LAST:event_btnExportMouseExited
+
+    private void btnExportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExportMouseClicked
+        exportexcel();
+    }//GEN-LAST:event_btnExportMouseClicked
 // đợi
 
     private void clear() {
@@ -5496,21 +5633,21 @@ public class ViewSanPham extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-
+                    
                 }
             }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(ViewSanPham.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            
         } catch (InstantiationException ex) {
             java.util.logging.Logger.getLogger(ViewSanPham.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            
         } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(ViewSanPham.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ViewSanPham.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
@@ -5571,7 +5708,7 @@ public class ViewSanPham extends javax.swing.JFrame {
     private javax.swing.JButton btnDesignPin;
     private javax.swing.JButton btnDesignRam;
     private javax.swing.JButton btnDesignRom;
-    private javax.swing.JButton btnExcel;
+    private javax.swing.JPanel btnExport;
     private javax.swing.JButton btnHD1;
     private javax.swing.JButton btnHD2;
     private javax.swing.JButton btnHuyHoaDon;
@@ -5790,6 +5927,7 @@ public class ViewSanPham extends javax.swing.JFrame {
     private javax.swing.JLabel lblThoat;
     private javax.swing.JLabel lblThongKe;
     private javax.swing.JLabel lblThongTinCaNhan;
+    private javax.swing.JLabel lblicon;
     private javax.swing.JPanel pHoaDon;
     private javax.swing.JPanel pImei;
     private javax.swing.JPanel pLoc;
