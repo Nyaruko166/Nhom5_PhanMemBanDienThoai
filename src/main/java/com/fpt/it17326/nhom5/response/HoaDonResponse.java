@@ -22,6 +22,7 @@ public class HoaDonResponse {
 
     private String maHD;
     private String maNV;
+    private String maKH;
     private String tenKH;
     private String sdt;
     private boolean trangThai;
@@ -36,6 +37,7 @@ public class HoaDonResponse {
     public HoaDonResponse(HoaDon hd) {
         this.maHD = hd.getMaHD();
         this.maNV = hd.getNhanVien().getMaNhanVien();
+        this.maKH = hd.getKhachHang().getMaKH();
         this.tenKH = hd.getTenKH();
         this.sdt = hd.getSdt();
         this.trangThai = hd.isTrangThai();
