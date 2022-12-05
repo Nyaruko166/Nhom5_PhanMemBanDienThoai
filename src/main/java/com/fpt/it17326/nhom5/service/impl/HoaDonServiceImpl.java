@@ -12,9 +12,14 @@ import java.util.List;
  *
  */
 public class HoaDonServiceImpl implements HoaDonService {
-    
+
     private HoaDonRepository hoaDonRepository = new HoaDonRepository();
-    
+
+    @Override
+    public List<HoaDon> getAll2() {
+        return hoaDonRepository.getAll();
+    }
+
     @Override
     public List<HoaDonResponse> getAll() {
         List<HoaDonResponse> lst = new ArrayList<>();
@@ -25,43 +30,44 @@ public class HoaDonServiceImpl implements HoaDonService {
         }
         return lst;
     }
-    
+
     @Override
     public HoaDon getOne(String MaHoaDon) {
         return hoaDonRepository.getOne(MaHoaDon);
     }
-    
+
     @Override
     public String add(HoaDon hd) {
-        
+
         boolean add = hoaDonRepository.add(hd);
-        if(add){
+        if (add) {
             return "Tạo thành công";
-        }else{
+        } else {
             return "Tạo thất bại";
         }
     }
-    
+
     @Override
     public String update(HoaDon hd) {
         boolean update = hoaDonRepository.update(hd);
-        if(update){
+        if (update) {
             return "Thành công";
-        }else{
+        } else {
             return "Sửa thất bại";
         }
     }
-    
+
     @Override
     public String delete(HoaDon hd) {
         boolean delete = hoaDonRepository.delete(hd);
-        if(delete){
+        if (delete) {
             return "Xóa thành công";
-        }else{
+        } else {
             return "Xóa thất bại";
         }
     }
-      @Override
+
+    @Override
     public List<HoaDonResponse> getAll1() {
         List<HoaDonResponse> lst = new ArrayList<>();
         List<HoaDon> lstHD = hoaDonRepository.getAll();
