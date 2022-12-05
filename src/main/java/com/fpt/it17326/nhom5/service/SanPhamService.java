@@ -6,6 +6,8 @@ package com.fpt.it17326.nhom5.service;
 
 import com.fpt.it17326.nhom5.domainmodel.SanPham;
 import com.fpt.it17326.nhom5.response.SanPhamResponse;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 /**
@@ -15,23 +17,23 @@ import java.util.List;
 public interface SanPhamService {
 
     List<SanPhamResponse> getAll();
-    
+
     List<SanPham> getAllSanPham();
-    
+
     List<SanPham> getDeletedSanPham();
-    
+
     List<SanPham> searchProduct(String name);
-    
+
     SanPhamResponse getOne(String tenSP);
 
     public SanPham getSPLast();
-    
+
     String add(SanPham sp);
 
     String update(SanPham sp);
 
     String delete(SanPham sp);
-    
+
     String updateSL(SanPham sp, int sl);
 
 }

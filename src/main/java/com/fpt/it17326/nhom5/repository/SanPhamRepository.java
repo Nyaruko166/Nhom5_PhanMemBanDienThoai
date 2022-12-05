@@ -8,6 +8,9 @@ import com.fpt.it17326.nhom5.config.HibernateConfig;
 import com.fpt.it17326.nhom5.domainmodel.SanPham;
 import java.awt.image.SampleModel;
 import java.util.List;
+
+import javax.transaction.Transactional;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -37,18 +40,16 @@ public class SanPhamRepository {
         query.setParameter("TenSP", MaSanPham);
         return (SanPham) query.getSingleResult();
     }
-    
 
-    @Async
+
     public List<SanPham> getAll() {
         String sql = fromTable + " WHERE deleted = 0  ORDER BY Id DESC";
         Query query = session.createQuery(sql);
         return query.getResultList();
     }
 
-    @Async
     public List<SanPham> getAllDeleted() {
-        String sql = fromTable + " WHERE deleted = 1 ORDER BY Id DESC";
+        String sql = fromTable + " WHERE deleted = 1 ORDER BY UpdatedAt DESC";
         Query query = session.createQuery(sql);
         return query.getResultList();
     }
@@ -61,7 +62,6 @@ public class SanPhamRepository {
         return query.getResultList();
     }
 
-    @Async
     public SanPham getSPLast() {
         String sql = fromTable + " ORDER BY Id DESC";
         Query query = session.createQuery(sql);
@@ -77,7 +77,6 @@ public class SanPhamRepository {
         return (SanPham) query.getSingleResult();
     }
 
-    @Async
     public Boolean add(SanPham sp) {
         Transaction transaction = null;
         try ( Session session = HibernateConfig.getFACTORY().openSession()) {
@@ -91,7 +90,6 @@ public class SanPhamRepository {
         return null;
     }
 
-    @Async
     public Boolean update(SanPham sp) {
         Transaction transaction = null;
         try ( Session session = HibernateConfig.getFACTORY().openSession()) {
@@ -105,7 +103,6 @@ public class SanPhamRepository {
         return null;
     }
 
-    @Async
     public Boolean delete(SanPham sp) {
         Transaction transaction = null;
         try ( Session session = HibernateConfig.getFACTORY().openSession()) {
@@ -120,7 +117,6 @@ public class SanPhamRepository {
         return null;
     }
 
-    @Async
     public Boolean updateSL(SanPham sp, int sl) {
         boolean update = false;
         try ( Session session = HibernateConfig.getFACTORY().openSession()) {
