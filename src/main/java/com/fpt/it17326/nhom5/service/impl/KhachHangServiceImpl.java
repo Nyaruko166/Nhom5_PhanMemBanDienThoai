@@ -16,6 +16,11 @@ public class KhachHangServiceImpl implements KhachHangService {
     private KhachHangRepository KhachHangRepository = new KhachHangRepository();
 
     @Override
+    public List<KhachHang> getAll1() {
+        return KhachHangRepository.getAll();
+    }
+    
+    @Override
     public List<KhachHangResponse> getAll() {
         List<KhachHangResponse> lst = new ArrayList<>();
         List<KhachHang> lstKH = KhachHangRepository.getAll();
