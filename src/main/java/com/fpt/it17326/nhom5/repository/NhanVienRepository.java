@@ -29,6 +29,16 @@ public class NhanVienRepository {
         List<NhanVien> lst = query.getResultList();
         return lst;
     }
+    
+    public List<NhanVien> getAllTrue() {
+        org.hibernate.query.Query query = session.createQuery(fromTable + " where Deleted = 'true' order by MaNhanVien desc");
+        return query.getResultList();
+        }
+
+        public List<NhanVien> getAllFalse() {
+            org.hibernate.query.Query query = session.createQuery(fromTable + " where Deleted = 'false' order by MaNhanVien desc");
+            return query.getResultList();
+        }
 
     public NhanVien getOne(String MaNhanVien) {
         String sql = fromTable + " WHERE MaNhanVien =: MaNhanVien";
