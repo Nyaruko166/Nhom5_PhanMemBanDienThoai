@@ -371,6 +371,7 @@ public class DemoDialog extends javax.swing.JDialog {
         });
 
         tblSetting.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        tblSetting.setForeground(new java.awt.Color(0, 0, 102));
         tblSetting.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -392,6 +393,7 @@ public class DemoDialog extends javax.swing.JDialog {
         });
         tblSetting.setGridColor(new java.awt.Color(0, 0, 102));
         tblSetting.setSelectionBackground(new java.awt.Color(255, 0, 51));
+        tblSetting.setSelectionForeground(new java.awt.Color(0, 0, 102));
         tblSetting.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblSettingMouseClicked(evt);
