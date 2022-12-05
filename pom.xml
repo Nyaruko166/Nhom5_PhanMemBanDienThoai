@@ -43,6 +43,7 @@
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
         </dependency>
+<<<<<<< HEAD
         <dependency>
             <groupId>com.toedter</groupId>
             <artifactId>jcalendar</artifactId>
@@ -50,19 +51,26 @@
         </dependency>
         
               <dependency>
+=======
+        <!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+       
+        <dependency>
+>>>>>>> 5c568a85d6b46ebce7b9b9028cff26230569c535
    <groupId>org.apache.commons</groupId>
    <artifactId>commons-lang3</artifactId>
    <version>3.1</version>
             <type>jar</type>
         </dependency>
+<<<<<<< HEAD
         
         
         
+=======
+>>>>>>> 5c568a85d6b46ebce7b9b9028cff26230569c535
      <dependency>
             <groupId>javax.mail</groupId>
             <artifactId>mail</artifactId>
             <version>1.4</version>
         </dependency>
     </dependencies>
-    <name>Nhom5_QuanLyDienThoai</name>
 </project>

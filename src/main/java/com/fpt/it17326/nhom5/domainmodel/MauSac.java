@@ -1,5 +1,9 @@
 package com.fpt.it17326.nhom5.domainmodel;
 
+/**
+ * AowVN_Nyaruko
+ **/
+
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;

@@ -1,5 +1,7 @@
 package com.fpt.it17326.nhom5.config;
 
+import com.fpt.it17326.nhom5.domainmodel.NhanVien;
+
 import com.fpt.it17326.nhom5.domainmodel.Anh;
 import com.fpt.it17326.nhom5.domainmodel.Chip;
 import com.fpt.it17326.nhom5.domainmodel.HangDienThoai;
@@ -14,7 +16,12 @@ import com.fpt.it17326.nhom5.domainmodel.Pin;
 import com.fpt.it17326.nhom5.domainmodel.Ram;
 import com.fpt.it17326.nhom5.domainmodel.Rom;
 import com.fpt.it17326.nhom5.domainmodel.SanPham;
+<<<<<<< HEAD
 import com.fpt.it17326.nhom5.domainmodel.SanPhamGiamGia;
+=======
+import com.fpt.it17326.nhom5.domainmodel.TrangThaiHoaDon;
+
+>>>>>>> 5c568a85d6b46ebce7b9b9028cff26230569c535
 import java.util.Properties;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -34,12 +41,17 @@ public class HibernateConfig {
         properties.put(Environment.DRIVER, "com.microsoft.sqlserver.jdbc.SQLServerDriver");
         properties.put(Environment.URL, "jdbc:sqlserver://localhost:1433;databaseName=QUANLYBANDIENTHOAI");
         properties.put(Environment.USER, "sa");
-        properties.put(Environment.PASS, "123456");
+
+        properties.put(Environment.PASS, "minhtu1804");
+
         properties.put(Environment.SHOW_SQL, "true");
 
         conf.setProperties(properties);
         //Add @Entity
         //conf.addAnnotatedClass(*);
+
+        conf.addAnnotatedClass(NhanVien.class);
+
         //conf.addAnnotatedClass(*.class);
         conf.addAnnotatedClass(Anh.class);
         conf.addAnnotatedClass(MauSac.class);
@@ -70,4 +82,11 @@ conf.addAnnotatedClass(SanPhamGiamGia.class);
     public static void main(String[] args) {
         getFACTORY();
     }
+<<<<<<< HEAD
+=======
+
+//    public static void main(String[] args) {
+//        getFACTORY();
+//    }
+>>>>>>> 5c568a85d6b46ebce7b9b9028cff26230569c535
 }

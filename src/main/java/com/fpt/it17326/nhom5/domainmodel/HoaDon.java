@@ -1,5 +1,7 @@
 package com.fpt.it17326.nhom5.domainmodel;
 
+import java.io.Serializable;
+import javax.persistence.Entity;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +16,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
+/**
+ * AowVN_Nyaruko
+ **/
+
+
+
+
 
 /**
  * AowVN_Nyaruko
@@ -80,4 +90,10 @@ public class HoaDon {
         this.nhanVien = nhanVien;
         this.tongTien = tongTien;
     }
+<<<<<<< HEAD
+=======
+
+    
+
+>>>>>>> 5c568a85d6b46ebce7b9b9028cff26230569c535
 }

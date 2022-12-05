@@ -1,5 +1,7 @@
 package com.fpt.it17326.nhom5.domainmodel;
 
+
+
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,9 +14,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
 /**
  * AowVN_Nyaruko
  **/
+
+
+
+
 
 @Entity
 @Table (name = "Anh")
@@ -36,6 +43,11 @@ public class Anh {
     @Column(name = "UrlAnh")
     private String urlAnh;
     
+<<<<<<< HEAD
+=======
+    
+    
+>>>>>>> 5c568a85d6b46ebce7b9b9028cff26230569c535
     @Column(name = "CreatedAt")
     private Date createdAt;
     
@@ -44,4 +56,5 @@ public class Anh {
     
     @Column(name = "UpdatedAt")
     private Date updatedAt;
+
 }

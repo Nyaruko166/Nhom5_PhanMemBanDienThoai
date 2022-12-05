@@ -1,5 +1,6 @@
 package com.fpt.it17326.nhom5.domainmodel;
 
+
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -15,6 +16,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+<<<<<<< HEAD
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -22,6 +24,12 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 /**
  * AowVN_Nyaruko
  **/
+=======
+
+
+
+
+>>>>>>> 5c568a85d6b46ebce7b9b9028cff26230569c535
 
 @Entity
 @Table (name = "Chip")
@@ -52,4 +60,5 @@ public class Chip {
 
     @Column (name = "UpdatedAt")
     private Date updatedAt;
+
 }

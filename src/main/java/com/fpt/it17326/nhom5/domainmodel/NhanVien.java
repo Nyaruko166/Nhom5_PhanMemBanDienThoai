@@ -77,6 +77,14 @@ public class NhanVien {
         this.MatKhau = MatKhau;
         this.CreatedAt = CreatedAt;
         this.Deleted = Deleted;
+<<<<<<< HEAD
+=======
+    }
+
+    public NhanVien( String MatKhau) {
+        
+        this.MatKhau = MatKhau;
+>>>>>>> 5c568a85d6b46ebce7b9b9028cff26230569c535
     }
             
     public NhanVien( String MaNhanVien) {
@@ -84,7 +92,6 @@ public class NhanVien {
         this.MaNhanVien = MaNhanVien;
     }
 
-    
     
     
 }

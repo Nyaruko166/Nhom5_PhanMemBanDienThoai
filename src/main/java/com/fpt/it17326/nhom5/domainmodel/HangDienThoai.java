@@ -1,5 +1,6 @@
 package com.fpt.it17326.nhom5.domainmodel;
 
+
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +16,8 @@ import lombok.ToString;
 /**
  * AowVN_Nyaruko
  **/
+
+
 
 @Entity
 @Table (name = "HangDienThoai")

@@ -4,6 +4,7 @@
  */
 package com.fpt.it17326.nhom5.domainmodel;
 
+
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,10 +20,16 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+<<<<<<< HEAD:src/main/java/com/fpt/it17326/nhom5/domainmodel/ImeiDaBan.java
 /**
  * AowVN_Nyaruko
  *
  */
+=======
+
+
+
+>>>>>>> 5c568a85d6b46ebce7b9b9028cff26230569c535:src/main/java/com/fpt/it17326/nhom5/domainmodel/BaoHanh.java
 @Entity
 @Table(name = "ImeiDaBan")
 @Getter
@@ -58,4 +65,16 @@ public class ImeiDaBan {
 
     @Column (name = "UpdatedAt")
     private Date updatedAt;
+<<<<<<< HEAD:src/main/java/com/fpt/it17326/nhom5/domainmodel/ImeiDaBan.java
+=======
+
+    @ManyToOne
+    @JoinColumn (name = "IdHang", referencedColumnName = "Id")
+    private HangDienThoai hangDienThoai;
+    
+    @ManyToOne
+    @JoinColumn (name = "IdSP", referencedColumnName = "Id")
+    private SanPham sanPham;
+
+>>>>>>> 5c568a85d6b46ebce7b9b9028cff26230569c535:src/main/java/com/fpt/it17326/nhom5/domainmodel/BaoHanh.java
 }

@@ -1,6 +1,16 @@
 package com.fpt.it17326.nhom5.domainmodel;
 
+<<<<<<< HEAD
 import java.util.Date;
+=======
+/**
+ * AowVN_Nyaruko
+ **/
+
+
+
+
+>>>>>>> 5c568a85d6b46ebce7b9b9028cff26230569c535
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
