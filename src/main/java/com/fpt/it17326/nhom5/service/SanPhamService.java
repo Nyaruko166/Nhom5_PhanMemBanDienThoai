@@ -20,6 +20,8 @@ public interface SanPhamService {
     
     List<SanPham> getDeletedSanPham();
     
+    List<SanPham> searchProduct(String name);
+    
     SanPhamResponse getOne(String tenSP);
 
     public SanPham getSPLast();

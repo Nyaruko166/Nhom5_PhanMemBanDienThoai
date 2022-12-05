@@ -18,7 +18,6 @@ import org.springframework.scheduling.annotation.EnableAsync;
  *
  * @author youngboizseetinh
  */
-@EnableAsync
 public class SanPhamRepository {
 
     private Session session = HibernateConfig.getFACTORY().openSession();
@@ -38,24 +37,25 @@ public class SanPhamRepository {
         query.setParameter("TenSP", MaSanPham);
         return (SanPham) query.getSingleResult();
     }
+    
 
     @Async
     public List<SanPham> getAll() {
-        String sql = fromTable + " WHERE deleted = 0";
+        String sql = fromTable + " WHERE deleted = 0  ORDER BY Id DESC";
         Query query = session.createQuery(sql);
         return query.getResultList();
     }
 
+    @Async
     public List<SanPham> getAllDeleted() {
-        String sql = fromTable + " WHERE deleted = 1";
+        String sql = fromTable + " WHERE deleted = 1 ORDER BY Id DESC";
         Query query = session.createQuery(sql);
         return query.getResultList();
     }
 
-    public List getOne(String tenSP) {
+    public List<SanPham> search(String tenSP) {
         tenSP = "%" + tenSP + "%";
-        String sql = fromTable + " WHERE TenSP LIKE: TenSP1";
-
+        String sql = fromTable + " WHERE TenSP LIKE :TenSP1 and deleted = 0";
         Query query = session.createQuery(sql);
         query.setParameter("TenSP1", tenSP);
         return query.getResultList();
@@ -120,6 +120,7 @@ public class SanPhamRepository {
         return null;
     }
 
+    @Async
     public Boolean updateSL(SanPham sp, int sl) {
         boolean update = false;
         try ( Session session = HibernateConfig.getFACTORY().openSession()) {

@@ -92,4 +92,9 @@ public class SanPhamServiceImpl implements SanPhamService {
     public SanPham getSPLast() {
         return sanPhamRepository.getSPLast();
     }
+
+    @Override
+    public List<SanPham> searchProduct(String name) {
+        return sanPhamRepository.search(name);
+    }
 }

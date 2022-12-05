@@ -22,14 +22,28 @@ public class Util {
             theDir.mkdirs();
         }
     }
-
-    public static void uploadImage(String path, boolean hasRoot) {
-        File source = new File(path);
-        String userDirectory = new File("").getAbsolutePath();
-        File dest = new File("pictures\\" + source.getName());
-        if (hasRoot) {
-            dest = new File(userDirectory + "\\pictures\\" + source.getName());
+    
+    public static String getNameFileFromPath(String fileName, boolean isFile) {
+        // "t.u.n.g.jpg"; => ["tung", "jpg"] tung.jpg
+        String result = "";
+        String [] splitStr = fileName.split("\\.");
+        if (isFile) {
+            if (splitStr.length  >= 2) {
+                for (int i = 0; i < splitStr.length - 1; i++) {
+                    result += splitStr[i];
+                }
+            }
+        } else {
+            result = splitStr[splitStr.length - 1];
         }
+        return result;
+    }
+    
+
+    public static void uploadImage(String path, String name) {
+        File source = new File(path);
+        String userDirectory = new File("").getAbsolutePath();        
+        File dest = new File("pictures\\" + name);
         try {
             Files.copy(source.toPath(), dest.toPath());
         } catch (IOException e) {
