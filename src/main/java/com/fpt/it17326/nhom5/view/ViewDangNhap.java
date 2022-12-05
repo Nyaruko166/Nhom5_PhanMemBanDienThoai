@@ -36,14 +36,14 @@ public class ViewDangNhap extends javax.swing.JFrame {
      */
     public ViewDangNhap() {
         initComponents();
-        setuplogo();
+//        setuplogo();
 
     }
 
-    private void setuplogo() {
-        ImageIcon icon = new ImageIcon("images\\logo.png");
-        lblLogo.setIcon(icon);
-    }
+//    private void setuplogo() {
+//        ImageIcon icon = new ImageIcon("images\\logo.png");
+//        lblLogo.setIcon(icon);
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -296,7 +296,7 @@ public class ViewDangNhap extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Mật khẩu không được để trống");
             return;
         }
-        listtk = dvtk.getAll();
+        listtk = dvtk.getAll1();
         for (NhanVien viewTaiKhoanResponse : listtk) {
 //            if (!viewTaiKhoanResponse.getTaiKhoan().contains(username)) {
 //
