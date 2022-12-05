@@ -62,6 +62,14 @@ public class SanPhamRepository {
         return query.getResultList();
     }
 
+    public List<SanPham> searchDeleted(String tenSP) {
+        tenSP = "%" + tenSP + "%";
+        String sql = fromTable + " WHERE TenSP LIKE :TenSP1 and deleted = 1";
+        Query query = session.createQuery(sql);
+        query.setParameter("TenSP1", tenSP);
+        return query.getResultList();
+    }
+
     public SanPham getSPLast() {
         String sql = fromTable + " ORDER BY Id DESC";
         Query query = session.createQuery(sql);
@@ -138,5 +146,11 @@ public class SanPhamRepository {
             }
         }
         return update;
+    }
+
+    public int count() {
+        String sql = "Select COUNT(sp.id) from SanPham sp";
+        Query countQuery = session.createQuery(sql);
+        return Integer.parseInt(countQuery.uniqueResult().toString());
     }
 }

@@ -24,6 +24,8 @@ public interface SanPhamService {
 
     List<SanPham> searchProduct(String name);
 
+    List<SanPham> searchDeletedProduct(String name);
+
     SanPhamResponse getOne(String tenSP);
 
     public SanPham getSPLast();
@@ -35,5 +37,9 @@ public interface SanPhamService {
     String delete(SanPham sp);
 
     String updateSL(SanPham sp, int sl);
+
+    String restore(SanPham sp);
+
+    int countRecord();
 
 }

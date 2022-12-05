@@ -106,4 +106,30 @@ public class SanPhamServiceImpl implements SanPhamService {
     public List<SanPham> searchProduct(String name) {
         return sanPhamRepository.search(name);
     }
+
+    @Async
+    @Override
+    public String restore(SanPham sp) {
+        sp.setDeleted(false);
+        // TODO Auto-generated method stub
+        if (sanPhamRepository.update(sp)) {
+            return "Khôi phục thành công";
+        } else {
+            return "Khôi phục thất bại";
+        }
+    }
+
+    @Override
+    public List<SanPham> searchDeletedProduct(String name) {
+        // TODO Auto-generated method stub
+        return sanPhamRepository.searchDeleted(name);
+    }
+
+    @Async
+    @Override
+    public int countRecord() {
+        // TODO Auto-generated method stub
+        return sanPhamRepository.count();
+    }
+
 }

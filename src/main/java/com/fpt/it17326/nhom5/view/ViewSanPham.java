@@ -93,6 +93,12 @@ import com.fpt.it17326.nhom5.util.Util;
 @EnableAsync
 public class ViewSanPham extends javax.swing.JFrame {
 
+    private int page = 0;
+    private int totalRow = 0;
+    private int totalPage = 0;
+    private int itemPerPage = 2;
+    private int start = 0;
+
     DefaultTableModel dfm;
     DefaultTableModel dfm2;
     DefaultTableModel dfm3;
@@ -188,8 +194,8 @@ public class ViewSanPham extends javax.swing.JFrame {
         dtmHoaDon = (DefaultTableModel) tblHoaDon.getModel();
         designTableSanPham();
 
-        loadProductForm();
-        Util.createFolderImageUpload();
+        // loadProductForm();
+
 
         //-------Thang
         loadbangthongke();
@@ -310,6 +316,7 @@ public class ViewSanPham extends javax.swing.JFrame {
 
     public void loadProductForm() {
         imeis = new ArrayList<>();
+        Util.createFolderImageUpload();
         listSanPhamDeleted = new ArrayList<>();
         listSp = sanPhamService.getAllSanPham();
         listSanPham = sanPhamService.getAll();
@@ -542,7 +549,7 @@ public class ViewSanPham extends javax.swing.JFrame {
                 String.format("%,.0f", sp.getDonGia()) + " VND",
                 sp.getMoTa(),
                 sp.getUrlAnh(),
-                sp.getMauSac(),
+                sp.getMauSac().getTenMauSac(),
                 sp.getHangdt().getTenHang(),
                 sp.getChip().getTenChip(),
                 sp.getRam().getDungLuong(),
@@ -552,6 +559,12 @@ public class ViewSanPham extends javax.swing.JFrame {
                 Util.getCurrentDate(),};
             dtm.addRow(row);
         }
+    }
+
+    public void calculatePagination() {
+        totalRow = sanPhamService.countRecord();
+        totalPage = (int)(totalRow / itemPerPage) + (totalRow % 2 > 0 ? 1 : 0);
+        start = page * itemPerPage;
     }
 
     // Tung End////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -4689,6 +4702,13 @@ public class ViewSanPham extends javax.swing.JFrame {
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
         // TODO add your handling code here:
+        if (page < totalPage) {
+            page += 1;
+            calculatePagination();
+            listSp = sanPhamService.getAllSanPham();
+            listSanPham = sanPhamService.getAll();
+            loadProductTable();
+        }
     }//GEN-LAST:event_btnNextActionPerformed
 
     private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
@@ -4751,8 +4771,12 @@ public class ViewSanPham extends javax.swing.JFrame {
             if (result.contains("thành công")) {
                 listSp.set(tblSanPham2.getSelectedRow(), sp);
                 listSanPham.set(tblSanPham2.getSelectedRow(), new SanPhamResponse(sp));
-
                 loadProductTable();
+                List<Imei> listImeiData = imeiService.getAllImeiBySanPham(sp.getId());
+                for (Imei imei : listImeiData) {
+                    imeiService.delete(imei);
+                }
+                addImei(imeis, sp);
             }
         }
     }//GEN-LAST:event_btnSuaSanPhamActionPerformed
@@ -4812,11 +4836,14 @@ public class ViewSanPham extends javax.swing.JFrame {
         listSanPham = new ArrayList<>();
         if (!search.equals("")) {
             listSp = sanPhamService.searchProduct(search);
-            for (SanPham item : listSp) {
-                listSanPham.add(new SanPhamResponse(item));
-            }
-            loadProductTable();
+
+        } else {
+            listSp = sanPhamService.getAllSanPham();
         }
+        for (SanPham item : listSp) {
+            listSanPham.add(new SanPhamResponse(item));
+        }
+        loadProductTable();
     }//GEN-LAST:event_btnSearchSanPhamActionPerformed
 
     private void btnLast1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLast1ActionPerformed
@@ -5168,10 +5195,29 @@ public class ViewSanPham extends javax.swing.JFrame {
 
     private void btnRestoreSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestoreSanPhamActionPerformed
         // TODO add your handling code here:
+        if (tblSanPhamLuuTru.getSelectedRow() >= 0) {
+            SanPham sp = listSanPhamDeleted.get(tblSanPhamLuuTru.getSelectedRow());
+            String result = sanPhamService.restore(sp);
+            if (result.contains("thành công")) {
+                listSanPhamDeleted = sanPhamService.getDeletedSanPham();
+                getAllSanPhamLuuTru(listSanPhamDeleted);
+                listSp = sanPhamService.getAllSanPham();
+                listSanPham = sanPhamService.getAll();
+                loadProductTable();
+            }
+        }
+
     }//GEN-LAST:event_btnRestoreSanPhamActionPerformed
 
     private void btnTimKiemSanPhamDeletedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemSanPhamDeletedActionPerformed
         // TODO add your handling code here:
+        String keySearch = jTextField8.getText().trim();
+        if (keySearch.isBlank()) {
+            listSanPhamDeleted = sanPhamService.getDeletedSanPham();
+        } else {
+            listSanPhamDeleted = sanPhamService.searchDeletedProduct(keySearch);
+        }
+        getAllSanPhamLuuTru(listSanPhamDeleted);
     }//GEN-LAST:event_btnTimKiemSanPhamDeletedActionPerformed
 // đợi
 
