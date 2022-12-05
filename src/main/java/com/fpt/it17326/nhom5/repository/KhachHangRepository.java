@@ -69,12 +69,12 @@ public class KhachHangRepository {
         return null;
     }
 
-//    public static void main(String[] args) {
-//        KhachHangRepository hangRepository = new KhachHangRepository();
-//        List<KhachHang> lst = hangRepository.getAll();
-//        
-//        for (KhachHang x : lst) {
-//            System.out.println(x.toString());
-//        }
-//    }
+    public static void main(String[] args) {
+        KhachHangRepository hangRepository = new KhachHangRepository();
+        List<KhachHang> lst = hangRepository.getAll();
+        
+        for (KhachHang x : lst) {
+            System.out.println(x.toString());
+        }
+    }
 }

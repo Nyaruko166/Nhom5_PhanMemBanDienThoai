@@ -22,7 +22,6 @@ public class KhachHangResponse {
     private boolean gioiTinh;
     private Date ngaySinh;
     private String diaChi;
-    private String hangKH;
     private Date createdAt;
     private boolean deleted;
     private Date updatedAt;
@@ -38,7 +37,6 @@ public class KhachHangResponse {
         this.gioiTinh = kh.isGioiTinh();
         this.ngaySinh = kh.getNgaySinh();
         this.diaChi = kh.getDiaChi();
-        this.hangKH = kh.getHangKH();
         this.createdAt = kh.getCreatedAt();
         this.deleted = kh.isDeleted();
         this.updatedAt = kh.getUpdatedAt();
