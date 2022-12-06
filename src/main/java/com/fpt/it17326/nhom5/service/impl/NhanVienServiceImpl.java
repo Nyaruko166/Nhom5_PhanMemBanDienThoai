@@ -168,4 +168,9 @@ public class NhanVienServiceImpl implements NhanVienService {
         }
     }
 
+    @Override
+    public NhanVien getOneByUsername(String username) {
+        return nhanVienRepository.getOneByUsername(username);
+    }
+
 }

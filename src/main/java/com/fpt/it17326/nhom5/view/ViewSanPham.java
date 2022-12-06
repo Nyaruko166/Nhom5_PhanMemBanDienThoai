@@ -187,12 +187,28 @@ public class ViewSanPham extends javax.swing.JFrame {
     HoaDonService HoaDonService = new HoaDonServiceImpl();
 
     private List<ThongkeResponse> listThongke = new ArrayList<>();
-
+    private String dataConstructor;
+    NhanVienService dvnv = new NhanVienServiceImpl();
     /**
      * Creates new form BanHang
      */
-    public ViewSanPham() {
+    public ViewSanPham(String dataConstructor) {
         initComponents();
+        this.dataConstructor=dataConstructor;
+        NhanVien nv = dvnv.getOneByUsername(dataConstructor);
+        txtHoTen.setText(nv.getHoTen());
+        txtMa.setText(nv.getMaNhanVien());
+        txtMaNV.setText(nv.getMaNhanVien());
+        txtTenNV.setText(nv.getHoTen());
+        String gt="";
+        if (nv.isGioiTinh()==true) {
+            gt="Nam";
+        }else{
+            gt="Nu";
+        }
+        txtGioiTinh.setText(gt);
+        txtChucVu.setText(nv.getTenCV());
+        
         dtmKH = (DefaultTableModel) tblThongtinKH1.getModel();
         khachHangService = new KhachHangServiceImpl();
         setuptblKH();
@@ -259,6 +275,10 @@ public class ViewSanPham extends javax.swing.JFrame {
         loadnv3(list3);
     }
 //Khai Start///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private ViewSanPham() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
     public void showDataKM(List<KhuyenMaiResponse> lst) {
         dfm2.setRowCount(0);
@@ -1565,6 +1585,8 @@ public class ViewSanPham extends javax.swing.JFrame {
         lblThongKe1 = new javax.swing.JLabel();
         pn_ThongKe = new javax.swing.JPanel();
         lblThongKe = new javax.swing.JLabel();
+        txtHoTen = new javax.swing.JLabel();
+        txtMa = new javax.swing.JLabel();
         lb_Tendetai = new javax.swing.JLabel();
         pl_FullChucNang = new javax.swing.JPanel();
         pl_home = new javax.swing.JPanel();
@@ -1811,13 +1833,13 @@ public class ViewSanPham extends javax.swing.JFrame {
         jLabel30 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
-        jLabel33 = new javax.swing.JLabel();
-        jLabel34 = new javax.swing.JLabel();
-        jLabel47 = new javax.swing.JLabel();
-        jLabel50 = new javax.swing.JLabel();
-        jLabel71 = new javax.swing.JLabel();
-        jLabel72 = new javax.swing.JLabel();
-        jLabel73 = new javax.swing.JLabel();
+        txtMaNV = new javax.swing.JLabel();
+        txtTenNV = new javax.swing.JLabel();
+        txtGioiTinh = new javax.swing.JLabel();
+        txtChucVu = new javax.swing.JLabel();
+        txtEmail = new javax.swing.JLabel();
+        txtQueQuan = new javax.swing.JLabel();
+        txtNgaySinh = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jPanel34 = new javax.swing.JPanel();
         jLabel51 = new javax.swing.JLabel();
@@ -2275,6 +2297,12 @@ public class ViewSanPham extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        txtHoTen.setForeground(new java.awt.Color(255, 255, 255));
+        txtHoTen.setText("Họ và tên");
+
+        txtMa.setForeground(new java.awt.Color(255, 255, 255));
+        txtMa.setText("Họ và tên");
+
         javax.swing.GroupLayout pn_MenuLayout = new javax.swing.GroupLayout(pn_Menu);
         pn_Menu.setLayout(pn_MenuLayout);
         pn_MenuLayout.setHorizontalGroup(
@@ -2283,21 +2311,29 @@ public class ViewSanPham extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(pn_MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pl_anh, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblHoTenHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(pn_MenuLayout.createSequentialGroup()
-                        .addGroup(pn_MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(pn_KhachHang, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(pn_Home, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(pn_SanPham, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(pn_BanHang, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(pn_HoaDon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(pn_KhuyenMai, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(pn_NhanVien, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(pn_ThongTinCaNhan, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(lblMaHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pn_Thoat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pn_ThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(pn_ThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pn_MenuLayout.createSequentialGroup()
+                        .addGroup(pn_MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pn_MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(pn_KhachHang, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(pn_Home, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(pn_SanPham, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(pn_BanHang, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(pn_HoaDon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(pn_KhuyenMai, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(pn_NhanVien, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(pn_ThongTinCaNhan, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(pn_MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pn_MenuLayout.createSequentialGroup()
+                                    .addComponent(lblMaHome)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtMa))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pn_MenuLayout.createSequentialGroup()
+                                    .addComponent(lblHoTenHome)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(txtHoTen))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         pn_MenuLayout.setVerticalGroup(
@@ -2306,9 +2342,13 @@ public class ViewSanPham extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(pl_anh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblHoTenHome)
+                .addGroup(pn_MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblHoTenHome)
+                    .addComponent(txtHoTen))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblMaHome)
+                .addGroup(pn_MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblMaHome)
+                    .addComponent(txtMa))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pn_Home, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -3943,7 +3983,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         pSanPhamLayout.setHorizontalGroup(
             pSanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pSanPhamLayout.createSequentialGroup()
-                .addComponent(jScrollPane14, javax.swing.GroupLayout.DEFAULT_SIZE, 594, Short.MAX_VALUE)
+                .addComponent(jScrollPane14, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
                 .addContainerGap())
         );
         pSanPhamLayout.setVerticalGroup(
@@ -3972,7 +4012,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         pImeiLayout.setHorizontalGroup(
             pImeiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pImeiLayout.createSequentialGroup()
-                .addComponent(jScrollPane19, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
+                .addComponent(jScrollPane19, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
                 .addContainerGap())
         );
         pImeiLayout.setVerticalGroup(
@@ -4092,16 +4132,16 @@ public class ViewSanPham extends javax.swing.JFrame {
         btnSortAscLayout.setHorizontalGroup(
             btnSortAscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnSortAscLayout.createSequentialGroup()
-                .addGap(53, 53, 53)
+                .addGap(51, 51, 51)
                 .addComponent(lblicon1)
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
         btnSortAscLayout.setVerticalGroup(
             btnSortAscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnSortAscLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(22, Short.MAX_VALUE)
                 .addComponent(lblicon1)
-                .addGap(12, 12, 12))
+                .addContainerGap())
         );
 
         btnSortDesc.setBackground(new java.awt.Color(0, 0, 102));
@@ -4132,7 +4172,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         btnSortDescLayout.setVerticalGroup(
             btnSortDescLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnSortDescLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(14, Short.MAX_VALUE)
                 .addComponent(lblicon2)
                 .addGap(12, 12, 12))
         );
@@ -4143,27 +4183,25 @@ public class ViewSanPham extends javax.swing.JFrame {
             pl_hoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pl_hoadonLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pl_hoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pl_hoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(pl_hoadonLayout.createSequentialGroup()
                         .addComponent(pSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(pImei, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(71, 71, 71)
+                        .addGap(18, 18, 18)
                         .addComponent(btnSortAsc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addComponent(btnSortDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnSortDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pl_hoadonLayout.createSequentialGroup()
                         .addGroup(pl_hoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel58)
                             .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 608, Short.MAX_VALUE)
+                        .addGap(273, 273, 273)
                         .addComponent(pLoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(102, 102, 102)
-                        .addComponent(btnExport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(110, 110, 110)))
-                .addContainerGap(528, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnExport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(1067, Short.MAX_VALUE))
         );
         pl_hoadonLayout.setVerticalGroup(
             pl_hoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -4171,14 +4209,12 @@ public class ViewSanPham extends javax.swing.JFrame {
                 .addGroup(pl_hoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pl_hoadonLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(pl_hoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pl_hoadonLayout.createSequentialGroup()
-                                .addComponent(jLabel58)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(pLoc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel58)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pLoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pl_hoadonLayout.createSequentialGroup()
-                        .addGap(28, 28, 28)
+                        .addGap(29, 29, 29)
                         .addComponent(btnExport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(pHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -4188,9 +4224,9 @@ public class ViewSanPham extends javax.swing.JFrame {
                     .addComponent(pImei, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pl_hoadonLayout.createSequentialGroup()
                         .addGap(8, 8, 8)
-                        .addGroup(pl_hoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btnSortDesc, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnSortAsc, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(pl_hoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnSortDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSortAsc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -4834,33 +4870,33 @@ public class ViewSanPham extends javax.swing.JFrame {
         jLabel32.setForeground(new java.awt.Color(0, 0, 102));
         jLabel32.setText("Ngày Sinh");
 
-        jLabel33.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel33.setForeground(new java.awt.Color(0, 0, 102));
-        jLabel33.setText("Mã");
+        txtMaNV.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtMaNV.setForeground(new java.awt.Color(0, 0, 102));
+        txtMaNV.setText("Mã");
 
-        jLabel34.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel34.setForeground(new java.awt.Color(0, 0, 102));
-        jLabel34.setText("Mã");
+        txtTenNV.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtTenNV.setForeground(new java.awt.Color(0, 0, 102));
+        txtTenNV.setText("Mã");
 
-        jLabel47.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel47.setForeground(new java.awt.Color(0, 0, 102));
-        jLabel47.setText("Mã");
+        txtGioiTinh.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtGioiTinh.setForeground(new java.awt.Color(0, 0, 102));
+        txtGioiTinh.setText("Mã");
 
-        jLabel50.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel50.setForeground(new java.awt.Color(0, 0, 102));
-        jLabel50.setText("Mã");
+        txtChucVu.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtChucVu.setForeground(new java.awt.Color(0, 0, 102));
+        txtChucVu.setText("Mã");
 
-        jLabel71.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel71.setForeground(new java.awt.Color(0, 0, 102));
-        jLabel71.setText("Mã");
+        txtEmail.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtEmail.setForeground(new java.awt.Color(0, 0, 102));
+        txtEmail.setText("Mã");
 
-        jLabel72.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel72.setForeground(new java.awt.Color(0, 0, 102));
-        jLabel72.setText("Mã");
+        txtQueQuan.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtQueQuan.setForeground(new java.awt.Color(0, 0, 102));
+        txtQueQuan.setText("Mã");
 
-        jLabel73.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel73.setForeground(new java.awt.Color(0, 0, 102));
-        jLabel73.setText("Mã");
+        txtNgaySinh.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtNgaySinh.setForeground(new java.awt.Color(0, 0, 102));
+        txtNgaySinh.setText("Mã");
 
         jButton3.setBackground(new java.awt.Color(0, 0, 102));
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -4880,31 +4916,31 @@ public class ViewSanPham extends javax.swing.JFrame {
                             .addGroup(jPanel18Layout.createSequentialGroup()
                                 .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel72, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(txtQueQuan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel18Layout.createSequentialGroup()
                                 .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel71, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel18Layout.createSequentialGroup()
                                 .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel50, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(txtChucVu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel18Layout.createSequentialGroup()
                                 .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel47, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(txtGioiTinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel18Layout.createSequentialGroup()
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel34, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(txtTenNV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel18Layout.createSequentialGroup()
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel18Layout.createSequentialGroup()
                                 .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel73, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(txtNgaySinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(jPanel18Layout.createSequentialGroup()
                         .addGap(151, 151, 151)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -4916,31 +4952,31 @@ public class ViewSanPham extends javax.swing.JFrame {
                 .addGap(49, 49, 49)
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel33))
+                    .addComponent(txtMaNV))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel34))
+                    .addComponent(txtTenNV))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel23)
-                    .addComponent(jLabel47))
+                    .addComponent(txtGioiTinh))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel24)
-                    .addComponent(jLabel50))
+                    .addComponent(txtChucVu))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel30)
-                    .addComponent(jLabel71))
+                    .addComponent(txtEmail))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel31)
-                    .addComponent(jLabel72))
+                    .addComponent(txtQueQuan))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel32)
-                    .addComponent(jLabel73))
+                    .addComponent(txtNgaySinh))
                 .addGap(41, 41, 41)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(173, Short.MAX_VALUE))
@@ -6327,6 +6363,49 @@ public class ViewSanPham extends javax.swing.JFrame {
         list2 = nhanvienService.getAllFalse();
         loadnv1(list1);
         loadnv2(list2);
+        final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
+        final String toEmail = txtemail.getText();
+         String toTaiKhoan = txttaikhaon.getText();
+         String toMatKhau = txtmatkhau.getText();
+        // Get a Properties object
+        Properties props = System.getProperties();
+        props.setProperty("mail.smtp.host", "smtp.gmail.com");
+        props.setProperty("mail.smtp.socketFactory.class", SSL_FACTORY);
+        props.setProperty("mail.smtp.socketFactory.fallback", "false");
+        props.setProperty("mail.smtp.port", "465");
+        props.setProperty("mail.smtp.socketFactory.port", "465");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.debug", "true");
+        props.put("mail.store.protocol", "pop3");
+        props.put("mail.transport.protocol", "smtp");
+        final String username = "tupmph28142@fpt.edu.vn";// EMAIL CUA MINH
+        final String password = "0375236867";// MAT KHAU EMAIL
+        
+        try {
+            Session session = Session.getDefaultInstance(props,
+                new Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(username, password);
+                    }
+                });
+
+                // -- Create a new message --
+                Message msg = new MimeMessage(session);
+
+                // -- Set the FROM and TO fields --
+                msg.setFrom(new InternetAddress("tupmph28142@fpt.edu.vn"));// EMAIL CUA MINH
+                msg.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse(toEmail, false));// toEmail: email muon gui den
+                msg.setSubject("Tài khoản và mật khẩu của bạn");// TIEU DE EMAIL
+                //msg.setText("Tài khoản: "+ toTaiKhoan);// NOI DUNG EMAIL
+                msg.setText("Tai khoan: "+ toTaiKhoan + "|" + "Mat khau: "+ toMatKhau);
+                
+                msg.setSentDate(new Date());
+                Transport.send(msg);
+                
+            } catch (MessagingException e) {
+                System.out.println("Loi gui tin nhan " + e);
+            }
         //listNhanVien.add(e);
         //loadtable();
     }//GEN-LAST:event_btnthemActionPerformed
@@ -6597,8 +6676,6 @@ public class ViewSanPham extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
@@ -6612,11 +6689,9 @@ public class ViewSanPham extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
-    private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel51;
     private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel53;
@@ -6639,9 +6714,6 @@ public class ViewSanPham extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel69;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel70;
-    private javax.swing.JLabel jLabel71;
-    private javax.swing.JLabel jLabel72;
-    private javax.swing.JLabel jLabel73;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -6804,15 +6876,24 @@ public class ViewSanPham extends javax.swing.JFrame {
     private javax.swing.JTextField tftimkiemthongke;
     private javax.swing.JLabel tftongdonhang;
     private javax.swing.JTextArea txaMoTa;
+    private javax.swing.JLabel txtChucVu;
     private javax.swing.JTextArea txtDiachi1;
     private javax.swing.JTextField txtDonGia;
+    private javax.swing.JLabel txtEmail;
     private javax.swing.JTextField txtEmail1;
+    private javax.swing.JLabel txtGioiTinh;
+    private javax.swing.JLabel txtHoTen;
+    private javax.swing.JLabel txtMa;
     private javax.swing.JTextField txtMaHD;
     private javax.swing.JTextField txtMaKH1;
+    private javax.swing.JLabel txtMaNV;
+    private javax.swing.JLabel txtNgaySinh;
+    private javax.swing.JLabel txtQueQuan;
     private javax.swing.JTextField txtSDT2;
     private javax.swing.JTextField txtSoLuong;
     private javax.swing.JTextField txtTenKH1;
     private javax.swing.JTextField txtTenKh;
+    private javax.swing.JLabel txtTenNV;
     private javax.swing.JTextField txtTenSanPham;
     private javax.swing.JTextField txtTienKHTra;
     private javax.swing.JTextField txtTienKhachDua;
