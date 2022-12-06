@@ -215,9 +215,9 @@ public class ViewSanPham extends javax.swing.JFrame {
         showDataKM6();
         imeiDaBanService = new ImeiDaBanServiceImpl();
         SanPhamRepository giaRepository = new SanPhamRepository();
-        SanPham sanPham = giaRepository.getOneMa(4);
-        sanPham.setTenSP("NOKIA");
-        sanPhamService.update(sanPham);
+//        SanPham sanPham = giaRepository.getOneMa(4);
+//        sanPham.setTenSP("NOKIA");
+//        sanPhamService.update(sanPham);
         KhuyenMaThread khuyenMaThread = new KhuyenMaThread();
         khuyenMaThread.start();
         dfm = (DefaultTableModel) tbl_KhuyenMaiNgungHoatDong.getModel();
@@ -379,6 +379,8 @@ public class ViewSanPham extends javax.swing.JFrame {
     }
 //Khai end/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    
+    
     // Tung Start///////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void designTableSanPham() {
         JTableHeader header = tblSanPham2.getTableHeader();

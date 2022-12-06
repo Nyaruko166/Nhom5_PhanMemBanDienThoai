@@ -46,7 +46,7 @@ public class KhachHangRepository {
         Transaction transaction = null;
         try ( Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
-            session.saveOrUpdate(kh);
+            session.update(kh);
             transaction.commit();
             return true;
         } catch (Exception e) {
