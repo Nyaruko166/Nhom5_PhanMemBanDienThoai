@@ -358,7 +358,6 @@ public class ViewSanPham extends javax.swing.JFrame {
         dtmLichSu = (DefaultTableModel) tblLichSu.getModel();
         dtmKH = (DefaultTableModel) tblThongtinKH1.getModel();
         khachHangService = new KhachHangServiceImpl();
-        setuptblKH();
         showDataKM6();
         imeiDaBanService = new ImeiDaBanServiceImpl();
         SanPhamRepository giaRepository = new SanPhamRepository();
@@ -823,15 +822,18 @@ public class ViewSanPham extends javax.swing.JFrame {
     private void setuptblHD() {
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         List<HoaDonResponse> lsthd = hoaDonService.getAll();
+//        List<HoaDonResponse> lsthd1 = new ArrayList<>();
         dtmHoaDon.setRowCount(0);
         for (HoaDonResponse x : lsthd) {
             String StrTT = "Chưa thanh toán";
             if (x.isTrangThai()) {
                 StrTT = "Đã thanh toán";
-
             }
-            dtmHoaDon.addRow(new Object[]{x.getMaHD(), x.getMaNV(), x.getMaKH(), x.getTenKH(), x.getSdt(), StrTT, String.format("%,.0f", x.getTongTien()) + " VND", format.format(x.getCreatedAt())});
-
+            if (txtMa.getText().equals("MNV001")) {
+                dtmHoaDon.addRow(new Object[]{x.getMaHD(), x.getMaNV(), x.getMaKH(), x.getTenKH(), x.getSdt(), StrTT, String.format("%,.0f", x.getTongTien()) + " VND", format.format(x.getCreatedAt())});
+            } else if (txtMa.getText().equals(x.getMaNV())) {
+                dtmHoaDon.addRow(new Object[]{x.getMaHD(), x.getMaNV(), x.getMaKH(), x.getTenKH(), x.getSdt(), StrTT, String.format("%,.0f", x.getTongTien()) + " VND", format.format(x.getCreatedAt())});
+            }
         }
     }
 
@@ -988,10 +990,12 @@ public class ViewSanPham extends javax.swing.JFrame {
         List<KhachHangResponse> lst = khachHangService.getAll();
         List<HoaDonResponse> lsthd = hoaDonService.getAll();
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-        String gioitinh = "Nữ";
+        String gioitinh = "";
         for (KhachHangResponse x : lst) {
             if (x.isGioiTinh()) {
                 gioitinh = "Nam";
+            } else {
+                gioitinh = "Nữ";
             }
             int i = 0;
             for (HoaDonResponse y : lsthd) {
@@ -1025,9 +1029,9 @@ public class ViewSanPham extends javax.swing.JFrame {
             return null;
         }
 
-        boolean GioiTinh = true;
+        boolean GioiTinh = false;
         if (rdonam1.isSelected()) {
-            GioiTinh = false;
+            GioiTinh = true;
         }
 
         String regexPattern = "^[A-Za-z0-9+_.-]+@(.+)$";
@@ -1097,7 +1101,7 @@ public class ViewSanPham extends javax.swing.JFrame {
     private void updateKH(KhachHang kh) {
         if (kh != null) {
             String mess = khachHangService.update(kh);
-            setuptblKH();
+//            setuptblKH();
             JOptionPane.showMessageDialog(this, mess);
         }
     }
@@ -1127,7 +1131,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         String MaKH = txtLichSu.getText();
         for (HoaDon x : lsthd) {
             if (x.getKhachHang().getMaKH().equals(MaKH)) {
-                dtmLichSu.addRow(new Object[]{x.getKhachHang().getMaKH(),x.getKhachHang().getHoTen(),x.getMaHD(),String.format("%,.0f", x.getTongTien()) + " VND",f.format(x.getCreatedAt())});
+                dtmLichSu.addRow(new Object[]{x.getKhachHang().getMaKH(), x.getKhachHang().getHoTen(), x.getMaHD(), String.format("%,.0f", x.getTongTien()) + " VND", f.format(x.getCreatedAt())});
             }
         }
     }
@@ -7322,6 +7326,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         pl_FullChucNang.repaint();
         pl_FullChucNang.revalidate();
         lblTenChucNang.setText("KHÁCH HÀNG");
+        setuptblKH();
     }//GEN-LAST:event_pn_KhachHangMouseClicked
 
     private void pn_HomeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pn_HomeMouseEntered
@@ -8381,6 +8386,20 @@ public class ViewSanPham extends javax.swing.JFrame {
             KhachHang kh = validateKH();
             kh.setId(id);
             updateKH(kh);
+            SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy");
+            dtmKH.setValueAt(kh.getMaKH(), index, 0);
+            dtmKH.setValueAt(kh.getHoTen(), index, 1);
+            dtmKH.setValueAt(kh.getSdt(), index, 2);
+            dtmKH.setValueAt(kh.getEmail(), index, 3);
+            String gt = "";
+            if (kh.isGioiTinh()) {
+                gt = "Nam";
+            } else {
+                gt = "Nữ";
+            }
+            dtmKH.setValueAt(gt, index, 4);
+            dtmKH.setValueAt(f.format(kh.getNgaySinh()), index, 5);
+            dtmKH.setValueAt(kh.getDiaChi(), index, 6);
         }
     }//GEN-LAST:event_jButton10ActionPerformed
 
@@ -8402,6 +8421,7 @@ public class ViewSanPham extends javax.swing.JFrame {
             KhachHang kh = validateKH();
             kh.setId(id);
             deleteKH(kh);
+            dtmKH.removeRow(index);
         }
     }//GEN-LAST:event_jButton11ActionPerformed
 
