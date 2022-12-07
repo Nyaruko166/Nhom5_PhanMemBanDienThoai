@@ -46,6 +46,12 @@ public class NhanVienRepository {
         query.setParameter("MaNhanVien", MaNhanVien);
         return (NhanVien) query.getSingleResult();
     }
+     public NhanVien getOneByUsername(String username) {
+        String sql = fromTable + " WHERE TaiKhoan =: TaiKhoan";
+        org.hibernate.query.Query query = session.createQuery(sql);
+        query.setParameter("TaiKhoan", username);
+        return (NhanVien) query.getSingleResult();
+    }
 
     public Boolean add(NhanVien tk) {
         Transaction transaction = null;
