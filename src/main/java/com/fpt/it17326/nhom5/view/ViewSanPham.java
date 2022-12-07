@@ -245,6 +245,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
+
 /**
  *
  * @author PHAM DAC THANG
@@ -258,6 +259,7 @@ public class ViewSanPham extends javax.swing.JFrame {
     private int itemPerPage = 2;
     private int start = 0;
 
+    private DefaultTableModel dtmLichSu;
     private KhachHangService khachHangService;
     private DefaultTableModel dtmKH;
     DefaultTableModel dfm;
@@ -319,47 +321,41 @@ public class ViewSanPham extends javax.swing.JFrame {
     Color bgColo = new Color(0, 0, 102);
 
     //------Thang
-    
-    
-    
-    
-    
-      DefaultTableModel defaultTable;
+    DefaultTableModel defaultTable;
     HoaDonChiTietService HoaDonChiTietService = new HoaDonChiTietServiceImpl();
     HoaDonService HoaDonService = new HoaDonServiceImpl();
-     
+
     private List<ThongkeResponse> listThongke = new ArrayList<>();
-    String ngaybatdau="a";
-    String nayketthuc="a";
-        List<bieudo> b=new ArrayList();
-        int kiemtravitribangthongke=0;
+    String ngaybatdau = "a";
+    String nayketthuc = "a";
+    List<bieudo> b = new ArrayList();
+    int kiemtravitribangthongke = 0;
     DefaultTableModel vitribangexcle;
     //thang
     private String dataConstructor;
     NhanVienService dvnv = new NhanVienServiceImpl();
+
     /**
      * Creates new form BanHang
      */
-        
- 
-
     public ViewSanPham(String dataConstructor) {
         initComponents();
-        this.dataConstructor=dataConstructor;
+        this.dataConstructor = dataConstructor;
         NhanVien nv = dvnv.getOneByUsername(dataConstructor);
         txtHoTen.setText(nv.getHoTen());
         txtMa.setText(nv.getMaNhanVien());
         txtMaNV.setText(nv.getMaNhanVien());
         txtTenNV.setText(nv.getHoTen());
-        String gt="";
-        if (nv.isGioiTinh()==true) {
-            gt="Nam";
-        }else{
-            gt="Nu";
+        String gt = "";
+        if (nv.isGioiTinh() == true) {
+            gt = "Nam";
+        } else {
+            gt = "Nu";
         }
         txtGioiTinh.setText(gt);
         txtChucVu.setText(nv.getTenCV());
-        
+
+        dtmLichSu = (DefaultTableModel) tblLichSu.getModel();
         dtmKH = (DefaultTableModel) tblThongtinKH1.getModel();
         khachHangService = new KhachHangServiceImpl();
         setuptblKH();
@@ -403,11 +399,11 @@ public class ViewSanPham extends javax.swing.JFrame {
         // Util.createFolderImageUpload();
 
         //-------Thang
-             loadbangthongke();
-         loadbangsanphamtonthongke();
-         loadbangsanphambanchaynhat();
-         loadbangbieudo();
-         gananhbieudo();
+        loadbangthongke();
+        loadbangsanphamtonthongke();
+        loadbangsanphambanchaynhat();
+        loadbangbieudo();
+        gananhbieudo();
         File file = new File("logonhom5.png");
         try {
             Image img = ImageIO.read(file);
@@ -415,8 +411,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-    
-    
+
         //--BanHangKM
         for (KhuyenMaiResponse list : lists2) {
             cbx_KhuyenMai.addItem(list.getMaKM());
@@ -442,7 +437,6 @@ public class ViewSanPham extends javax.swing.JFrame {
     private ViewSanPham() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
 
     public void showDataKM(List<KhuyenMaiResponse> lst) {
         dfm2.setRowCount(0);
@@ -543,8 +537,6 @@ public class ViewSanPham extends javax.swing.JFrame {
     }
 //Khai end/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    
-    
     // Tung Start///////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void designTableSanPham() {
         JTableHeader header = tblSanPham2.getTableHeader();
@@ -631,7 +623,7 @@ public class ViewSanPham extends javax.swing.JFrame {
 
     public void loadImageToLabel(String path, boolean hasRoot) {
         BufferedImage img = null;
-        String userDirectory = new File("").getAbsolutePath() + Util.SLASH +"pictures";
+        String userDirectory = new File("").getAbsolutePath() + Util.SLASH + "pictures";
 
         try {
             if (hasRoot) {
@@ -802,7 +794,7 @@ public class ViewSanPham extends javax.swing.JFrame {
 
     public void calculatePagination() {
         totalRow = sanPhamService.countRecord();
-        totalPage = (int)(totalRow / itemPerPage) + (totalRow % 2 > 0 ? 1 : 0);
+        totalPage = (int) (totalRow / itemPerPage) + (totalRow % 2 > 0 ? 1 : 0);
         start = page * itemPerPage;
     }
 
@@ -992,6 +984,7 @@ public class ViewSanPham extends javax.swing.JFrame {
 
     //KhachHang
     private void setuptblKH() {
+        dtmKH.setRowCount(0);
         List<KhachHangResponse> lst = khachHangService.getAll();
         List<HoaDonResponse> lsthd = hoaDonService.getAll();
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
@@ -1116,10 +1109,33 @@ public class ViewSanPham extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, mess);
         }
     }
+
+    private void clearKH() {
+        txtMaKH1.setText("");
+        txtTenKH1.setText("");
+        txtSDT2.setText("");
+        txtEmail1.setText("");
+        jdateNgaySinhKH.setDate(null);
+        txtDiachi1.setText("");
+        rdonam1.setSelected(true);
+    }
+
+    private void lichsuKH() {
+        dtmLichSu.setRowCount(0);
+        List<HoaDon> lsthd = hoaDonService.getAll2();
+        SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy");
+        String MaKH = txtLichSu.getText();
+        for (HoaDon x : lsthd) {
+            if (x.getKhachHang().getMaKH().equals(MaKH)) {
+                dtmLichSu.addRow(new Object[]{x.getKhachHang().getMaKH(),x.getKhachHang().getHoTen(),x.getMaHD(),String.format("%,.0f", x.getTongTien()) + " VND",f.format(x.getCreatedAt())});
+            }
+        }
+    }
 //======================================================================================
 //@QuanPM_PH27325 END
 //--------------------------------------------------------------------------------------
     //Hieundph27275 start
+
     public void selecttablenv() {
         listNhanVien = nhanvienService.getAll();
         DefaultTableModel dtmNV = (DefaultTableModel) tablenv.getModel();
@@ -1152,21 +1168,22 @@ public class ViewSanPham extends javax.swing.JFrame {
         }
 
     }
-        
-    public void loadnv1(List<NhanVienResponse> list1){
+
+    public void loadnv1(List<NhanVienResponse> list1) {
         modelnv1.setRowCount(0);
         for (NhanVienResponse nhanVienResponse : list1) {
             modelnv1.addRow(nhanVienResponse.toDataRow());
         }
     }
-    
-    public void loadnv2(List<NhanVienResponse> list2){
+
+    public void loadnv2(List<NhanVienResponse> list2) {
         modelnv2.setRowCount(0);
         for (NhanVienResponse nhanVienResponse : list2) {
             modelnv2.addRow(nhanVienResponse.toDataRow());
         }
     }
-    public void loadnv3(List<NhanVienResponse> list3){
+
+    public void loadnv3(List<NhanVienResponse> list3) {
         modelnv3.setRowCount(0);
         for (NhanVienResponse nhanVienResponse : list3) {
             modelnv3.addRow(nhanVienResponse.toDataRow());
@@ -1175,10 +1192,8 @@ public class ViewSanPham extends javax.swing.JFrame {
     //Hieundph27275-end
 //---------------------------------------------------------------------------------------------
     //--------------Thang
-   
 
-    
-   public JFreeChart createChart(List<bieudo> b) {
+    public JFreeChart createChart(List<bieudo> b) {
         JFreeChart barChart = ChartFactory.createBarChart(
                 "BIỂU ĐỒ DOANH THU THEO dd-MM-yyyy",
                 "dd-MM-yyyy", "Doanh thu(VND)",
@@ -1188,38 +1203,39 @@ public class ViewSanPham extends javax.swing.JFrame {
 
     private CategoryDataset createDataset(List<bieudo> b) {
         final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-     for (bieudo c : b) {
-         String ox=chuyenngaydd_MM_yyyy(c.getOx());
-              dataset.addValue(c.getOy(), " ",ox);
+        for (bieudo c : b) {
+            String ox = chuyenngaydd_MM_yyyy(c.getOx());
+            dataset.addValue(c.getOy(), " ", ox);
         }
         return dataset;
     }
-    public  void loadbangbieudo(){
-     DefaultTableModel tb=new DefaultTableModel();
-    tb=(DefaultTableModel) tbbangbieudo.getModel();
+
+    public void loadbangbieudo() {
+        DefaultTableModel tb = new DefaultTableModel();
+        tb = (DefaultTableModel) tbbangbieudo.getModel();
         tb.setRowCount(0);
-        if (b.size()>0) {
-            int stt=0;
-           for (bieudo b : b) {
-                  double a = (double) (b.getOy() * 1);
-            tb.addRow(new Object[]{
-            
-       stt=stt+1,   chuyenngaydd_MM_yyyy( b.getOx()) , String.format("%,.2f", a) + " VND"
-            
-            
-            });
-        }  
+        if (b.size() > 0) {
+            int stt = 0;
+            for (bieudo b : b) {
+                double a = (double) (b.getOy() * 1);
+                tb.addRow(new Object[]{
+                    stt = stt + 1, chuyenngaydd_MM_yyyy(b.getOx()), String.format("%,.2f", a) + " VND"
+
+                });
+            }
         } else {
-            System.err.println("taco:-"+b.size());
+            System.err.println("taco:-" + b.size());
         }
-       
+
     }
-    public  float  doanhthu(String a){
-    return HoaDonChiTietService.getAll3(a);
-            
+
+    public float doanhthu(String a) {
+        return HoaDonChiTietService.getAll3(a);
+
     }
-    public  void gananhbieudo(){
-     File file = new File("anhbieudo.png");
+
+    public void gananhbieudo() {
+        File file = new File("anhbieudo.png");
         try {
             Image img = ImageIO.read(file);
             lbanhbieudo.setIcon(new ImageIcon(img.getScaledInstance(328, 142, 0)));
@@ -1227,7 +1243,8 @@ public class ViewSanPham extends javax.swing.JFrame {
             ex.printStackTrace();
         }
     }
-     public boolean loadbangthongtheotimkiemkhoangtime1giamdan() throws ParseException {
+
+    public boolean loadbangthongtheotimkiemkhoangtime1giamdan() throws ParseException {
         defaultTable = (DefaultTableModel) tbbangthongke.getModel();
         listThongke = HoaDonChiTietService.getAll1();
 
@@ -1239,13 +1256,13 @@ public class ViewSanPham extends javax.swing.JFrame {
         int solg = 0;
         double tong = 0;
         //----------------------------------------------------------------------
-           listThongke.sort(
+        listThongke.sort(
                 (o1, o2) -> {
                     return Double.compare(o2.thanhtien(), o1.thanhtien());
                 });
         defaultTable.setRowCount(0);
-          int stt=0;
-         double tongbang=0;
+        int stt = 0;
+        double tongbang = 0;
         if (listThongke.size() > 0) {
             for (int i = 0; i < listThongke.size(); i = i + 1) {
                 if (sosanhngaytrongkhoang1(listThongke.get(i).chuyenngaymua())) {
@@ -1253,13 +1270,12 @@ public class ViewSanPham extends javax.swing.JFrame {
                     solg = listThongke.get(i).getSoLuong() + solg;
                     tong = listThongke.get(i).thanhtien() + tong;
 
-        String doanhthu = String.format("%,.2f", tong) + " VND";
-        tfdoanhthu.setText(doanhthu);
-        tfsoluongsanphambanthongke.setText("" + solg);
-        
-        
+                    String doanhthu = String.format("%,.2f", tong) + " VND";
+                    tfdoanhthu.setText(doanhthu);
+                    tfsoluongsanphambanthongke.setText("" + solg);
+
                     double a = (double) (listThongke.get(i).getDonGia() * 1);
-                    defaultTable.addRow(new Object[]{stt=stt + 1, listThongke.get(i).getMaSP(),
+                    defaultTable.addRow(new Object[]{stt = stt + 1, listThongke.get(i).getMaSP(),
                         listThongke.get(i).getMaHD(),
                         listThongke.get(i).getTenSP(),
                         listThongke.get(i).getSoLuong(),
@@ -1267,8 +1283,8 @@ public class ViewSanPham extends javax.swing.JFrame {
                         String.format("%,.2f", listThongke.get(i).thanhtien()) + " VND",
                         listThongke.get(i).chuyenngaymua()
                     });
-                    tongbang= listThongke.get(i).thanhtien()+tongbang;
-                   tftongdoanhthutimkiem.setText(String.format("%,.2f",tongbang) + " VND");
+                    tongbang = listThongke.get(i).thanhtien() + tongbang;
+                    tftongdoanhthutimkiem.setText(String.format("%,.2f", tongbang) + " VND");
                 }
             }
         } else {
@@ -1307,10 +1323,10 @@ public class ViewSanPham extends javax.swing.JFrame {
 //        } else {
 //            System.err.println("list.size=  " + listThongke.size());
 //        }
-      
-return  true;
+        return true;
     }
-        public boolean loadbangthongtheotimkiemkhoangtime0giamdan() throws ParseException {
+
+    public boolean loadbangthongtheotimkiemkhoangtime0giamdan() throws ParseException {
         defaultTable = (DefaultTableModel) tbbangthongke.getModel();
         listThongke = HoaDonChiTietService.getAll1();
 
@@ -1322,14 +1338,14 @@ return  true;
         int solg = 0;
         double tong = 0;
         //----------------------------------------------------------------------
-           listThongke.sort(
+        listThongke.sort(
                 (o1, o2) -> {
                     return Double.compare(o2.thanhtien(), o1.thanhtien());
                 }
         );
         defaultTable.setRowCount(0);
-         int st=0;
-         double tongbang=0;
+        int st = 0;
+        double tongbang = 0;
         if (listThongke.size() > 0) {
             for (int i = 0; i < listThongke.size(); i = i + 1) {
                 if (sosanhngaytrongkhoang0(listThongke.get(i).chuyenngaymua())) {
@@ -1337,11 +1353,11 @@ return  true;
                     solg = listThongke.get(i).getSoLuong() + solg;
                     tong = listThongke.get(i).thanhtien() + tong;
                     tfdondahuy.setText(" 0");
-        String doanhthu = String.format("%,.2f", tong) + " VND";
-        tfdoanhthu.setText(doanhthu);
-        tfsoluongsanphambanthongke.setText("" + solg);
+                    String doanhthu = String.format("%,.2f", tong) + " VND";
+                    tfdoanhthu.setText(doanhthu);
+                    tfsoluongsanphambanthongke.setText("" + solg);
                     double a = (double) (listThongke.get(i).getDonGia() * 1);
-                    defaultTable.addRow(new Object[]{st=st + 1, listThongke.get(i).getMaSP(),
+                    defaultTable.addRow(new Object[]{st = st + 1, listThongke.get(i).getMaSP(),
                         listThongke.get(i).getMaHD(),
                         listThongke.get(i).getTenSP(),
                         listThongke.get(i).getSoLuong(),
@@ -1349,8 +1365,8 @@ return  true;
                         String.format("%,.2f", listThongke.get(i).thanhtien()) + " VND",
                         listThongke.get(i).chuyenngaymua()
                     });
-                      tongbang= listThongke.get(i).thanhtien()+tongbang;
-                   tftongdoanhthutimkiem.setText(String.format("%,.2f",tongbang) + " VND");
+                    tongbang = listThongke.get(i).thanhtien() + tongbang;
+                    tftongdoanhthutimkiem.setText(String.format("%,.2f", tongbang) + " VND");
                 }
             }
         } else {
@@ -1360,21 +1376,17 @@ return  true;
         int tc = 0;
 
         for (HoaDonResponse hd : HoaDonService.getAll1()) {
-            if (sosanhngaytrongkhoang0(chuyenngaymuatk(hd.getCreatedAt()))  && hd.isTrangThai()) {
+            if (sosanhngaytrongkhoang0(chuyenngaymuatk(hd.getCreatedAt())) && hd.isTrangThai()) {
                 tc = tc + 1;
             }
         }
         tftongdonhang.setText("" + tc);
         tfdonthanhcong.setText(" " + String.valueOf(tc));
-        
 
-        
-        
-        
-     
-return true;
+        return true;
     }
-     public boolean loadbangthongtheotimkiemkhoangtime1tangdan() throws ParseException {
+
+    public boolean loadbangthongtheotimkiemkhoangtime1tangdan() throws ParseException {
         defaultTable = (DefaultTableModel) tbbangthongke.getModel();
         listThongke = HoaDonChiTietService.getAll1();
 
@@ -1386,13 +1398,13 @@ return true;
         int solg = 0;
         double tong = 0;
         //----------------------------------------------------------------------
-           listThongke.sort(
+        listThongke.sort(
                 (o1, o2) -> {
                     return Double.compare(o1.thanhtien(), o2.thanhtien());
                 });
         defaultTable.setRowCount(0);
-          int stt=0;
-         double tongbang=0;
+        int stt = 0;
+        double tongbang = 0;
         if (listThongke.size() > 0) {
             for (int i = 0; i < listThongke.size(); i = i + 1) {
                 if (sosanhngaytrongkhoang1(listThongke.get(i).chuyenngaymua())) {
@@ -1400,13 +1412,12 @@ return true;
                     solg = listThongke.get(i).getSoLuong() + solg;
                     tong = listThongke.get(i).thanhtien() + tong;
 
-        String doanhthu = String.format("%,.2f", tong) + " VND";
-        tfdoanhthu.setText(doanhthu);
-        tfsoluongsanphambanthongke.setText("" + solg);
-        
-        
+                    String doanhthu = String.format("%,.2f", tong) + " VND";
+                    tfdoanhthu.setText(doanhthu);
+                    tfsoluongsanphambanthongke.setText("" + solg);
+
                     double a = (double) (listThongke.get(i).getDonGia() * 1);
-                    defaultTable.addRow(new Object[]{stt=stt + 1, listThongke.get(i).getMaSP(),
+                    defaultTable.addRow(new Object[]{stt = stt + 1, listThongke.get(i).getMaSP(),
                         listThongke.get(i).getMaHD(),
                         listThongke.get(i).getTenSP(),
                         listThongke.get(i).getSoLuong(),
@@ -1414,8 +1425,8 @@ return true;
                         String.format("%,.2f", listThongke.get(i).thanhtien()) + " VND",
                         listThongke.get(i).chuyenngaymua()
                     });
-                    tongbang= listThongke.get(i).thanhtien()+tongbang;
-                   tftongdoanhthutimkiem.setText(String.format("%,.2f",tongbang) + " VND");
+                    tongbang = listThongke.get(i).thanhtien() + tongbang;
+                    tftongdoanhthutimkiem.setText(String.format("%,.2f", tongbang) + " VND");
                 }
             }
         } else {
@@ -1454,10 +1465,10 @@ return true;
 //        } else {
 //            System.err.println("list.size=  " + listThongke.size());
 //        }
-      
-return  true;
+        return true;
     }
-       public boolean loadbangthongtheotimkiemkhoangtime0tangdan() throws ParseException {
+
+    public boolean loadbangthongtheotimkiemkhoangtime0tangdan() throws ParseException {
         defaultTable = (DefaultTableModel) tbbangthongke.getModel();
         listThongke = HoaDonChiTietService.getAll1();
 
@@ -1469,14 +1480,14 @@ return  true;
         int solg = 0;
         double tong = 0;
         //----------------------------------------------------------------------
-           listThongke.sort(
+        listThongke.sort(
                 (o1, o2) -> {
                     return Double.compare(o1.thanhtien(), o2.thanhtien());
                 }
         );
         defaultTable.setRowCount(0);
-         int st=0;
-         double tongbang=0;
+        int st = 0;
+        double tongbang = 0;
         if (listThongke.size() > 0) {
             for (int i = 0; i < listThongke.size(); i = i + 1) {
                 if (sosanhngaytrongkhoang0(listThongke.get(i).chuyenngaymua())) {
@@ -1484,11 +1495,11 @@ return  true;
                     solg = listThongke.get(i).getSoLuong() + solg;
                     tong = listThongke.get(i).thanhtien() + tong;
                     tfdondahuy.setText(" 0");
-        String doanhthu = String.format("%,.2f", tong) + " VND";
-        tfdoanhthu.setText(doanhthu);
-        tfsoluongsanphambanthongke.setText("" + solg);
+                    String doanhthu = String.format("%,.2f", tong) + " VND";
+                    tfdoanhthu.setText(doanhthu);
+                    tfsoluongsanphambanthongke.setText("" + solg);
                     double a = (double) (listThongke.get(i).getDonGia() * 1);
-                    defaultTable.addRow(new Object[]{st=st + 1, listThongke.get(i).getMaSP(),
+                    defaultTable.addRow(new Object[]{st = st + 1, listThongke.get(i).getMaSP(),
                         listThongke.get(i).getMaHD(),
                         listThongke.get(i).getTenSP(),
                         listThongke.get(i).getSoLuong(),
@@ -1496,8 +1507,8 @@ return  true;
                         String.format("%,.2f", listThongke.get(i).thanhtien()) + " VND",
                         listThongke.get(i).chuyenngaymua()
                     });
-                      tongbang= listThongke.get(i).thanhtien()+tongbang;
-                   tftongdoanhthutimkiem.setText(String.format("%,.2f",tongbang) + " VND");
+                    tongbang = listThongke.get(i).thanhtien() + tongbang;
+                    tftongdoanhthutimkiem.setText(String.format("%,.2f", tongbang) + " VND");
                 }
             }
         } else {
@@ -1507,25 +1518,21 @@ return  true;
         int tc = 0;
 
         for (HoaDonResponse hd : HoaDonService.getAll1()) {
-            if (sosanhngaytrongkhoang0(chuyenngaymuatk(hd.getCreatedAt()))  && hd.isTrangThai()) {
+            if (sosanhngaytrongkhoang0(chuyenngaymuatk(hd.getCreatedAt())) && hd.isTrangThai()) {
                 tc = tc + 1;
             }
         }
         tftongdonhang.setText("" + tc);
         tfdonthanhcong.setText(" " + String.valueOf(tc));
-        
 
-        
-        
-        
-     
-return true;
+        return true;
     }
-        public  void locsanphambanchaytheokhoangtimegiamdan(){
 
- defaultTable = (DefaultTableModel) tbbangsanphambanchaynhat.getModel();
-         listThongke=HoaDonChiTietService.getAl4(chuyenngayY_M_D(ngaybatdau), chuyenngayY_M_D(nayketthuc));
-listThongke.sort(
+    public void locsanphambanchaytheokhoangtimegiamdan() {
+
+        defaultTable = (DefaultTableModel) tbbangsanphambanchaynhat.getModel();
+        listThongke = HoaDonChiTietService.getAl4(chuyenngayY_M_D(ngaybatdau), chuyenngayY_M_D(nayketthuc));
+        listThongke.sort(
                 (o1, o2) -> {
                     return Double.compare(o2.getTongsoLuong(), o1.getTongsoLuong());
                 }
@@ -1535,25 +1542,24 @@ listThongke.sort(
         if (listThongke.size() > 0) {
             for (int i = 0; i < listThongke.size(); i = i + 1) {
 
-               
-   defaultTable.addRow( new Object[]{
-   i+1,
-listThongke.get(i).getMaSP(),
-          listThongke.get(i).getTenSP(),
-          listThongke.get(i).getTongsoLuong()
-   }
-   
-   );
+                defaultTable.addRow(new Object[]{
+                    i + 1,
+                    listThongke.get(i).getMaSP(),
+                    listThongke.get(i).getTenSP(),
+                    listThongke.get(i).getTongsoLuong()
+                }
+                );
             }
         } else {
             System.err.println("list.size=  " + listThongke.size());
         }
-}
-    public  void locsanphambanchaytheokhoangtimetangdan(){
+    }
 
- defaultTable = (DefaultTableModel) tbbangsanphambanchaynhat.getModel();
-         listThongke=HoaDonChiTietService.getAl4(chuyenngayY_M_D(ngaybatdau), chuyenngayY_M_D(nayketthuc));
-listThongke.sort(
+    public void locsanphambanchaytheokhoangtimetangdan() {
+
+        defaultTable = (DefaultTableModel) tbbangsanphambanchaynhat.getModel();
+        listThongke = HoaDonChiTietService.getAl4(chuyenngayY_M_D(ngaybatdau), chuyenngayY_M_D(nayketthuc));
+        listThongke.sort(
                 (o1, o2) -> {
                     return Double.compare(o1.getTongsoLuong(), o2.getTongsoLuong());
                 }
@@ -1563,21 +1569,20 @@ listThongke.sort(
         if (listThongke.size() > 0) {
             for (int i = 0; i < listThongke.size(); i = i + 1) {
 
-               
-   defaultTable.addRow( new Object[]{
-   i+1,
-listThongke.get(i).getMaSP(),
-          listThongke.get(i).getTenSP(),
-          listThongke.get(i).getTongsoLuong()
-   }
-   
-   );
+                defaultTable.addRow(new Object[]{
+                    i + 1,
+                    listThongke.get(i).getMaSP(),
+                    listThongke.get(i).getTenSP(),
+                    listThongke.get(i).getTongsoLuong()
+                }
+                );
             }
         } else {
             System.err.println("list.size=  " + listThongke.size());
         }
-}
-       public boolean loadbangthongtheotimkiemkhoangtime1theomasanpham() throws ParseException {
+    }
+
+    public boolean loadbangthongtheotimkiemkhoangtime1theomasanpham() throws ParseException {
         defaultTable = (DefaultTableModel) tbbangthongke.getModel();
         listThongke = HoaDonChiTietService.getAll1();
 
@@ -1590,22 +1595,21 @@ listThongke.get(i).getMaSP(),
         double tong = 0;
         //----------------------------------------------------------------------
         defaultTable.setRowCount(0);
-          int stt=0;
-         double tongbang=0;
+        int stt = 0;
+        double tongbang = 0;
         if (listThongke.size() > 0) {
             for (int i = 0; i < listThongke.size(); i = i + 1) {
-                if (sosanhngaytrongkhoang1(listThongke.get(i).chuyenngaymua()) && listThongke.get(i).getMaSP().equals(tftimkiemthongke.getText()) ) {
+                if (sosanhngaytrongkhoang1(listThongke.get(i).chuyenngaymua()) && listThongke.get(i).getMaSP().equals(tftimkiemthongke.getText())) {
 
                     solg = listThongke.get(i).getSoLuong() + solg;
                     tong = listThongke.get(i).thanhtien() + tong;
 
-        String doanhthu = String.format("%,.2f", tong) + " VND";
-        tfdoanhthu.setText(doanhthu);
-        tfsoluongsanphambanthongke.setText("" + solg);
-        
-        
+                    String doanhthu = String.format("%,.2f", tong) + " VND";
+                    tfdoanhthu.setText(doanhthu);
+                    tfsoluongsanphambanthongke.setText("" + solg);
+
                     double a = (double) (listThongke.get(i).getDonGia() * 1);
-                    defaultTable.addRow(new Object[]{stt=stt + 1, listThongke.get(i).getMaSP(),
+                    defaultTable.addRow(new Object[]{stt = stt + 1, listThongke.get(i).getMaSP(),
                         listThongke.get(i).getMaHD(),
                         listThongke.get(i).getTenSP(),
                         listThongke.get(i).getSoLuong(),
@@ -1613,8 +1617,8 @@ listThongke.get(i).getMaSP(),
                         String.format("%,.2f", listThongke.get(i).thanhtien()) + " VND",
                         listThongke.get(i).chuyenngaymua()
                     });
-                    tongbang= listThongke.get(i).thanhtien()+tongbang;
-                   tftongdoanhthutimkiem.setText(String.format("%,.2f",tongbang) + " VND");
+                    tongbang = listThongke.get(i).thanhtien() + tongbang;
+                    tftongdoanhthutimkiem.setText(String.format("%,.2f", tongbang) + " VND");
                 }
             }
         } else {
@@ -1653,10 +1657,9 @@ listThongke.get(i).getMaSP(),
 //        } else {
 //            System.err.println("list.size=  " + listThongke.size());
 //        }
-      
-return  true;
+        return true;
     }
-    
+
     public boolean loadbangthongtheotimkiemkhoangtime0theomasanpham() throws ParseException {
         defaultTable = (DefaultTableModel) tbbangthongke.getModel();
         listThongke = HoaDonChiTietService.getAll1();
@@ -1670,20 +1673,20 @@ return  true;
         double tong = 0;
         //----------------------------------------------------------------------
         defaultTable.setRowCount(0);
-         int st=0;
-         double tongbang=0;
+        int st = 0;
+        double tongbang = 0;
         if (listThongke.size() > 0) {
             for (int i = 0; i < listThongke.size(); i = i + 1) {
-                if (sosanhngaytrongkhoang0(listThongke.get(i).chuyenngaymua())   && listThongke.get(i).getMaSP().equals(tftimkiemthongke.getText())) {
+                if (sosanhngaytrongkhoang0(listThongke.get(i).chuyenngaymua()) && listThongke.get(i).getMaSP().equals(tftimkiemthongke.getText())) {
 
                     solg = listThongke.get(i).getSoLuong() + solg;
                     tong = listThongke.get(i).thanhtien() + tong;
                     tfdondahuy.setText(" 0");
-        String doanhthu = String.format("%,.2f", tong) + " VND";
-        tfdoanhthu.setText(doanhthu);
-        tfsoluongsanphambanthongke.setText("" + solg);
+                    String doanhthu = String.format("%,.2f", tong) + " VND";
+                    tfdoanhthu.setText(doanhthu);
+                    tfsoluongsanphambanthongke.setText("" + solg);
                     double a = (double) (listThongke.get(i).getDonGia() * 1);
-                    defaultTable.addRow(new Object[]{st=st + 1, listThongke.get(i).getMaSP(),
+                    defaultTable.addRow(new Object[]{st = st + 1, listThongke.get(i).getMaSP(),
                         listThongke.get(i).getMaHD(),
                         listThongke.get(i).getTenSP(),
                         listThongke.get(i).getSoLuong(),
@@ -1691,8 +1694,8 @@ return  true;
                         String.format("%,.2f", listThongke.get(i).thanhtien()) + " VND",
                         listThongke.get(i).chuyenngaymua()
                     });
-                      tongbang= listThongke.get(i).thanhtien()+tongbang;
-                   tftongdoanhthutimkiem.setText(String.format("%,.2f",tongbang) + " VND");
+                    tongbang = listThongke.get(i).thanhtien() + tongbang;
+                    tftongdoanhthutimkiem.setText(String.format("%,.2f", tongbang) + " VND");
                 }
             }
         } else {
@@ -1702,48 +1705,42 @@ return  true;
         int tc = 0;
 
         for (HoaDonResponse hd : HoaDonService.getAll1()) {
-            if (sosanhngaytrongkhoang0(chuyenngaymuatk(hd.getCreatedAt()))  && hd.isTrangThai()) {
+            if (sosanhngaytrongkhoang0(chuyenngaymuatk(hd.getCreatedAt())) && hd.isTrangThai()) {
                 tc = tc + 1;
             }
         }
         tftongdonhang.setText("" + tc);
         tfdonthanhcong.setText(" " + String.valueOf(tc));
-        
 
-        
-        
-        
-     
-return true;
+        return true;
     }
-        public void loadbangsanphambanchaynhat() {
+
+    public void loadbangsanphambanchaynhat() {
         defaultTable = (DefaultTableModel) tbbangsanphambanchaynhat.getModel();
-        
 
         defaultTable.setRowCount(0);
 
         if (listThongke.size() > 0) {
             for (int i = 0; i < HoaDonChiTietService.getAl2().size(); i = i + 1) {
 
-               
-   defaultTable.addRow( new Object[]{
-   i+1,
-           HoaDonChiTietService.getAl2().get(i).getMaSP(),
-            HoaDonChiTietService.getAl2().get(i).getTenSP(),
-             HoaDonChiTietService.getAl2().get(i).getTongsoLuong()
-   }
-   
-   );
+                defaultTable.addRow(new Object[]{
+                    i + 1,
+                    HoaDonChiTietService.getAl2().get(i).getMaSP(),
+                    HoaDonChiTietService.getAl2().get(i).getTenSP(),
+                    HoaDonChiTietService.getAl2().get(i).getTongsoLuong()
+                }
+                );
             }
         } else {
             System.err.println("list.size=  " + listThongke.size());
         }
 
     }
-          public void loadbangsanphamtonthongkeGIAMDAN() {
+
+    public void loadbangsanphamtonthongkeGIAMDAN() {
         defaultTable = (DefaultTableModel) tbsanphamtonthongke.getModel();
         listThongke = HoaDonChiTietService.getAllsp();
-   listThongke.sort(
+        listThongke.sort(
                 (o1, o2) -> {
                     return Double.compare(o2.getDonGia(), o1.getDonGia());
                 }
@@ -1755,12 +1752,9 @@ return true;
 
                 double a = (double) (listThongke.get(i).getDonGia() * 1);
                 defaultTable.addRow(new Object[]{i + 1, listThongke.get(i).getMaSP(),
-                 
                     listThongke.get(i).getTenSP(),
                     listThongke.get(i).getSolgton(),
-                    String.format("%,.2f", listThongke.get(i).getDonGia()) + " VND",
-                   
-                });
+                    String.format("%,.2f", listThongke.get(i).getDonGia()) + " VND",});
 
             }
         } else {
@@ -1768,10 +1762,11 @@ return true;
         }
 
     }
-      public void loadbangsanphamtonthongkeTANGDAN() {
+
+    public void loadbangsanphamtonthongkeTANGDAN() {
         defaultTable = (DefaultTableModel) tbsanphamtonthongke.getModel();
         listThongke = HoaDonChiTietService.getAllsp();
-   listThongke.sort(
+        listThongke.sort(
                 (o1, o2) -> {
                     return Double.compare(o1.getDonGia(), o2.getDonGia());
                 }
@@ -1783,12 +1778,9 @@ return true;
 
                 double a = (double) (listThongke.get(i).getDonGia() * 1);
                 defaultTable.addRow(new Object[]{i + 1, listThongke.get(i).getMaSP(),
-                 
                     listThongke.get(i).getTenSP(),
                     listThongke.get(i).getSolgton(),
-                    String.format("%,.2f", listThongke.get(i).getDonGia()) + " VND",
-                   
-                });
+                    String.format("%,.2f", listThongke.get(i).getDonGia()) + " VND",});
 
             }
         } else {
@@ -1796,7 +1788,8 @@ return true;
         }
 
     }
-        public void loadbangsanphamtonthongke() {
+
+    public void loadbangsanphamtonthongke() {
         defaultTable = (DefaultTableModel) tbsanphamtonthongke.getModel();
         listThongke = HoaDonChiTietService.getAllsp();
 
@@ -1807,12 +1800,9 @@ return true;
 
                 double a = (double) (listThongke.get(i).getDonGia() * 1);
                 defaultTable.addRow(new Object[]{i + 1, listThongke.get(i).getMaSP(),
-                 
                     listThongke.get(i).getTenSP(),
                     listThongke.get(i).getSolgton(),
-                    String.format("%,.2f", listThongke.get(i).getDonGia()) + " VND",
-                   
-                });
+                    String.format("%,.2f", listThongke.get(i).getDonGia()) + " VND",});
 
             }
         } else {
@@ -1820,10 +1810,6 @@ return true;
         }
 
     }
-
-
-
- 
 
     public void loadbangthongke() {
         defaultTable = (DefaultTableModel) tbbangthongke.getModel();
@@ -1833,7 +1819,7 @@ return true;
         tftieudetongdonhang.setText("TỔNG ĐƠN HÀNG");
         tfchitietdonhang.setText("CHI TIẾT ĐƠN HÀNG");
         tftieudetongdoanhthu.setText("DOANH THU");
-     //   tftongdonhang.setText(String.valueOf(HoaDonService.getAll1().size()));
+        //   tftongdonhang.setText(String.valueOf(HoaDonService.getAll1().size()));
         int tc = 0;
         int dh = 0;
         for (HoaDonResponse hd : HoaDonService.getAll1()) {
@@ -1841,7 +1827,7 @@ return true;
                 tc = tc + 1;
             }
         }
-          tftongdonhang.setText(String.valueOf(tc));
+        tftongdonhang.setText(String.valueOf(tc));
         tfdonthanhcong.setText(" " + String.valueOf(tc));
         tfdondahuy.setText(" 0");
         int solg = 0;
@@ -1855,7 +1841,7 @@ return true;
         tfsoluongsanphambanthongke.setText("" + solg);
         //----------------------------------------------------------------------
         defaultTable.setRowCount(0);
-double tongbang=0;
+        double tongbang = 0;
         if (listThongke.size() > 0) {
             for (int i = 0; i < listThongke.size(); i = i + 1) {
 
@@ -1868,16 +1854,14 @@ double tongbang=0;
                     String.format("%,.2f", listThongke.get(i).thanhtien()) + " VND",
                     listThongke.get(i).chuyenngaymua()
                 });
-  tongbang= listThongke.get(i).thanhtien()+tongbang;
-                   tftongdoanhthutimkiem.setText(String.format("%,.2f",tongbang) + " VND");
+                tongbang = listThongke.get(i).thanhtien() + tongbang;
+                tftongdoanhthutimkiem.setText(String.format("%,.2f", tongbang) + " VND");
             }
         } else {
             System.err.println("list.size=  " + listThongke.size());
         }
 
         //----------------------
-        
-        
     }
 
     public void loadbangthongketangdantheothanhtien() {
@@ -1888,7 +1872,7 @@ double tongbang=0;
         tftieudetongdonhang.setText("TỔNG ĐƠN HÀNG");
         tfchitietdonhang.setText("CHI TIẾT ĐƠN HÀNG");
         tftieudetongdoanhthu.setText("DOANH THU");
-       // tftongdonhang.setText(String.valueOf(HoaDonService.getAll1().size()));
+        // tftongdonhang.setText(String.valueOf(HoaDonService.getAll1().size()));
         int tc = 0;
         int dh = 0;
         for (HoaDonResponse hd : HoaDonService.getAll1()) {
@@ -1896,7 +1880,7 @@ double tongbang=0;
                 tc = tc + 1;
             }
         }
-            tftongdonhang.setText(String.valueOf(tc));
+        tftongdonhang.setText(String.valueOf(tc));
         tfdonthanhcong.setText("" + String.valueOf(tc));
         tfdondahuy.setText("0");
         int solg = 0;
@@ -1916,7 +1900,7 @@ double tongbang=0;
                 }
         );
         defaultTable.setRowCount(0);
-double tongbang=0;
+        double tongbang = 0;
         if (listThongke.size() > 0) {
             for (int i = 0; i < listThongke.size(); i = i + 1) {
 
@@ -1929,22 +1913,17 @@ double tongbang=0;
                     String.format("%,.2f", listThongke.get(i).thanhtien()) + " VND",
                     listThongke.get(i).chuyenngaymua()
                 });
-  tongbang= listThongke.get(i).thanhtien()+tongbang;
-                   tftongdoanhthutimkiem.setText(String.format("%,.2f",tongbang) + " VND");
+                tongbang = listThongke.get(i).thanhtien() + tongbang;
+                tftongdoanhthutimkiem.setText(String.format("%,.2f", tongbang) + " VND");
             }
         } else {
             System.err.println("list.size=  " + listThongke.size());
         }
 
-    //    loadbangthongkeimei();
-
-    
-    
-    
-    
-      defaultTable = (DefaultTableModel) tbbangsanphambanchaynhat.getModel();
-      listThongke=HoaDonChiTietService.getAl2();
-         listThongke.sort(
+        //    loadbangthongkeimei();
+        defaultTable = (DefaultTableModel) tbbangsanphambanchaynhat.getModel();
+        listThongke = HoaDonChiTietService.getAl2();
+        listThongke.sort(
                 (o1, o2) -> {
                     return Double.compare(o1.getTongsoLuong(), o2.getTongsoLuong());
                 }
@@ -1955,15 +1934,13 @@ double tongbang=0;
         if (listThongke.size() > 0) {
             for (int i = 0; i < listThongke.size(); i = i + 1) {
 
-               
-   defaultTable.addRow( new Object[]{
-   i+1,
-           listThongke.get(i).getMaSP(),
-          listThongke.get(i).getTenSP(),
-             listThongke.get(i).getTongsoLuong()
-   }
-   
-   );
+                defaultTable.addRow(new Object[]{
+                    i + 1,
+                    listThongke.get(i).getMaSP(),
+                    listThongke.get(i).getTenSP(),
+                    listThongke.get(i).getTongsoLuong()
+                }
+                );
             }
         } else {
             System.err.println("list.size=  " + listThongke.size());
@@ -1979,7 +1956,7 @@ double tongbang=0;
         tftieudetongdonhang.setText("TỔNG ĐƠN HÀNG");
         tfchitietdonhang.setText("CHI TIẾT ĐƠN HÀNG");
         tftieudetongdoanhthu.setText("DOANH THU");
-   //     tftongdonhang.setText(String.valueOf(HoaDonService.getAll1().size()));
+        //     tftongdonhang.setText(String.valueOf(HoaDonService.getAll1().size()));
         int tc = 0;
         int dh = 0;
         for (HoaDonResponse hd : HoaDonService.getAll1()) {
@@ -1987,7 +1964,7 @@ double tongbang=0;
                 tc = tc + 1;
             }
         }
-              tftongdonhang.setText(String.valueOf(tc));
+        tftongdonhang.setText(String.valueOf(tc));
         tfdonthanhcong.setText(" " + String.valueOf(tc));
         tfdondahuy.setText("0");
         int solg = 0;
@@ -2007,7 +1984,7 @@ double tongbang=0;
                 }
         );
         defaultTable.setRowCount(0);
-double tongbang=0;
+        double tongbang = 0;
         if (listThongke.size() > 0) {
             for (int i = 0; i < listThongke.size(); i = i + 1) {
 
@@ -2020,49 +1997,35 @@ double tongbang=0;
                     String.format("%,.2f", listThongke.get(i).thanhtien()) + " VND",
                     listThongke.get(i).chuyenngaymua()
                 });
-  tongbang= listThongke.get(i).thanhtien()+tongbang;
-                   tftongdoanhthutimkiem.setText(String.format("%,.2f",tongbang) + " VND");
+                tongbang = listThongke.get(i).thanhtien() + tongbang;
+                tftongdoanhthutimkiem.setText(String.format("%,.2f", tongbang) + " VND");
             }
         } else {
             System.err.println("list.size=  " + listThongke.size());
         }
 
-   //     loadbangthongkeimei();
+        //     loadbangthongkeimei();
+        loadbangsanphambanchaynhat();
 
-    
- loadbangsanphambanchaynhat();
-    
-    
     }
-    
-    
 
-        
-        
-
-
-public void timkiemthongke1() {
+    public void timkiemthongke1() {
         defaultTable = (DefaultTableModel) tbsanphamtonthongke.getModel();
         listThongke = HoaDonChiTietService.getAllsp();
 
         //---------------------------------------------------------------
-       
         defaultTable.setRowCount(0);
-         int ec=0;
-     
+        int ec = 0;
+
         if (listThongke.size() > 0) {
             for (int i = 0; i < listThongke.size(); i = i + 1) {
-                      if (listThongke.get(i).getMaSP().equals(tftimkiemsanphamton.getText())) {
-                      double a = (double) (listThongke.get(i).getDonGia() * 1);
-                defaultTable.addRow(new Object[]{ec=ec + 1, listThongke.get(i).getMaSP(),
-                 
-                    listThongke.get(i).getTenSP(),
-                    listThongke.get(i).getSolgton(),
-                    String.format("%,.2f", listThongke.get(i).getDonGia()) + " VND",
-                   
-                });
+                if (listThongke.get(i).getMaSP().equals(tftimkiemsanphamton.getText())) {
+                    double a = (double) (listThongke.get(i).getDonGia() * 1);
+                    defaultTable.addRow(new Object[]{ec = ec + 1, listThongke.get(i).getMaSP(),
+                        listThongke.get(i).getTenSP(),
+                        listThongke.get(i).getSolgton(),
+                        String.format("%,.2f", listThongke.get(i).getDonGia()) + " VND",});
                 }
-              
 
             }
         } else {
@@ -2070,24 +2033,23 @@ public void timkiemthongke1() {
         }
 
 //
-      //  timkiemimei();
-
+        //  timkiemimei();
     }
+
     public void timkiemthongke() {
         defaultTable = (DefaultTableModel) tbbangthongke.getModel();
         listThongke = HoaDonChiTietService.getAll1();
 
-      
         defaultTable.setRowCount(0);
 
         if (listThongke.size() > 0) {
             int io = 0;
-            double tongbang=0;
+            double tongbang = 0;
             for (int i = 0; i < listThongke.size(); i = i + 1) {
                 if (listThongke.get(i).getMaSP().equalsIgnoreCase(tftimkiemthongke.getText())) {
-             
+
                     double a = (double) (listThongke.get(i).getDonGia() * 1);
-                    defaultTable.addRow(new Object[]{io=io + 1, listThongke.get(i).getMaSP(),
+                    defaultTable.addRow(new Object[]{io = io + 1, listThongke.get(i).getMaSP(),
                         listThongke.get(i).getMaHD(),
                         listThongke.get(i).getTenSP(),
                         listThongke.get(i).getSoLuong(),
@@ -2095,8 +2057,8 @@ public void timkiemthongke1() {
                         String.format("%,.2f", listThongke.get(i).thanhtien()) + " VND",
                         listThongke.get(i).chuyenngaymua()
                     });
-                    tongbang= listThongke.get(i).thanhtien()+tongbang;
-                   tftongdoanhthutimkiem.setText(String.format("%,.2f",tongbang) + " VND");
+                    tongbang = listThongke.get(i).thanhtien() + tongbang;
+                    tftongdoanhthutimkiem.setText(String.format("%,.2f", tongbang) + " VND");
                 }
 
             }
@@ -2104,40 +2066,32 @@ public void timkiemthongke1() {
             System.err.println("list.size=  " + listThongke.size());
         }
 
-        
-        
-        
         ///////////////
-             defaultTable = (DefaultTableModel) tbbangsanphambanchaynhat.getModel();
-        
+        defaultTable = (DefaultTableModel) tbbangsanphambanchaynhat.getModel();
 
         defaultTable.setRowCount(0);
 
         if (listThongke.size() > 0) {
-           int b2=0;
+            int b2 = 0;
             for (int i = 0; i < HoaDonChiTietService.getAl2().size(); i = i + 1) {
 
-                 if (HoaDonChiTietService.getAl2().get(i).getMaSP().equalsIgnoreCase(tftimkiemthongke.getText())) {
-   defaultTable.addRow( new Object[]{
-   b2=b2+1,
-           HoaDonChiTietService.getAl2().get(i).getMaSP(),
-            HoaDonChiTietService.getAl2().get(i).getTenSP(),
-             HoaDonChiTietService.getAl2().get(i).getTongsoLuong()
-   }
-   
-   );
-                 }
+                if (HoaDonChiTietService.getAl2().get(i).getMaSP().equalsIgnoreCase(tftimkiemthongke.getText())) {
+                    defaultTable.addRow(new Object[]{
+                        b2 = b2 + 1,
+                        HoaDonChiTietService.getAl2().get(i).getMaSP(),
+                        HoaDonChiTietService.getAl2().get(i).getTenSP(),
+                        HoaDonChiTietService.getAl2().get(i).getTongsoLuong()
+                    }
+                    );
+                }
             }
         } else {
             System.err.println("list.size=  " + listThongke.size());
         }
 
 //
-      //  timkiemimei();
-
+        //  timkiemimei();
     }
-
-
 
     public int sosanhngaybtvskt() throws ParseException {
 
@@ -2158,36 +2112,33 @@ public void timkiemthongke1() {
     int kt = 0;
 
     public boolean checktimkiemtheokhoangtime() throws ParseException {
-        if (tfngaybatdauthongke.getDate()==null) {
+        if (tfngaybatdauthongke.getDate() == null) {
             JOptionPane.showMessageDialog(this, "Ngày bắt đầu không đúng định dạng dd-MM-yyyy");
             return false;
         } else {
-            if (tfketthucngaythongke.getDate()==null) {
+            if (tfketthucngaythongke.getDate() == null) {
                 JOptionPane.showMessageDialog(this, "Ngày kết thúc kkhông đúng định dạng dd-MM-yyyy");
                 return false;
             } else {
-           
-                   
-                        if (sosanhngaybtvskt() == 0) {
-                            kt = 0;
-                            return true;
-                        } else {
-                            if (sosanhngaybtvskt() == -1) {
-                                kt = 1;
-                                return true;
-                            } else {
-                                JOptionPane.showMessageDialog(this, "Ngày kết thúc phải lớn hơn hoặc bằng ngày bắt đàu");
-                                return false;
-                            }
-                        }
-                   
-                
+
+                if (sosanhngaybtvskt() == 0) {
+                    kt = 0;
+                    return true;
+                } else {
+                    if (sosanhngaybtvskt() == -1) {
+                        kt = 1;
+                        return true;
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Ngày kết thúc phải lớn hơn hoặc bằng ngày bắt đàu");
+                        return false;
+                    }
+                }
+
             }
         }
     }
 
-     
-     public String chuyenngaydd_MM_yyyy(String s) {
+    public String chuyenngaydd_MM_yyyy(String s) {
 
         try {
             Date date = new SimpleDateFormat("yyyy-MM-dd").parse(s);
@@ -2199,7 +2150,8 @@ public void timkiemthongke1() {
         }
 
     }
-     public String chuyenngayY_M_D(String s) {
+
+    public String chuyenngayY_M_D(String s) {
 
         try {
             Date date = new SimpleDateFormat("dd-MM-yyyy").parse(s);
@@ -2211,6 +2163,7 @@ public void timkiemthongke1() {
         }
 
     }
+
     public String chuyenngaymuatk(Date s) {
 
         try {
@@ -2223,17 +2176,18 @@ public void timkiemthongke1() {
         }
 
     }
-       public String chuyen_d_M_y(Date s){
-            try {
-                 SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-         String formattedDate = format.format( s);
-       return formattedDate;
-            } catch (Exception e) {
-                return "";
-            }
-           
+
+    public String chuyen_d_M_y(Date s) {
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+            String formattedDate = format.format(s);
+            return formattedDate;
+        } catch (Exception e) {
+            return "";
         }
- 
+
+    }
+
     public boolean loadbangthongtheotimkiemkhoangtime0() throws ParseException {
         defaultTable = (DefaultTableModel) tbbangthongke.getModel();
         listThongke = HoaDonChiTietService.getAll1();
@@ -2247,18 +2201,18 @@ public void timkiemthongke1() {
         double tong = 0;
         //----------------------------------------------------------------------
         defaultTable.setRowCount(0);
-         int st=0;
-         double tongbang=0;
+        int st = 0;
+        double tongbang = 0;
         if (listThongke.size() > 0) {
             for (int i = 0; i < listThongke.size(); i = i + 1) {
                 if (sosanhngaytrongkhoang0(listThongke.get(i).chuyenngaymua())) {
 
                     solg = listThongke.get(i).getSoLuong() + solg;
                     tong = listThongke.get(i).thanhtien() + tong;
-                      tongbang= listThongke.get(i).thanhtien()+tongbang;
-                 
+                    tongbang = listThongke.get(i).thanhtien() + tongbang;
+
                     double a = (double) (listThongke.get(i).getDonGia() * 1);
-                    defaultTable.addRow(new Object[]{st=st + 1, listThongke.get(i).getMaSP(),
+                    defaultTable.addRow(new Object[]{st = st + 1, listThongke.get(i).getMaSP(),
                         listThongke.get(i).getMaHD(),
                         listThongke.get(i).getTenSP(),
                         listThongke.get(i).getSoLuong(),
@@ -2266,15 +2220,14 @@ public void timkiemthongke1() {
                         String.format("%,.2f", listThongke.get(i).thanhtien()) + " VND",
                         listThongke.get(i).chuyenngaymua()
                     });
-                    
-                  
+
                 }
             }
-               tfdondahuy.setText(" 0");
-        String doanhthu = String.format("%,.2f", tong) + " VND";
-        tfdoanhthu.setText(doanhthu);
-        tfsoluongsanphambanthongke.setText("" + solg);
-         tftongdoanhthutimkiem.setText(String.format("%,.2f",tongbang) + " VND");
+            tfdondahuy.setText(" 0");
+            String doanhthu = String.format("%,.2f", tong) + " VND";
+            tfdoanhthu.setText(doanhthu);
+            tfsoluongsanphambanthongke.setText("" + solg);
+            tftongdoanhthutimkiem.setText(String.format("%,.2f", tongbang) + " VND");
         } else {
             System.err.println(" sizz sanpham " + listThongke.size());
         }
@@ -2282,19 +2235,14 @@ public void timkiemthongke1() {
         int tc = 0;
 
         for (HoaDonResponse hd : HoaDonService.getAll1()) {
-            if (sosanhngaytrongkhoang0(chuyenngaymuatk(hd.getCreatedAt()))  && hd.isTrangThai()) {
+            if (sosanhngaytrongkhoang0(chuyenngaymuatk(hd.getCreatedAt())) && hd.isTrangThai()) {
                 tc = tc + 1;
             }
         }
         tftongdonhang.setText("" + tc);
         tfdonthanhcong.setText(" " + String.valueOf(tc));
-        
 
-        
-        
-        
-     
-return true;
+        return true;
     }
 
     public boolean loadbangthongtheotimkiemkhoangtime1() throws ParseException {
@@ -2310,20 +2258,18 @@ return true;
         double tong = 0;
         //----------------------------------------------------------------------
         defaultTable.setRowCount(0);
-          int stt=0;
-         double tongbang=0;
+        int stt = 0;
+        double tongbang = 0;
         if (listThongke.size() > 0) {
             for (int i = 0; i < listThongke.size(); i = i + 1) {
                 if (sosanhngaytrongkhoang1(listThongke.get(i).chuyenngaymua())) {
 
                     solg = listThongke.get(i).getSoLuong() + solg;
                     tong = listThongke.get(i).thanhtien() + tong;
-                        tongbang= listThongke.get(i).thanhtien()+tongbang;
-   
-        
-        
+                    tongbang = listThongke.get(i).thanhtien() + tongbang;
+
                     double a = (double) (listThongke.get(i).getDonGia() * 1);
-                    defaultTable.addRow(new Object[]{stt=stt + 1, listThongke.get(i).getMaSP(),
+                    defaultTable.addRow(new Object[]{stt = stt + 1, listThongke.get(i).getMaSP(),
                         listThongke.get(i).getMaHD(),
                         listThongke.get(i).getTenSP(),
                         listThongke.get(i).getSoLuong(),
@@ -2331,14 +2277,13 @@ return true;
                         String.format("%,.2f", listThongke.get(i).thanhtien()) + " VND",
                         listThongke.get(i).chuyenngaymua()
                     });
-                 
-                  
+
                 }
             }
-                 String doanhthu = String.format("%,.2f", tong) + " VND";
-        tfdoanhthu.setText(doanhthu);
-        tfsoluongsanphambanthongke.setText("" + solg);
-         tftongdoanhthutimkiem.setText(String.format("%,.2f",tongbang) + " VND");
+            String doanhthu = String.format("%,.2f", tong) + " VND";
+            tfdoanhthu.setText(doanhthu);
+            tfsoluongsanphambanthongke.setText("" + solg);
+            tftongdoanhthutimkiem.setText(String.format("%,.2f", tongbang) + " VND");
         } else {
             System.err.println("list.size=  " + listThongke.size());
         }
@@ -2375,8 +2320,7 @@ return true;
 //        } else {
 //            System.err.println("list.size=  " + listThongke.size());
 //        }
-      
-return  true;
+        return true;
     }
 
     public boolean sosanhngaytrongkhoang1(String ec) throws ParseException {
@@ -2404,7 +2348,7 @@ return  true;
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 
-            Date date1 = sdf.parse(chuyen_d_M_y(tfngaybatdauthongke.getDate()));
+        Date date1 = sdf.parse(chuyen_d_M_y(tfngaybatdauthongke.getDate()));
 
         Date date2 = sdf.parse(chuyen_d_M_y(tfketthucngaythongke.getDate()));
         Date date3 = sdf.parse(ec);
@@ -2417,336 +2361,320 @@ return  true;
             System.out.println("kiem tra  date ok");
             return true;
         } else {
-              System.out.println("kem tra loi");
+            System.out.println("kem tra loi");
             return false;
-           
+
         }
 
     }
-
-
 
     public void guibaocao() {
-    String i=    JOptionPane.showInputDialog(this,"NHẬP EMAIL CỦA SẾP");
-        
-          if ( i != null  && i.length() <=0) {
-            JOptionPane.showMessageDialog(this,"Không để trống eimil sếp ");
-        }  else{
-          
-                if (i==null ) {
-             JOptionPane.showMessageDialog(this," Đã dừng gửi");
-        } else{
-                
-                
-                
-               final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
-        // Get a Properties object
-        Properties props = System.getProperties();
-        props.setProperty("mail.smtp.host", "smtp.gmail.com");
-        props.setProperty("mail.smtp.socketFactory.class", SSL_FACTORY);
-        props.setProperty("mail.smtp.socketFactory.fallback", "false");
-        props.setProperty("mail.smtp.port", "465");
-        props.setProperty("mail.smtp.socketFactory.port", "465");
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.debug", "true");
-        props.put("mail.store.protocol", "pop3");
-        props.put("mail.transport.protocol", "smtp");
-        final String username = "thangpdph28478@fpt.edu.vn";//
-        final String password = "t3ku8v2k";
-        final String toEmail = i;
-        try {
-            Session session = Session.getDefaultInstance(props,
-                    new Authenticator() {
-                protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(username, password);
-                }
-            });
+        String i = JOptionPane.showInputDialog(this, "NHẬP EMAIL CỦA SẾP");
 
-            // -- Create a new message --
-            Message msg = new MimeMessage(session);
+        if (i != null && i.length() <= 0) {
+            JOptionPane.showMessageDialog(this, "Không để trống eimil sếp ");
+        } else {
 
-            // -- Set the FROM and TO fields --
-            msg.setFrom(new InternetAddress("thangpdph28478@fpt.edu.vn"));
-            msg.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse(toEmail, false));
-            msg.setSubject("THONG BAO DOANH THU: NHOM 5 BAN DIEN THOAI  [ " + chuyen_d_M_y(tfngaybatdauthongke.getDate()) + " DEN " + chuyen_d_M_y(tfketthucngaythongke.getDate()) + " ]");
-           
-            String  baocao="TONG DOANH THU "+"[ " + chuyen_d_M_y(tfngaybatdauthongke.getDate()) + " DEN " + chuyen_d_M_y(tfketthucngaythongke.getDate()) + " ]" + "\n"
-                    + "--------------------------------------------------------------------------\n"
-                    + "TONG DON HANG                            : " + tftongdonhang.getText() + "\n"
-                    + "THANH CONG                                   :" + tfdonthanhcong.getText() + "\n"
-                    + "DA HUY                                              :" + tfdondahuy.getText() + "\n"
-                    + "--------------------------------------------------------------------------\n"
-                    + "SO LUONG SAN PHAM DA BAN      : " + tfsoluongsanphambanthongke.getText() + "\n"
-                    + "--------------------------------------------------------------------------\n"
-                    + "TONG DOANH THU                           : " + tfdoanhthu.getText() + "\n";
-            msg.setText(baocao);
-            msg.setSentDate(new Date());
-               int xuat = JOptionPane.showConfirmDialog(this,baocao);
-
-            if (xuat == 0) {
-                Transport.send(msg);
-                JOptionPane.showMessageDialog(this, "GỬI BÁO CÁO THÀNH CÔNG");
+            if (i == null) {
+                JOptionPane.showMessageDialog(this, " Đã dừng gửi");
             } else {
-                JOptionPane.showMessageDialog(this, "ĐÃ DỪNG BÁO CÁO");
-            }
 
-        } catch (MessagingException e) {
-            JOptionPane.showMessageDialog(this, "email không tồn tại ,Gửi báo cáo thất bại");
-            System.out.println("LỖI :    " + e);
-        }
-   
-                
-                
-                
-                
+                final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
+                // Get a Properties object
+                Properties props = System.getProperties();
+                props.setProperty("mail.smtp.host", "smtp.gmail.com");
+                props.setProperty("mail.smtp.socketFactory.class", SSL_FACTORY);
+                props.setProperty("mail.smtp.socketFactory.fallback", "false");
+                props.setProperty("mail.smtp.port", "465");
+                props.setProperty("mail.smtp.socketFactory.port", "465");
+                props.put("mail.smtp.auth", "true");
+                props.put("mail.debug", "true");
+                props.put("mail.store.protocol", "pop3");
+                props.put("mail.transport.protocol", "smtp");
+                final String username = "thangpdph28478@fpt.edu.vn";//
+                final String password = "t3ku8v2k";
+                final String toEmail = i;
+                try {
+                    Session session = Session.getDefaultInstance(props,
+                            new Authenticator() {
+                        protected PasswordAuthentication getPasswordAuthentication() {
+                            return new PasswordAuthentication(username, password);
+                        }
+                    });
+
+                    // -- Create a new message --
+                    Message msg = new MimeMessage(session);
+
+                    // -- Set the FROM and TO fields --
+                    msg.setFrom(new InternetAddress("thangpdph28478@fpt.edu.vn"));
+                    msg.setRecipients(Message.RecipientType.TO,
+                            InternetAddress.parse(toEmail, false));
+                    msg.setSubject("THONG BAO DOANH THU: NHOM 5 BAN DIEN THOAI  [ " + chuyen_d_M_y(tfngaybatdauthongke.getDate()) + " DEN " + chuyen_d_M_y(tfketthucngaythongke.getDate()) + " ]");
+
+                    String baocao = "TONG DOANH THU " + "[ " + chuyen_d_M_y(tfngaybatdauthongke.getDate()) + " DEN " + chuyen_d_M_y(tfketthucngaythongke.getDate()) + " ]" + "\n"
+                            + "--------------------------------------------------------------------------\n"
+                            + "TONG DON HANG                            : " + tftongdonhang.getText() + "\n"
+                            + "THANH CONG                                   :" + tfdonthanhcong.getText() + "\n"
+                            + "DA HUY                                              :" + tfdondahuy.getText() + "\n"
+                            + "--------------------------------------------------------------------------\n"
+                            + "SO LUONG SAN PHAM DA BAN      : " + tfsoluongsanphambanthongke.getText() + "\n"
+                            + "--------------------------------------------------------------------------\n"
+                            + "TONG DOANH THU                           : " + tfdoanhthu.getText() + "\n";
+                    msg.setText(baocao);
+                    msg.setSentDate(new Date());
+                    int xuat = JOptionPane.showConfirmDialog(this, baocao);
+
+                    if (xuat == 0) {
+                        Transport.send(msg);
+                        JOptionPane.showMessageDialog(this, "GỬI BÁO CÁO THÀNH CÔNG");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "ĐÃ DỪNG BÁO CÁO");
+                    }
+
+                } catch (MessagingException e) {
+                    JOptionPane.showMessageDialog(this, "email không tồn tại ,Gửi báo cáo thất bại");
+                    System.out.println("LỖI :    " + e);
                 }
-          }
-        
-      
-    }
-public  void locsanphambanchaytheokhoangtime(){
 
- defaultTable = (DefaultTableModel) tbbangsanphambanchaynhat.getModel();
-        
+            }
+        }
+
+    }
+
+    public void locsanphambanchaytheokhoangtime() {
+
+        defaultTable = (DefaultTableModel) tbbangsanphambanchaynhat.getModel();
 
         defaultTable.setRowCount(0);
 
         if (HoaDonChiTietService.getAl4(chuyenngayY_M_D(ngaybatdau), chuyenngayY_M_D(nayketthuc)).size() > 0) {
             for (int i = 0; i < HoaDonChiTietService.getAl4(chuyenngayY_M_D(ngaybatdau), chuyenngayY_M_D(nayketthuc)).size(); i = i + 1) {
 
-               
-   defaultTable.addRow( new Object[]{
-   i+1,
-           HoaDonChiTietService.getAl4(chuyenngayY_M_D(ngaybatdau), chuyenngayY_M_D(nayketthuc)).get(i).getMaSP(),
-           HoaDonChiTietService.getAl4(chuyenngayY_M_D(ngaybatdau), chuyenngayY_M_D(nayketthuc)).get(i).getTenSP(),
-           HoaDonChiTietService.getAl4(chuyenngayY_M_D(ngaybatdau), chuyenngayY_M_D(nayketthuc)).get(i).getTongsoLuong()
-   }
-   
-   );
+                defaultTable.addRow(new Object[]{
+                    i + 1,
+                    HoaDonChiTietService.getAl4(chuyenngayY_M_D(ngaybatdau), chuyenngayY_M_D(nayketthuc)).get(i).getMaSP(),
+                    HoaDonChiTietService.getAl4(chuyenngayY_M_D(ngaybatdau), chuyenngayY_M_D(nayketthuc)).get(i).getTenSP(),
+                    HoaDonChiTietService.getAl4(chuyenngayY_M_D(ngaybatdau), chuyenngayY_M_D(nayketthuc)).get(i).getTongsoLuong()
+                }
+                );
             }
         } else {
             System.err.println("list.size=  " + listThongke.size());
         }
-}
+    }
 
-public  void locsanphambanchaytheokhoangtimetimkiem(){
+    public void locsanphambanchaytheokhoangtimetimkiem() {
 
- defaultTable = (DefaultTableModel) tbbangsanphambanchaynhat.getModel();
-        
+        defaultTable = (DefaultTableModel) tbbangsanphambanchaynhat.getModel();
 
         defaultTable.setRowCount(0);
 
         if (listThongke.size() > 0) {
-            int io=0;
+            int io = 0;
             for (int i = 0; i < HoaDonChiTietService.getAl4(chuyenngayY_M_D(ngaybatdau), chuyenngayY_M_D(nayketthuc)).size(); i = i + 1) {
                 if (HoaDonChiTietService.getAl4(chuyenngayY_M_D(ngaybatdau), chuyenngayY_M_D(nayketthuc)).get(i).getMaSP().equals(tftimkiemthongke.getText())) {
-                     defaultTable.addRow( new Object[]{
-   io=io+1,
-           HoaDonChiTietService.getAl4(chuyenngayY_M_D(ngaybatdau), chuyenngayY_M_D(nayketthuc)).get(i).getMaSP(),
-           HoaDonChiTietService.getAl4(chuyenngayY_M_D(ngaybatdau), chuyenngayY_M_D(nayketthuc)).get(i).getTenSP(),
-           HoaDonChiTietService.getAl4(chuyenngayY_M_D(ngaybatdau), chuyenngayY_M_D(nayketthuc)).get(i).getTongsoLuong()
-   }
-   
-   );
+                    defaultTable.addRow(new Object[]{
+                        io = io + 1,
+                        HoaDonChiTietService.getAl4(chuyenngayY_M_D(ngaybatdau), chuyenngayY_M_D(nayketthuc)).get(i).getMaSP(),
+                        HoaDonChiTietService.getAl4(chuyenngayY_M_D(ngaybatdau), chuyenngayY_M_D(nayketthuc)).get(i).getTenSP(),
+                        HoaDonChiTietService.getAl4(chuyenngayY_M_D(ngaybatdau), chuyenngayY_M_D(nayketthuc)).get(i).getTongsoLuong()
+                    }
+                    );
                 }
-               
-  
+
             }
         } else {
             System.err.println("list.size=  " + listThongke.size());
         }
-}
-    public  void xuatexcelthongke(){
-    
-          if (kiemtravitribangthongke==0) {
-              JOptionPane.showMessageDialog(this,"Bạn chưa bôi  đen dữ liệu cần xuất Excel");
-          } else {
-              if (kiemtravitribangthongke==1) {
-                  vitribangexcle=(DefaultTableModel)  tbbangthongke.getModel();
-                   JFileChooser excelFileChooser = new JFileChooser("C:\\Users\\Admin\\Desktop");
-        excelFileChooser.setDialogTitle("Save as");
-        FileNameExtensionFilter filefilter = new FileNameExtensionFilter("EXCEL FILES", "xls", "xlsx", "xlsm");
-        excelFileChooser.setFileFilter(filefilter);
-        int check = excelFileChooser.showSaveDialog(null);
-
-        //Check khi ấn nút save
-        if (check == JFileChooser.APPROVE_OPTION) {
-            FileOutputStream FOS = null;
-            BufferedOutputStream BOS = null;
-            XSSFWorkbook excelJtableExporter = null;
-            try {
-                excelJtableExporter = new XSSFWorkbook();
-//                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd_MM_yyyy HH:mm:ss");
-//                LocalDateTime now = LocalDateTime.now();
-                XSSFSheet excelSheet = excelJtableExporter.createSheet("SẢN PHẨM BÁN THEO KHOẢNG THỜI GIAN");
-                //Lấy số dòng, cột tblHoaDon
-                    
-                for (int i = tbbangthongke.getSelectedRow(); i < tbbangthongke.getSelectedRow()+tbbangthongke.getSelectedRowCount(); i++) {
-                    XSSFRow excelRow = excelSheet.createRow(i);
-                    for (int j = 0; j < vitribangexcle.getColumnCount(); j++) {
-                        XSSFCell excelCell = excelRow.createCell(j);
-
-                        excelCell.setCellValue(vitribangexcle.getValueAt(i, j).toString());
-                    }
-                }
-
-                FOS = new FileOutputStream(excelFileChooser.getSelectedFile() + ".xlsx");
-                BOS = new BufferedOutputStream(FOS);
-                excelJtableExporter.write(BOS);
-                JOptionPane.showMessageDialog(this, "Xuất Thành Công!!!!");
-            } catch (FileNotFoundException ex) {
-                ex.printStackTrace();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            } finally {
-                try {
-                    if (BOS != null) {
-                        BOS.close();
-                    }
-
-                    if (FOS != null) {
-                        FOS.close();
-                    }
-
-                    if (excelJtableExporter != null) {
-                        excelJtableExporter.close();
-                    }
-
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-            }
-
-        }
-              } else {
-                    if (kiemtravitribangthongke==2) {
-                  vitribangexcle=(DefaultTableModel)  tbbangsanphambanchaynhat.getModel();
-                   JFileChooser excelFileChooser = new JFileChooser("C:\\Users\\Admin\\Desktop");
-        excelFileChooser.setDialogTitle("Save as");
-        FileNameExtensionFilter filefilter = new FileNameExtensionFilter("EXCEL FILES", "xls", "xlsx", "xlsm");
-        excelFileChooser.setFileFilter(filefilter);
-        int check = excelFileChooser.showSaveDialog(null);
-
-        //Check khi ấn nút save
-        if (check == JFileChooser.APPROVE_OPTION) {
-            FileOutputStream FOS = null;
-            BufferedOutputStream BOS = null;
-            XSSFWorkbook excelJtableExporter = null;
-            try {
-                excelJtableExporter = new XSSFWorkbook();
-//                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd_MM_yyyy HH:mm:ss");
-//                LocalDateTime now = LocalDateTime.now();
-                XSSFSheet excelSheet = excelJtableExporter.createSheet("Sản phẩm bán nhiều nhất trong khoang thời gian");
-                //Lấy số dòng, cột tblHoaDon
-                    
-                for (int i = tbbangsanphambanchaynhat.getSelectedRow(); i <tbbangsanphambanchaynhat.getSelectedRow()+tbbangsanphambanchaynhat.getSelectedRowCount(); i++) {
-                    XSSFRow excelRow = excelSheet.createRow(i);
-                    for (int j = 0; j < vitribangexcle.getColumnCount(); j++) {
-                        XSSFCell excelCell = excelRow.createCell(j);
-
-                        excelCell.setCellValue(vitribangexcle.getValueAt(i, j).toString());
-                    }
-                }
-
-                FOS = new FileOutputStream(excelFileChooser.getSelectedFile() + ".xlsx");
-                BOS = new BufferedOutputStream(FOS);
-                excelJtableExporter.write(BOS);
-                JOptionPane.showMessageDialog(this, "Xuất Thành Công!!!!");
-            } catch (FileNotFoundException ex) {
-                ex.printStackTrace();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            } finally {
-                try {
-                    if (BOS != null) {
-                        BOS.close();
-                    }
-
-                    if (FOS != null) {
-                        FOS.close();
-                    }
-
-                    if (excelJtableExporter != null) {
-                        excelJtableExporter.close();
-                    }
-
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-            }
-
-        }
-              }else{   
-                    
-                      if (kiemtravitribangthongke==3) {
-                  vitribangexcle=(DefaultTableModel)  tbsanphamtonthongke.getModel();
-                   JFileChooser excelFileChooser = new JFileChooser("C:\\Users\\Admin\\Desktop");
-        excelFileChooser.setDialogTitle("Save as");
-        FileNameExtensionFilter filefilter = new FileNameExtensionFilter("EXCEL FILES", "xls", "xlsx", "xlsm");
-        excelFileChooser.setFileFilter(filefilter);
-        int check = excelFileChooser.showSaveDialog(null);
-
-        //Check khi ấn nút save
-        if (check == JFileChooser.APPROVE_OPTION) {
-            FileOutputStream FOS = null;
-            BufferedOutputStream BOS = null;
-            XSSFWorkbook excelJtableExporter = null;
-            try {
-                excelJtableExporter = new XSSFWorkbook();
-//                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd_MM_yyyy HH:mm:ss");
-//                LocalDateTime now = LocalDateTime.now();
-                XSSFSheet excelSheet = excelJtableExporter.createSheet("SẢN PHẨM TRONG KHO");
-                //Lấy số dòng, cột tblHoaDon
-                    
-                for (int i = tbsanphamtonthongke.getSelectedRow(); i < tbsanphamtonthongke.getSelectedRow()+tbsanphamtonthongke.getSelectedRowCount(); i++) {
-                    XSSFRow excelRow = excelSheet.createRow(i);
-                    for (int j = 0; j < vitribangexcle.getColumnCount(); j++) {
-                        XSSFCell excelCell = excelRow.createCell(j);
-
-                        excelCell.setCellValue(vitribangexcle.getValueAt(i, j).toString());
-                    }
-                }
-
-                FOS = new FileOutputStream(excelFileChooser.getSelectedFile() + ".xlsx");
-                BOS = new BufferedOutputStream(FOS);
-                excelJtableExporter.write(BOS);
-                JOptionPane.showMessageDialog(this, "Xuất Thành Công!!!!");
-            } catch (FileNotFoundException ex) {
-                ex.printStackTrace();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            } finally {
-                try {
-                    if (BOS != null) {
-                        BOS.close();
-                    }
-
-                    if (FOS != null) {
-                        FOS.close();
-                    }
-
-                    if (excelJtableExporter != null) {
-                        excelJtableExporter.close();
-                    }
-
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-            }
-
-        }
-              }
-                    
-                    }
-              }
-          }
-        
     }
 
-   
+    public void xuatexcelthongke() {
 
-  
+        if (kiemtravitribangthongke == 0) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa bôi  đen dữ liệu cần xuất Excel");
+        } else {
+            if (kiemtravitribangthongke == 1) {
+                vitribangexcle = (DefaultTableModel) tbbangthongke.getModel();
+                JFileChooser excelFileChooser = new JFileChooser("C:\\Users\\Admin\\Desktop");
+                excelFileChooser.setDialogTitle("Save as");
+                FileNameExtensionFilter filefilter = new FileNameExtensionFilter("EXCEL FILES", "xls", "xlsx", "xlsm");
+                excelFileChooser.setFileFilter(filefilter);
+                int check = excelFileChooser.showSaveDialog(null);
+
+                //Check khi ấn nút save
+                if (check == JFileChooser.APPROVE_OPTION) {
+                    FileOutputStream FOS = null;
+                    BufferedOutputStream BOS = null;
+                    XSSFWorkbook excelJtableExporter = null;
+                    try {
+                        excelJtableExporter = new XSSFWorkbook();
+//                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd_MM_yyyy HH:mm:ss");
+//                LocalDateTime now = LocalDateTime.now();
+                        XSSFSheet excelSheet = excelJtableExporter.createSheet("SẢN PHẨM BÁN THEO KHOẢNG THỜI GIAN");
+                        //Lấy số dòng, cột tblHoaDon
+
+                        for (int i = tbbangthongke.getSelectedRow(); i < tbbangthongke.getSelectedRow() + tbbangthongke.getSelectedRowCount(); i++) {
+                            XSSFRow excelRow = excelSheet.createRow(i);
+                            for (int j = 0; j < vitribangexcle.getColumnCount(); j++) {
+                                XSSFCell excelCell = excelRow.createCell(j);
+
+                                excelCell.setCellValue(vitribangexcle.getValueAt(i, j).toString());
+                            }
+                        }
+
+                        FOS = new FileOutputStream(excelFileChooser.getSelectedFile() + ".xlsx");
+                        BOS = new BufferedOutputStream(FOS);
+                        excelJtableExporter.write(BOS);
+                        JOptionPane.showMessageDialog(this, "Xuất Thành Công!!!!");
+                    } catch (FileNotFoundException ex) {
+                        ex.printStackTrace();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    } finally {
+                        try {
+                            if (BOS != null) {
+                                BOS.close();
+                            }
+
+                            if (FOS != null) {
+                                FOS.close();
+                            }
+
+                            if (excelJtableExporter != null) {
+                                excelJtableExporter.close();
+                            }
+
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+
+                }
+            } else {
+                if (kiemtravitribangthongke == 2) {
+                    vitribangexcle = (DefaultTableModel) tbbangsanphambanchaynhat.getModel();
+                    JFileChooser excelFileChooser = new JFileChooser("C:\\Users\\Admin\\Desktop");
+                    excelFileChooser.setDialogTitle("Save as");
+                    FileNameExtensionFilter filefilter = new FileNameExtensionFilter("EXCEL FILES", "xls", "xlsx", "xlsm");
+                    excelFileChooser.setFileFilter(filefilter);
+                    int check = excelFileChooser.showSaveDialog(null);
+
+                    //Check khi ấn nút save
+                    if (check == JFileChooser.APPROVE_OPTION) {
+                        FileOutputStream FOS = null;
+                        BufferedOutputStream BOS = null;
+                        XSSFWorkbook excelJtableExporter = null;
+                        try {
+                            excelJtableExporter = new XSSFWorkbook();
+//                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd_MM_yyyy HH:mm:ss");
+//                LocalDateTime now = LocalDateTime.now();
+                            XSSFSheet excelSheet = excelJtableExporter.createSheet("Sản phẩm bán nhiều nhất trong khoang thời gian");
+                            //Lấy số dòng, cột tblHoaDon
+
+                            for (int i = tbbangsanphambanchaynhat.getSelectedRow(); i < tbbangsanphambanchaynhat.getSelectedRow() + tbbangsanphambanchaynhat.getSelectedRowCount(); i++) {
+                                XSSFRow excelRow = excelSheet.createRow(i);
+                                for (int j = 0; j < vitribangexcle.getColumnCount(); j++) {
+                                    XSSFCell excelCell = excelRow.createCell(j);
+
+                                    excelCell.setCellValue(vitribangexcle.getValueAt(i, j).toString());
+                                }
+                            }
+
+                            FOS = new FileOutputStream(excelFileChooser.getSelectedFile() + ".xlsx");
+                            BOS = new BufferedOutputStream(FOS);
+                            excelJtableExporter.write(BOS);
+                            JOptionPane.showMessageDialog(this, "Xuất Thành Công!!!!");
+                        } catch (FileNotFoundException ex) {
+                            ex.printStackTrace();
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        } finally {
+                            try {
+                                if (BOS != null) {
+                                    BOS.close();
+                                }
+
+                                if (FOS != null) {
+                                    FOS.close();
+                                }
+
+                                if (excelJtableExporter != null) {
+                                    excelJtableExporter.close();
+                                }
+
+                            } catch (IOException ex) {
+                                ex.printStackTrace();
+                            }
+                        }
+
+                    }
+                } else {
+
+                    if (kiemtravitribangthongke == 3) {
+                        vitribangexcle = (DefaultTableModel) tbsanphamtonthongke.getModel();
+                        JFileChooser excelFileChooser = new JFileChooser("C:\\Users\\Admin\\Desktop");
+                        excelFileChooser.setDialogTitle("Save as");
+                        FileNameExtensionFilter filefilter = new FileNameExtensionFilter("EXCEL FILES", "xls", "xlsx", "xlsm");
+                        excelFileChooser.setFileFilter(filefilter);
+                        int check = excelFileChooser.showSaveDialog(null);
+
+                        //Check khi ấn nút save
+                        if (check == JFileChooser.APPROVE_OPTION) {
+                            FileOutputStream FOS = null;
+                            BufferedOutputStream BOS = null;
+                            XSSFWorkbook excelJtableExporter = null;
+                            try {
+                                excelJtableExporter = new XSSFWorkbook();
+//                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd_MM_yyyy HH:mm:ss");
+//                LocalDateTime now = LocalDateTime.now();
+                                XSSFSheet excelSheet = excelJtableExporter.createSheet("SẢN PHẨM TRONG KHO");
+                                //Lấy số dòng, cột tblHoaDon
+
+                                for (int i = tbsanphamtonthongke.getSelectedRow(); i < tbsanphamtonthongke.getSelectedRow() + tbsanphamtonthongke.getSelectedRowCount(); i++) {
+                                    XSSFRow excelRow = excelSheet.createRow(i);
+                                    for (int j = 0; j < vitribangexcle.getColumnCount(); j++) {
+                                        XSSFCell excelCell = excelRow.createCell(j);
+
+                                        excelCell.setCellValue(vitribangexcle.getValueAt(i, j).toString());
+                                    }
+                                }
+
+                                FOS = new FileOutputStream(excelFileChooser.getSelectedFile() + ".xlsx");
+                                BOS = new BufferedOutputStream(FOS);
+                                excelJtableExporter.write(BOS);
+                                JOptionPane.showMessageDialog(this, "Xuất Thành Công!!!!");
+                            } catch (FileNotFoundException ex) {
+                                ex.printStackTrace();
+                            } catch (IOException ex) {
+                                ex.printStackTrace();
+                            } finally {
+                                try {
+                                    if (BOS != null) {
+                                        BOS.close();
+                                    }
+
+                                    if (FOS != null) {
+                                        FOS.close();
+                                    }
+
+                                    if (excelJtableExporter != null) {
+                                        excelJtableExporter.close();
+                                    }
+
+                                } catch (IOException ex) {
+                                    ex.printStackTrace();
+                                }
+                            }
+
+                        }
+                    }
+
+                }
+            }
+        }
+
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -2821,9 +2749,6 @@ public  void locsanphambanchaytheokhoangtimetimkiem(){
         jButton7 = new javax.swing.JButton();
         jLabel35 = new javax.swing.JLabel();
         jPanel16 = new javax.swing.JPanel();
-        btnKHThem = new javax.swing.JButton();
-        btnKHSua = new javax.swing.JButton();
-        btnKHXoa = new javax.swing.JButton();
         jPanel27 = new javax.swing.JPanel();
         jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
@@ -2831,10 +2756,10 @@ public  void locsanphambanchaytheokhoangtimetimkiem(){
         jButton15 = new javax.swing.JButton();
         jPanel22 = new javax.swing.JPanel();
         jLabel36 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jButton16 = new javax.swing.JButton();
+        txtLichSu = new javax.swing.JTextField();
+        btnLichSu = new javax.swing.JButton();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblLichSu = new javax.swing.JTable();
         pl_sanpham = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel7 = new javax.swing.JPanel();
@@ -3607,7 +3532,7 @@ public  void locsanphambanchaytheokhoangtimetimkiem(){
                 .addComponent(pn_ThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(13, 13, 13)
                 .addComponent(pn_Thoat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         lb_Tendetai.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
@@ -3647,6 +3572,11 @@ public  void locsanphambanchaytheokhoangtimetimkiem(){
         ));
         tblThongtinKH1.setGridColor(new java.awt.Color(51, 0, 102));
         tblThongtinKH1.setSelectionBackground(new java.awt.Color(255, 0, 51));
+        tblThongtinKH1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblThongtinKH1MouseClicked(evt);
+            }
+        });
         jScrollPane9.setViewportView(tblThongtinKH1);
 
         jPanel24.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thiết lập thông tin khách hàng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(0, 0, 102))); // NOI18N
@@ -3795,34 +3725,15 @@ public  void locsanphambanchaytheokhoangtimetimkiem(){
         jLabel35.setForeground(new java.awt.Color(0, 0, 102));
         jLabel35.setText("Tìm kiếm");
 
-        btnKHThem.setText("Thêm");
-
-        btnKHSua.setText("Sửa");
-
-        btnKHXoa.setText("Xoá");
-
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
         jPanel16Layout.setHorizontalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel16Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnKHThem)
-                .addGap(18, 18, 18)
-                .addComponent(btnKHSua)
-                .addGap(18, 18, 18)
-                .addComponent(btnKHXoa)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 1068, Short.MAX_VALUE)
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
-                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnKHThem)
-                    .addComponent(btnKHSua)
-                    .addComponent(btnKHXoa))
-                .addContainerGap())
+            .addGap(0, 42, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel23Layout = new javax.swing.GroupLayout(jPanel23);
@@ -3865,6 +3776,11 @@ public  void locsanphambanchaytheokhoangtimetimkiem(){
         jPanel27.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chức năng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12), new java.awt.Color(0, 0, 102))); // NOI18N
 
         jButton9.setText("Thêm");
+        jButton9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton9MouseClicked(evt);
+            }
+        });
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton9ActionPerformed(evt);
@@ -3872,10 +3788,25 @@ public  void locsanphambanchaytheokhoangtimetimkiem(){
         });
 
         jButton10.setText("Sửa");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
 
         jButton11.setText("Xóa");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
 
         jButton15.setText("Làm mới");
+        jButton15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton15ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel27Layout = new javax.swing.GroupLayout(jPanel27);
         jPanel27.setLayout(jPanel27Layout);
@@ -3929,20 +3860,22 @@ public  void locsanphambanchaytheokhoangtimetimkiem(){
         jLabel36.setForeground(new java.awt.Color(0, 0, 102));
         jLabel36.setText("Tìm kiếm");
 
-        jButton16.setText("Tìm kiếm");
+        btnLichSu.setText("Tìm kiếm");
+        btnLichSu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLichSuActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblLichSu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Mã KH", "Tên KH", "Mã HĐ", "Tổng Tiền", "Ngày Tạo"
             }
         ));
-        jScrollPane6.setViewportView(jTable1);
+        jScrollPane6.setViewportView(tblLichSu);
 
         javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
         jPanel22.setLayout(jPanel22Layout);
@@ -3956,9 +3889,9 @@ public  void locsanphambanchaytheokhoangtimetimkiem(){
                         .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel36)
                             .addGroup(jPanel22Layout.createSequentialGroup()
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtLichSu, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton16)))
+                                .addComponent(btnLichSu)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -3969,8 +3902,8 @@ public  void locsanphambanchaytheokhoangtimetimkiem(){
                 .addComponent(jLabel36)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton16))
+                    .addComponent(txtLichSu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLichSu))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(268, Short.MAX_VALUE))
@@ -6384,7 +6317,7 @@ public  void locsanphambanchaytheokhoangtimetimkiem(){
                     .addGroup(jPanel36Layout.createSequentialGroup()
                         .addComponent(jLabel79, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tfdonthanhcong, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)))
+                        .addComponent(tfdonthanhcong, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)))
                 .addGap(0, 12, Short.MAX_VALUE))
         );
         jPanel36Layout.setVerticalGroup(
@@ -7168,7 +7101,7 @@ public  void locsanphambanchaytheokhoangtimetimkiem(){
             .addGroup(jPanel52Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel35, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -7186,7 +7119,7 @@ public  void locsanphambanchaytheokhoangtimetimkiem(){
             pl_thongkeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pl_thongkeLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel52, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel52, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -7959,7 +7892,9 @@ public  void locsanphambanchaytheokhoangtimetimkiem(){
         getAllSanPhamLuuTru(listSanPhamDeleted);
     }//GEN-LAST:event_btnTimKiemSanPhamDeletedActionPerformed
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        // TODO add your handling code here:
+        if (validateKH() != null) {
+            addKH(validateKH());
+        }
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void btnExportMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExportMouseEntered
@@ -8001,15 +7936,15 @@ public  void locsanphambanchaytheokhoangtimetimkiem(){
     private void tableluutruMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableluutruMouseClicked
         // TODO add your handling code here:
         int selectrow = tableluutru.getSelectedRow();
-        
+
         DefaultTableModel dtmNV = (DefaultTableModel) tableluutru.getModel();
         txtmanv.setText(dtmNV.getValueAt(selectrow, 0).toString());
         txttennv.setText(dtmNV.getValueAt(selectrow, 1).toString());
         rdnam.setEnabled(rootPaneCheckingEnabled);
         boolean gt = false;
-        if(rdnam.isSelected()){
+        if (rdnam.isSelected()) {
             gt = false;
-        }else{
+        } else {
             gt = true;
         }
         cbbchucvu.setSelectedItem(dtmNV.getValueAt(selectrow, 3).toString());
@@ -8055,8 +7990,8 @@ public  void locsanphambanchaytheokhoangtimetimkiem(){
         loadnv2(list2);
         final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
         final String toEmail = txtemail.getText();
-         String toTaiKhoan = txttaikhaon.getText();
-         String toMatKhau = txtmatkhau.getText();
+        String toTaiKhoan = txttaikhaon.getText();
+        String toMatKhau = txtmatkhau.getText();
         // Get a Properties object
         Properties props = System.getProperties();
         props.setProperty("mail.smtp.host", "smtp.gmail.com");
@@ -8070,32 +8005,32 @@ public  void locsanphambanchaytheokhoangtimetimkiem(){
         props.put("mail.transport.protocol", "smtp");
         final String username = "tupmph28142@fpt.edu.vn";// EMAIL CUA MINH
         final String password = "0375236867";// MAT KHAU EMAIL
-        
+
         try {
             Session session = Session.getDefaultInstance(props,
-                new Authenticator() {
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(username, password);
-                    }
-                });
+                    new Authenticator() {
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(username, password);
+                }
+            });
 
-                // -- Create a new message --
-                Message msg = new MimeMessage(session);
+            // -- Create a new message --
+            Message msg = new MimeMessage(session);
 
-                // -- Set the FROM and TO fields --
-                msg.setFrom(new InternetAddress("tupmph28142@fpt.edu.vn"));// EMAIL CUA MINH
-                msg.setRecipients(Message.RecipientType.TO,
+            // -- Set the FROM and TO fields --
+            msg.setFrom(new InternetAddress("tupmph28142@fpt.edu.vn"));// EMAIL CUA MINH
+            msg.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(toEmail, false));// toEmail: email muon gui den
-                msg.setSubject("Tài khoản và mật khẩu của bạn");// TIEU DE EMAIL
-                //msg.setText("Tài khoản: "+ toTaiKhoan);// NOI DUNG EMAIL
-                msg.setText("Tai khoan: "+ toTaiKhoan + "|" + "Mat khau: "+ toMatKhau);
-                
-                msg.setSentDate(new Date());
-                Transport.send(msg);
-                
-            } catch (MessagingException e) {
-                System.out.println("Loi gui tin nhan " + e);
-            }
+            msg.setSubject("Tài khoản và mật khẩu của bạn");// TIEU DE EMAIL
+            //msg.setText("Tài khoản: "+ toTaiKhoan);// NOI DUNG EMAIL
+            msg.setText("Tai khoan: " + toTaiKhoan + "|" + "Mat khau: " + toMatKhau);
+
+            msg.setSentDate(new Date());
+            Transport.send(msg);
+
+        } catch (MessagingException e) {
+            System.out.println("Loi gui tin nhan " + e);
+        }
         //listNhanVien.add(e);
         //loadtable();
     }//GEN-LAST:event_btnthemActionPerformed
@@ -8103,13 +8038,13 @@ public  void locsanphambanchaytheokhoangtimetimkiem(){
     private void btnsuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsuaActionPerformed
         // TODO add your handling code here:
         int rowsua = tableluutru.getSelectedRow();
-        if(rowsua == -1){
+        if (rowsua == -1) {
             JOptionPane.showMessageDialog(this, "Chọn để sửa");
             return;
         }
         NhanVienRepository nhanVienRepository = new NhanVienRepository();
         NhanVien nhanVien = nhanVienRepository.getOne((String) modelnv2.getValueAt(rowsua, 0).toString());
-        
+
         nhanVien.setMaNhanVien((String) modelnv2.getValueAt(rowsua, 0));
         nhanVien.setHoTen(txttennv.getText());
         nhanVien.isGioiTinh();
@@ -8119,7 +8054,7 @@ public  void locsanphambanchaytheokhoangtimetimkiem(){
         nhanVien.setNgaySinh(txtngaysinh.getText());
         nhanVien.setTaiKhoan(txttaikhaon.getText());
         nhanVien.setMatKhau(txtmatkhau.getText());
-        
+
         NhanVienService nhanVienService = new NhanVienServiceImpl();
         nhanVienService.update(nhanVien);
         list1 = nhanVienService.getAllTrue();
@@ -8184,7 +8119,7 @@ public  void locsanphambanchaytheokhoangtimetimkiem(){
 
     private void jButton54ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton54ActionPerformed
 
-        JOptionPane.showMessageDialog(this,"CHÚ Ý : TRƯỚC ĐÓ HÃY NHẬP ĐẦU ĐỦ Ở KHUNG : Thống kê thông tin theo thời gian");
+        JOptionPane.showMessageDialog(this, "CHÚ Ý : TRƯỚC ĐÓ HÃY NHẬP ĐẦU ĐỦ Ở KHUNG : Thống kê thông tin theo thời gian");
         try {
 
             if (checktimkiemtheokhoangtime()) {
@@ -8219,13 +8154,13 @@ public  void locsanphambanchaytheokhoangtimetimkiem(){
 
             if (checktimkiemtheokhoangtime()) {
                 if (kt == 0) {
-                    ngaybatdau=chuyen_d_M_y(tfngaybatdauthongke.getDate());
-                    nayketthuc=chuyen_d_M_y(tfketthucngaythongke.getDate());
+                    ngaybatdau = chuyen_d_M_y(tfngaybatdauthongke.getDate());
+                    nayketthuc = chuyen_d_M_y(tfketthucngaythongke.getDate());
                     loadbangthongtheotimkiemkhoangtime0();
                     locsanphambanchaytheokhoangtime();
                 } else {
-                    ngaybatdau=chuyen_d_M_y(tfngaybatdauthongke.getDate());
-                    nayketthuc=chuyen_d_M_y(tfketthucngaythongke.getDate());
+                    ngaybatdau = chuyen_d_M_y(tfngaybatdauthongke.getDate());
+                    nayketthuc = chuyen_d_M_y(tfketthucngaythongke.getDate());
                     loadbangthongtheotimkiemkhoangtime1();
                     locsanphambanchaytheokhoangtime();
                 }
@@ -8246,7 +8181,7 @@ public  void locsanphambanchaytheokhoangtimetimkiem(){
             } else {
                 locsanphambanchaytheokhoangtimetimkiem();
 
-                if (kt==0) {
+                if (kt == 0) {
                     try {
                         loadbangthongtheotimkiemkhoangtime0theomasanpham();
                     } catch (ParseException ex) {
@@ -8254,7 +8189,7 @@ public  void locsanphambanchaytheokhoangtimetimkiem(){
                     }
                 } else {
                     try {
-                        loadbangthongtheotimkiemkhoangtime1theomasanpham() ;
+                        loadbangthongtheotimkiemkhoangtime1theomasanpham();
                     } catch (ParseException ex) {
                         Logger.getLogger(ViewSanPham.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -8271,7 +8206,7 @@ public  void locsanphambanchaytheokhoangtimetimkiem(){
             loadbangthongketangdantheothanhtien();
         } else {
             locsanphambanchaytheokhoangtimetangdan();
-            if (kt==0) {
+            if (kt == 0) {
                 try {
                     loadbangthongtheotimkiemkhoangtime0tangdan();
                 } catch (ParseException ex) {
@@ -8279,7 +8214,7 @@ public  void locsanphambanchaytheokhoangtimetimkiem(){
                 }
             } else {
                 try {
-                    loadbangthongtheotimkiemkhoangtime1tangdan() ;
+                    loadbangthongtheotimkiemkhoangtime1tangdan();
                 } catch (ParseException ex) {
                     Logger.getLogger(ViewSanPham.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -8295,7 +8230,7 @@ public  void locsanphambanchaytheokhoangtimetimkiem(){
         } else {
             locsanphambanchaytheokhoangtimegiamdan();
 
-            if (kt==0) {
+            if (kt == 0) {
                 try {
                     loadbangthongtheotimkiemkhoangtime0giamdan();
                 } catch (ParseException ex) {
@@ -8314,11 +8249,11 @@ public  void locsanphambanchaytheokhoangtimetimkiem(){
     }//GEN-LAST:event_jButton52ActionPerformed
 
     private void tbbangsanphambanchaynhatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbbangsanphambanchaynhatMouseClicked
-        kiemtravitribangthongke=2;
+        kiemtravitribangthongke = 2;
     }//GEN-LAST:event_tbbangsanphambanchaynhatMouseClicked
 
     private void tbbangthongkeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbbangthongkeMouseClicked
-        kiemtravitribangthongke=1;
+        kiemtravitribangthongke = 1;
     }//GEN-LAST:event_tbbangthongkeMouseClicked
 
     private void jButton56ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton56ActionPerformed
@@ -8342,35 +8277,35 @@ public  void locsanphambanchaytheokhoangtimetimkiem(){
     }//GEN-LAST:event_jButton58ActionPerformed
 
     private void tbsanphamtonthongkeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbsanphamtonthongkeMouseClicked
-        kiemtravitribangthongke=3;
+        kiemtravitribangthongke = 3;
     }//GEN-LAST:event_tbsanphamtonthongkeMouseClicked
 
     private void jButton59ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton59ActionPerformed
 
         if (tfOX.getDate() == null) {
-            JOptionPane.showMessageDialog(this,"Nhập không đúng định dạng dd-MM-yyyy");
+            JOptionPane.showMessageDialog(this, "Nhập không đúng định dạng dd-MM-yyyy");
 
-        }else{
+        } else {
 
-            b.add(new bieudo(  chuyenngayY_M_D( chuyen_d_M_y(tfOX.getDate())),doanhthu(chuyenngayY_M_D( chuyen_d_M_y(tfOX.getDate())))));
+            b.add(new bieudo(chuyenngayY_M_D(chuyen_d_M_y(tfOX.getDate())), doanhthu(chuyenngayY_M_D(chuyen_d_M_y(tfOX.getDate())))));
             loadbangbieudo();
         }
     }//GEN-LAST:event_jButton59ActionPerformed
 
     private void jButton60ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton60ActionPerformed
 
-        int vt=tbbangbieudo.getSelectedRow();
+        int vt = tbbangbieudo.getSelectedRow();
 
-        if (vt<0) {
-            JOptionPane.showMessageDialog(this,"bạn chưa chọn đối tượng để cập nhật");
+        if (vt < 0) {
+            JOptionPane.showMessageDialog(this, "bạn chưa chọn đối tượng để cập nhật");
 
-        }else{
-            if (tfOX.getDate()==null) {
-                JOptionPane.showMessageDialog(this,"Bạn chưa nhập OX(dd-MM-yyyy)  cập nhật");
+        } else {
+            if (tfOX.getDate() == null) {
+                JOptionPane.showMessageDialog(this, "Bạn chưa nhập OX(dd-MM-yyyy)  cập nhật");
             } else {
 
-                b.get(vt).setOx( chuyenngayY_M_D( chuyen_d_M_y(tfOX.getDate())));
-                b.get(vt).setOy(doanhthu(chuyenngayY_M_D( chuyen_d_M_y(tfOX.getDate()))));
+                b.get(vt).setOx(chuyenngayY_M_D(chuyen_d_M_y(tfOX.getDate())));
+                b.get(vt).setOy(doanhthu(chuyenngayY_M_D(chuyen_d_M_y(tfOX.getDate()))));
                 loadbangbieudo();
             }
 
@@ -8378,17 +8313,17 @@ public  void locsanphambanchaytheokhoangtimetimkiem(){
     }//GEN-LAST:event_jButton60ActionPerformed
 
     private void jButton61ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton61ActionPerformed
-        int vt=tbbangbieudo.getSelectedRow();   //>=0
-        int tong=tbbangbieudo.getSelectedRowCount(); //>0
-        System.err.println(""+vt);
-        System.out.println(""+tong);
-        if (vt>=0 && tong >0) {
+        int vt = tbbangbieudo.getSelectedRow();   //>=0
+        int tong = tbbangbieudo.getSelectedRowCount(); //>0
+        System.err.println("" + vt);
+        System.out.println("" + tong);
+        if (vt >= 0 && tong > 0) {
             for (int i = 0; i < tong; i++) {
                 b.remove(vt);
                 loadbangbieudo();
             }
         } else {
-            JOptionPane.showMessageDialog(this,"Bạn chưa chọn đối tượng để xóa");
+            JOptionPane.showMessageDialog(this, "Bạn chưa chọn đối tượng để xóa");
         }
 
         //        System.out.println("bat dau --"+b.get(3).getOx());
@@ -8398,25 +8333,85 @@ public  void locsanphambanchaytheokhoangtimetimkiem(){
 
     private void jButton55ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton55ActionPerformed
         ChartPanel chartPanel = new ChartPanel(createChart(b));
-        chartPanel.setPreferredSize(new java.awt.Dimension(10,10));
+        chartPanel.setPreferredSize(new java.awt.Dimension(10, 10));
         JFrame frame = new JFrame();
         frame.add(chartPanel);
         frame.setTitle("Biểu đồ thống kê doanh thu ");
-        frame.setSize(1200,800);
+        frame.setSize(1200, 800);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         frame.setVisible(true);
     }//GEN-LAST:event_jButton55ActionPerformed
 
     private void tbbangbieudoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbbangbieudoMouseClicked
-        int vt=tbbangbieudo.getSelectedRow();
+        int vt = tbbangbieudo.getSelectedRow();
 
         try {
-            Date date=new SimpleDateFormat("dd-MM-yyyy").parse( tbbangbieudo.getValueAt(vt, 1).toString());
+            Date date = new SimpleDateFormat("dd-MM-yyyy").parse(tbbangbieudo.getValueAt(vt, 1).toString());
             tfOX.setDate(date);
         } catch (Exception e) {
         }
     }//GEN-LAST:event_tbbangbieudoMouseClicked
+
+    private void tblThongtinKH1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblThongtinKH1MouseClicked
+        detailKH();
+    }//GEN-LAST:event_tblThongtinKH1MouseClicked
+
+    private void jButton9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MouseClicked
+        if (validateKH() != null) {
+
+        }
+    }//GEN-LAST:event_jButton9MouseClicked
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        int index = -1;
+        index = tblThongtinKH1.getSelectedRow();
+        if (index == -1) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa chọn khách hàng muốn sửa");
+        } else {
+            String MaKH = dtmKH.getValueAt(index, 0).toString();
+            int id = -1;
+            List<KhachHang> lst = khachHangService.getAll1();
+            for (KhachHang x : lst) {
+                if (x.getMaKH().equals(MaKH)) {
+                    id = x.getId();
+                    break;
+                }
+            }
+            KhachHang kh = validateKH();
+            kh.setId(id);
+            updateKH(kh);
+        }
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        int index = -1;
+        index = tblThongtinKH1.getSelectedRow();
+        if (index == -1) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa chọn khách hàng muốn xoá");
+        } else {
+            String MaKH = dtmKH.getValueAt(index, 0).toString();
+            int id = -1;
+            List<KhachHang> lst = khachHangService.getAll1();
+            for (KhachHang x : lst) {
+                if (x.getMaKH().equals(MaKH)) {
+                    id = x.getId();
+                    break;
+                }
+            }
+            KhachHang kh = validateKH();
+            kh.setId(id);
+            deleteKH(kh);
+        }
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+        clearKH();
+    }//GEN-LAST:event_jButton15ActionPerformed
+
+    private void btnLichSuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLichSuActionPerformed
+        lichsuKH();
+    }//GEN-LAST:event_btnLichSuActionPerformed
 // đợi
 
     private void clear() {
@@ -8520,11 +8515,9 @@ public  void locsanphambanchaytheokhoangtimetimkiem(){
     private javax.swing.JButton btnHD1;
     private javax.swing.JButton btnHD2;
     private javax.swing.JButton btnHuyHoaDon;
-    private javax.swing.JButton btnKHSua;
-    private javax.swing.JButton btnKHThem;
-    private javax.swing.JButton btnKHXoa;
     private javax.swing.JButton btnLast;
     private javax.swing.JButton btnLast1;
+    private javax.swing.JButton btnLichSu;
     private javax.swing.JButton btnNext;
     private javax.swing.JButton btnNext2;
     private javax.swing.JButton btnRestoreSanPham;
@@ -8562,7 +8555,6 @@ public  void locsanphambanchaytheokhoangtimetimkiem(){
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton15;
-    private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -8736,10 +8728,8 @@ public  void locsanphambanchaytheokhoangtimetimkiem(){
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTabbedPane jTabbedPane4;
     private javax.swing.JTabbedPane jTabbedPane5;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField29;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField33;
     private javax.swing.JTextField jTextField41;
     private javax.swing.JTextField jTextField43;
@@ -8815,6 +8805,7 @@ public  void locsanphambanchaytheokhoangtimetimkiem(){
     private javax.swing.JTable tblGioHang;
     private javax.swing.JTable tblHoaDon;
     private javax.swing.JTable tblImei;
+    private javax.swing.JTable tblLichSu;
     private javax.swing.JTable tblSP;
     private javax.swing.JTable tblSanPham2;
     private javax.swing.JTable tblSanPhamBanHang;
@@ -8846,6 +8837,7 @@ public  void locsanphambanchaytheokhoangtimetimkiem(){
     private javax.swing.JTextField txtEmail1;
     private javax.swing.JLabel txtGioiTinh;
     private javax.swing.JLabel txtHoTen;
+    private javax.swing.JTextField txtLichSu;
     private javax.swing.JLabel txtMa;
     private javax.swing.JTextField txtMaHD;
     private javax.swing.JTextField txtMaKH1;
