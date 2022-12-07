@@ -24,7 +24,11 @@ public class HoaDonRepository {
         Query query = session.createQuery(fromTable);
         return query.getResultList();
     }
-
+public static List<HoaDon> getAll1() {
+        Session session = HibernateConfig.getFACTORY().openSession();
+        Query query = session.createQuery("From HoaDon");
+        return query.getResultList();
+    }
 //    public static List<HoaDon> getAll1() {
 //        Session session = HibernateConfig.getFACTORY().openSession();
 //        Query query = session.createQuery("From HoaDon");
