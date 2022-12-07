@@ -801,9 +801,9 @@ public class ViewSanPham extends javax.swing.JFrame {
         } else {
             rdoNu1.setSelected(true);
         }
-        SimpleDateFormat f1 = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy");
         try {
-            jdateNgaySinhKH.setDate(f1.parse(dtmKH.getValueAt(index, 5).toString()));
+            jdateNgaySinhKH.setDate(f.parse(dtmKH.getValueAt(index, 5).toString()));
         } catch (ParseException ex) {
             ex.printStackTrace();
         }
