@@ -239,6 +239,7 @@ import java.util.Properties;
 import javax.mail.internet.AddressException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -334,6 +335,8 @@ public class ViewSanPham extends javax.swing.JFrame {
     //thang
     private String dataConstructor;
     NhanVienService dvnv = new NhanVienServiceImpl();
+    private String generatedString = RandomStringUtils.randomAlphanumeric(6);
+    NhanVienRepository nvr = new NhanVienRepository();
 
     /**
      * Creates new form BanHang
@@ -354,6 +357,9 @@ public class ViewSanPham extends javax.swing.JFrame {
         }
         txtGioiTinh.setText(gt);
         txtChucVu.setText(nv.getTenCV());
+        txtEmailttcn.setText(nv.getEmail());
+        txtQueQuanttcn.setText(nv.getQueQuan());
+        txtNgaySinhttcn.setText(nv.getNgaySinh());
 
         dtmLichSu = (DefaultTableModel) tblLichSu.getModel();
         dtmKH = (DefaultTableModel) tblThongtinKH1.getModel();
@@ -2967,20 +2973,20 @@ public class ViewSanPham extends javax.swing.JFrame {
         txtTenNV = new javax.swing.JLabel();
         txtGioiTinh = new javax.swing.JLabel();
         txtChucVu = new javax.swing.JLabel();
-        txtEmail = new javax.swing.JLabel();
-        txtQueQuan = new javax.swing.JLabel();
-        txtNgaySinh = new javax.swing.JLabel();
+        txtEmailttcn = new javax.swing.JLabel();
+        txtQueQuanttcn = new javax.swing.JLabel();
+        txtNgaySinhttcn = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jPanel34 = new javax.swing.JPanel();
         jLabel51 = new javax.swing.JLabel();
-        jTextField33 = new javax.swing.JTextField();
+        txtMatKhauCu = new javax.swing.JTextField();
         jButton12 = new javax.swing.JButton();
         jLabel52 = new javax.swing.JLabel();
-        jTextField41 = new javax.swing.JTextField();
+        txtMatKhauMoi = new javax.swing.JTextField();
         jLabel53 = new javax.swing.JLabel();
-        jTextField43 = new javax.swing.JTextField();
+        txtNhapLai = new javax.swing.JTextField();
         jButton50 = new javax.swing.JButton();
-        jTextField44 = new javax.swing.JTextField();
+        txtMaXN = new javax.swing.JTextField();
         pl_thongke = new javax.swing.JPanel();
         jPanel52 = new javax.swing.JPanel();
         jPanel35 = new javax.swing.JPanel();
@@ -6065,23 +6071,28 @@ public class ViewSanPham extends javax.swing.JFrame {
         txtChucVu.setForeground(new java.awt.Color(0, 0, 102));
         txtChucVu.setText("Mã");
 
-        txtEmail.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        txtEmail.setForeground(new java.awt.Color(0, 0, 102));
-        txtEmail.setText("Mã");
+        txtEmailttcn.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtEmailttcn.setForeground(new java.awt.Color(0, 0, 102));
+        txtEmailttcn.setText("Mã");
 
-        txtQueQuan.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        txtQueQuan.setForeground(new java.awt.Color(0, 0, 102));
-        txtQueQuan.setText("Mã");
+        txtQueQuanttcn.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtQueQuanttcn.setForeground(new java.awt.Color(0, 0, 102));
+        txtQueQuanttcn.setText("Mã");
 
-        txtNgaySinh.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        txtNgaySinh.setForeground(new java.awt.Color(0, 0, 102));
-        txtNgaySinh.setText("Mã");
+        txtNgaySinhttcn.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtNgaySinhttcn.setForeground(new java.awt.Color(0, 0, 102));
+        txtNgaySinhttcn.setText("Mã");
 
         jButton3.setBackground(new java.awt.Color(0, 0, 102));
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/log-out.png"))); // NOI18N
         jButton3.setText("ĐĂNG XUẤT");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
         jPanel18.setLayout(jPanel18Layout);
@@ -6095,11 +6106,11 @@ public class ViewSanPham extends javax.swing.JFrame {
                             .addGroup(jPanel18Layout.createSequentialGroup()
                                 .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(txtQueQuan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(txtQueQuanttcn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel18Layout.createSequentialGroup()
                                 .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(txtEmailttcn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel18Layout.createSequentialGroup()
                                 .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -6119,7 +6130,7 @@ public class ViewSanPham extends javax.swing.JFrame {
                             .addGroup(jPanel18Layout.createSequentialGroup()
                                 .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(txtNgaySinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(txtNgaySinhttcn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(jPanel18Layout.createSequentialGroup()
                         .addGap(151, 151, 151)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -6147,15 +6158,15 @@ public class ViewSanPham extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel30)
-                    .addComponent(txtEmail))
+                    .addComponent(txtEmailttcn))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel31)
-                    .addComponent(txtQueQuan))
+                    .addComponent(txtQueQuanttcn))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel32)
-                    .addComponent(txtNgaySinh))
+                    .addComponent(txtNgaySinhttcn))
                 .addGap(41, 41, 41)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(173, Short.MAX_VALUE))
@@ -6191,6 +6202,11 @@ public class ViewSanPham extends javax.swing.JFrame {
         jButton12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton12.setForeground(new java.awt.Color(255, 255, 255));
         jButton12.setText("GỬI MÃ");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
 
         jLabel52.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel52.setForeground(new java.awt.Color(0, 0, 102));
@@ -6205,6 +6221,11 @@ public class ViewSanPham extends javax.swing.JFrame {
         jButton50.setForeground(new java.awt.Color(255, 255, 255));
         jButton50.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/key.png"))); // NOI18N
         jButton50.setText("ĐỔI MẬT KHẨU");
+        jButton50.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton50ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel34Layout = new javax.swing.GroupLayout(jPanel34);
         jPanel34.setLayout(jPanel34Layout);
@@ -6220,10 +6241,10 @@ public class ViewSanPham extends javax.swing.JFrame {
                             .addComponent(jLabel53, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField44, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
-                            .addComponent(jTextField43)
-                            .addComponent(jTextField33)
-                            .addComponent(jTextField41)))
+                            .addComponent(txtMaXN, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
+                            .addComponent(txtNhapLai)
+                            .addComponent(txtMatKhauCu)
+                            .addComponent(txtMatKhauMoi)))
                     .addGroup(jPanel34Layout.createSequentialGroup()
                         .addGap(186, 186, 186)
                         .addComponent(jButton50, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -6238,17 +6259,17 @@ public class ViewSanPham extends javax.swing.JFrame {
                 .addGap(85, 85, 85)
                 .addGroup(jPanel34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel51)
-                    .addComponent(jTextField33, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtMatKhauCu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField41, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMatKhauMoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel52))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel53)
-                    .addComponent(jTextField43, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNhapLai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jTextField44, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtMaXN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton12)
                 .addGap(18, 18, 18)
@@ -7293,12 +7314,18 @@ public class ViewSanPham extends javax.swing.JFrame {
     }//GEN-LAST:event_pn_KhuyenMaiMouseClicked
 
     private void pn_NhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pn_NhanVienMouseClicked
-        // TODO add your handling code here:
-        pl_FullChucNang.removeAll();
-        pl_FullChucNang.add(pl_nhanvien);
-        pl_FullChucNang.repaint();
-        pl_FullChucNang.revalidate();
-        lblTenChucNang.setText("NHÂN VIÊN");
+        NhanVien nv = dvnv.getOneByUsername(dataConstructor);
+        if (nv.getTenCV().equals("Quản lý")) {
+            pn_NhanVien.setEnabled(true);
+            pl_FullChucNang.removeAll();
+            pl_FullChucNang.add(pl_nhanvien);
+            pl_FullChucNang.repaint();
+            pl_FullChucNang.revalidate();
+            lblTenChucNang.setText("NHÂN VIÊN");
+        } else {
+            pn_NhanVien.setEnabled(false);
+            JOptionPane.showMessageDialog(this, "Chỉ có quản lý mới được dùng chức năng này");
+        }
     }//GEN-LAST:event_pn_NhanVienMouseClicked
 
     private void pn_ThongTinCaNhanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pn_ThongTinCaNhanMouseClicked
@@ -8432,6 +8459,90 @@ public class ViewSanPham extends javax.swing.JFrame {
     private void btnLichSuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLichSuActionPerformed
         lichsuKH();
     }//GEN-LAST:event_btnLichSuActionPerformed
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        NhanVien nv = dvnv.getOneByUsername(dataConstructor);
+
+        System.out.println(generatedString);
+
+        final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
+        // Get a Properties object
+        Properties props = System.getProperties();
+        props.setProperty("mail.smtp.host", "smtp.gmail.com");
+        props.setProperty("mail.smtp.socketFactory.class", SSL_FACTORY);
+        props.setProperty("mail.smtp.socketFactory.fallback", "false");
+        props.setProperty("mail.smtp.port", "465");
+        props.setProperty("mail.smtp.socketFactory.port", "465");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.debug", "true");
+        props.put("mail.store.protocol", "pop3");
+        props.put("mail.transport.protocol", "smtp");
+        final String username = "tupmph28142@fpt.edu.vn";//
+        final String password = "0375236867";
+        final String toEmail = nv.getEmail();
+        try {
+            Session session = Session.getDefaultInstance(props,
+                    new Authenticator() {
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(username, password);
+                }
+            });
+
+            // -- Create a new message --
+            Message msg = new MimeMessage(session);
+
+            // -- Set the FROM and TO fields --
+            msg.setFrom(new InternetAddress("tupmph28142@fpt.edu.vn"));
+            msg.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse(toEmail, false));
+            msg.setSubject("Doi mat khau");
+            msg.setText("Ma xac nhan cua ban la: " + generatedString);
+            msg.setSentDate(new Date());
+            Transport.send(msg);
+            JOptionPane.showMessageDialog(this, "Ma xac nhan da duoc gui ve gmail cua ban. Vui long kiem tra gmail!");
+
+        } catch (MessagingException e) {
+            System.out.println("Loi gui tin nhan " + e);
+        }
+    }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void jButton50ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton50ActionPerformed
+        NhanVien nv = dvnv.getOneByUsername(dataConstructor);
+
+        if (txtMatKhauCu.getText().trim().length() == 0 || txtMatKhauMoi.getText().trim().length() == 0 || txtNhapLai.getText().trim().length() == 0 || txtMaXN.getText().trim().length() == 0) {
+            JOptionPane.showMessageDialog(this, "Thông tin không được để trống");
+            return;
+        } else {
+            if (!nv.getMatKhau().contains(txtMatKhauCu.getText())) {
+                JOptionPane.showMessageDialog(this, "Mật khẩu cũ không đúng");
+                return;
+            } else {
+                if (!txtMatKhauMoi.getText().contains(txtNhapLai.getText())) {
+                    JOptionPane.showMessageDialog(this, "Mật khẩu khôn khớp");
+                    return;
+                } else {
+                    if (!txtMaXN.getText().contains(generatedString)) {
+                        JOptionPane.showMessageDialog(this, "Mã xác nhận không đúng");
+                        return;
+                    } else {
+                        nvr.doimk(nv.getEmail(), txtMatKhauMoi.getText());
+                        JOptionPane.showMessageDialog(this, "Đổi mật khẩu thành công");
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_jButton50ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        int conFirm = JOptionPane.showConfirmDialog(null, "Bạn có muốn đăng xuất?");
+        if (conFirm == 0) {
+            JOptionPane.showMessageDialog(this, "Đăng xuất thành công");
+            ViewDangNhap v = new ViewDangNhap();
+            v.setLocationRelativeTo(null);
+            v.setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 // đợi
 
     private void clear() {
@@ -8750,10 +8861,6 @@ public class ViewSanPham extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane5;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField29;
-    private javax.swing.JTextField jTextField33;
-    private javax.swing.JTextField jTextField41;
-    private javax.swing.JTextField jTextField43;
-    private javax.swing.JTextField jTextField44;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JLabel jbl_KM;
     private com.toedter.calendar.JDateChooser jdateFrom;
@@ -8853,8 +8960,8 @@ public class ViewSanPham extends javax.swing.JFrame {
     private javax.swing.JLabel txtChucVu;
     private javax.swing.JTextArea txtDiachi1;
     private javax.swing.JTextField txtDonGia;
-    private javax.swing.JLabel txtEmail;
     private javax.swing.JTextField txtEmail1;
+    private javax.swing.JLabel txtEmailttcn;
     private javax.swing.JLabel txtGioiTinh;
     private javax.swing.JLabel txtHoTen;
     private javax.swing.JTextField txtLichSu;
@@ -8862,8 +8969,12 @@ public class ViewSanPham extends javax.swing.JFrame {
     private javax.swing.JTextField txtMaHD;
     private javax.swing.JTextField txtMaKH1;
     private javax.swing.JLabel txtMaNV;
-    private javax.swing.JLabel txtNgaySinh;
-    private javax.swing.JLabel txtQueQuan;
+    private javax.swing.JTextField txtMaXN;
+    private javax.swing.JTextField txtMatKhauCu;
+    private javax.swing.JTextField txtMatKhauMoi;
+    private javax.swing.JLabel txtNgaySinhttcn;
+    private javax.swing.JTextField txtNhapLai;
+    private javax.swing.JLabel txtQueQuanttcn;
     private javax.swing.JTextField txtSDT2;
     private javax.swing.JTextField txtSoLuong;
     private javax.swing.JTextField txtTenKH1;

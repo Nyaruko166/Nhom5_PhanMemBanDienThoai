@@ -5433,12 +5433,12 @@
                                                   <Group type="102" attributes="0">
                                                       <Component id="jLabel31" min="-2" pref="145" max="-2" attributes="0"/>
                                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                      <Component id="txtQueQuan" max="32767" attributes="0"/>
+                                                      <Component id="txtQueQuanttcn" max="32767" attributes="0"/>
                                                   </Group>
                                                   <Group type="102" attributes="0">
                                                       <Component id="jLabel30" min="-2" pref="145" max="-2" attributes="0"/>
                                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                      <Component id="txtEmail" max="32767" attributes="0"/>
+                                                      <Component id="txtEmailttcn" max="32767" attributes="0"/>
                                                   </Group>
                                                   <Group type="102" attributes="0">
                                                       <Component id="jLabel24" min="-2" pref="145" max="-2" attributes="0"/>
@@ -5463,7 +5463,7 @@
                                                   <Group type="102" alignment="0" attributes="0">
                                                       <Component id="jLabel32" min="-2" pref="145" max="-2" attributes="0"/>
                                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                      <Component id="txtNgaySinh" max="32767" attributes="0"/>
+                                                      <Component id="txtNgaySinhttcn" max="32767" attributes="0"/>
                                                   </Group>
                                               </Group>
                                           </Group>
@@ -5502,17 +5502,17 @@
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLabel30" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="txtEmail" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="txtEmailttcn" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLabel31" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="txtQueQuan" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="txtQueQuanttcn" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLabel32" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="txtNgaySinh" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="txtNgaySinhttcn" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                                       <Component id="jButton3" min="-2" pref="39" max="-2" attributes="0"/>
@@ -5643,7 +5643,7 @@
                                 <Property name="text" type="java.lang.String" value="M&#xe3;"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JLabel" name="txtEmail">
+                            <Component class="javax.swing.JLabel" name="txtEmailttcn">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Tahoma" size="12" style="1"/>
@@ -5654,7 +5654,7 @@
                                 <Property name="text" type="java.lang.String" value="M&#xe3;"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JLabel" name="txtQueQuan">
+                            <Component class="javax.swing.JLabel" name="txtQueQuanttcn">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Tahoma" size="12" style="1"/>
@@ -5665,7 +5665,7 @@
                                 <Property name="text" type="java.lang.String" value="M&#xe3;"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JLabel" name="txtNgaySinh">
+                            <Component class="javax.swing.JLabel" name="txtNgaySinhttcn">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Tahoma" size="12" style="1"/>
@@ -5692,6 +5692,9 @@
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="&#x110;&#x102;NG XU&#x1ea4;T"/>
                               </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+                              </Events>
                             </Component>
                           </SubComponents>
                         </Container>
@@ -5733,10 +5736,10 @@
                                           </Group>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="jTextField44" pref="204" max="32767" attributes="0"/>
-                                              <Component id="jTextField43" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="jTextField33" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="jTextField41" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="txtMaXN" pref="204" max="32767" attributes="0"/>
+                                              <Component id="txtNhapLai" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="txtMatKhauCu" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="txtMatKhauMoi" alignment="0" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
@@ -5758,20 +5761,20 @@
                                   <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jLabel51" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jTextField33" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtMatKhauCu" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="jTextField41" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtMatKhauMoi" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel52" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabel53" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jTextField43" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtNhapLai" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jTextField44" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtMaXN" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="jButton12" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -5793,7 +5796,7 @@
                             <Property name="text" type="java.lang.String" value="M&#x1eac;T KH&#x1ea8;U C&#x168;"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="jTextField33">
+                        <Component class="javax.swing.JTextField" name="txtMatKhauCu">
                         </Component>
                         <Component class="javax.swing.JButton" name="jButton12">
                           <Properties>
@@ -5808,6 +5811,9 @@
                             </Property>
                             <Property name="text" type="java.lang.String" value="G&#x1eec;I M&#xc3;"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton12ActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel52">
                           <Properties>
@@ -5820,7 +5826,7 @@
                             <Property name="text" type="java.lang.String" value="M&#x1eac;T KH&#x1ea8;U M&#x1eda;I"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="jTextField41">
+                        <Component class="javax.swing.JTextField" name="txtMatKhauMoi">
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel53">
                           <Properties>
@@ -5833,7 +5839,7 @@
                             <Property name="text" type="java.lang.String" value="NH&#x1eac;P L&#x1ea0;I"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="jTextField43">
+                        <Component class="javax.swing.JTextField" name="txtNhapLai">
                         </Component>
                         <Component class="javax.swing.JButton" name="jButton50">
                           <Properties>
@@ -5851,8 +5857,11 @@
                             </Property>
                             <Property name="text" type="java.lang.String" value="&#x110;&#x1ed4;I M&#x1eac;T KH&#x1ea8;U"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton50ActionPerformed"/>
+                          </Events>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="jTextField44">
+                        <Component class="javax.swing.JTextField" name="txtMaXN">
                         </Component>
                       </SubComponents>
                     </Container>
