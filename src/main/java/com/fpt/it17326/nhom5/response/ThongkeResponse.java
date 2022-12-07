@@ -6,6 +6,7 @@ package com.fpt.it17326.nhom5.response;
 
 import com.fpt.it17326.nhom5.domainmodel.HoaDonChiTiet;
 import com.fpt.it17326.nhom5.domainmodel.ImeiDaBan;
+import com.fpt.it17326.nhom5.domainmodel.SanPham;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import lombok.Getter;
@@ -34,7 +35,11 @@ public class ThongkeResponse {
    
     private int soLuong;
 
+    private int solgton;
+
  
+    
+    
     private Float donGia;
 
  private boolean trangthai;
@@ -43,10 +48,35 @@ public class ThongkeResponse {
    
     private boolean deleted;
 
-   
+
     private Date updatedAt;
     private String MaImei;
     private String imei;
+  private long tongsoLuong;
+//
+  private float tongdoangthu;
+
+    public ThongkeResponse(float tongdoangthu) {
+        this.tongdoangthu = tongdoangthu;
+    }
+  
+    public ThongkeResponse(String MaSP, String TenSP, long tongsoLuong, boolean trangthai) {
+        this.MaSP = MaSP;
+        this.TenSP = TenSP;
+        this.tongsoLuong=tongsoLuong;
+        this.trangthai = trangthai;
+    }
+
+  
+
+      public ThongkeResponse(SanPham sp) {
+      
+        this.MaSP = sp.getMaSP();
+        this.TenSP = sp.getTenSP();
+     
+        this.solgton = sp.getSoLuong();
+        this.donGia = sp.getDonGia();
+        }
 
     public ThongkeResponse(HoaDonChiTiet hdct) {
             this.id = hdct.getId();
@@ -69,6 +99,29 @@ public class ThongkeResponse {
         this.imei = a.getImei();
     }
 
+    public float getTongdoangthu() {
+        return tongdoangthu;
+    }
+
+    public void setTongdoangthu(long tongdoangthu) {
+        this.tongdoangthu = tongdoangthu;
+    }
+
+    public long getTongsoLuong() {
+        return tongsoLuong;
+    }
+
+    public void setTongsoLuong(long tongsoLuong) {
+        this.tongsoLuong = tongsoLuong;
+    }
+    
+ public int getSolgton() {
+        return solgton;
+    }
+
+    public void setSolgton(int solgton) {
+        this.solgton = solgton;
+    }
     public boolean isTrangthai() {
         return trangthai;
     }
@@ -172,6 +225,7 @@ public double thanhtien(){
   
   
   }
+
   public String chuyenngaymua() {
 
         try {
