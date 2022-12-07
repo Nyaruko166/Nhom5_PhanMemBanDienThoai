@@ -107,7 +107,7 @@ public class DialogImei extends javax.swing.JDialog {
         jLabel4.setText("Imei");
 
         btnThemImei.setBackground(new java.awt.Color(0, 0, 102));
-        btnThemImei.setIcon(new javax.swing.ImageIcon("C:\\Users\\youngboizseetinh\\Downloads\\CodeMoiNhatNe\\Nhom5_QuanLyDienThoai\\images\\add.png")); // NOI18N
+        btnThemImei.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add.png"))); // NOI18N
         btnThemImei.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThemImeiActionPerformed(evt);
@@ -115,7 +115,7 @@ public class DialogImei extends javax.swing.JDialog {
         });
 
         btnXoaImei.setBackground(new java.awt.Color(0, 0, 102));
-        btnXoaImei.setIcon(new javax.swing.ImageIcon("C:\\Users\\youngboizseetinh\\Downloads\\CodeMoiNhatNe\\Nhom5_QuanLyDienThoai\\images\\delete.png")); // NOI18N
+        btnXoaImei.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete.png"))); // NOI18N
         btnXoaImei.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnXoaImeiActionPerformed(evt);
@@ -153,7 +153,7 @@ public class DialogImei extends javax.swing.JDialog {
         }
 
         btnSave.setBackground(new java.awt.Color(0, 0, 102));
-        btnSave.setIcon(new javax.swing.ImageIcon("C:\\Users\\youngboizseetinh\\Downloads\\CodeMoiNhatNe\\Nhom5_QuanLyDienThoai\\images\\save.png")); // NOI18N
+        btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save.png"))); // NOI18N
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveActionPerformed(evt);
@@ -163,7 +163,7 @@ public class DialogImei extends javax.swing.JDialog {
         btnExcel.setBackground(new java.awt.Color(0, 0, 102));
         btnExcel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnExcel.setForeground(new java.awt.Color(255, 255, 255));
-        btnExcel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/excel.png"))); // NOI18N
+        btnExcel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/excel.png"))); // NOI18N
         btnExcel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExcelActionPerformed(evt);

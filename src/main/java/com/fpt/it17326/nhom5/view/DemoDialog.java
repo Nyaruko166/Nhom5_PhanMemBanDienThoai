@@ -347,7 +347,7 @@ public class DemoDialog extends javax.swing.JDialog {
         txtTen.setForeground(new java.awt.Color(0, 0, 102));
 
         btnThem.setBackground(new java.awt.Color(0, 0, 102));
-        btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/add.png"))); // NOI18N
+        // btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/add.png"))); // NOI18N
         btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThemActionPerformed(evt);
@@ -355,7 +355,7 @@ public class DemoDialog extends javax.swing.JDialog {
         });
 
         btnSua.setBackground(new java.awt.Color(0, 0, 102));
-        btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/update.png"))); // NOI18N
+        // btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/update.png"))); // NOI18N
         btnSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSuaActionPerformed(evt);
@@ -363,7 +363,7 @@ public class DemoDialog extends javax.swing.JDialog {
         });
 
         btnXoa.setBackground(new java.awt.Color(0, 0, 102));
-        btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/delete.png"))); // NOI18N
+        // btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/delete.png"))); // NOI18N
         btnXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnXoaActionPerformed(evt);
@@ -460,7 +460,7 @@ public class DemoDialog extends javax.swing.JDialog {
         txtTimKiem.setForeground(new java.awt.Color(0, 0, 102));
 
         btnSearch.setBackground(new java.awt.Color(0, 0, 102));
-        btnSearch.setIcon(new javax.swing.ImageIcon("C:\\Users\\youngboizseetinh\\Downloads\\CodeMoiNhatNe\\Nhom5_QuanLyDienThoai\\images\\search.png")); // NOI18N
+        // btnSearch.setIcon(new javax.swing.ImageIcon("C:\\Users\\youngboizseetinh\\Downloads\\CodeMoiNhatNe\\Nhom5_QuanLyDienThoai\\images\\search.png")); // NOI18N
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSearchActionPerformed(evt);
@@ -493,7 +493,7 @@ public class DemoDialog extends javax.swing.JDialog {
 
         btnRestore.setBackground(new java.awt.Color(0, 0, 102));
         btnRestore.setForeground(new java.awt.Color(0, 0, 102));
-        btnRestore.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/restore.png"))); // NOI18N
+        // btnRestore.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/restore.png"))); // NOI18N
         btnRestore.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRestoreActionPerformed(evt);
