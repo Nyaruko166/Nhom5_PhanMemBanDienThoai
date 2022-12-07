@@ -11,6 +11,8 @@ import java.util.List;
 public interface KhachHangService {
 
     List<KhachHangResponse> getAll();
+    
+    List<KhachHang> getAll1();
 
     KhachHang getOne(String MaKH);
 
