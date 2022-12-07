@@ -39,4 +39,5 @@ public interface NhanVienService {
     String update(NhanVien nv);
 
     String delete(NhanVien nv);
+    NhanVien getOneByUsername(String username);
 }

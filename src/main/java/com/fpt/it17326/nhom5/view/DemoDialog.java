@@ -49,7 +49,7 @@ public class DemoDialog extends javax.swing.JDialog {
     private PinService pinService;
     private HangDienThoaiService hangDienThoaiService;
     private MauSacService mauSacService;
-    
+
     List<Chip> listChip;
     List<Chip> listChipDeleted;
     List<Ram> listRam;
@@ -62,7 +62,7 @@ public class DemoDialog extends javax.swing.JDialog {
     List<HangDienThoai> listHangDTDeleted;
     List<Pin> listPin;
     List<Pin> listPinDeleted;
-    
+
     private int selectedRow;
 
     /**
@@ -76,7 +76,7 @@ public class DemoDialog extends javax.swing.JDialog {
             setHeaderColumn(headers);
         }
         //Code này của bảng sản phẩm chi tiết khum động zô////////////////////////////////////////////////////////
-        
+
         lblTitle.setText(title);
         lblMa.setText(ma);
         lblTen.setText(ten);
@@ -93,6 +93,33 @@ public class DemoDialog extends javax.swing.JDialog {
         mauSacService = new MauSacServiceImpl();
     }
 
+    public boolean checkValidChiTietSP() {
+        String ma = txtMa.getText();
+        String ten = txtTen.getText();
+        if (ma.trim().length() == 0) {
+            JOptionPane.showMessageDialog(this, "Không được để trống " + ma);
+            return false;
+        }
+        if (ten.trim().length() == 0) {
+            JOptionPane.showMessageDialog(this, "Không được để trống " + ten);
+            return false;
+        }
+        return true;
+    }
+
+//    public void setButtonStatus(boolean isUpdate) {
+//        if (isUpdate) {
+//            btnThem.setEnabled(false);
+//            btnSua.setEnabled(true);
+//            btnXoa.setEnabled(true);
+//        } else {
+//            btnThem.setEnabled(true);
+//            btnSua.setEnabled(false);
+//            btnXoa.setEnabled(false);
+//            tblSetting.clearSelection();
+//        }
+//
+//    }
     public void loadData() {
         String txt = lblTitle.getText();
         if (txt.equalsIgnoreCase("chip")) {
@@ -152,7 +179,7 @@ public class DemoDialog extends javax.swing.JDialog {
         }
         loadTableSPChiTiet(rows);
     }
-    
+
     public void getAllChipDeleted(List<Chip> listChip) {
         ArrayList<Object[]> rows = new ArrayList<>();
         for (Chip chip : listChip) {
@@ -179,7 +206,7 @@ public class DemoDialog extends javax.swing.JDialog {
         }
         loadTableDeleted(rows);
     }
-    
+
     public void getAllRam(List<Ram> listRam) {
         ArrayList<Object[]> rows = new ArrayList<>();
         for (Ram ram : listRam) {
@@ -197,7 +224,7 @@ public class DemoDialog extends javax.swing.JDialog {
         }
         loadTableDeleted(rows);
     }
-    
+
     public void getAllHangDT(List<HangDienThoai> listHangDT) {
         ArrayList<Object[]> rows = new ArrayList<>();
         for (HangDienThoai hdt : listHangDT) {
@@ -206,7 +233,7 @@ public class DemoDialog extends javax.swing.JDialog {
         }
         loadTableSPChiTiet(rows);
     }
-    
+
     public void getAllHangDTDeleted(List<HangDienThoai> listHangDT) {
         ArrayList<Object[]> rows = new ArrayList<>();
         for (HangDienThoai hdt : listHangDT) {
@@ -233,7 +260,7 @@ public class DemoDialog extends javax.swing.JDialog {
         }
         loadTableDeleted(rows);
     }
-    
+
     public void getAllPin(List<Pin> listPin) {
         ArrayList<Object[]> rows = new ArrayList<>();
         for (Pin pin : listPin) {
@@ -259,7 +286,7 @@ public class DemoDialog extends javax.swing.JDialog {
             dtm.addRow(data);
         }
     }
-    
+
     public void loadTableDeleted(ArrayList<Object[]> rows) {
         DefaultTableModel dtm = (DefaultTableModel) tblLuuTru.getModel();
         dtm.setRowCount(0);
@@ -320,7 +347,7 @@ public class DemoDialog extends javax.swing.JDialog {
         txtTen.setForeground(new java.awt.Color(0, 0, 102));
 
         btnThem.setBackground(new java.awt.Color(0, 0, 102));
-        btnThem.setIcon(new javax.swing.ImageIcon("C:\\Users\\youngboizseetinh\\Downloads\\CodeMoiNhatNe\\Nhom5_QuanLyDienThoai\\images\\add.png")); // NOI18N
+        btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/add.png"))); // NOI18N
         btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThemActionPerformed(evt);
@@ -328,7 +355,7 @@ public class DemoDialog extends javax.swing.JDialog {
         });
 
         btnSua.setBackground(new java.awt.Color(0, 0, 102));
-        btnSua.setIcon(new javax.swing.ImageIcon("C:\\Users\\youngboizseetinh\\Downloads\\CodeMoiNhatNe\\Nhom5_QuanLyDienThoai\\images\\update.png")); // NOI18N
+        btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/update.png"))); // NOI18N
         btnSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSuaActionPerformed(evt);
@@ -336,7 +363,7 @@ public class DemoDialog extends javax.swing.JDialog {
         });
 
         btnXoa.setBackground(new java.awt.Color(0, 0, 102));
-        btnXoa.setIcon(new javax.swing.ImageIcon("C:\\Users\\youngboizseetinh\\Downloads\\CodeMoiNhatNe\\Nhom5_QuanLyDienThoai\\images\\delete.png")); // NOI18N
+        btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/delete.png"))); // NOI18N
         btnXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnXoaActionPerformed(evt);
@@ -344,6 +371,7 @@ public class DemoDialog extends javax.swing.JDialog {
         });
 
         tblSetting.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        tblSetting.setForeground(new java.awt.Color(0, 0, 102));
         tblSetting.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -365,6 +393,7 @@ public class DemoDialog extends javax.swing.JDialog {
         });
         tblSetting.setGridColor(new java.awt.Color(0, 0, 102));
         tblSetting.setSelectionBackground(new java.awt.Color(255, 0, 51));
+        tblSetting.setSelectionForeground(new java.awt.Color(0, 0, 102));
         tblSetting.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblSettingMouseClicked(evt);
@@ -385,9 +414,9 @@ public class DemoDialog extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(lblTen, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblMa, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblMa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -464,7 +493,7 @@ public class DemoDialog extends javax.swing.JDialog {
 
         btnRestore.setBackground(new java.awt.Color(0, 0, 102));
         btnRestore.setForeground(new java.awt.Color(0, 0, 102));
-        btnRestore.setIcon(new javax.swing.ImageIcon("C:\\Users\\youngboizseetinh\\Downloads\\CodeMoiNhatNe\\Nhom5_QuanLyDienThoai\\images\\restore.png")); // NOI18N
+        btnRestore.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/restore.png"))); // NOI18N
         btnRestore.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRestoreActionPerformed(evt);
@@ -637,33 +666,36 @@ public class DemoDialog extends javax.swing.JDialog {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
-        int row = tblSetting.getSelectedRow();
-        if (row == -1) {
-            JOptionPane.showMessageDialog(this, "Chọn 1 dòng trên bảng để sửa");
-            return;
-        }
-        int option = JOptionPane.showConfirmDialog(this, "Xác nhận sửa", "Sửa dữ liệu", JOptionPane.OK_CANCEL_OPTION);
-        if (option == 0) {
-            if (lblTitle.getText().equalsIgnoreCase("Chip")) {
-                int id = listChip.get(row).getId();
-                updateChip(id);
-            } else if (lblTitle.getText().equalsIgnoreCase("Ram")) {
-                int id = listRam.get(row).getId();
-                updateRam(id);
-            } else if (lblTitle.getText().equalsIgnoreCase("Rom")) {
-                int id = listRom.get(row).getId();
-                updateRom(id);
-            } else if (lblTitle.getText().equalsIgnoreCase("Màu sắc")) {
-                int id = listMauSac.get(row).getId();
-                updateMauSac(id);
-            } else if (lblTitle.getText().equalsIgnoreCase("Hãng")) {
-                int id = listHangDT.get(row).getId();
-                updateHang(id);
-            } else if (lblTitle.getText().equalsIgnoreCase("Pin")) {
-                int id = listPin.get(row).getId();
-                updatePin(id);
+        if (rootPaneCheckingEnabled) {
+            int row = tblSetting.getSelectedRow();
+            if (row == -1) {
+                JOptionPane.showMessageDialog(this, "Chọn 1 dòng trên bảng để sửa");
+                return;
+            }
+            int option = JOptionPane.showConfirmDialog(this, "Xác nhận sửa", "Sửa dữ liệu", JOptionPane.OK_CANCEL_OPTION);
+            if (option == 0) {
+                if (lblTitle.getText().equalsIgnoreCase("Chip")) {
+                    int id = listChip.get(row).getId();
+                    updateChip(id);
+                } else if (lblTitle.getText().equalsIgnoreCase("Ram")) {
+                    int id = listRam.get(row).getId();
+                    updateRam(id);
+                } else if (lblTitle.getText().equalsIgnoreCase("Rom")) {
+                    int id = listRom.get(row).getId();
+                    updateRom(id);
+                } else if (lblTitle.getText().equalsIgnoreCase("Màu sắc")) {
+                    int id = listMauSac.get(row).getId();
+                    updateMauSac(id);
+                } else if (lblTitle.getText().equalsIgnoreCase("Hãng")) {
+                    int id = listHangDT.get(row).getId();
+                    updateHang(id);
+                } else if (lblTitle.getText().equalsIgnoreCase("Pin")) {
+                    int id = listPin.get(row).getId();
+                    updatePin(id);
+                }
             }
         }
+
     }//GEN-LAST:event_btnSuaActionPerformed
 
     public void addChip() {
@@ -759,22 +791,25 @@ public class DemoDialog extends javax.swing.JDialog {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-        int option = JOptionPane.showConfirmDialog(this, "Xác nhận thêm", "Thêm dữ liệu", JOptionPane.OK_CANCEL_OPTION);
-        if (option == 0) {
-            if (lblTitle.getText().equalsIgnoreCase("Chip")) {
-                addChip();
-            } else if (lblTitle.getText().equalsIgnoreCase("Ram")) {
-                addRam();
-            } else if (lblTitle.getText().equalsIgnoreCase("Rom")) {
-                addRom();
-            } else if (lblTitle.getText().equalsIgnoreCase("Màu sắc")) {
-                addMauSac();
-            } else if (lblTitle.getText().equalsIgnoreCase("Hãng")) {
-                addHang();
-            } else if (lblTitle.getText().equalsIgnoreCase("Pin")) {
-                addPin();
+        if (checkValidChiTietSP()) {
+            int option = JOptionPane.showConfirmDialog(this, "Xác nhận thêm", "Thêm dữ liệu", JOptionPane.OK_CANCEL_OPTION);
+            if (option == 0) {
+                if (lblTitle.getText().equalsIgnoreCase("Chip")) {
+                    addChip();
+                } else if (lblTitle.getText().equalsIgnoreCase("Ram")) {
+                    addRam();
+                } else if (lblTitle.getText().equalsIgnoreCase("Rom")) {
+                    addRom();
+                } else if (lblTitle.getText().equalsIgnoreCase("Màu sắc")) {
+                    addMauSac();
+                } else if (lblTitle.getText().equalsIgnoreCase("Hãng")) {
+                    addHang();
+                } else if (lblTitle.getText().equalsIgnoreCase("Pin")) {
+                    addPin();
+                }
             }
         }
+
     }//GEN-LAST:event_btnThemActionPerformed
 
     public void deleteChip(int id) {
@@ -848,7 +883,11 @@ public class DemoDialog extends javax.swing.JDialog {
         String result = hangDienThoaiService.delete(hdt);
         JOptionPane.showMessageDialog(this, result);
         if (result.contains("thành công")) {
-            loadData();
+            listHangDT.remove(selectedRow);
+            getAllHangDT(listHangDT);
+            listHangDTDeleted.add(hdt);
+            getAllHangDTDeleted(listHangDTDeleted);
+            selectedRow = -1;
         }
     }
 
@@ -863,7 +902,11 @@ public class DemoDialog extends javax.swing.JDialog {
         String result = mauSacService.delete(ms);
         JOptionPane.showMessageDialog(this, result);
         if (result.contains("thành công")) {
-            loadData();
+            listMauSac.remove(selectedRow);
+            getAllMauSac(listMauSac);
+            listMauSacDeleted.add(ms);
+            getAllMauSacDeleted(listMauSacDeleted);
+            selectedRow = -1;
         }
     }
 
@@ -878,7 +921,11 @@ public class DemoDialog extends javax.swing.JDialog {
         String result = pinService.delete(pin);
         JOptionPane.showMessageDialog(this, result);
         if (result.contains("thành công")) {
-            loadData();
+            listPin.remove(selectedRow);
+            getAllPin(listPin);
+            listPinDeleted.add(pin);
+            getAllPinDeleted(listPinDeleted);
+            selectedRow = -1;
         }
     }
 
@@ -915,6 +962,7 @@ public class DemoDialog extends javax.swing.JDialog {
 
     private void tblSettingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSettingMouseClicked
         // TODO add your handling code here:
+        //setButtonStatus(true);
         DefaultTableModel dtm = (DefaultTableModel) tblSetting.getModel();
         int row = tblSetting.getSelectedRow();
         selectedRow = row;
@@ -929,6 +977,7 @@ public class DemoDialog extends javax.swing.JDialog {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
+
     }//GEN-LAST:event_btnSearchActionPerformed
 
     /**
