@@ -20,13 +20,13 @@ import com.fpt.it17326.nhom5.service.impl.PinServiceImpl;
 import com.fpt.it17326.nhom5.service.impl.RamServiceImpl;
 import com.fpt.it17326.nhom5.service.impl.RomServiceImpl;
 import com.fpt.it17326.nhom5.service.impl.SanPhamServiceImpl;
-import com.fpt.it17326.nhom5.util.Util;
 import javax.swing.JFileChooser;
 
 import com.fpt.it17326.nhom5.domainmodel.HoaDon;
 import com.fpt.it17326.nhom5.domainmodel.HoaDonChiTiet;
 import com.fpt.it17326.nhom5.domainmodel.Imei;
 import com.fpt.it17326.nhom5.domainmodel.ImeiDaBan;
+import com.fpt.it17326.nhom5.domainmodel.KhachHang;
 import com.fpt.it17326.nhom5.domainmodel.KhuyenMai;
 import com.fpt.it17326.nhom5.domainmodel.MauSac;
 import com.fpt.it17326.nhom5.domainmodel.NhanVien;
@@ -80,8 +80,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -829,6 +827,7 @@ public class ViewSanPham extends javax.swing.JFrame {
     //KhachHang
     private void setuptblKH() {
         List<KhachHangResponse> lst = khachHangService.getAll();
+        List<HoaDonResponse> lsthd = hoaDonService.getAll();
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         String gioitinh = "Nữ";
         for (KhachHangResponse x : lst) {
@@ -6694,7 +6693,6 @@ public class ViewSanPham extends javax.swing.JFrame {
             @Override
             public void run() {
                 ViewSanPham v = new ViewSanPham();
-                v.setLocationRelativeTo(null);
                 v.setVisible(true);
             }
         });
