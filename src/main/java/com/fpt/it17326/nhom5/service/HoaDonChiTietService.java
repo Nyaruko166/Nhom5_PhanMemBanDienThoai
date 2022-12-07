@@ -20,7 +20,10 @@ public interface HoaDonChiTietService {
 
     HoaDonChiTiet getOne(String Id);
 
-    public List<ThongkeResponse> getAll1();
-
-    public List<ThongkeResponse> getAllimeidaban();
+public List<ThongkeResponse> getAll1() ;
+      public List<ThongkeResponse> getAllimeidaban();
+       public List<ThongkeResponse> getAllsp();
+             public  float getAll3(String b) ;
+              public List<ThongkeResponse> getAl2();
+                public List<ThongkeResponse> getAl4(String a, String b);
 }
