@@ -493,7 +493,7 @@ public class DemoDialog extends javax.swing.JDialog {
 
         btnRestore.setBackground(new java.awt.Color(0, 0, 102));
         btnRestore.setForeground(new java.awt.Color(0, 0, 102));
-        btnRestore.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fpt/it17326/nhom5/images/restore.png"))); // NOI18N
+        btnRestore.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/restore.png"))); // NOI18N
         btnRestore.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRestoreActionPerformed(evt);
