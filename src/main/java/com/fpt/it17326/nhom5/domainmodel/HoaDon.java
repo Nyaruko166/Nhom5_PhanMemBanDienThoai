@@ -44,6 +44,8 @@ public class HoaDon {
     @JoinColumn(name = "IdKH", referencedColumnName = "Id")
     private KhachHang khachHang;
     
+    @Column(name = "TenKH")
+    private String tenKH;
 
     @Column(name = "SDT")
     private String sdt;
@@ -77,6 +79,7 @@ public class HoaDon {
 //    }
         public HoaDon(String maHD, String tenKH, NhanVien nhanVien, Float tongTien) {
         this.maHD = maHD;
+        this.tenKH = tenKH;
 //        this.trangThaiHoaDon = trangThaiHoaDon;
         this.nhanVien = nhanVien;
         this.tongTien = tongTien;

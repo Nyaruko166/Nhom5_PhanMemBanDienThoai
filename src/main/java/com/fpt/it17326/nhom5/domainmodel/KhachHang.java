@@ -52,9 +52,6 @@ public class KhachHang {
     @Column(name = "DiaChi")
     private String diaChi;
     
-    @Column(name = "HangKH")
-    private String hangKH;
-    
     @Column(name = "CreatedAt")
     private Date createdAt;
 

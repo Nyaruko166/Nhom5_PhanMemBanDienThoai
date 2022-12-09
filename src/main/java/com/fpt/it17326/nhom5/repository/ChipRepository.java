@@ -43,6 +43,8 @@ public class ChipRepository {
         return query.getResultList();
     }
     
+    
+
     public Boolean add(Chip chip) {
         Transaction transaction = null;
         try (Session session = HibernateConfig.getFACTORY().openSession()) {

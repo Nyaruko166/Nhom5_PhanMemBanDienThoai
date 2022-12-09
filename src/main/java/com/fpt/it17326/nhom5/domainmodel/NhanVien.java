@@ -18,71 +18,63 @@ import lombok.ToString;
  * AowVN_Nyaruko
  **/
 @Entity
-@Table(name="NhanVien")
+@Table(name = "NhanVien")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+
 public class NhanVien {
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id")
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @Column (name = "Id")
     private int id;
     
-    @Column(name="MaNhanVien")
-    private String MaNhanVien;
+    @Column (name = "MaNhanVien")
+    private String maNhanVien;
     
-    @Column(name ="HoTen")
-    private String HoTen;
+    @Column (name = "HoTen")
+    private String hoTen;
     
-    @Column(name ="GioiTinh")
-    private Boolean GioiTinh;
+    @Column (name = "GioiTinh")
+    private boolean gioiTinh;
     
+    @Column(name = "TenCV")
+    private String tenCV;
     
-    @Column(name ="TenCV")
-    private String TenCV;
+    @Column(name = "Email")
+    private String email;
     
-    @Column(name ="Email")
-    private String Email;
+    @Column(name = "QueQuan")
+    private String queQuan;
     
-    @Column(name ="QueQuan")
-    private String QueQuan;
+    @Column(name = "NgaySinh")
+    private Date ngaySinh;
     
-    @Column(name ="NgaySinh")
-    private Date NgaySinh;
+    @Column(name = "TaiKhoan")
+    private String taiKhoan;
     
-   
+    @Column(name = "MatKhau")
+    private String matKhau;
     
-    @Column(name ="TaiKhoan")
-    private String TaiKhoan;
-    
-    @Column(name ="MatKhau")
-    private String MatKhau;
-    
-    @Column(name ="CreatedAt")
-    private Date CreatedAt;
-    
-    @Column(name ="Deleted")
-    private Boolean Deleted;
-    
-    @Column(name ="UpdatedAt")
-    private Date UpdatedAt;
+    @Column(name = "CreatedAt")
+    private Date createdAt;
 
-    public NhanVien(String HoTen, String TenCV, String Email, String TaiKhoan, String MatKhau, Date CreatedAt, Boolean Deleted) {
-        this.HoTen = HoTen;
-        this.TenCV = TenCV;
-        this.Email = Email;
-        this.TaiKhoan = TaiKhoan;
-        this.MatKhau = MatKhau;
-        this.CreatedAt = CreatedAt;
-        this.Deleted = Deleted;
+    @Column(name = "Deleted")
+    private boolean deleted;
+
+    @Column(name = "UpdatedAt")
+    private Date updatedAt;
+
+    public NhanVien(int id) {
+        this.id = id;
     }
-            
-    public NhanVien( String MaNhanVien) {
-        
-        this.MaNhanVien = MaNhanVien;
-    }
+
+    public NhanVien(String maNV) {
+        this.maNhanVien = maNhanVien;
+                }
 
     
     

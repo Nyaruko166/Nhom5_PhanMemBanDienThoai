@@ -5,6 +5,7 @@
 package com.fpt.it17326.nhom5.response;
 
 import com.fpt.it17326.nhom5.domainmodel.KhuyenMai;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
@@ -48,12 +49,21 @@ public class KhuyenMaiResponse {
         this.updatedAt = km.getUpdatedAt();
     }
 
-    public Object[] toDataRow() {
+    public Object[] toDataRow1() {
         String trangThai = "Đã ngừng hoạt động";
-        if (deleted==false) {
-            trangThai = "Hoạt động";
-        }
-        return new Object[]{id, tenKM, maKM,String.format("%,.0f", soTienGiam) + " %", ngayBatDau + " đến " + ngayKetThuc, trangThai};
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        String date1 = format.format(ngayBatDau);
+        String date2 = format.format(ngayKetThuc);
+        return new Object[]{id, tenKM, maKM,String.format("%,.0f", soTienGiam) + " %", date1 + " đến " + date2, trangThai};
+
+    }
+    public Object[] toDataRow2() {
+        String trangThai = "Hoạt động";
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        String date1 = format.format(ngayBatDau);
+        String date2 = format.format(ngayKetThuc);
+        return new Object[]{id, tenKM, maKM,String.format("%,.0f", soTienGiam) + " %", date1 + " đến " + date2, trangThai};
+
     }
 
 }

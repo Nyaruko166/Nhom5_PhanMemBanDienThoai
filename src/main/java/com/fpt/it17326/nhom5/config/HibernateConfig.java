@@ -56,7 +56,7 @@ public class HibernateConfig {
         conf.addAnnotatedClass(Imei.class);
         conf.addAnnotatedClass(SanPhamGiamGia.class);
         conf.addAnnotatedClass(KhachHang.class);
-        
+
         ServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .applySettings(conf.getProperties()).build();
         FACTORY = conf.buildSessionFactory(registry);
@@ -67,7 +67,7 @@ public class HibernateConfig {
         return FACTORY;
     }
 
-    public static void main(String[] args) {
-        getFACTORY();
-    }
+//    public static void main(String[] args) {
+//        getFACTORY();
+//    }
 }
