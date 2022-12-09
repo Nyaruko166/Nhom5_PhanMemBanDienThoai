@@ -24,7 +24,7 @@ public class NhanVienResponse {
     private String TenCV;
     private String Email;
     private String QueQuan;
-    private String NgaySinh;
+    private Date NgaySinh;
     private String TaiKhoan;
     private String MatKhau;
     private Date CreatedAt;
@@ -58,7 +58,7 @@ public class NhanVienResponse {
         if (Deleted==true) {
             trangThai = "Đã ngừng hoạt động";
         }
-        return new Object[]{MaNhanVien,HoTen,GioiTinh,TenCV,Email,QueQuan,NgaySinh,TaiKhoan,MatKhau,trangThai};
+        return new Object[]{MaNhanVien,HoTen,GioiTinh==true?"Nam":"Nữ",TenCV,Email,QueQuan,NgaySinh,TaiKhoan,MatKhau,trangThai};
     }
 
 
