@@ -240,7 +240,6 @@ public class ViewSanPham extends javax.swing.JFrame {
         txtEmailttcn.setText(nv.getEmail());
         txtQueQuanttcn.setText(nv.getQueQuan());
         txtNgaySinhttcn.setText(nv.getNgaySinh()+ "");
-
         dtmLichSu = (DefaultTableModel) tblLichSu.getModel();
         dtmKH = (DefaultTableModel) tblThongtinKH1.getModel();
         khachHangService = new KhachHangServiceImpl();
@@ -5719,10 +5718,8 @@ public class ViewSanPham extends javax.swing.JFrame {
 
         pl_khuyenmai.setBackground(new java.awt.Color(255, 255, 255));
         pl_khuyenmai.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
         pl_khuyenmai1.setBackground(new java.awt.Color(255, 255, 255));
         pl_khuyenmai1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
         pl_khuyenmai5.setBackground(new java.awt.Color(255, 255, 255));
         pl_khuyenmai5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -6061,7 +6058,6 @@ public class ViewSanPham extends javax.swing.JFrame {
                     .addComponent(jdateFrom1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGap(692, 692, 692)))
         );
-
         javax.swing.GroupLayout pl_khuyenmaiLayout = new javax.swing.GroupLayout(pl_khuyenmai);
         pl_khuyenmai.setLayout(pl_khuyenmaiLayout);
         pl_khuyenmaiLayout.setHorizontalGroup(
@@ -8186,7 +8182,6 @@ public class ViewSanPham extends javax.swing.JFrame {
         } catch (MessagingException e) {
             System.out.println("Loi gui tin nhan " + e);
         }
-        
         //listNhanVien.add(e);
         //loadtable();
     }//GEN-LAST:event_btnthemActionPerformed
@@ -9246,7 +9241,6 @@ public class ViewSanPham extends javax.swing.JFrame {
         
          
     }//GEN-LAST:event_jButton2ActionPerformed
-
     private void txtTongTienHang1ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }

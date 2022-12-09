@@ -51,7 +51,7 @@ public class NhanVien {
     private String queQuan;
     
     @Column(name = "NgaySinh")
-    private Date ngaySinh;
+    private Date ngaySinh; 
     
     @Column(name = "TaiKhoan")
     private String taiKhoan;

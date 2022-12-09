@@ -73,7 +73,7 @@ public class banhang_repo {
 "				left join Ram f on a.IdRam=f.id\n" +
 "				left join Imei g on a.Id=g.idsp\n" +
 "				group by a.masp,a.tensp,b.TenPin,c.TenChip,d.TenRom,e.TenHang,f.DungLuong,a.DonGia,a.id ";
-  
+ 
         try {
             st = db.openDbConnection().createStatement();
             rs = st.executeQuery(select);

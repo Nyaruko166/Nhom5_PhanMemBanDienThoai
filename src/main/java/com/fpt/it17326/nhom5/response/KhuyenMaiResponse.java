@@ -63,7 +63,6 @@ public class KhuyenMaiResponse {
         String date1 = format.format(ngayBatDau);
         String date2 = format.format(ngayKetThuc);
         return new Object[]{id, tenKM, maKM,String.format("%,.0f", soTienGiam) + " %", date1 + " đến " + date2, trangThai};
-
     }
 
 }
