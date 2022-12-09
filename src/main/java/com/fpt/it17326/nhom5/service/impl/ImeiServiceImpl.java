@@ -10,13 +10,16 @@ import com.fpt.it17326.nhom5.response.ImeiResponse;
 import com.fpt.it17326.nhom5.service.ImeiService;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author youngboizseetinh
  */
-@EnableAsync
+@Service
 public class ImeiServiceImpl implements ImeiService{
 
     ImeiRepository imeiRepository = new ImeiRepository();
@@ -40,6 +43,7 @@ public class ImeiServiceImpl implements ImeiService{
         return lsp;
     }
 
+    @Async
     @Override
     public String add(Imei imei) {
         if (imeiRepository.add(imei)) {
@@ -49,6 +53,7 @@ public class ImeiServiceImpl implements ImeiService{
         }
     }
 
+    @Async
     @Override
     public String update(Imei imei) {
         if (imeiRepository.update(imei)) {
@@ -58,6 +63,7 @@ public class ImeiServiceImpl implements ImeiService{
         }
     }
 
+    @Async
     @Override
     public String delete(Imei imei) {
         if (imeiRepository.delete(imei)) {
@@ -72,11 +78,13 @@ public class ImeiServiceImpl implements ImeiService{
         return imeiRepository.getAll();
     }
 
+    @Async
     @Override
     public List<Imei> getDeletedImei() {
         return imeiRepository.getAllDeleted();
     }
 
+    @Async
     @Override
     public List<Imei> getAllImeiBySanPham(int idSP) {
         return imeiRepository.getAllImeiBySanPham(idSP);
@@ -87,5 +95,5 @@ public class ImeiServiceImpl implements ImeiService{
 //        return imeiRepository.getAllImeiDeletedBySanPham(idSP);
 //    }
 
-    
+
 }

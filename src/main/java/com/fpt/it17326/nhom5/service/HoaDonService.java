@@ -11,6 +11,8 @@ import java.util.List;
 public interface HoaDonService {
 
     List<HoaDonResponse> getAll();
+    
+    List<HoaDon> getAll2();
 
     HoaDon getOne(String MaHoaDon);
 

@@ -14,6 +14,8 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 /**
  *
@@ -22,8 +24,9 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class SanPhamResponse {
+@Repository
 
+public class SanPhamResponse {
     private int id;
     private String maSP;
     private String tenSP;
