@@ -64,7 +64,7 @@ public class NhanVienRepository {
         } catch (Exception e) {
             e.printStackTrace(System.out);
         }
-        return true;
+        return null;
     }
 
     public Boolean update(NhanVien nv) {

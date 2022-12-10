@@ -4,23 +4,12 @@
  */
 package com.fpt.it17326.nhom5.view;
 
-import com.fpt.it17326.nhom5.view.ViewDatLaiMatKhau;
-import com.fpt.it17326.nhom5.response.NhanVienResponse;
 import com.fpt.it17326.nhom5.service.impl.NhanVienServiceImpl;
 import com.fpt.it17326.nhom5.domainmodel.NhanVien;
-import com.fpt.it17326.nhom5.view.ViewSanPham;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import org.apache.commons.lang3.RandomStringUtils;
 import com.fpt.it17326.nhom5.service.NhanVienService;
-import java.awt.Image;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
 
 /**
  *
