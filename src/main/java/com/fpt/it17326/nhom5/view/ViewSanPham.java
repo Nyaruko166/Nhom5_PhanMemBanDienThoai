@@ -5049,7 +5049,6 @@ String pathUnicode = "font\\unicode.ttf";
         jScrollPane1.setViewportView(tbbanhhoadonbanhang);
 
         buttonGroup2banhang.add(jRadioButton3);
-        jRadioButton3.setSelected(true);
         jRadioButton3.setText("Tất cả");
 
         jRadioButton2.setBackground(new java.awt.Color(255, 255, 255));
@@ -5318,7 +5317,6 @@ String pathUnicode = "font\\unicode.ttf";
         tfngaytaovaban.setText("dd-MM-yyyy");
 
         buttonGroup1banhang.add(rdtienmat);
-        rdtienmat.setSelected(true);
         rdtienmat.setText("Tiền mặt");
         rdtienmat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -5864,8 +5862,10 @@ String pathUnicode = "font\\unicode.ttf";
 
         pl_khuyenmai.setBackground(new java.awt.Color(255, 255, 255));
         pl_khuyenmai.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
         pl_khuyenmai1.setBackground(new java.awt.Color(255, 255, 255));
         pl_khuyenmai1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
         pl_khuyenmai5.setBackground(new java.awt.Color(255, 255, 255));
         pl_khuyenmai5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -6144,7 +6144,7 @@ String pathUnicode = "font\\unicode.ttf";
                     .addGroup(pl_khuyenmai5Layout.createSequentialGroup()
                         .addComponent(jPanel45, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel46, javax.swing.GroupLayout.PREFERRED_SIZE, 109, Short.MAX_VALUE))
+                        .addComponent(jPanel46, javax.swing.GroupLayout.PREFERRED_SIZE, 112, Short.MAX_VALUE))
                     .addComponent(jScrollPane22, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE))
                 .addGap(823, 823, 823)
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -6204,6 +6204,7 @@ String pathUnicode = "font\\unicode.ttf";
                     .addComponent(jdateFrom1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGap(692, 692, 692)))
         );
+
         javax.swing.GroupLayout pl_khuyenmaiLayout = new javax.swing.GroupLayout(pl_khuyenmai);
         pl_khuyenmai.setLayout(pl_khuyenmaiLayout);
         pl_khuyenmaiLayout.setHorizontalGroup(
