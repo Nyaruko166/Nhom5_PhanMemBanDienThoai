@@ -8,9 +8,11 @@ import java.util.List;
  * AowVN_Nyaruko
  *
  */
-
 public interface HoaDonService {
+
     List<HoaDonResponse> getAll();
+    
+    List<HoaDon> getAll2();
 
     HoaDon getOne(String MaHoaDon);
 
@@ -19,5 +21,6 @@ public interface HoaDonService {
     String update(HoaDon hd);
 
     String delete(HoaDon hd);
-     public List<HoaDonResponse> getAll1() ;
+
+    public List<HoaDonResponse> getAll1();
 }

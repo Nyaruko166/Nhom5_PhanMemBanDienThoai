@@ -189,7 +189,7 @@ public class ViewDatLaiMatKhau extends javax.swing.JFrame {
 
     private void btnGuiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuiActionPerformed
         String email = txtGuiDen.getText().trim();
-        lists = dvtk.getAll();
+        lists = dvtk.getAll1();
 
         if (email.trim().length() == 0) {
             JOptionPane.showMessageDialog(this, "email khong duoc de trong");

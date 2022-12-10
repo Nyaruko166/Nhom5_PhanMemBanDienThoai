@@ -16,6 +16,8 @@ public interface ImeiDaBanService {
     
     List<ImeiDaBanResponse> getAll();
     
+    List<ImeiDaBan> getAll1();
+    
     ImeiDaBanResponse getOne(String MaImei);
 
     String add(ImeiDaBan imeiDaBan);

@@ -8,6 +8,9 @@ import com.fpt.it17326.nhom5.domainmodel.SanPham;
 import com.fpt.it17326.nhom5.repository.SanPhamRepository;
 import com.fpt.it17326.nhom5.response.SanPhamResponse;
 import com.fpt.it17326.nhom5.service.SanPhamService;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,10 +18,12 @@ import java.util.List;
  *
  * @author youngboizseetinh
  */
+@Service
 public class SanPhamServiceImpl implements SanPhamService {
-    
+
     private SanPhamRepository sanPhamRepository = new SanPhamRepository();
-    
+
+    @Async
     @Override
     public List<SanPhamResponse> getAll() {
         List<SanPham> listSP = sanPhamRepository.getAll();
@@ -29,12 +34,13 @@ public class SanPhamServiceImpl implements SanPhamService {
         }
         return lst;
     }
-    
+
 //    @Override
 //    public SanPhamResponse getOne(String tenSP) {
 //        return new SanPhamResponse(sanPhamRepository.getOne(tenSP));
 //    }
-    
+
+    @Async
     @Override
     public String add(SanPham sp) {
         if (sanPhamRepository.add(sp)) {
@@ -43,7 +49,8 @@ public class SanPhamServiceImpl implements SanPhamService {
             return "Thêm thất bại";
         }
     }
-    
+
+    @Async
     @Override
     public String update(SanPham sp) {
         if (sanPhamRepository.update(sp)) {
@@ -52,7 +59,8 @@ public class SanPhamServiceImpl implements SanPhamService {
             return "Sửa thất bại";
         }
     }
-    
+
+    @Async
     @Override
     public String delete(SanPham sp) {
         if (sanPhamRepository.delete(sp)) {
@@ -61,16 +69,17 @@ public class SanPhamServiceImpl implements SanPhamService {
             return "Xoá thất bại";
         }
     }
-    
+
+    @Async
     @Override
     public String updateSL(SanPham sp, int sl) {
-        
+
         if (sanPhamRepository.updateSL(sp, sl)) {
             return "Thêm sản phẩm thành công";
         } else {
             return "Thêm sản phẩm thất bại";
         }
-        
+
     }
 
     @Override
@@ -92,4 +101,35 @@ public class SanPhamServiceImpl implements SanPhamService {
     public SanPham getSPLast() {
         return sanPhamRepository.getSPLast();
     }
+
+    @Override
+    public List<SanPham> searchProduct(String name) {
+        return sanPhamRepository.search(name);
+    }
+
+    @Async
+    @Override
+    public String restore(SanPham sp) {
+        sp.setDeleted(false);
+        // TODO Auto-generated method stub
+        if (sanPhamRepository.update(sp)) {
+            return "Khôi phục thành công";
+        } else {
+            return "Khôi phục thất bại";
+        }
+    }
+
+    @Override
+    public List<SanPham> searchDeletedProduct(String name) {
+        // TODO Auto-generated method stub
+        return sanPhamRepository.searchDeleted(name);
+    }
+
+    @Async
+    @Override
+    public int countRecord() {
+        // TODO Auto-generated method stub
+        return sanPhamRepository.count();
+    }
+
 }
