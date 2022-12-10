@@ -112,6 +112,7 @@ import com.fpt.it17326.nhom5.repobanhang.banhang_repo;
 
 import com.fpt.it17326.nhom5.viewmodel.hoadonbanhang;
 import com.fpt.it17326.nhom5.viewmodel.sanphambanhang;
+import com.fpt.it17326.nhom5.viewmodel.xuathoadon;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.util.ArrayList;
@@ -121,7 +122,24 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 //banhang thang
-//
+//xuat hoadon
+//import com.itextpdf.kernel.color.Color;
+import com.itextpdf.kernel.color.DeviceRgb;
+import com.itextpdf.kernel.font.PdfFont;
+import com.itextpdf.kernel.font.PdfFontFactory;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.border.Border;
+import com.itextpdf.layout.element.Cell;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.property.TextAlignment;
+import com.itextpdf.layout.property.VerticalAlignment;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+// xuat hoa don
 
 /**
  *
@@ -312,6 +330,134 @@ public class ViewSanPham extends javax.swing.JFrame {
     }
 
     ////banhang  thang
+       public boolean xuathoadon(String mhd){
+String pathUnicode = "font\\unicode.ttf";
+    try {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+            String date = sdf.format(new Date());
+            String path = mhd +"_"+ date + ".pdf";
+            PdfWriter pdfWriter = new PdfWriter(path);
+            PdfDocument pdfDocument = new PdfDocument(pdfWriter);
+            Document document = new Document(pdfDocument);
+            float col = 280f;
+            float columWidth[] = {col, col};
+
+            PdfFont font = PdfFontFactory.createFont(pathUnicode, BaseFont.IDENTITY_H);
+
+            Table table = new Table(columWidth);
+            table.setBackgroundColor(new DeviceRgb(63, 169, 219)).setFontColor(com.itextpdf.kernel.color.Color.WHITE);
+            table.setFont(font);
+
+            table.addCell(new Cell().add("A PHONE BILL").setTextAlignment(TextAlignment.CENTER)
+                    .setVerticalAlignment(VerticalAlignment.MIDDLE)
+                    .setMarginTop(30f)
+                    .setMarginBottom(30f)
+                    .setFontSize(30f)
+                    .setBorder(Border.NO_BORDER));
+            table.addCell(new Cell().add("Mã hóa đơn:"+mhd+"\nA Phone store").setTextAlignment(TextAlignment.RIGHT)
+                    .setMarginTop(30f)
+                    .setMarginBottom(30f)
+                    .setBorder(Border.NO_BORDER)
+                    .setMarginRight(10f));
+
+            float colWidth[] = {80, 250, 200, 200};
+            Table customerInforTable = new Table(colWidth);
+            customerInforTable.setFont(font);
+            customerInforTable.addCell(new Cell(0, 4) .add("Thông tin khách hàng").setBold().setBorder(Border.NO_BORDER));
+               
+             customerInforTable.addCell(new Cell().add("Họ tên:").setBorder(Border.NO_BORDER));
+            customerInforTable.addCell(new Cell().add(""+rp.xuathoadobbanhang(mhd).get(0).getHoten()).setBorder(Border.NO_BORDER));
+            customerInforTable.addCell(new Cell().add("Số điện thoại:").setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.RIGHT));
+            customerInforTable.addCell(new Cell().add(""+rp.xuathoadobbanhang(mhd).get(0).getSdt()).setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.RIGHT));
+            customerInforTable.addCell(new Cell().add("Địa chỉ:").setBorder(Border.NO_BORDER));
+            customerInforTable.addCell(new Cell().add(""+rp.xuathoadobbanhang(mhd).get(0).getDiachi()).setBorder(Border.NO_BORDER));
+            customerInforTable.addCell(new Cell().add("Ngày thanh toán:").setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.RIGHT));
+            customerInforTable.addCell(new Cell().add(""+rp.xuathoadobbanhang(mhd).get(0).getNgaythanhtoan()).setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.RIGHT));
+            
+////////////////////////////////////////////////////////////////
+            float itemColWidth[] = {15, 110, 110, 50, 140, 140};
+            Table itemTable = new Table(itemColWidth);
+            itemTable.setFont(font);
+            itemTable.addCell(new Cell().add("STT").setBackgroundColor(new DeviceRgb(63, 169, 219)).setFontColor(com.itextpdf.kernel.color.Color.WHITE));
+            itemTable.addCell(new Cell().add("Tên sản phẩm").setBackgroundColor(new DeviceRgb(63, 169, 219)).setFontColor(com.itextpdf.kernel.color.Color.WHITE));
+            itemTable.addCell(new Cell().add("Thông tin SP").setBackgroundColor(new DeviceRgb(63, 169, 219)).setFontColor(com.itextpdf.kernel.color.Color.WHITE));
+            itemTable.addCell(new Cell().add("Số lượng").setBackgroundColor(new DeviceRgb(63, 169, 219)).setFontColor(com.itextpdf.kernel.color.Color.WHITE));
+            itemTable.addCell(new Cell().add("Giá bán").setBackgroundColor(new DeviceRgb(63, 169, 219)).setFontColor(com.itextpdf.kernel.color.Color.WHITE));
+            itemTable.addCell(new Cell().add("Thành tiền").setBackgroundColor(new DeviceRgb(63, 169, 219)).setFontColor(com.itextpdf.kernel.color.Color.WHITE));
+               int stt=0;
+               double tong=0;
+               if (rp.xuathoadobbanhang(mhd).size()>0) {
+              for (xuathoadon x: rp.xuathoadobbanhang(mhd)) {
+                stt=stt+1;
+            itemTable.addCell(new Cell().add(""+stt));
+            itemTable.addCell(new Cell().add(""+x.getTensp()));
+            itemTable.addCell(new Cell().add(""+x.getThongtinsp()));
+            itemTable.addCell(new Cell().add(""+x.getSolg()));
+            itemTable.addCell(new Cell().add(""+String.format("%,.2f", x.getDongia()) + " VND"));
+            itemTable.addCell(new Cell().add(""+String.format("%,.2f", x.getThanhtien()) + " VND"));
+            tong=tong+ x.getThanhtien();
+            }
+              
+        }else{
+                      itemTable.addCell(new Cell().add(""));
+            itemTable.addCell(new Cell().add(""));
+            itemTable.addCell(new Cell().add(""));
+            itemTable.addCell(new Cell().add(""));
+            itemTable.addCell(new Cell().add(""));
+            itemTable.addCell(new Cell().add(""));
+               }
+           
+            itemTable.addCell(new Cell().add("").setBackgroundColor(new DeviceRgb(63, 169, 219)).setBorder(Border.NO_BORDER));
+            itemTable.addCell(new Cell().add("").setBackgroundColor(new DeviceRgb(63, 169, 219)).setBorder(Border.NO_BORDER));
+            itemTable.addCell(new Cell().add("").setBackgroundColor(new DeviceRgb(63, 169, 219)).setBorder(Border.NO_BORDER));
+            itemTable.addCell(new Cell().add("").setBackgroundColor(new DeviceRgb(63, 169, 219)).setBorder(Border.NO_BORDER));
+            itemTable.addCell(new Cell().add("Tổng tiền").setBackgroundColor(new DeviceRgb(63, 169, 219)).setBorder(Border.NO_BORDER).setFontColor(com.itextpdf.kernel.color.Color.WHITE));
+            itemTable.addCell(new Cell().add(""+String.format("%,.2f", tong) + " VND").setBackgroundColor(new DeviceRgb(63, 169, 219)).setBorder(Border.NO_BORDER).setFontColor(com.itextpdf.kernel.color.Color.WHITE));
+            String ten="";
+            String phantram="";
+            double phaitra=0;
+                   if (rp.xuathoadobbanhang(mhd).size()>0) {  
+                       if (rp.xuathoadobbanhang(mhd).get(0).getHoten().equals("khách bán lẻ")) {
+            ten=rp.xuathoadobbanhang(mhd).get(0).getHoten();
+            phantram="0%";
+            phaitra=tong;
+        } else {
+                 ten="Thành viên";
+                  if ( tong <1000000) {phaitra=tong/100*100;phantram="0%";} 
+                    else  if (10000000>tong && tong >=1000000) {phaitra=tong/100*99;phantram="1%";} 
+                      else if(tong <100000000 && tong >=10000000){phaitra=tong/100*95;phantram="5%";}
+                      else if(tong >=100000000){phaitra=tong/100*90;phantram="10%";}
+        }   
+                   }
+        
+            itemTable.addCell(new Cell().add("").setBackgroundColor(new DeviceRgb(63, 169, 219)).setBorder(Border.NO_BORDER));
+            itemTable.addCell(new Cell().add("").setBackgroundColor(new DeviceRgb(63, 169, 219)).setBorder(Border.NO_BORDER));
+            itemTable.addCell(new Cell().add("").setBackgroundColor(new DeviceRgb(63, 169, 219)).setBorder(Border.NO_BORDER));
+            itemTable.addCell(new Cell().add("").setBackgroundColor(new DeviceRgb(63, 169, 219)).setBorder(Border.NO_BORDER));
+            itemTable.addCell(new Cell().add(""+ten).setBackgroundColor(new DeviceRgb(63, 169, 219)).setBorder(Border.NO_BORDER).setFontColor(com.itextpdf.kernel.color.Color.WHITE));
+            itemTable.addCell(new Cell().add("Giảm :"+phantram).setBackgroundColor(new DeviceRgb(63, 169, 219)).setBorder(Border.NO_BORDER).setFontColor(com.itextpdf.kernel.color.Color.WHITE));
+            
+            itemTable.addCell(new Cell().add("").setBackgroundColor(new DeviceRgb(63, 169, 219)).setBorder(Border.NO_BORDER));
+            itemTable.addCell(new Cell().add("").setBackgroundColor(new DeviceRgb(63, 169, 219)).setBorder(Border.NO_BORDER));
+            itemTable.addCell(new Cell().add("").setBackgroundColor(new DeviceRgb(63, 169, 219)).setBorder(Border.NO_BORDER));
+            itemTable.addCell(new Cell().add("").setBackgroundColor(new DeviceRgb(63, 169, 219)).setBorder(Border.NO_BORDER));
+            itemTable.addCell(new Cell().add("Tiền phải trả :").setBackgroundColor(new DeviceRgb(63, 169, 219)).setBorder(Border.NO_BORDER).setFontColor(com.itextpdf.kernel.color.Color.WHITE));
+            itemTable.addCell(new Cell().add(""+String.format("%,.2f", phaitra) + " VND").setBackgroundColor(new DeviceRgb(63, 169, 219)).setBorder(Border.NO_BORDER).setFontColor(com.itextpdf.kernel.color.Color.WHITE));
+            
+            document.add(table);
+            document.add(new Paragraph("\n"));
+            document.add(customerInforTable);
+            document.add(new Paragraph("\n"));
+            document.add(itemTable);
+            document.close();
+            System.out.println("Export successfully");
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
+}
     public String loadtrangthaibanhanghoadon(int a) {
         if (a == 0) {
             return "Chờ thanh toán";
@@ -8883,119 +9029,241 @@ public class ViewSanPham extends javax.swing.JFrame {
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
 
-        if (tbbanhhoadonbanhang.getSelectedRow() < 0) {
-            JOptionPane.showMessageDialog(this, "Bạn chưa chọn hóa đơn để thanh toán");
-        } else {
-
+          if (tbbanhhoadonbanhang.getSelectedRow()<0) {
+            JOptionPane.showMessageDialog(this,"Bạn chưa chọn hóa đơn để thanh toán");
+        }else{  
+            
             clicksanphamragiohang____kethop(tbbanhhoadonbanhang.getSelectedRow());
-
-            int vthd = 0;
-            for (int i = 0; i < rp.gethdbanhang().size(); i++) {
-                if (tbbanhhoadonbanhang.getValueAt(tbbanhhoadonbanhang.getSelectedRow(), 1).toString().equals(rp.gethdbanhang().get(i).getMaHD())) {
-                    vthd = i;
-                }
-            }
-            if (rp.gethdbanhang().get(vthd).getTrangthai() == 1) {
-                JOptionPane.showMessageDialog(this, "Hóa đơn mã : " + tbbanhhoadonbanhang.getValueAt(tbbanhhoadonbanhang.getSelectedRow(), 1).toString() + " đã được thanh toán.\n"
-                        + "Nên bạn không thể thanh toán tiếp hóa đơn đó....");
+            
+                         int vthd=0;
+          for (int i = 0; i < rp.gethdbanhang().size(); i++) {
+               if (tbbanhhoadonbanhang.getValueAt(tbbanhhoadonbanhang.getSelectedRow(),1).toString().equals(rp.gethdbanhang().get(i).getMaHD())) {
+                   vthd=i;
+               }
+           } 
+            if (rp.gethdbanhang().get(vthd).getTrangthai()==1) {
+                JOptionPane.showMessageDialog(this,"Hóa đơn mã : "+tbbanhhoadonbanhang.getValueAt(tbbanhhoadonbanhang.getSelectedRow(),1).toString()+" đã được thanh toán.\n"
+                                                 + "Nên bạn không thể thanh toán tiếp hóa đơn đó....");
             } else {
-
-                if (rdtienmat.isSelected() || rdchuyenkhoan.isSelected()) {
-
-                    if (rdtienmat.isSelected()) {
-                        //tien mat
-                        if (tftienkhachdua.getText().isBlank() || tftienkhachdua.getText().isEmpty()) {
-
-                            JOptionPane.showMessageDialog(this, "Tiền khách đưa không được để trống");
-
-                        } else {
-
-                            if (kttiennhap()) {
-
-                                float tiendua = Float.parseFloat(tftienkhachdua.getText());
-
-                                if (tiendua > tongtienhangsaukhuyenmai) {
-                                    JOptionPane.showMessageDialog(this, "Khách hàng đã dưa thừa tiền\n"
-                                            + "Nhân viên hãy trả lại tiền cho khách hàng rồi hãng thanh toán");
-                                } else if (tiendua < tongtienhangsaukhuyenmai) {
-                                    JOptionPane.showMessageDialog(this, "Khách hàng đã dưa thiếu tiền\n"
-                                            + "Không thể thanh toán");
-                                } else {
-
-                                    String tiendakhuyenmai = String.valueOf(tongtienhangsaukhuyenmai);
-                                    JOptionPane.showMessageDialog(this, rp.Thanhtoanhoadon(tiendakhuyenmai, tbbanhhoadonbanhang.getValueAt(tbbanhhoadonbanhang.getSelectedRow(), 1).toString()));
-                                    for (sanphambanhang sp : rp.getsanphambanhang()) {
-                                        rp.capnhatsolgsanpham(sp.getMasp());
-                                    }
-                                    loadtablebanhanghoadon();
-                                    loadtablebanhangsanpham();
-                                    DefaultTableModel defaultTable = new DefaultTableModel();
-
-                                    defaultTable = (DefaultTableModel) tbgiohangbanhang.getModel();
-                                    defaultTable.setRowCount(0);
-
-                                }
-
-                            } else {
-
-                                JOptionPane.showMessageDialog(this, "Tiền khách đưa không hợp lệ\n"
-                                        + "(Tiền khách đưa chỉ được ghi số)");
-
-                            }
-
-                        }
-
-                    } else {
-                        //chuyen khoan
-                        if (tftienkhachdua.getText().isBlank() || tftienkhachdua.getText().isEmpty()) {
-                            JOptionPane.showMessageDialog(this, "Bạn hãy chọn lại phương thức thanh toán");
-
-                        } else {
-
-                            String tiendakhuyenmai = String.valueOf(tongtienhangsaukhuyenmai);
-                            JOptionPane.showMessageDialog(this, rp.Thanhtoanhoadon(tiendakhuyenmai, tbbanhhoadonbanhang.getValueAt(tbbanhhoadonbanhang.getSelectedRow(), 1).toString()));
-                            for (sanphambanhang sp : rp.getsanphambanhang()) {
-                                rp.capnhatsolgsanpham(sp.getMasp());
-                            }
-                            loadtablebanhanghoadon();
-                            loadtablebanhangsanpham();
-
-                            DefaultTableModel defaultTable = new DefaultTableModel();
-
-                            defaultTable = (DefaultTableModel) tbgiohangbanhang.getModel();
-                            defaultTable.setRowCount(0);
-
-                        }
-
-                    }
-
-                    //                int vthd=0;
-                    //          for (int i = 0; i < rp.gethdbanhang().size(); i++) {
-                    //               if (tbbanhhoadonbanhang.getValueAt(tbbanhhoadonbanhang.getSelectedRow(),1).toString().equals(rp.gethdbanhang().get(i).getMaHD())) {
-                    //                   vthd=i;
-                    //               }
-                    //           }
-                    //            if (rp.gethdbanhang().get(vthd).getTrangthai()==1) {
-                    //                JOptionPane.showMessageDialog(this,"Hóa đơn mã : "+tbbanhhoadonbanhang.getValueAt(tbbanhhoadonbanhang.getSelectedRow(),1).toString()+" đã được thanh toán.\n"
-                    //                                                 + "Nên bạn không thể thanh toán tiếp hóa đơn đó....");
-                    //            } else {
-                    //
-                    //                 String tiendakhuyenmai=String.valueOf(tongtienhangsaukhuyenmai);
-                    //        JOptionPane.showMessageDialog(this,rp.Thanhtoanhoadon(tiendakhuyenmai, tbbanhhoadonbanhang.getValueAt(tbbanhhoadonbanhang.getSelectedRow(), 1).toString()));
-                    //                for (sanphambanhang sp : rp.getsanphambanhang()) {
-                    //                    rp.capnhatsolgsanpham(sp.getMasp());
-                    //                }
-                    //        loadtablebanhanghoadon();
-                    //        loadtablebanhangsanpham();
-                    //
-                    //            }
-                } else {
-                    JOptionPane.showMessageDialog(this, "Bạn chưa chọn phương thức thanh toán");
-                }
-
+            
+            
+            if (rdtienmat.isSelected()  ||  rdchuyenkhoan.isSelected()) {
+              
+                if (rdtienmat.isSelected()) {
+                    //tien mat
+                     if (tftienkhachdua.getText().isBlank()  || tftienkhachdua.getText().isEmpty()) {
+                     
+                     
+                       JOptionPane.showMessageDialog(this,"Tiền khách đưa không được để trống");
+                     
+                     
+                     }else{
+                     
+                         if (kttiennhap()) {
+                             
+                               float tiendua=Float.parseFloat(tftienkhachdua.getText());
+                         
+                             if (tiendua>tongtienhangsaukhuyenmai) {
+                                  JOptionPane.showMessageDialog(this,"Khách hàng đã dưa thừa tiền\n"
+                                                                    + "Nhân viên hãy trả lại tiền cho khách hàng rồi hãng thanh toán");
+                             }else if(tiendua<tongtienhangsaukhuyenmai){
+                              JOptionPane.showMessageDialog(this,"Khách hàng đã dưa thiếu tiền\n"
+                                                                + "Không thể thanh toán");
+                             }else{
+                             
+                             
+                             
+                             
+                             
+              //thanh toán
+                
+                 String tiendakhuyenmai=String.valueOf(tongtienhangsaukhuyenmai);
+   
+      
+        
+           if (rp.Thanhtoanhoadon(tiendakhuyenmai, tbbanhhoadonbanhang.getValueAt(tbbanhhoadonbanhang.getSelectedRow(), 1).toString()).equals("Thanh toán  thanh công")) {
+                JOptionPane.showMessageDialog(this, "Thanh toán thành công");
+                             int vitri=      JOptionPane.showConfirmDialog(this,"BẠN CÓ MUỐN XUẤT HÓA ĐƠN KHÔNG");
+                                     if (vitri==0) {
+                                              if (xuathoadon(tbbanhhoadonbanhang.getValueAt(tbbanhhoadonbanhang.getSelectedRow(),1).toString())) {
+                                             JOptionPane.showMessageDialog(this,"Xuất hóa đơn thành công");
+                                         }else{
+                                              
+                                            JOptionPane.showMessageDialog(this,"Xuất hóa đơn thất bại");  
+                                              }
+                                     }
+                                 }else{
+             JOptionPane.showMessageDialog(this, "Thanh toán thất bại");
             }
+             tftienkhachdua.setText("");
+              for (sanphambanhang sp : rp.getsanphambanhang()) {
+                    rp.capnhatsolgsanpham(sp.getMasp());
+                }
+                                 for (sanphambanhang om : rp.clhoadonrabanggiohang(tbbanhhoadonbanhang.getValueAt(tbbanhhoadonbanhang.getSelectedRow(), 1).toString())) {
+                                     rp.capnhatsoluonghoadonchitiet(om.getIdhdct());
+                                 }
+        
+        loadtablebanhanghoadon();
+        loadtablebanhangsanpham();
+        
+        
+                             
+        
+          DefaultTableModel defaultTable = new DefaultTableModel();
+    
+      defaultTable = (DefaultTableModel) tbgiohangbanhang.getModel();
+      defaultTable.setRowCount(0);
+      
+   
+              
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             }
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                         }else{
+                         
+                         
+                          JOptionPane.showMessageDialog(this,"Tiền khách đưa không hợp lệ\n"
+                                                            + "(Tiền khách đưa chỉ được ghi số)");
+                         
+                         }
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     }
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                }else{
+                //chuyen khoan
+                    if (tftienkhachdua.getText().isBlank()  || tftienkhachdua.getText().isEmpty()) {
+                        JOptionPane.showMessageDialog(this,"Bạn hãy chọn lại phương thức thanh toán");
+                        
+                        
+                    }else{
+                    
+                    
+            //thanh toán
+                
+                 String tiendakhuyenmai=String.valueOf(tongtienhangsaukhuyenmai);
+ 
+   
+      
+        
+            if (rp.Thanhtoanhoadon(tiendakhuyenmai, tbbanhhoadonbanhang.getValueAt(tbbanhhoadonbanhang.getSelectedRow(), 1).toString()).equals("Thanh toán  thanh công")) {
+                JOptionPane.showMessageDialog(this, "Thanh toán thành công");
+                             int vitri=      JOptionPane.showConfirmDialog(this,"BẠN CÓ MUỐN XUẤT HÓA ĐƠN KHÔNG");
+                                     if (vitri==0) {
+                                              if (xuathoadon(tbbanhhoadonbanhang.getValueAt(tbbanhhoadonbanhang.getSelectedRow(),1).toString())) {
+                                             JOptionPane.showMessageDialog(this,"Xuất hóa đơn thành công");
+                                         }else{
+                                              
+                                            JOptionPane.showMessageDialog(this,"Xuất hóa đơn thất bại");  
+                                              }
+                                     }
+                                 }else{
+             JOptionPane.showMessageDialog(this, "Thanh toán thất bại");
+            }
+             tftienkhachdua.setText("");
+              for (sanphambanhang sp : rp.getsanphambanhang()) {
+                    rp.capnhatsolgsanpham(sp.getMasp());
+                }
+                            for (sanphambanhang om : rp.clhoadonrabanggiohang(tbbanhhoadonbanhang.getValueAt(tbbanhhoadonbanhang.getSelectedRow(), 1).toString())) {
+                                     rp.capnhatsoluonghoadonchitiet(om.getIdhdct());
+                                 }
+        loadtablebanhanghoadon();
+        loadtablebanhangsanpham();
+        
+        
+                             
+        
+          DefaultTableModel defaultTable = new DefaultTableModel();
+    
+      defaultTable = (DefaultTableModel) tbgiohangbanhang.getModel();
+      defaultTable.setRowCount(0);
+      
+  
+                    
+                    }
+                
+                
+                
+                
+                }
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
 
+                
+                
+            } else {
+                JOptionPane.showMessageDialog(this,"Bạn chưa chọn phương thức thanh toán");
+            }
+       
+        
+        
         }
+        
+        }
+       
+        
+   
+       
 
     }//GEN-LAST:event_jButton14ActionPerformed
 
