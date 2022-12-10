@@ -5,7 +5,7 @@
 package com.fpt.it17326.nhom5.repobanhang;
 
 
-
+import com.fpt.it17326.nhom5.view.banhangimei;
 import com.fpt.it17326.nhom5.viewmodel.banhangimeithoebang;
 import com.fpt.it17326.nhom5.viewmodel.hoadonbanhang;
 import com.fpt.it17326.nhom5.viewmodel.khachhangbanhang;
@@ -34,7 +34,7 @@ public class banhang_repo {
    List<banhangimeithoebang> listimei = null;
          List<sanphambanhang> lissanphambanhang = null;
               List<khachhangbanhang> liskhachhangbanhang = null;
-                  List<xuathoadon> lisxuathoadon = null;
+                 List<xuathoadon> lisxuathoadon = null;
     public banhang_repo() {
     }
 
@@ -74,8 +74,9 @@ public class banhang_repo {
 "				left join HangDienThoai e on a.IdHang=e.id\n" +
 "				left join Ram f on a.IdRam=f.id\n" +
 "				left join Imei g on a.Id=g.idsp\n" +
+"\n" +
 "				group by a.masp,a.tensp,b.TenPin,c.TenChip,d.TenRom,e.TenHang,f.DungLuong,a.DonGia,a.id ";
- 
+  
         try {
             st = db.openDbConnection().createStatement();
             rs = st.executeQuery(select);
@@ -276,7 +277,7 @@ public class banhang_repo {
           
                public List<sanphambanhang> clhoadonrabanggiohang(String mahd) {
                lissanphambanhang=new ArrayList<>();
-        String select = "	select a.masp,a.tensp,b.TenPin,c.TenChip,d.TenRom,e.TenHang,f.DungLuong,count(i.IdHoaDonChiTiet),g.DonGia ,g.IdSP\n" +
+        String select = "	select a.masp,a.tensp,b.TenPin,c.TenChip,d.TenRom,e.TenHang,f.DungLuong,count(i.IdHoaDonChiTiet),g.DonGia ,g.IdSP,g.id\n" +
 " from sanpham a  join pin b on a.idpin=b.id\n" +
 "                join Chip c on a.idchip=c.id\n" +
 "				 join Rom d on a.IdRom=d.id\n" +
@@ -287,7 +288,7 @@ public class banhang_repo {
 "					 \n" +
 "					 	left join ImeiDaBan i on g.Id=i.IdHoaDonChiTiet\n" +
 "\n" +
-"				group by a.masp,a.tensp,b.TenPin,c.TenChip,d.TenRom,e.TenHang,f.DungLuong,g.DonGia ,g.IdSP,h.MaHD\n" +
+"				group by a.masp,a.tensp,b.TenPin,c.TenChip,d.TenRom,e.TenHang,f.DungLuong,g.DonGia ,g.IdSP,h.MaHD,g.id\n" +
 "					 \n" +
 "					 \n" +
 "					 having h.MaHD='"+mahd+"'";
@@ -307,7 +308,8 @@ public class banhang_repo {
                            rs.getString(7) ,
                       rs.getInt(8),
                                  rs.getFloat(9),
-                        rs.getInt(10)
+                        rs.getInt(10),
+                          rs.getInt(11)
                         
                         )
                         
@@ -540,7 +542,45 @@ public class banhang_repo {
           
           
           
-             public List<xuathoadon> xuathoadobbanhang(String mahd) {
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          //////////////////////////////////////////////////////////////////////////
+               
+                  
+                     public   void capnhatsoluonghoadonchitiet(int idhdct){
+            
+      try {
+            String delete = " update HoaDonChiTiet set SoLuong=(\n" +
+"select count(b.IdHoaDonChiTiet) from HoaDonChiTiet a left join ImeiDaBan b on b.IdHoaDonChiTiet=a.id \n" +
+"group by  a.id  having a.id=?)  where id=?" ;
+            pst = db.openDbConnection().prepareStatement(delete);
+            pst.setObject(1, idhdct);
+              pst.setObject(2, idhdct);
+              
+               
+
+            pst.executeUpdate();
+            
+  
+        } catch (SQLException ex) {
+            Logger.getLogger(banhang_repo.class.getName()).log(Level.SEVERE, null, ex);
+          
+        }      
+    
+    }
+     
+                    public List<xuathoadon> xuathoadobbanhang(String mahd) {
                lisxuathoadon=new ArrayList<>();
         String select = "select b.MaHD,a.HoTen,a.SDT,a.DiaChi,convert(varchar,b.CreatedAt,105),d.TenSP,f.TenMauSac+','+g.tenrom+','+h.DungLuong,COUNT(e.IdHoaDonChiTiet),d.DonGia,COUNT(e.IdHoaDonChiTiet)*d.DonGia from\n" +
 " hoadon b  left join KhachHang a on a.id=b.IdKH\n" +
@@ -578,4 +618,6 @@ public class banhang_repo {
         return lisxuathoadon;
         
     }
+                    
+   
 }

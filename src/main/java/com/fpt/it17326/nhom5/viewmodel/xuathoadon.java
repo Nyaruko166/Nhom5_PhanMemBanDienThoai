@@ -6,7 +6,7 @@ package com.fpt.it17326.nhom5.viewmodel;
 
 /**
  *
- * @author youngboizseetinh
+ * @author PHAM DAC THANG
  */
 public class xuathoadon {
     public  String mahd,hoten,sdt,diachi,ngaythanhtoan,tensp,thongtinsp;
