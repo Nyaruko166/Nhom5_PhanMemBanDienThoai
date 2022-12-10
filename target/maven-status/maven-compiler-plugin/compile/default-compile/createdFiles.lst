@@ -164,6 +164,7 @@ com\fpt\it17326\nhom5\view\ViewAnh$1.class
 com\fpt\it17326\nhom5\repobanhang\banhang_repo.class
 com\fpt\it17326\nhom5\view\ViewSanPham$50.class
 com\fpt\it17326\nhom5\view\ViewSanPham$7.class
+com\fpt\it17326\nhom5\viewmodel\xuathoadon.class
 com\fpt\it17326\nhom5\repository\RamRepository.class
 com\fpt\it17326\nhom5\service\impl\HoaDonChiTietServiceImpl.class
 com\fpt\it17326\nhom5\domainmodel\Imei.class
