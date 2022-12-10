@@ -18,7 +18,7 @@ public class dbcontest {
 //     private static String hostName = "DESKTOP-HMT0GAQ\\SQLEXPRESS";
 
     private static String account = "sa";
-    private static String pass = "sa";
+    private static String pass = "123456";
     private static String dbName = "QUANLYBANDIENTHOAI";
     private static String connectionSQL = "jdbc:sqlserver://localhost:1433;databaseName=" + dbName;
     private static String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";

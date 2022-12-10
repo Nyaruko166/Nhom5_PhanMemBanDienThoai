@@ -34,8 +34,8 @@ public class HibernateConfig {
         properties.put(Environment.DRIVER, "com.microsoft.sqlserver.jdbc.SQLServerDriver");
         properties.put(Environment.URL, "jdbc:sqlserver://localhost:1433;databaseName=QUANLYBANDIENTHOAI");
         properties.put(Environment.USER, "sa");
-        properties.put(Environment.PASS, "sa");
-        properties.put(Environment.SHOW_SQL, "true");
+        properties.put(Environment.PASS, "123456");
+        properties.put(Environment.SHOW_SQL, "false");
         conf.setProperties(properties);
         //Add @Entity
         //conf.addAnnotatedClass(*);
