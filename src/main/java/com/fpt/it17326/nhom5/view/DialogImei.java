@@ -307,6 +307,7 @@ public class DialogImei extends javax.swing.JDialog {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
         this.response.getListImeiResponse(listImei);
+        JOptionPane.showMessageDialog(null, "Thêm imei thành công");
         this.dispose();
     }//GEN-LAST:event_btnSaveActionPerformed
 

@@ -115,6 +115,7 @@ public class banhangimei extends javax.swing.JDialog {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Danh sách imei"));
 
+        tbbangbanhangimei.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tbbangbanhangimei.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -126,10 +127,15 @@ public class banhangimei extends javax.swing.JDialog {
                 "STT", "ID imei", "MaImei", "Imei"
             }
         ));
+        tbbangbanhangimei.setGridColor(new java.awt.Color(0, 0, 102));
+        tbbangbanhangimei.setSelectionBackground(new java.awt.Color(255, 0, 51));
         jScrollPane1.setViewportView(tbbangbanhangimei);
 
         jLabel1.setText("imei");
 
+        btthemimeibanhang.setBackground(new java.awt.Color(0, 0, 102));
+        btthemimeibanhang.setForeground(new java.awt.Color(255, 255, 255));
+        btthemimeibanhang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add.png"))); // NOI18N
         btthemimeibanhang.setText("Thêm vào giỏ hàng");
         btthemimeibanhang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,6 +143,9 @@ public class banhangimei extends javax.swing.JDialog {
             }
         });
 
+        btxoaimeibanhang.setBackground(new java.awt.Color(0, 0, 102));
+        btxoaimeibanhang.setForeground(new java.awt.Color(255, 255, 255));
+        btxoaimeibanhang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete.png"))); // NOI18N
         btxoaimeibanhang.setText("Xóa khỏi giỏ hàng");
         btxoaimeibanhang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -155,8 +164,8 @@ public class banhangimei extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(40, 40, 40)
-                        .addComponent(btxoaimeibanhang, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(61, 61, 61)
+                        .addComponent(btxoaimeibanhang)
+                        .addGap(53, 53, 53)
                         .addComponent(btthemimeibanhang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );

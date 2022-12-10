@@ -345,7 +345,7 @@ public class ViewDangNhap extends javax.swing.JFrame {
 //            }
             if (viewTaiKhoanResponse.getTaiKhoan().contains(username) && viewTaiKhoanResponse.getMatKhau().contains(pass)) {
 
-                JOptionPane.showMessageDialog(this, "Đằng nhập thành công");
+                JOptionPane.showMessageDialog(this, "Đăng nhập thành công");
                 ViewSanPham vdk = new ViewSanPham(viewTaiKhoanResponse.getTaiKhoan());
 //                vdk.HoTenNV = viewTaiKhoanResponse.getHoTen();
 //                vdk.MaNhanVien = viewTaiKhoanResponse.getMaNhanVien();
