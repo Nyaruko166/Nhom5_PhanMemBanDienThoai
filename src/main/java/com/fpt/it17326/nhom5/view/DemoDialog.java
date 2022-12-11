@@ -1086,7 +1086,7 @@ public class DemoDialog extends javax.swing.JDialog {
         }
         getAllChipDeleted(listChipDeleted);
     }
-    
+
     public void searchRamDeleted() {
         String keySearch = txtTimKiem.getText().trim();
         if (keySearch.isBlank()) {
@@ -1096,7 +1096,7 @@ public class DemoDialog extends javax.swing.JDialog {
         }
         getAllRamDeleted(listRamDeleted);
     }
-    
+
     public void searchRomDeleted() {
         String keySearch = txtTimKiem.getText().trim();
         if (keySearch.isBlank()) {
@@ -1106,7 +1106,7 @@ public class DemoDialog extends javax.swing.JDialog {
         }
         getAllRomDeleted(listRomDeleted);
     }
-    
+
     public void searchPinDeleted() {
         String keySearch = txtTimKiem.getText().trim();
         if (keySearch.isBlank()) {
@@ -1116,7 +1116,7 @@ public class DemoDialog extends javax.swing.JDialog {
         }
         getAllPinDeleted(listPinDeleted);
     }
-    
+
     public void searchMauSacDeleted() {
         String keySearch = txtTimKiem.getText().trim();
         if (keySearch.isBlank()) {
@@ -1126,7 +1126,7 @@ public class DemoDialog extends javax.swing.JDialog {
         }
         getAllMauSacDeleted(listMauSacDeleted);
     }
-    
+
     public void searchHangDTDeleted() {
         String keySearch = txtTimKiem.getText().trim();
         if (keySearch.isBlank()) {
@@ -1136,7 +1136,7 @@ public class DemoDialog extends javax.swing.JDialog {
         }
         getAllHangDTDeleted(listHangDTDeleted);
     }
-    
+
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
         if (lblTitle.getText().equalsIgnoreCase("Chip")) {
