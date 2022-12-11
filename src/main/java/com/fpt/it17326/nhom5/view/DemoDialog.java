@@ -183,7 +183,7 @@ public class DemoDialog extends javax.swing.JDialog {
     public void getAllChipDeleted(List<Chip> listChip) {
         ArrayList<Object[]> rows = new ArrayList<>();
         for (Chip chip : listChip) {
-            Object[] row = {chip.getMaChip(), chip.getTenChip(),};
+            Object[] row = {chip.getMaChip(), chip.getTenChip(), Util.getCurrentDate()};
             rows.add(row);
         }
         loadTableDeleted(rows);
@@ -201,7 +201,7 @@ public class DemoDialog extends javax.swing.JDialog {
     public void getAllRomDeleted(List<Rom> listRom) {
         ArrayList<Object[]> rows = new ArrayList<>();
         for (Rom rom : listRom) {
-            Object[] row = {rom.getMaRom(), rom.getTenRom(),};
+            Object[] row = {rom.getMaRom(), rom.getTenRom(), Util.getCurrentDate()};
             rows.add(row);
         }
         loadTableDeleted(rows);
@@ -219,7 +219,7 @@ public class DemoDialog extends javax.swing.JDialog {
     public void getAllRamDeleted(List<Ram> listRam) {
         ArrayList<Object[]> rows = new ArrayList<>();
         for (Ram ram : listRam) {
-            Object[] row = {ram.getMaRam(), ram.getDungLuong(),};
+            Object[] row = {ram.getMaRam(), ram.getDungLuong(), Util.getCurrentDate()};
             rows.add(row);
         }
         loadTableDeleted(rows);
@@ -237,7 +237,7 @@ public class DemoDialog extends javax.swing.JDialog {
     public void getAllHangDTDeleted(List<HangDienThoai> listHangDT) {
         ArrayList<Object[]> rows = new ArrayList<>();
         for (HangDienThoai hdt : listHangDT) {
-            Object[] row = {hdt.getMaHang(), hdt.getTenHang(),};
+            Object[] row = {hdt.getMaHang(), hdt.getTenHang(), Util.getCurrentDate()};
             rows.add(row);
         }
         loadTableDeleted(rows);
@@ -255,7 +255,7 @@ public class DemoDialog extends javax.swing.JDialog {
     public void getAllMauSacDeleted(List<MauSac> listMauSac) {
         ArrayList<Object[]> rows = new ArrayList<>();
         for (MauSac ms : listMauSac) {
-            Object[] row = {ms.getMaMauSac(), ms.getTenMauSac(),};
+            Object[] row = {ms.getMaMauSac(), ms.getTenMauSac(), Util.getCurrentDate()};
             rows.add(row);
         }
         loadTableDeleted(rows);
@@ -273,7 +273,7 @@ public class DemoDialog extends javax.swing.JDialog {
     public void getAllPinDeleted(List<Pin> listPin) {
         ArrayList<Object[]> rows = new ArrayList<>();
         for (Pin pin : listPin) {
-            Object[] row = {pin.getMaPin(), pin.getTenPin(),};
+            Object[] row = {pin.getMaPin(), pin.getTenPin(), Util.getCurrentDate()};
             rows.add(row);
         }
         loadTableDeleted(rows);
@@ -472,11 +472,11 @@ public class DemoDialog extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Mã", "Tên"
+                "Mã", "Tên", "Ngày xóa"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -489,6 +489,7 @@ public class DemoDialog extends javax.swing.JDialog {
         if (tblLuuTru.getColumnModel().getColumnCount() > 0) {
             tblLuuTru.getColumnModel().getColumn(0).setResizable(false);
             tblLuuTru.getColumnModel().getColumn(1).setResizable(false);
+            tblLuuTru.getColumnModel().getColumn(2).setResizable(false);
         }
 
         btnRestore.setBackground(new java.awt.Color(0, 0, 102));
@@ -872,10 +873,11 @@ public class DemoDialog extends javax.swing.JDialog {
         }
     }
 
-    public void deleteHangDT() {
+    public void deleteHangDT(int id) {
         String ma = txtMa.getText();
         String ten = txtTen.getText();
         HangDienThoai hdt = new HangDienThoai();
+        hdt.setId(id);
         hdt.setMaHang(ma);
         hdt.setTenHang(ten);
         hdt.setDeleted(true);
@@ -891,10 +893,11 @@ public class DemoDialog extends javax.swing.JDialog {
         }
     }
 
-    public void deleteMauSac() {
+    public void deleteMauSac(int id) {
         String ma = txtMa.getText();
         String ten = txtTen.getText();
         MauSac ms = new MauSac();
+        ms.setId(id);
         ms.setMaMauSac(ma);
         ms.setTenMauSac(ten);
         ms.setDeleted(true);
@@ -910,10 +913,11 @@ public class DemoDialog extends javax.swing.JDialog {
         }
     }
 
-    public void deletePin() {
+    public void deletePin(int id) {
         String ma = txtMa.getText();
         String ten = txtTen.getText();
         Pin pin = new Pin();
+        pin.setId(id);
         pin.setMaPin(ma);
         pin.setTenPin(ten);
         pin.setDeleted(true);
@@ -949,13 +953,13 @@ public class DemoDialog extends javax.swing.JDialog {
                 deleteRom(id);
             } else if (lblTitle.getText().equalsIgnoreCase("Màu sắc")) {
                 int id = listMauSac.get(row).getId();
-                deleteMauSac();
+                deleteMauSac(id);
             } else if (lblTitle.getText().equalsIgnoreCase("Hãng")) {
                 int id = listHangDT.get(row).getId();
-                deleteHangDT();
+                deleteHangDT(id);
             } else if (lblTitle.getText().equalsIgnoreCase("Pin")) {
                 int id = listPin.get(row).getId();
-                deletePin();
+                deletePin(id);
             }
         }
     }//GEN-LAST:event_btnXoaActionPerformed
@@ -971,13 +975,183 @@ public class DemoDialog extends javax.swing.JDialog {
 
     }//GEN-LAST:event_tblSettingMouseClicked
 
+    public void restoreChip() {
+        if (tblLuuTru.getSelectedRow() >= 0) {
+            Chip chip = listChipDeleted.get(tblLuuTru.getSelectedRow());
+            String result = chipService.restore(chip);
+            JOptionPane.showMessageDialog(this, result);
+            if (result.contains("thành công")) {
+                listChipDeleted = chipService.getDeletedChip();
+                getAllChipDeleted(listChipDeleted);
+                listChip = chipService.getAllChip();
+                loadData();
+            }
+        }
+    }
+
+    public void restoreRam() {
+        if (tblLuuTru.getSelectedRow() >= 0) {
+            Ram ram = listRamDeleted.get(tblLuuTru.getSelectedRow());
+            String result = ramService.restore(ram);
+            JOptionPane.showMessageDialog(this, result);
+            if (result.contains("thành công")) {
+                listRamDeleted = ramService.getDeletedRam();
+                getAllRamDeleted(listRamDeleted);
+                listRam = ramService.getAllRam();
+                loadData();
+            }
+        }
+    }
+
+    public void restoreRom() {
+        if (tblLuuTru.getSelectedRow() >= 0) {
+            Rom rom = listRomDeleted.get(tblLuuTru.getSelectedRow());
+            String result = romService.restore(rom);
+            JOptionPane.showMessageDialog(this, result);
+            if (result.contains("thành công")) {
+                listRomDeleted = romService.getDeletedRom();
+                getAllRomDeleted(listRomDeleted);
+                listRom = romService.getAllRom();
+                loadData();
+            }
+        }
+    }
+
+    public void restorePin() {
+        if (tblLuuTru.getSelectedRow() >= 0) {
+            Pin pin = listPinDeleted.get(tblLuuTru.getSelectedRow());
+            String result = pinService.restore(pin);
+            JOptionPane.showMessageDialog(this, result);
+            if (result.contains("thành công")) {
+                listPinDeleted = pinService.getDeletedPin();
+                getAllPinDeleted(listPinDeleted);
+                listPin = pinService.getAllPin();
+                loadData();
+            }
+        }
+    }
+
+    public void restoreMauSac() {
+        if (tblLuuTru.getSelectedRow() >= 0) {
+            MauSac ms = listMauSacDeleted.get(tblLuuTru.getSelectedRow());
+            String result = mauSacService.restore(ms);
+            JOptionPane.showMessageDialog(this, result);
+            if (result.contains("thành công")) {
+                listMauSacDeleted = mauSacService.getDeletedMauSac();
+                getAllMauSacDeleted(listMauSacDeleted);
+                listMauSac = mauSacService.getAllMauSac();
+                loadData();
+            }
+        }
+    }
+
+    public void restoreHangDT() {
+        if (tblLuuTru.getSelectedRow() >= 0) {
+            HangDienThoai hdt = listHangDTDeleted.get(tblLuuTru.getSelectedRow());
+            String result = hangDienThoaiService.restore(hdt);
+            JOptionPane.showMessageDialog(this, result);
+            if (result.contains("thành công")) {
+                listHangDTDeleted = hangDienThoaiService.getDeletedHangDT();
+                getAllHangDTDeleted(listHangDTDeleted);
+                listHangDT = hangDienThoaiService.getAllHangDT();
+                loadData();
+            }
+        }
+    }
+
     private void btnRestoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestoreActionPerformed
         // TODO add your handling code here:
+        if (lblTitle.getText().equalsIgnoreCase("Chip")) {
+            restoreChip();
+        } else if (lblTitle.getText().equalsIgnoreCase("Ram")) {
+            restoreRam();
+        } else if (lblTitle.getText().equalsIgnoreCase("Rom")) {
+            restoreRom();
+        } else if (lblTitle.getText().equalsIgnoreCase("Pin")) {
+            restorePin();
+        } else if (lblTitle.getText().equalsIgnoreCase("Màu sắc")) {
+            restoreMauSac();
+        } else if (lblTitle.getText().equalsIgnoreCase("Hãng")) {
+            restoreHangDT();
+        }
+
     }//GEN-LAST:event_btnRestoreActionPerformed
 
+    public void searchChipDeleted() {
+        String keySearch = txtTimKiem.getText().trim();
+        if (keySearch.isBlank()) {
+            listChipDeleted = chipService.getDeletedChip();
+        } else {
+            listChipDeleted = chipService.searchDeletedChip(keySearch);
+        }
+        getAllChipDeleted(listChipDeleted);
+    }
+    
+    public void searchRamDeleted() {
+        String keySearch = txtTimKiem.getText().trim();
+        if (keySearch.isBlank()) {
+            listRamDeleted = ramService.getDeletedRam();
+        } else {
+            listRamDeleted = ramService.searchDeletedRam(keySearch);
+        }
+        getAllRamDeleted(listRamDeleted);
+    }
+    
+    public void searchRomDeleted() {
+        String keySearch = txtTimKiem.getText().trim();
+        if (keySearch.isBlank()) {
+            listRomDeleted = romService.getDeletedRom();
+        } else {
+            listRomDeleted = romService.searchDeletedRom(keySearch);
+        }
+        getAllRomDeleted(listRomDeleted);
+    }
+    
+    public void searchPinDeleted() {
+        String keySearch = txtTimKiem.getText().trim();
+        if (keySearch.isBlank()) {
+            listPinDeleted = pinService.getDeletedPin();
+        } else {
+            listPinDeleted = pinService.searchDeletedPin(keySearch);
+        }
+        getAllPinDeleted(listPinDeleted);
+    }
+    
+    public void searchMauSacDeleted() {
+        String keySearch = txtTimKiem.getText().trim();
+        if (keySearch.isBlank()) {
+            listMauSacDeleted = mauSacService.getDeletedMauSac();
+        } else {
+            listMauSacDeleted = mauSacService.searchDeletedMauSac(keySearch);
+        }
+        getAllMauSacDeleted(listMauSacDeleted);
+    }
+    
+    public void searchHangDTDeleted() {
+        String keySearch = txtTimKiem.getText().trim();
+        if (keySearch.isBlank()) {
+            listHangDTDeleted = hangDienThoaiService.getDeletedHangDT();
+        } else {
+            listHangDTDeleted = hangDienThoaiService.searchDeletedHangDT(keySearch);
+        }
+        getAllHangDTDeleted(listHangDTDeleted);
+    }
+    
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
-
+        if (lblTitle.getText().equalsIgnoreCase("Chip")) {
+            searchChipDeleted();
+        } else if (lblTitle.getText().equalsIgnoreCase("Ram")) {
+            searchRamDeleted();
+        } else if (lblTitle.getText().equalsIgnoreCase("Rom")) {
+            searchRomDeleted();
+        } else if (lblTitle.getText().equalsIgnoreCase("Pin")) {
+            searchPinDeleted();
+        } else if (lblTitle.getText().equalsIgnoreCase("Màu sắc")) {
+            searchMauSacDeleted();
+        } else if (lblTitle.getText().equalsIgnoreCase("Hãng")) {
+            searchHangDTDeleted();
+        }
     }//GEN-LAST:event_btnSearchActionPerformed
 
     /**

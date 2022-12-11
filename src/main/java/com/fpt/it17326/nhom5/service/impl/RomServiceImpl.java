@@ -10,11 +10,14 @@ import com.fpt.it17326.nhom5.response.RomResponse;
 import com.fpt.it17326.nhom5.service.RomService;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author youngboizseetinh
  */
+@Service
 public class RomServiceImpl implements RomService{
 
     private RomRepository romRepository = new RomRepository();
@@ -71,6 +74,22 @@ public class RomServiceImpl implements RomService{
     @Override
     public List<Rom> getDeletedRom() {
         return romRepository.getAllDeleted();
+    }
+
+    @Async
+    @Override
+    public String restore(Rom rom) {
+        rom.setDeleted(false);
+        if (romRepository.update(rom)) {
+            return "Khôi phục thành công";
+        } else {
+            return "Khôi phục thất bại";
+        }
+    }
+
+    @Override
+    public List<Rom> searchDeletedRom(String name) {
+        return romRepository.searchDeleted(name);
     }
     
 }

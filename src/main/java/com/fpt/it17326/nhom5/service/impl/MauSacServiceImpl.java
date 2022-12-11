@@ -6,11 +6,14 @@ import com.fpt.it17326.nhom5.response.MauSacResponse;
 import com.fpt.it17326.nhom5.service.MauSacService;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Service;
 
 /**
  * AowVN_Nyaruko
  *
  */
+@Service
 public class MauSacServiceImpl implements MauSacService {
 
     private MauSacRepository MauSacRepository = new MauSacRepository();
@@ -68,5 +71,21 @@ public class MauSacServiceImpl implements MauSacService {
     @Override
     public List<MauSac> getDeletedMauSac() {
         return MauSacRepository.getAllDeleted();
+    }
+
+    @Async
+    @Override
+    public String restore(MauSac ms) {
+        ms.setDeleted(false);
+        if (MauSacRepository.update(ms)) {
+            return "Khôi phục thành công";
+        } else {
+            return "Khôi phục thất bại";
+        }
+    }
+
+    @Override
+    public List<MauSac> searchDeletedMauSac(String name) {
+        return MauSacRepository.searchDeleted(name);
     }
 }
