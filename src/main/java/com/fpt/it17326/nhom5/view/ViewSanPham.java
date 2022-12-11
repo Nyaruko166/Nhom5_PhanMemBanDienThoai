@@ -7822,6 +7822,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         jButton44.setBackground(new java.awt.Color(0, 0, 102));
         jButton44.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search.png"))); // NOI18N
 
+        tableluutru.setForeground(new java.awt.Color(0, 0, 102));
         tableluutru.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -7830,6 +7831,7 @@ public class ViewSanPham extends javax.swing.JFrame {
                 "Mã NV", "Tên NV", "Giới tính", "Chức vụ", "Email", "Quê quán", "Ngày sinh", "Tài khoản", "Mật Khẩu", "Trạng Thái"
             }
         ));
+        tableluutru.setSelectionBackground(new java.awt.Color(255, 0, 51));
         tableluutru.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tableluutruMouseClicked(evt);
