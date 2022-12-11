@@ -24,13 +24,13 @@ public class RomRepository {
     private String fromTable = "FROM Rom";
 
     public List<Rom> getAll() {
-        String sql = fromTable + " WHERE deleted = 0";
+        String sql = fromTable + " WHERE deleted = 0 ORDER BY Id DESC";
         Query query = session.createQuery(sql);
         return query.getResultList();
     }
     
     public List<Rom> getAllDeleted() {
-        String sql = fromTable + " WHERE deleted = 1";
+        String sql = fromTable + " WHERE deleted = 1 ORDER BY UpdatedAt DESC";
         Query query = session.createQuery(sql);
         return query.getResultList();
     }
@@ -43,6 +43,14 @@ public class RomRepository {
         return (Rom) query.getSingleResult();
     }
 
+    public List<Rom> searchDeleted(String tenRom) {
+        tenRom = "%" + tenRom + "%";
+        String sql = fromTable + " WHERE TenRom LIKE :TenRom1 and deleted = 1";
+        Query query = session.createQuery(sql);
+        query.setParameter("TenRom1", tenRom);
+        return query.getResultList();
+    }
+    
     public Boolean add(Rom rom) {
         Transaction transaction = null;
         try ( Session session = HibernateConfig.getFACTORY().openSession()) {

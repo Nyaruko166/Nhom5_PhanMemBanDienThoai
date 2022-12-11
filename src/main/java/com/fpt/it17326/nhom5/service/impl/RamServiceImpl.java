@@ -10,11 +10,14 @@ import com.fpt.it17326.nhom5.response.RamResponse;
 import com.fpt.it17326.nhom5.service.RamService;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author youngboizseetinh
  */
+@Service
 public class RamServiceImpl implements RamService {
 
     private RamRepository ramRepository = new RamRepository();
@@ -71,6 +74,22 @@ public class RamServiceImpl implements RamService {
     @Override
     public List<Ram> getDeletedRam() {
         return ramRepository.getAllDeleted();
+    }
+
+    @Async
+    @Override
+    public String restore(Ram ram) {
+        ram.setDeleted(false);
+        if (ramRepository.update(ram)) {
+            return "Khôi phục thành công";
+        } else {
+            return "Khôi phục thất bại";
+        }
+    }
+
+    @Override
+    public List<Ram> searchDeletedRam(String name) {
+        return ramRepository.searchDeleted(name);
     }
 
 }

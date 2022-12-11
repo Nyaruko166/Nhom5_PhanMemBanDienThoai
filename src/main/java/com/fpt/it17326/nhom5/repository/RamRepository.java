@@ -22,13 +22,13 @@ public class RamRepository {
     private String fromTable = "FROM Ram";
 
     public List<Ram> getAll() {
-        String sql = fromTable + " WHERE deleted = 0";
+        String sql = fromTable + " WHERE deleted = 0 ORDER BY Id DESC";
         Query query = session.createQuery(sql);
         return query.getResultList();
     }
     
     public List<Ram> getAllDeleted() {
-        String sql = fromTable + " WHERE deleted = 1";
+        String sql = fromTable + " WHERE deleted = 1 ORDER BY UpdatedAt DESC";
         Query query = session.createQuery(sql);
         return query.getResultList();
     }
@@ -41,6 +41,14 @@ public class RamRepository {
         return (Ram) query.getSingleResult();
     }
 
+    public List<Ram> searchDeleted(String dungLuong) {
+        dungLuong = "%" + dungLuong + "%";
+        String sql = fromTable + " WHERE DungLuong LIKE :DungLuong1 and deleted = 1";
+        Query query = session.createQuery(sql);
+        query.setParameter("DungLuong1", dungLuong);
+        return query.getResultList();
+    }
+    
     public Boolean add(Ram ram) {
         Transaction transaction = null;
         try ( Session session = HibernateConfig.getFACTORY().openSession()) {

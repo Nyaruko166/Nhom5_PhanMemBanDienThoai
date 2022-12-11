@@ -22,17 +22,25 @@ public class PinRepository {
     private String fromTable = "FROM Pin";
 
     public List<Pin> getAll() {
-        String sql = fromTable + " WHERE deleted = 0";
+        String sql = fromTable + " WHERE deleted = 0 ORDER BY Id DESC";
         Query query = session.createQuery(sql);
         return query.getResultList();
     }
     
     public List<Pin> getAllDeleted() {
-        String sql = fromTable + " WHERE deleted = 1";
+        String sql = fromTable + " WHERE deleted = 1 ORDER BY UpdatedAt DESC";
         Query query = session.createQuery(sql);
         return query.getResultList();
     }
 
+    public List<Pin> searchDeleted(String tenPin) {
+        tenPin = "%" + tenPin + "%";
+        String sql = fromTable + " WHERE TenPin LIKE :TenPin1 and deleted = 1";
+        Query query = session.createQuery(sql);
+        query.setParameter("TenPin1", tenPin);
+        return query.getResultList();
+    }
+    
     public Pin getOne(String MaPin) {
         String sql = fromTable + " WHERE MaPin =: MaPin1";
 
