@@ -3448,6 +3448,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         btnhoatdonglai = new javax.swing.JButton();
         btnsua = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        btnexportEXCEL = new javax.swing.JButton();
         jPanel31 = new javax.swing.JPanel();
         jLabel40 = new javax.swing.JLabel();
         txtmanv = new javax.swing.JTextField();
@@ -7671,18 +7672,26 @@ public class ViewSanPham extends javax.swing.JFrame {
             }
         });
 
+        btnexportEXCEL.setText("Export Excel");
+        btnexportEXCEL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnexportEXCELActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel30Layout = new javax.swing.GroupLayout(jPanel30);
         jPanel30.setLayout(jPanel30Layout);
         jPanel30Layout.setHorizontalGroup(
             jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel30Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel30Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnthem, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
-                    .addComponent(btnsua, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnxoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnhoatdonglai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnexportEXCEL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnthem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnsua, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnxoa, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnhoatdonglai, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel30Layout.setVerticalGroup(
@@ -7698,6 +7707,8 @@ public class ViewSanPham extends javax.swing.JFrame {
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnhoatdonglai)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnexportEXCEL)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -7816,6 +7827,7 @@ public class ViewSanPham extends javax.swing.JFrame {
         jButton44.setBackground(new java.awt.Color(0, 0, 102));
         jButton44.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search.png"))); // NOI18N
 
+        tableluutru.setForeground(new java.awt.Color(0, 0, 102));
         tableluutru.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -7824,6 +7836,7 @@ public class ViewSanPham extends javax.swing.JFrame {
                 "Mã NV", "Tên NV", "Giới tính", "Chức vụ", "Email", "Quê quán", "Ngày sinh", "Tài khoản", "Mật Khẩu", "Trạng Thái"
             }
         ));
+        tableluutru.setSelectionBackground(new java.awt.Color(255, 0, 51));
         tableluutru.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tableluutruMouseClicked(evt);
@@ -7905,7 +7918,7 @@ public class ViewSanPham extends javax.swing.JFrame {
                         .addComponent(jPanel31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(284, Short.MAX_VALUE))))
+                        .addContainerGap(279, Short.MAX_VALUE))))
         );
         pl_nhanvienLayout.setVerticalGroup(
             pl_nhanvienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -9668,6 +9681,63 @@ public class ViewSanPham extends javax.swing.JFrame {
     private void tblDSImeiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDSImeiMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_tblDSImeiMouseClicked
+
+    private void btnexportEXCELActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnexportEXCELActionPerformed
+        // TODO add your handling code here:
+         JFileChooser excelFileChooser = new JFileChooser("C:\\Users\\Admin\\Desktop");
+        excelFileChooser.setDialogTitle("Save as");
+        FileNameExtensionFilter filefilter = new FileNameExtensionFilter("EXCEL FILES", "xls", "xlsx", "xlsm");
+        excelFileChooser.setFileFilter(filefilter);
+        int check = excelFileChooser.showSaveDialog(null);
+
+        //Check khi ấn nút save
+        if (check == JFileChooser.APPROVE_OPTION) {
+            FileOutputStream FOS = null;
+            BufferedOutputStream BOS = null;
+            XSSFWorkbook excelJtableExporter = null;
+            try {
+                excelJtableExporter = new XSSFWorkbook();
+                XSSFSheet excelSheet = excelJtableExporter.createSheet("HoaDon");
+                //Lấy số dòng, cột tblHoaDon
+                for (int i = 0; i < tableluutru.getRowCount(); i++) {
+                    XSSFRow excelRow = excelSheet.createRow(i);
+                    for (int j = 0; j < tableluutru.getColumnCount(); j++) {
+                        XSSFCell excelCell = excelRow.createCell(j);
+
+                        excelCell.setCellValue(tableluutru.getValueAt(i, j).toString());
+                    }
+                }
+
+                FOS = new FileOutputStream(excelFileChooser.getSelectedFile() + ".xlsx");
+                BOS = new BufferedOutputStream(FOS);
+                excelJtableExporter.write(BOS);
+                JOptionPane.showMessageDialog(this, "Xuất Thành Công!!!!");
+            } catch (FileNotFoundException ex) {
+                ex.printStackTrace();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            } finally {
+                try {
+                    if (BOS != null) {
+                        BOS.close();
+                    }
+
+                    if (FOS != null) {
+                        FOS.close();
+                    }
+
+                    if (excelJtableExporter != null) {
+                        excelJtableExporter.close();
+                    }
+
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+
+        }
+    
+    }//GEN-LAST:event_btnexportEXCELActionPerformed
     private void txtTongTienHang1ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
@@ -9816,6 +9886,7 @@ public class ViewSanPham extends javax.swing.JFrame {
     private javax.swing.JButton btnTimKiemSanPhamDeleted;
     private javax.swing.JButton btnXoaFormSanPham;
     private javax.swing.JButton btnXoaSanPham;
+    private javax.swing.JButton btnexportEXCEL;
     private javax.swing.JButton btnhoatdonglai;
     private javax.swing.JButton btnsua;
     private javax.swing.JButton btnthem;
