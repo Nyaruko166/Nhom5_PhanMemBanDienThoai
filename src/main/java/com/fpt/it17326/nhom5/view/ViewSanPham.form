@@ -7540,7 +7540,7 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-                  <CardConstraints cardName="nhanvien"/>
+                  <CardConstraints cardName="card10"/>
                 </Constraint>
               </Constraints>
 
@@ -7939,7 +7939,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jTextField29" min="-2" pref="166" max="-2" attributes="0"/>
+                              <Component id="txttimnv" min="-2" pref="166" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jButton44" min="-2" pref="68" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
@@ -7951,7 +7951,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jTextField29" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txttimnv" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jButton44" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
@@ -7961,7 +7961,7 @@
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JTextField" name="jTextField29">
+                    <Component class="javax.swing.JTextField" name="txttimnv">
                     </Component>
                     <Component class="javax.swing.JButton" name="jButton44">
                       <Properties>
@@ -7972,6 +7972,9 @@
                           <Image iconType="3" name="/images/search.png"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton44ActionPerformed"/>
+                      </Events>
                     </Component>
                     <Container class="javax.swing.JTabbedPane" name="table">
 
