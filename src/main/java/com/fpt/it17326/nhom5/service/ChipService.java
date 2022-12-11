@@ -27,4 +27,8 @@ public interface ChipService {
     String update(Chip chip);
 
     String delete(Chip chip);
+    
+    String restore(Chip chip);
+    
+    List<Chip> searchDeletedChip(String name);
 }

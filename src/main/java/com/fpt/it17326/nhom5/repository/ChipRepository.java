@@ -32,18 +32,24 @@ public class ChipRepository {
     }
     
     public List<Chip> getAll() {
-        String sql = fromTable + " WHERE deleted = 0";
+        String sql = fromTable + " WHERE deleted = 0 ORDER BY Id DESC";
         Query query = session.createQuery(sql);
         return query.getResultList();
     }
     
     public List<Chip> getAllDeleted() {
-        String sql = fromTable + " WHERE deleted = 1";
+        String sql = fromTable + " WHERE deleted = 1 ORDER BY UpdatedAt DESC";
         Query query = session.createQuery(sql);
         return query.getResultList();
     }
     
-    
+    public List<Chip> searchDeleted(String tenChip) {
+        tenChip = "%" + tenChip + "%";
+        String sql = fromTable + " WHERE TenChip LIKE :TenChip1 and deleted = 1";
+        Query query = session.createQuery(sql);
+        query.setParameter("TenChip1", tenChip);
+        return query.getResultList();
+    }
 
     public Boolean add(Chip chip) {
         Transaction transaction = null;

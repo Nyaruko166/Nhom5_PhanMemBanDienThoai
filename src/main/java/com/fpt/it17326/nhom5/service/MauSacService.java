@@ -23,4 +23,8 @@ public interface MauSacService {
     String update(MauSac ms);
 
     String delete(MauSac ms);
+    
+    String restore(MauSac ms);
+    
+    List<MauSac> searchDeletedMauSac(String name);
 }

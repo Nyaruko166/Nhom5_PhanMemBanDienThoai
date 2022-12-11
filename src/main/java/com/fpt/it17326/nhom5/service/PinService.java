@@ -27,4 +27,8 @@ public interface PinService {
     String update(Pin pin);
 
     String delete(Pin pin);
+    
+    String restore(Pin pin);
+    
+    List<Pin> searchDeletedPin(String name);
 }

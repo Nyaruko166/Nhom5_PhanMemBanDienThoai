@@ -23,4 +23,8 @@ public interface HangDienThoaiService {
     String update(HangDienThoai hdt);
 
     String delete(HangDienThoai hdt);
+    
+    String restore(HangDienThoai hdt);
+    
+    List<HangDienThoai> searchDeletedHangDT(String name);
 }

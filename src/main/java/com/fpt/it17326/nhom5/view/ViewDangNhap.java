@@ -72,7 +72,7 @@ public class ViewDangNhap extends javax.swing.JFrame {
         jPanel2.setToolTipText("");
 
         jLabel1.setBackground(new java.awt.Color(102, 204, 255));
-        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 1, 30)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 102));
         jLabel1.setText("Đăng nhập");
 
@@ -119,7 +119,7 @@ public class ViewDangNhap extends javax.swing.JFrame {
         });
 
         btnDangNhap.setBackground(new java.awt.Color(0, 0, 102));
-        btnDangNhap.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        btnDangNhap.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnDangNhap.setForeground(new java.awt.Color(255, 255, 255));
         btnDangNhap.setText("Đăng nhập");
         btnDangNhap.setBorder(null);
@@ -192,7 +192,7 @@ public class ViewDangNhap extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel8)
@@ -221,7 +221,7 @@ public class ViewDangNhap extends javax.swing.JFrame {
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
                         .addComponent(btnDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         jPanel5.setBackground(new java.awt.Color(41, 56, 143));
