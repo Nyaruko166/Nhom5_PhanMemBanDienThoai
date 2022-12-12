@@ -27,12 +27,16 @@ public interface NhanVienService {
 //    String delete(NhanVien tk);
 
     List<NhanVienResponse> getAll();
+    
+    List<NhanVien> getAllNV();
 
     List<NhanVienResponse> getAllTrue();
 
     List<NhanVienResponse> getAllFalse();
 
     NhanVienResponse getOne1(String MaNhanVien);
+    
+    List<NhanVien> timNV (String MaNhanVien);
 
     String add(NhanVien nv);
 

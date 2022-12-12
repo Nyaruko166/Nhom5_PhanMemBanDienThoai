@@ -6,6 +6,7 @@ package com.fpt.it17326.nhom5.repository;
 
 import com.fpt.it17326.nhom5.config.HibernateConfig;
 import com.fpt.it17326.nhom5.domainmodel.Chip;
+import com.fpt.it17326.nhom5.util.Util;
 import java.util.List;
 import javax.persistence.Query;
 import org.hibernate.Session;
@@ -83,6 +84,7 @@ public class ChipRepository {
         try (Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
             chip.setDeleted(true);
+            chip.setUpdatedAt(Util.getCurrentDate());
             session.update(chip);
             transaction.commit();
             return true;

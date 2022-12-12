@@ -8,13 +8,13 @@ package com.fpt.it17326.nhom5.viewmodel;
  *
  * @author PHAM DAC THANG
  */
-public class taohoadonbanhang {
+public class taohoadonbanhang1 {
     String manv,mahd;
 
-    public taohoadonbanhang() {
+    public taohoadonbanhang1() {
     }
 
-    public taohoadonbanhang(String manv, String mahd) {
+    public taohoadonbanhang1(String manv, String mahd) {
         this.manv = manv;
         this.mahd = mahd;
     }

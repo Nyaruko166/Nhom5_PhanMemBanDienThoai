@@ -6,6 +6,7 @@ package com.fpt.it17326.nhom5.repository;
 
 import com.fpt.it17326.nhom5.config.HibernateConfig;
 import com.fpt.it17326.nhom5.domainmodel.Ram;
+import com.fpt.it17326.nhom5.util.Util;
 import java.util.List;
 import javax.persistence.Query;
 import org.hibernate.Session;
@@ -80,6 +81,7 @@ public class RamRepository {
         try ( Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
             ram.setDeleted(true);
+            ram.setUpdatedAt(Util.getCurrentDate());
             session.update(ram);
             transaction.commit();
             return true;

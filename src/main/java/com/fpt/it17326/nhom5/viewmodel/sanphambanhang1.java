@@ -8,17 +8,17 @@ package com.fpt.it17326.nhom5.viewmodel;
  *
  * @author PHAM DAC THANG
  */
-public class sanphambanhang {
+public class sanphambanhang1 {
   private String masp,tensp,pin,chip,rom,hangdienthoai,ram;
   private int soluong;
   private float dongia;
   private int id;
   private int idhdct;
 
-    public sanphambanhang() {
+    public sanphambanhang1() {
     }
 
-    public sanphambanhang(String masp, String tensp, String pin, String chip, String rom, String hangdienthoai, String ram, int soluong, float dongia,int id) {
+    public sanphambanhang1(String masp, String tensp, String pin, String chip, String rom, String hangdienthoai, String ram, int soluong, float dongia,int id) {
         this.masp = masp;
         this.tensp = tensp;
         this.pin = pin;
@@ -31,7 +31,7 @@ public class sanphambanhang {
         this.id=id;
     }
 
-    public sanphambanhang(String masp, String tensp, String pin, String chip, String rom, String hangdienthoai, String ram, int soluong, float dongia, int id, int idhdct) {
+    public sanphambanhang1(String masp, String tensp, String pin, String chip, String rom, String hangdienthoai, String ram, int soluong, float dongia, int id, int idhdct) {
         this.masp = masp;
         this.tensp = tensp;
         this.pin = pin;
