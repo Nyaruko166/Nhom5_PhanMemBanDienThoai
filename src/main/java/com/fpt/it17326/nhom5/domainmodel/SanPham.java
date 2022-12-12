@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -31,6 +32,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Builder
 public class SanPham {
 
     @Id
@@ -106,7 +108,7 @@ public class SanPham {
         this.deleted = deleted;
         this.updatedAt = updatedAt;
     }
-    
+
     public void setCommonData() {
         this.deleted = false;
         this.createdAt = Util.getCurrentDate();
