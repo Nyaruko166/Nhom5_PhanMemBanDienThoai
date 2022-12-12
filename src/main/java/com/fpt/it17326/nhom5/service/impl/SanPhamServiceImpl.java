@@ -9,6 +9,7 @@ import com.fpt.it17326.nhom5.repository.SanPhamRepository;
 import com.fpt.it17326.nhom5.response.SanPhamResponse;
 import com.fpt.it17326.nhom5.service.SanPhamService;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import java.util.List;
  * @author youngboizseetinh
  */
 @Service
+@EnableAsync
 public class SanPhamServiceImpl implements SanPhamService {
 
     private SanPhamRepository sanPhamRepository = new SanPhamRepository();
@@ -132,6 +134,26 @@ public class SanPhamServiceImpl implements SanPhamService {
     public int countRecord() {
         // TODO Auto-generated method stub
         return sanPhamRepository.count();
+    }
+
+    @Override
+    public String deleteById(int id) {
+        // TODO Auto-generated method stub
+        if (sanPhamRepository.deleteById(id)) {
+            return "Xóa thành công";
+        } else {
+            return "Xóa thất bại";
+        }
+    }
+
+    @Override
+    public String restoreById(int id) {
+        // TODO Auto-generated method stub
+        if (sanPhamRepository.restoreById(id)) {
+            return "Khôi phục thành công";
+        } else {
+            return "Khôi phục thất bại";
+        }
     }
 
 }

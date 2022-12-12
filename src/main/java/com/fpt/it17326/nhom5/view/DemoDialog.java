@@ -30,12 +30,15 @@ import com.fpt.it17326.nhom5.service.impl.PinServiceImpl;
 import com.fpt.it17326.nhom5.service.impl.RamServiceImpl;
 import com.fpt.it17326.nhom5.service.impl.RomServiceImpl;
 import com.fpt.it17326.nhom5.util.Util;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -64,19 +67,20 @@ public class DemoDialog extends javax.swing.JDialog {
     List<Pin> listPinDeleted;
 
     private int selectedRow;
+    Color bgColo = new Color(0, 0, 102);
 
     /**
      * Creates new form DemoDialog
      */
-    public DemoDialog(java.awt.Frame parent, boolean modal, String title, String[] headers, String ma, String ten) {
+    public DemoDialog(java.awt.Frame parent, boolean modal, String title, String[] headers, String ma, String ten, String[] header2) {
         super(parent, modal);
         initComponents();
         initService();
         if (headers != null) {
-            setHeaderColumn(headers);
+            setHeaderColumn(headers, header2);
         }
         //Code này của bảng sản phẩm chi tiết khum động zô////////////////////////////////////////////////////////
-
+        designHeaderForm();
         lblTitle.setText(title);
         lblMa.setText(ma);
         lblTen.setText(ten);
@@ -107,19 +111,19 @@ public class DemoDialog extends javax.swing.JDialog {
         return true;
     }
 
-//    public void setButtonStatus(boolean isUpdate) {
-//        if (isUpdate) {
-//            btnThem.setEnabled(false);
-//            btnSua.setEnabled(true);
-//            btnXoa.setEnabled(true);
-//        } else {
-//            btnThem.setEnabled(true);
-//            btnSua.setEnabled(false);
-//            btnXoa.setEnabled(false);
-//            tblSetting.clearSelection();
-//        }
-//
-//    }
+
+    public void designHeaderForm() {
+        JTableHeader headerChiTietSanPham = tblSetting.getTableHeader();
+        headerChiTietSanPham.setBackground(bgColo);
+        headerChiTietSanPham.setForeground(bgColo);
+        headerChiTietSanPham.setFont(new Font("Tahoma", Font.BOLD, 14));
+        
+        JTableHeader headerCTSPLuuTru = tblLuuTru.getTableHeader();
+        headerCTSPLuuTru.setBackground(bgColo);
+        headerCTSPLuuTru.setForeground(bgColo);
+        headerCTSPLuuTru.setFont(new Font("Tahoma", Font.BOLD, 14));
+    }
+    
     public void loadData() {
         String txt = lblTitle.getText();
         if (txt.equalsIgnoreCase("chip")) {
@@ -155,11 +159,11 @@ public class DemoDialog extends javax.swing.JDialog {
         }
     }
 
-    public void setHeaderColumn(String[] headers) {
+    public void setHeaderColumn(String[] headers, String[] header2) {
         DefaultTableModel dtm = (DefaultTableModel) tblSetting.getModel();
         DefaultTableModel dtmLuuTru = (DefaultTableModel) tblLuuTru.getModel();
         dtm.setColumnIdentifiers(headers);
-        dtmLuuTru.setColumnIdentifiers(headers);
+        dtmLuuTru.setColumnIdentifiers(header2);
     }
 
     public void setScreenCenter() {

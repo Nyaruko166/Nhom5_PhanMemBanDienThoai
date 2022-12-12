@@ -9,11 +9,14 @@ import com.fpt.it17326.nhom5.response.SanPhamResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
  *
  * @author youngboizseetinh
  */
+@Service
+@EnableAsync
 public interface SanPhamService {
 
     List<SanPhamResponse> getAll();
@@ -41,5 +44,9 @@ public interface SanPhamService {
     String restore(SanPham sp);
 
     int countRecord();
+
+    String deleteById(int id);
+
+    String restoreById(int id);
 
 }
