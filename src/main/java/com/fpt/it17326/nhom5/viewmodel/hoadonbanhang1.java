@@ -8,7 +8,7 @@ package com.fpt.it17326.nhom5.viewmodel;
  *
  * @author PHAM DAC THANG
  */
-public class hoadonbanhang {
+public class hoadonbanhang1 {
     private String 	MaHD ;
    private String	
 	HoTennv ;
@@ -17,10 +17,10 @@ public class hoadonbanhang {
       private int trangthai,id,idkh;
 private String ngaytaovaban;
 private  double tongtien;
-    public hoadonbanhang() {
+    public hoadonbanhang1() {
     }
 
-    public hoadonbanhang(String MaHD, String HoTennv, String HoTenkh, int trangthai, int id, int idkh, String ngaytaovaban, double tongtien) {
+    public hoadonbanhang1(String MaHD, String HoTennv, String HoTenkh, int trangthai, int id, int idkh, String ngaytaovaban, double tongtien) {
         this.MaHD = MaHD;
         this.HoTennv = HoTennv;
         this.HoTenkh = HoTenkh;

@@ -8,16 +8,16 @@ package com.fpt.it17326.nhom5.viewmodel;
  *
  * @author PHAM DAC THANG
  */
-public class xuathoadon {
+public class xuathoadon1 {
     public  String mahd,hoten,sdt,diachi,ngaythanhtoan,tensp,thongtinsp;
             public int solg;
         public double dongia;
           public  double thanhtien;
 
-    public xuathoadon() {
+    public xuathoadon1() {
     }
 
-    public xuathoadon(String mahd, String hoten, String sdt, String diachi, String ngaythanhtoan, String tensp, String thongtinsp, int solg, double dongia, double thanhtien) {
+    public xuathoadon1(String mahd, String hoten, String sdt, String diachi, String ngaythanhtoan, String tensp, String thongtinsp, int solg, double dongia, double thanhtien) {
         this.mahd = mahd;
         this.hoten = hoten;
         this.sdt = sdt;

@@ -183,7 +183,7 @@ public class DemoDialog extends javax.swing.JDialog {
     public void getAllChipDeleted(List<Chip> listChip) {
         ArrayList<Object[]> rows = new ArrayList<>();
         for (Chip chip : listChip) {
-            Object[] row = {chip.getMaChip(), chip.getTenChip(), Util.getCurrentDate()};
+            Object[] row = {chip.getMaChip(), chip.getTenChip(), String.valueOf(chip.getUpdatedAt()).substring(0,10),};
             rows.add(row);
         }
         loadTableDeleted(rows);
@@ -201,7 +201,7 @@ public class DemoDialog extends javax.swing.JDialog {
     public void getAllRomDeleted(List<Rom> listRom) {
         ArrayList<Object[]> rows = new ArrayList<>();
         for (Rom rom : listRom) {
-            Object[] row = {rom.getMaRom(), rom.getTenRom(), Util.getCurrentDate()};
+            Object[] row = {rom.getMaRom(), rom.getTenRom(), String.valueOf(rom.getUpdatedAt()).substring(0,10),};
             rows.add(row);
         }
         loadTableDeleted(rows);
@@ -219,7 +219,7 @@ public class DemoDialog extends javax.swing.JDialog {
     public void getAllRamDeleted(List<Ram> listRam) {
         ArrayList<Object[]> rows = new ArrayList<>();
         for (Ram ram : listRam) {
-            Object[] row = {ram.getMaRam(), ram.getDungLuong(), Util.getCurrentDate()};
+            Object[] row = {ram.getMaRam(), ram.getDungLuong(), String.valueOf(ram.getUpdatedAt()).substring(0,10),};
             rows.add(row);
         }
         loadTableDeleted(rows);
@@ -237,7 +237,7 @@ public class DemoDialog extends javax.swing.JDialog {
     public void getAllHangDTDeleted(List<HangDienThoai> listHangDT) {
         ArrayList<Object[]> rows = new ArrayList<>();
         for (HangDienThoai hdt : listHangDT) {
-            Object[] row = {hdt.getMaHang(), hdt.getTenHang(), Util.getCurrentDate()};
+            Object[] row = {hdt.getMaHang(), hdt.getTenHang(), String.valueOf(hdt.getUpdatedAt()).substring(0,10),};
             rows.add(row);
         }
         loadTableDeleted(rows);
@@ -255,7 +255,7 @@ public class DemoDialog extends javax.swing.JDialog {
     public void getAllMauSacDeleted(List<MauSac> listMauSac) {
         ArrayList<Object[]> rows = new ArrayList<>();
         for (MauSac ms : listMauSac) {
-            Object[] row = {ms.getMaMauSac(), ms.getTenMauSac(), Util.getCurrentDate()};
+            Object[] row = {ms.getMaMauSac(), ms.getTenMauSac(), String.valueOf(ms.getUpdatedAt()).substring(0,10),};
             rows.add(row);
         }
         loadTableDeleted(rows);
@@ -273,7 +273,7 @@ public class DemoDialog extends javax.swing.JDialog {
     public void getAllPinDeleted(List<Pin> listPin) {
         ArrayList<Object[]> rows = new ArrayList<>();
         for (Pin pin : listPin) {
-            Object[] row = {pin.getMaPin(), pin.getTenPin(), Util.getCurrentDate()};
+            Object[] row = {pin.getMaPin(), pin.getTenPin(), String.valueOf(pin.getUpdatedAt()).substring(0,10),};
             rows.add(row);
         }
         loadTableDeleted(rows);
@@ -467,6 +467,8 @@ public class DemoDialog extends javax.swing.JDialog {
             }
         });
 
+        tblLuuTru.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        tblLuuTru.setForeground(new java.awt.Color(0, 0, 102));
         tblLuuTru.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

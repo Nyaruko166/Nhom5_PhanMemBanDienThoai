@@ -82,11 +82,13 @@ public class SanPhamServiceImpl implements SanPhamService {
 
     }
 
+    @Async
     @Override
     public List<SanPham> getAllSanPham() {
         return sanPhamRepository.getAll();
     }
 
+    @Async
     @Override
     public List<SanPham> getDeletedSanPham() {
         return sanPhamRepository.getAllDeleted();

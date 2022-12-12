@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  *
  * @author PHAM DAC THANG
  */
-public class dbcontest {
+public class dbcontest1 {
 //     private static String hostName = "DESKTOP-HMT0GAQ\\SQLEXPRESS";
 
     private static String account = "sa";
@@ -36,12 +36,12 @@ public class dbcontest {
         try {
             return DriverManager.getConnection(connectionSQL, account, pass);
         } catch (SQLException ex) {
-            Logger.getLogger(dbcontest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(dbcontest1.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
 
     public static void main(String[] args) {
-        new dbcontest().openDbConnection();
+        new dbcontest1().openDbConnection();
     }
 }

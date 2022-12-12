@@ -6,6 +6,7 @@ package com.fpt.it17326.nhom5.repository;
 
 import com.fpt.it17326.nhom5.config.HibernateConfig;
 import com.fpt.it17326.nhom5.domainmodel.Pin;
+import com.fpt.it17326.nhom5.util.Util;
 import java.util.List;
 import javax.persistence.Query;
 import org.hibernate.Session;
@@ -80,6 +81,7 @@ public class PinRepository {
         try ( Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
             pin.setDeleted(true);
+            pin.setUpdatedAt(Util.getCurrentDate());
             session.update(pin);
             transaction.commit();
             return true;

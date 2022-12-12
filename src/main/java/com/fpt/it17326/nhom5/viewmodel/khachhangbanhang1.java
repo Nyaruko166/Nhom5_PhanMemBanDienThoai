@@ -8,14 +8,14 @@ package com.fpt.it17326.nhom5.viewmodel;
  *
  * @author PHAM DAC THANG
  */
-public class khachhangbanhang {
+public class khachhangbanhang1 {
     private int id;
     private String makh,tenkh,sdt;
 
-    public khachhangbanhang() {
+    public khachhangbanhang1() {
     }
 
-    public khachhangbanhang(int id, String makh, String tenkh, String sdt) {
+    public khachhangbanhang1(int id, String makh, String tenkh, String sdt) {
         this.id = id;
         this.makh = makh;
         this.tenkh = tenkh;
