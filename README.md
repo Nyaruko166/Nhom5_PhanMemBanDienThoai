@@ -12,7 +12,7 @@ Phần mềm bán điện thoại code bằng Java
 - [@ChiHNP_PH22615](https://github.com/HoangChi123)
 - [@KhaiVN_PH27349](https://github.com/VuNgocKhai)
 - [@TuPM_PH28142](https://github.com/tupmph28142)
-- [@ThangPD_PH28748](idk)
+- [@ThangPD_PH28748](https://github.com/thangpdph28478)
 
 ## Roadmap
 
