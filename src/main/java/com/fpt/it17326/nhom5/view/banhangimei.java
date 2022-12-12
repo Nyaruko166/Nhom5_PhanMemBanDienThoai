@@ -113,9 +113,10 @@ public class banhangimei extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Danh sách imei"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách imei", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(0, 0, 102))); // NOI18N
 
         tbbangbanhangimei.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        tbbangbanhangimei.setForeground(new java.awt.Color(0, 0, 102));
         tbbangbanhangimei.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -131,6 +132,8 @@ public class banhangimei extends javax.swing.JDialog {
         tbbangbanhangimei.setSelectionBackground(new java.awt.Color(255, 0, 51));
         jScrollPane1.setViewportView(tbbangbanhangimei);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 102));
         jLabel1.setText("imei");
 
         btthemimeibanhang.setBackground(new java.awt.Color(0, 0, 102));
@@ -179,7 +182,7 @@ public class banhangimei extends javax.swing.JDialog {
                         .addComponent(btthemimeibanhang, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
