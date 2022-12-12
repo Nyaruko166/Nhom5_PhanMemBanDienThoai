@@ -173,4 +173,14 @@ public class NhanVienServiceImpl implements NhanVienService {
         return nhanVienRepository.getOneByUsername(username);
     }
 
+    @Override
+    public List<NhanVien> getAllNV() {
+        return nhanVienRepository.getAll();
+    }
+
+    @Override
+    public List<NhanVien> timNV(String MaNhanVien) {
+        return nhanVienRepository.search(MaNhanVien);
+    }
+
 }
