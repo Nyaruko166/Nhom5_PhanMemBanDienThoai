@@ -2,6 +2,7 @@ package com.fpt.it17326.nhom5.repository;
 
 import com.fpt.it17326.nhom5.config.HibernateConfig;
 import com.fpt.it17326.nhom5.domainmodel.MauSac;
+import com.fpt.it17326.nhom5.util.Util;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -78,6 +79,7 @@ public class MauSacRepository {
         try ( Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
             ms.setDeleted(true);
+            ms.setUpdatedAt(Util.getCurrentDate());
             session.update(ms);
             transaction.commit();
             return true;
