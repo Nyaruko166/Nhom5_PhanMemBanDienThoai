@@ -2,6 +2,7 @@ package com.fpt.it17326.nhom5.repository;
 
 import com.fpt.it17326.nhom5.config.HibernateConfig;
 import com.fpt.it17326.nhom5.domainmodel.MauSac;
+import com.fpt.it17326.nhom5.util.Util;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -20,17 +21,25 @@ public class MauSacRepository {
     private String fromTable = "FROM MauSac";
 
     public List<MauSac> getAll() {
-        String sql = fromTable + " WHERE deleted = 0";
+        String sql = fromTable + " WHERE deleted = 0 ORDER BY Id DESC";
         Query query = session.createQuery(sql);
         return query.getResultList();
     }
     
     public List<MauSac> getAllDeleted() {
-        String sql = fromTable + " WHERE deleted = 1";
+        String sql = fromTable + " WHERE deleted = 1 ORDER BY UpdatedAt DESC";
         Query query = session.createQuery(sql);
         return query.getResultList();
     }
 
+    public List<MauSac> searchDeleted(String tenMauSac) {
+        tenMauSac = "%" + tenMauSac + "%";
+        String sql = fromTable + " WHERE TenMauSac LIKE :TenMauSac1 and deleted = 1";
+        Query query = session.createQuery(sql);
+        query.setParameter("TenMauSac1", tenMauSac);
+        return query.getResultList();
+    }
+    
     public MauSac getOne(String MaMauSac) {
         String sql = fromTable + " WHERE MaMauSac =: MaMauSac1";
 
@@ -70,6 +79,7 @@ public class MauSacRepository {
         try ( Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
             ms.setDeleted(true);
+            ms.setUpdatedAt(Util.getCurrentDate());
             session.update(ms);
             transaction.commit();
             return true;

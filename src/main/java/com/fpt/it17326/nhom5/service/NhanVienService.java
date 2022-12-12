@@ -13,13 +13,35 @@ import java.util.List;
  * @author Tu
  */
 public interface NhanVienService {
-    List<NhanVien> getAll();
+
+    List<NhanVien> getAll1();
+
     List<NhanVien> getListTaiKhoan();
-    String add(NhanVien tk);
-    String update(NhanVien tk);
+//    String add(NhanVien tk);
+//    String update(NhanVien tk);
+
     NhanVien getOne(String Email);
-     
-//    String DangNhap(NhanVien tk);
+
+    String DangNhap(NhanVien tk);
 //    String update(NhanVien tk, String id);
 //    String delete(NhanVien tk);
+
+    List<NhanVienResponse> getAll();
+    
+    List<NhanVien> getAllNV();
+
+    List<NhanVienResponse> getAllTrue();
+
+    List<NhanVienResponse> getAllFalse();
+
+    NhanVienResponse getOne1(String MaNhanVien);
+    
+    List<NhanVien> timNV (String MaNhanVien);
+
+    String add(NhanVien nv);
+
+    String update(NhanVien nv);
+
+    String delete(NhanVien nv);
+    NhanVien getOneByUsername(String username);
 }

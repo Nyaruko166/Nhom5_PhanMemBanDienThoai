@@ -40,6 +40,10 @@ public class HoaDon {
     @JoinColumn(name = "IdNV", referencedColumnName = "Id")
     private NhanVien nhanVien;
 
+    @ManyToOne
+    @JoinColumn(name = "IdKH", referencedColumnName = "Id")
+    private KhachHang khachHang;
+    
     @Column(name = "TenKH")
     private String tenKH;
 

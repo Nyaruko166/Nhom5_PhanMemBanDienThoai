@@ -6,11 +6,14 @@ import com.fpt.it17326.nhom5.response.HangDienThoaiResponse;
 import com.fpt.it17326.nhom5.service.HangDienThoaiService;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Service;
 
 /**
  * AowVN_Nyaruko
  *
  */
+@Service
 public class HangDienThoaiServiceImpl implements HangDienThoaiService {
 
     private HangDienThoaiRepository hangDienThoaiRepository = new HangDienThoaiRepository();
@@ -67,6 +70,22 @@ public class HangDienThoaiServiceImpl implements HangDienThoaiService {
     @Override
     public List<HangDienThoai> getDeletedHangDT() {
         return hangDienThoaiRepository.getAllDeleted();
+    }
+
+    @Async
+    @Override
+    public String restore(HangDienThoai hdt) {
+        hdt.setDeleted(false);
+        if (hangDienThoaiRepository.update(hdt)) {
+            return "Khôi phục thành công";
+        } else {
+            return "Khôi phục thất bại";
+        }
+    }
+
+    @Override
+    public List<HangDienThoai> searchDeletedHangDT(String name) {
+        return hangDienThoaiRepository.searchDeleted(name);
     }
 
 }

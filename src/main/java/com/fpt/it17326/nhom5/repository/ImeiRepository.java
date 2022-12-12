@@ -29,7 +29,7 @@ public class ImeiRepository {
         Query query = session.createQuery(sql);
         return query.getResultList();
     }
-    
+
     public List<Imei> getAllDeleted() {
         String sql = fromTable + " WHERE deleted = 1";
         Query query = session.createQuery(sql);
@@ -49,7 +49,7 @@ public class ImeiRepository {
 //        //query.setParameter("IdSP1", idSP);
 //        return query.getResultList();
 //    }
-    
+
     public Imei getOne(String MaImei) {
         String sql = fromTable + " WHERE MaImei =: MaImei1";
         Query query = session.createQuery(sql);
@@ -60,7 +60,7 @@ public class ImeiRepository {
     @Async
     public Boolean add(Imei imei) {
         Transaction transaction = null;
-        try (Session session = HibernateConfig.getFACTORY().openSession()) {
+        try ( Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
             session.save(imei);
             transaction.commit();
@@ -73,7 +73,7 @@ public class ImeiRepository {
 
     public Boolean update(Imei imei) {
         Transaction transaction = null;
-        try (Session session = HibernateConfig.getFACTORY().openSession()) {
+        try ( Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
             session.saveOrUpdate(imei);
             transaction.commit();
@@ -86,7 +86,7 @@ public class ImeiRepository {
 
     public Boolean delete(Imei imei) {
         Transaction transaction = null;
-        try (Session session = HibernateConfig.getFACTORY().openSession()) {
+        try ( Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
             imei.setDeleted(true);
             session.update(imei);

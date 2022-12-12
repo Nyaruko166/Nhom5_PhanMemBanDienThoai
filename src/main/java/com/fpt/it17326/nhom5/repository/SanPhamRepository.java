@@ -6,8 +6,12 @@ package com.fpt.it17326.nhom5.repository;
 
 import com.fpt.it17326.nhom5.config.HibernateConfig;
 import com.fpt.it17326.nhom5.domainmodel.SanPham;
+import com.fpt.it17326.nhom5.util.Util;
 import java.awt.image.SampleModel;
 import java.util.List;
+
+import javax.transaction.Transactional;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -18,7 +22,6 @@ import org.springframework.scheduling.annotation.EnableAsync;
  *
  * @author youngboizseetinh
  */
-@EnableAsync
 public class SanPhamRepository {
 
     private Session session = HibernateConfig.getFACTORY().openSession();
@@ -39,29 +42,35 @@ public class SanPhamRepository {
         return (SanPham) query.getSingleResult();
     }
 
-    @Async
+
     public List<SanPham> getAll() {
-        String sql = fromTable + " WHERE deleted = 0";
+        String sql = fromTable + " WHERE deleted = 0  ORDER BY Id DESC";
         Query query = session.createQuery(sql);
         return query.getResultList();
     }
 
     public List<SanPham> getAllDeleted() {
-        String sql = fromTable + " WHERE deleted = 1";
+        String sql = fromTable + " WHERE deleted = 1 ORDER BY UpdatedAt DESC";
         Query query = session.createQuery(sql);
         return query.getResultList();
     }
 
-    public List getOne(String tenSP) {
+    public List<SanPham> search(String tenSP) {
         tenSP = "%" + tenSP + "%";
-        String sql = fromTable + " WHERE TenSP LIKE: TenSP1";
-
+        String sql = fromTable + " WHERE TenSP LIKE :TenSP1 and deleted = 0";
         Query query = session.createQuery(sql);
         query.setParameter("TenSP1", tenSP);
         return query.getResultList();
     }
 
-    @Async
+    public List<SanPham> searchDeleted(String tenSP) {
+        tenSP = "%" + tenSP + "%";
+        String sql = fromTable + " WHERE TenSP LIKE :TenSP1 and deleted = 1";
+        Query query = session.createQuery(sql);
+        query.setParameter("TenSP1", tenSP);
+        return query.getResultList();
+    }
+
     public SanPham getSPLast() {
         String sql = fromTable + " ORDER BY Id DESC";
         Query query = session.createQuery(sql);
@@ -77,7 +86,6 @@ public class SanPhamRepository {
         return (SanPham) query.getSingleResult();
     }
 
-    @Async
     public Boolean add(SanPham sp) {
         Transaction transaction = null;
         try ( Session session = HibernateConfig.getFACTORY().openSession()) {
@@ -91,7 +99,6 @@ public class SanPhamRepository {
         return null;
     }
 
-    @Async
     public Boolean update(SanPham sp) {
         Transaction transaction = null;
         try ( Session session = HibernateConfig.getFACTORY().openSession()) {
@@ -105,12 +112,12 @@ public class SanPhamRepository {
         return null;
     }
 
-    @Async
     public Boolean delete(SanPham sp) {
         Transaction transaction = null;
         try ( Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
             sp.setDeleted(true);
+            sp.setUpdatedAt(Util.getCurrentDate());
             session.update(sp);
             transaction.commit();
             return true;
@@ -141,5 +148,11 @@ public class SanPhamRepository {
             }
         }
         return update;
+    }
+
+    public int count() {
+        String sql = "Select COUNT(sp.id) from SanPham sp";
+        Query countQuery = session.createQuery(sql);
+        return Integer.parseInt(countQuery.uniqueResult().toString());
     }
 }

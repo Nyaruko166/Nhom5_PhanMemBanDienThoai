@@ -6,6 +6,7 @@ package com.fpt.it17326.nhom5.repository;
 
 import com.fpt.it17326.nhom5.config.HibernateConfig;
 import com.fpt.it17326.nhom5.domainmodel.Chip;
+import com.fpt.it17326.nhom5.util.Util;
 import java.util.List;
 import javax.persistence.Query;
 import org.hibernate.Session;
@@ -32,17 +33,25 @@ public class ChipRepository {
     }
     
     public List<Chip> getAll() {
-        String sql = fromTable + " WHERE deleted = 0";
+        String sql = fromTable + " WHERE deleted = 0 ORDER BY Id DESC";
         Query query = session.createQuery(sql);
         return query.getResultList();
     }
     
     public List<Chip> getAllDeleted() {
-        String sql = fromTable + " WHERE deleted = 1";
+        String sql = fromTable + " WHERE deleted = 1 ORDER BY UpdatedAt DESC";
         Query query = session.createQuery(sql);
         return query.getResultList();
     }
     
+    public List<Chip> searchDeleted(String tenChip) {
+        tenChip = "%" + tenChip + "%";
+        String sql = fromTable + " WHERE TenChip LIKE :TenChip1 and deleted = 1";
+        Query query = session.createQuery(sql);
+        query.setParameter("TenChip1", tenChip);
+        return query.getResultList();
+    }
+
     public Boolean add(Chip chip) {
         Transaction transaction = null;
         try (Session session = HibernateConfig.getFACTORY().openSession()) {
@@ -75,6 +84,7 @@ public class ChipRepository {
         try (Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
             chip.setDeleted(true);
+            chip.setUpdatedAt(Util.getCurrentDate());
             session.update(chip);
             transaction.commit();
             return true;

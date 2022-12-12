@@ -106,7 +106,7 @@ public class ViewDatLaiMatKhau extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        txtGuiDen.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtGuiDen.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtGuiDen.setForeground(new java.awt.Color(153, 153, 153));
         txtGuiDen.setText("Email");
         txtGuiDen.setBorder(null);
@@ -120,6 +120,7 @@ public class ViewDatLaiMatKhau extends javax.swing.JFrame {
         jLabel1.setText("Hãy nhập email xuống bên dưới, chúng tôi sẽ gửi mật khẩu mới cho bạn");
 
         btnGui.setBackground(new java.awt.Color(0, 0, 120));
+        btnGui.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnGui.setForeground(new java.awt.Color(255, 255, 255));
         btnGui.setText("Gửi mật khẩu");
         btnGui.setBorder(null);
@@ -148,11 +149,11 @@ public class ViewDatLaiMatKhau extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(txtGuiDen)
                     .addComponent(jSeparator1))
-                .addGap(28, 28, 28)
-                .addComponent(btnGui, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnGui, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 631, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -189,7 +190,7 @@ public class ViewDatLaiMatKhau extends javax.swing.JFrame {
 
     private void btnGuiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuiActionPerformed
         String email = txtGuiDen.getText().trim();
-        lists = dvtk.getAll();
+        lists = dvtk.getAll1();
 
         if (email.trim().length() == 0) {
             JOptionPane.showMessageDialog(this, "email khong duoc de trong");
