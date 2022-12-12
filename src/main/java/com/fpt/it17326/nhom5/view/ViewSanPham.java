@@ -139,6 +139,7 @@ import com.itextpdf.layout.property.TextAlignment;
 import com.itextpdf.layout.property.VerticalAlignment;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Vector;
 // xuat hoa don
 
 /**
@@ -1560,11 +1561,11 @@ public class ViewSanPham extends javax.swing.JFrame {
     }
 
     public void loadtable() {
-        listNhanVien = nhanvienService.getAll();
-        DefaultTableModel dtmNV = (DefaultTableModel) tablenv.getModel();
+        //listNhanVien = nhanvienService.getAll();
+        DefaultTableModel dtmNV = (DefaultTableModel) tableluutru.getModel();
         dtmNV.setRowCount(0);
         for (NhanVienResponse x : listNhanVien) {
-            Object[] row = {x.getMaNhanVien(), x.getHoTen(), x.isGioiTinh(), x.getTenCV(), x.getEmail(), x.getQueQuan(), x.getNgaySinh(), x.getTaiKhoan(), x.getMatKhau()};
+            Object[] row = x.toDataRow();
             dtmNV.addRow(row);
         }
 
@@ -9648,10 +9649,12 @@ public class ViewSanPham extends javax.swing.JFrame {
                     XSSFCell TaiKhoan = excelRow.getCell(7);
                     XSSFCell MatKhau = excelRow.getCell(8);
                     XSSFCell TrangThai = excelRow.getCell(9);
+                    Vector<?> rowData = null;
 
                     //JTable excelJL = new JTable;
                     //modelnv2.addRow(new Object[]{excelMaNV, excelHoTen, excelGioiTinh, excelChucVu, excelEmail, excelQueQuan, excelNgaySinh, excelTaiKhoan, excelMatKhau});
-                    modelnv2.addRow(new Object[]{MaNV, HoTen, GioiTinh, ChucVu, Email, QueQuan, NgaySinh, TaiKhoan, MatKhau,TrangThai});
+                    modelnv2.addRow(rowData);
+                    //modelnv2.addRow(new Object[]{MaNV, HoTen, GioiTinh, ChucVu, Email, QueQuan, NgaySinh, TaiKhoan, MatKhau,TrangThai});
                     //modelnv2.addRow(new Object[row]);
                 }
                 JOptionPane.showMessageDialog(null, "Đã thêm thông tin từ Excel");
@@ -9779,14 +9782,19 @@ public class ViewSanPham extends javax.swing.JFrame {
 
     private void jButton44ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton44ActionPerformed
         // TODO add your handling code here:
-//        String manv = txttimnv.getText();
-//        int i = tableluutru.getRowCount();
-//        for (int j = 0; j < i; j++) {
-//            if (manv.equals(dtmNV.getValueAt(j, 9).toString())) {
-//                tableluutru.setRowSelectionInterval(j, j);
-//                break;
-//            }
-//        }
+       String timnv = txttimnv.getText().trim();
+       listNhanVien = new ArrayList<>();
+       if(!timnv.equalsIgnoreCase("")){
+           listnhanvien = nhanvienService.timNV(timnv);
+       }else{
+           listnhanvien = nhanvienService.getAllNV();
+       }
+        for (NhanVien x : listnhanvien) {
+            listNhanVien.add(new NhanVienResponse(x));
+        }
+//        loadnv1(list1);
+//        loadnv2(list2);
+        loadtable();
     }//GEN-LAST:event_jButton44ActionPerformed
     private void txtTongTienHang1ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
