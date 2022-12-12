@@ -69,7 +69,7 @@ public class banhang_repo1 {
   //////////////////////////////////////////////////////
              public List<sanphambanhang1> getsanphambanhang() {
                lissanphambanhang=new ArrayList<>();
-        String select = "	 select a.masp,a.tensp,b.TenPin,c.TenChip,d.TenRom,e.TenHang,f.DungLuong,count(g.IdSP),a.dongia,a.id \n" +
+        String select = "	 select a.masp,a.tensp,b.TenPin,c.TenChip,d.TenRom,e.TenHang,f.DungLuong,count(g.IdSP),a.DonGia,a.id \n" +
 "from sanpham a left join pin b on a.idpin=b.id\n" +
 "            left join Chip c on a.idchip=c.id\n" +
 "				left join Rom d on a.IdRom=d.id\n" +
@@ -77,7 +77,7 @@ public class banhang_repo1 {
 "				left join Ram f on a.IdRam=f.id\n" +
 "				left join Imei g on a.Id=g.idsp\n" +
 "\n" +
-"				group by a.masp,a.tensp,b.TenPin,c.TenChip,d.TenRom,e.TenHang,f.DungLuong,a.dongia,a.id,g.TrangThai\n"
+"				group by a.masp,a.tensp,b.TenPin,c.TenChip,d.TenRom,e.TenHang,f.DungLuong,a.DonGia,a.id,g.TrangThai\n"
                 + "              having g.TrangThai=0   ";
   
         try {
@@ -214,7 +214,7 @@ public class banhang_repo1 {
 "    END\n" +
 "	else\n" +
 "	BEGIN\n" +
-"     insert into HoaDonchitiet(idhd,idsp,tensp,soluong,dongia,CreatedAt,Deleted,UpdatedAt)values(?,?,?,?,?,getdate(),0,getdate())\n" +
+"     insert into HoaDonchitiet(idhd,idsp,tensp,soluong,DonGia,CreatedAt,Deleted,UpdatedAt)values(?,?,?,?,?,getdate(),0,getdate())\n" +
 "\n" +
 "    END" ;
             pst = db.openDbConnection().prepareStatement(delete);
@@ -282,7 +282,7 @@ public class banhang_repo1 {
           
                public List<sanphambanhang1> clhoadonrabanggiohang(String mahd) {
                lissanphambanhang=new ArrayList<>();
-        String select = "	select a.masp,a.tensp,b.TenPin,c.TenChip,d.TenRom,e.TenHang,f.DungLuong,count(i.IdHoaDonChiTiet),g.dongia ,g.IdSP,g.id\n" +
+        String select = "	select a.masp,a.tensp,b.TenPin,c.TenChip,d.TenRom,e.TenHang,f.DungLuong,count(i.IdHoaDonChiTiet),g.DonGia ,g.IdSP,g.id\n" +
 " from sanpham a  join pin b on a.idpin=b.id\n" +
 "                join Chip c on a.idchip=c.id\n" +
 "				 join Rom d on a.IdRom=d.id\n" +
@@ -293,7 +293,7 @@ public class banhang_repo1 {
 "					 \n" +
 "					 	left join ImeiDaBan i on g.Id=i.IdHoaDonChiTiet\n" +
 "\n" +
-"				group by a.masp,a.tensp,b.TenPin,c.TenChip,d.TenRom,e.TenHang,f.DungLuong,g.dongia ,g.IdSP,h.MaHD,g.id\n" +
+"				group by a.masp,a.tensp,b.TenPin,c.TenChip,d.TenRom,e.TenHang,f.DungLuong,g.DonGia ,g.IdSP,h.MaHD,g.id\n" +
 "					 \n" +
 "					 \n" +
 "					 having h.MaHD='"+mahd+"'";
