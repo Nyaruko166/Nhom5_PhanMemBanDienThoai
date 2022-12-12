@@ -16,7 +16,7 @@ Phần mềm bán điện thoại code bằng Java
 
 ## Roadmap
 
-- Thêm các chức năng: Quét QR, Xuất Excel, ...
+- Thêm các chức năng: Quản lý lương thưởng, Giao ca, Quét CCCD, ...
 
 - Fix Bugs
 
