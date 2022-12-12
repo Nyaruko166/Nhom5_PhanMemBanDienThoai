@@ -5,6 +5,7 @@
 package com.fpt.it17326.nhom5.response;
 
 import com.fpt.it17326.nhom5.domainmodel.NhanVien;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,7 +25,7 @@ public class NhanVienResponse {
     private String TenCV;
     private String Email;
     private String QueQuan;
-    private String NgaySinh;
+    private Date NgaySinh;
     private String TaiKhoan;
     private String MatKhau;
     private Date CreatedAt;
@@ -58,7 +59,9 @@ public class NhanVienResponse {
         if (Deleted==true) {
             trangThai = "Đã ngừng hoạt động";
         }
-        return new Object[]{MaNhanVien,HoTen,GioiTinh,TenCV,Email,QueQuan,NgaySinh,TaiKhoan,MatKhau,trangThai};
+        SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyy");
+        String date4 = format1.format(NgaySinh);
+        return new Object[]{MaNhanVien,HoTen,GioiTinh==true?"Nam":"Nữ",TenCV,Email,QueQuan,date4,TaiKhoan,MatKhau,trangThai};
     }
 
 

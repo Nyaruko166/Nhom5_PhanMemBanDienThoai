@@ -11,11 +11,14 @@ import com.fpt.it17326.nhom5.response.PinResponse;
 import com.fpt.it17326.nhom5.service.PinService;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author youngboizseetinh
  */
+@Service
 public class PinServiceImpl implements PinService {
 
     private PinRepository pinRepository = new PinRepository();
@@ -72,6 +75,22 @@ public class PinServiceImpl implements PinService {
     @Override
     public List<Pin> getDeletedPin() {
         return pinRepository.getAllDeleted();
+    }
+
+    @Async
+    @Override
+    public String restore(Pin pin) {
+        pin.setDeleted(false);
+        if (pinRepository.update(pin)) {
+            return "Khôi phục thành công";
+        } else {
+            return "Khôi phục thất bại";
+        }
+    }
+
+    @Override
+    public List<Pin> searchDeletedPin(String name) {
+        return pinRepository.searchDeleted(name);
     }
 
 }

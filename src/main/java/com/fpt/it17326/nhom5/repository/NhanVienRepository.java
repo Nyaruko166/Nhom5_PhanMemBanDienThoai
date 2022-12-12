@@ -64,7 +64,7 @@ public class NhanVienRepository {
         } catch (Exception e) {
             e.printStackTrace(System.out);
         }
-        return true;
+        return null;
     }
 
     public Boolean update(NhanVien nv) {
@@ -135,6 +135,14 @@ public class NhanVienRepository {
         repo.update(nv);
     }
     
+    
+    public List<NhanVien> search(String MaNhanVien) {
+        MaNhanVien = "%" + MaNhanVien + "%";
+        String sql = fromTable + " WHERE MaNhanVien LIKE :MaNhanVien and deleted = 0";
+        Query query = session.createQuery(sql);
+        query.setParameter("MaNhanVien", MaNhanVien);
+        return query.getResultList();
+    }
     
     
     public static void main(String[] args) {

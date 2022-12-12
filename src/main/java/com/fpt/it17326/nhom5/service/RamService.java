@@ -27,4 +27,8 @@ public interface RamService {
     String update(Ram ram);
 
     String delete(Ram ram);
+    
+    String restore(Ram ram);
+    
+    List<Ram> searchDeletedRam(String name);
 }

@@ -13,6 +13,7 @@ public class sanphambanhang {
   private int soluong;
   private float dongia;
   private int id;
+  private int idhdct;
 
     public sanphambanhang() {
     }
@@ -28,6 +29,28 @@ public class sanphambanhang {
         this.soluong = soluong;
         this.dongia = dongia;
         this.id=id;
+    }
+
+    public sanphambanhang(String masp, String tensp, String pin, String chip, String rom, String hangdienthoai, String ram, int soluong, float dongia, int id, int idhdct) {
+        this.masp = masp;
+        this.tensp = tensp;
+        this.pin = pin;
+        this.chip = chip;
+        this.rom = rom;
+        this.hangdienthoai = hangdienthoai;
+        this.ram = ram;
+        this.soluong = soluong;
+        this.dongia = dongia;
+        this.id = id;
+        this.idhdct = idhdct;
+    }
+
+    public int getIdhdct() {
+        return idhdct;
+    }
+
+    public void setIdhdct(int idhdct) {
+        this.idhdct = idhdct;
     }
 
     public int getId() {

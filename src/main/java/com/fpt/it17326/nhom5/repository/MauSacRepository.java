@@ -20,17 +20,25 @@ public class MauSacRepository {
     private String fromTable = "FROM MauSac";
 
     public List<MauSac> getAll() {
-        String sql = fromTable + " WHERE deleted = 0";
+        String sql = fromTable + " WHERE deleted = 0 ORDER BY Id DESC";
         Query query = session.createQuery(sql);
         return query.getResultList();
     }
     
     public List<MauSac> getAllDeleted() {
-        String sql = fromTable + " WHERE deleted = 1";
+        String sql = fromTable + " WHERE deleted = 1 ORDER BY UpdatedAt DESC";
         Query query = session.createQuery(sql);
         return query.getResultList();
     }
 
+    public List<MauSac> searchDeleted(String tenMauSac) {
+        tenMauSac = "%" + tenMauSac + "%";
+        String sql = fromTable + " WHERE TenMauSac LIKE :TenMauSac1 and deleted = 1";
+        Query query = session.createQuery(sql);
+        query.setParameter("TenMauSac1", tenMauSac);
+        return query.getResultList();
+    }
+    
     public MauSac getOne(String MaMauSac) {
         String sql = fromTable + " WHERE MaMauSac =: MaMauSac1";
 
