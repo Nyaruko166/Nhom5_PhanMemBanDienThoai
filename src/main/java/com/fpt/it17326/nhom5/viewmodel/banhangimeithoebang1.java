@@ -8,18 +8,29 @@ package com.fpt.it17326.nhom5.viewmodel;
  *
  * @author PHAM DAC THANG
  */
-public class banhangimeithoebang {
+public class banhangimeithoebang1 {
     private int id;
     private String maimei,imei;
-
-    public banhangimeithoebang() {
+private  int idhdct;
+    public banhangimeithoebang1() {
     }
 
-    public banhangimeithoebang(int id, String maimei, String imei) {
+    public banhangimeithoebang1(int id, String maimei, String imei, int idhdct) {
         this.id = id;
         this.maimei = maimei;
         this.imei = imei;
+        this.idhdct = idhdct;
     }
+
+    public int getIdhdct() {
+        return idhdct;
+    }
+
+    public void setIdhdct(int idhdct) {
+        this.idhdct = idhdct;
+    }
+
+    
 
     public int getId() {
         return id;

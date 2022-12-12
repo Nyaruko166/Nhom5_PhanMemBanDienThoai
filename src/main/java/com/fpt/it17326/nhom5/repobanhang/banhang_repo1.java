@@ -5,12 +5,13 @@
 package com.fpt.it17326.nhom5.repobanhang;
 
 
-import com.fpt.it17326.nhom5.view.banhangimei;
-import com.fpt.it17326.nhom5.viewmodel.banhangimeithoebang;
-import com.fpt.it17326.nhom5.viewmodel.hoadonbanhang;
-import com.fpt.it17326.nhom5.viewmodel.khachhangbanhang;
-import com.fpt.it17326.nhom5.viewmodel.sanphambanhang;
-import com.fpt.it17326.nhom5.viewmodel.xuathoadon;
+import com.fpt.it17326.nhom5.viewmodel.QRimei1;
+
+import com.fpt.it17326.nhom5.viewmodel.banhangimeithoebang1;
+import com.fpt.it17326.nhom5.viewmodel.hoadonbanhang1;
+import com.fpt.it17326.nhom5.viewmodel.khachhangbanhang1;
+import com.fpt.it17326.nhom5.viewmodel.sanphambanhang1;
+import com.fpt.it17326.nhom5.viewmodel.xuathoadon1;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,26 +25,27 @@ import java.util.logging.Logger;
  *
  * @author PHAM DAC THANG
  */
-public class banhang_repo {
+public class banhang_repo1 {
   
-  dbcontest db;
+  dbcontest1 db;
     ResultSet rs = null;
     Statement st = null;
     PreparedStatement pst = null;
-    List<hoadonbanhang> lishoadon1 = null;
-   List<banhangimeithoebang> listimei = null;
-         List<sanphambanhang> lissanphambanhang = null;
-              List<khachhangbanhang> liskhachhangbanhang = null;
-                 List<xuathoadon> lisxuathoadon = null;
-    public banhang_repo() {
+    List<hoadonbanhang1> lishoadon1 = null;
+   List<banhangimeithoebang1> listimei = null;
+         List<sanphambanhang1> lissanphambanhang = null;
+              List<khachhangbanhang1> liskhachhangbanhang = null;
+                 List<xuathoadon1> lisxuathoadon = null;
+                 List<QRimei1> lisQR = null;
+    public banhang_repo1() {
     }
 
-    public banhang_repo(dbcontest db) {
+    public banhang_repo1(dbcontest1 db) {
         this.db = db;
     }
     
     
-           public List<hoadonbanhang> gethdbanhang() {
+           public List<hoadonbanhang1> gethdbanhang() {
                lishoadon1=new ArrayList<>();
         String select = " select a.mahd,b.hoten,c.hoten,a.TrangThai,a.id,c.id,convert(varchar,a.CreatedAt,105),a.tongtien from hoadon a join  nhanvien b  on a.idnv=b.id\n" +
 "join  khachhang c  on a.idkh=c.id   where a.deleted=0";
@@ -52,22 +54,22 @@ public class banhang_repo {
             st = db.openDbConnection().createStatement();
             rs = st.executeQuery(select);
             while (rs.next()) {
-                lishoadon1.add(new hoadonbanhang(rs.getNString(1),rs.getNString(2),rs.getNString(3) ,rs.getInt(4),rs.getInt(5),
+                lishoadon1.add(new hoadonbanhang1(rs.getNString(1),rs.getNString(2),rs.getNString(3) ,rs.getInt(4),rs.getInt(5),
                         rs.getInt(6),rs.getString(7),rs.getDouble(8)
                      ));
             }
             rs.close();
         } catch (SQLException ex) {
-            Logger.getLogger(banhang_repo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(banhang_repo1.class.getName()).log(Level.SEVERE, null, ex);
         }
         return lishoadon1;
         
     }
            
   //////////////////////////////////////////////////////
-             public List<sanphambanhang> getsanphambanhang() {
+             public List<sanphambanhang1> getsanphambanhang() {
                lissanphambanhang=new ArrayList<>();
-        String select = "	 select a.masp,a.tensp,b.TenPin,c.TenChip,d.TenRom,e.TenHang,f.DungLuong,count(g.IdSP),a.DonGia,a.id \n" +
+        String select = "	 select a.masp,a.tensp,b.TenPin,c.TenChip,d.TenRom,e.TenHang,f.DungLuong,count(g.IdSP),a.dongia,a.id \n" +
 "from sanpham a left join pin b on a.idpin=b.id\n" +
 "            left join Chip c on a.idchip=c.id\n" +
 "				left join Rom d on a.IdRom=d.id\n" +
@@ -75,13 +77,14 @@ public class banhang_repo {
 "				left join Ram f on a.IdRam=f.id\n" +
 "				left join Imei g on a.Id=g.idsp\n" +
 "\n" +
-"				group by a.masp,a.tensp,b.TenPin,c.TenChip,d.TenRom,e.TenHang,f.DungLuong,a.DonGia,a.id ";
+"				group by a.masp,a.tensp,b.TenPin,c.TenChip,d.TenRom,e.TenHang,f.DungLuong,a.dongia,a.id,g.TrangThai\n"
+                + "              having g.TrangThai=0   ";
   
         try {
             st = db.openDbConnection().createStatement();
             rs = st.executeQuery(select);
             while (rs.next()) {
-                lissanphambanhang.add(new sanphambanhang(
+                lissanphambanhang.add(new sanphambanhang1(
                         
                       rs.getNString(1),
                       rs.getString(2),
@@ -103,13 +106,13 @@ public class banhang_repo {
             }
             rs.close();
         } catch (SQLException ex) {
-            Logger.getLogger(banhang_repo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(banhang_repo1.class.getName()).log(Level.SEVERE, null, ex);
         }
         return lissanphambanhang;
         
     }
      //////////////////////////////////////////////////////          
-                public List<khachhangbanhang> getkhachhangbanhang() {
+                public List<khachhangbanhang1> getkhachhangbanhang() {
                liskhachhangbanhang=new ArrayList<>();
         String select = " select id,makh,hoten,sdt from khachhang";
   
@@ -117,7 +120,7 @@ public class banhang_repo {
             st = db.openDbConnection().createStatement();
             rs = st.executeQuery(select);
             while (rs.next()) {
-                     liskhachhangbanhang.add(new khachhangbanhang(
+                     liskhachhangbanhang.add(new khachhangbanhang1(
                         
                       rs.getInt(1),
                       rs.getNString(2),
@@ -133,7 +136,7 @@ public class banhang_repo {
             }
             rs.close();
         } catch (SQLException ex) {
-            Logger.getLogger(banhang_repo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(banhang_repo1.class.getName()).log(Level.SEVERE, null, ex);
         }
         return       liskhachhangbanhang;
         
@@ -161,26 +164,27 @@ public class banhang_repo {
                    pst.setString(4, makh);
             pst.executeUpdate();
             
-            return "Tạo hóa đơn treo thanh công";
+            return "Tạo hóa đơn  thanh công";
         } catch (SQLException ex) {
-            Logger.getLogger(banhang_repo.class.getName()).log(Level.SEVERE, null, ex);
-            return "Tạo hóa đơn treo thất bại";
+            Logger.getLogger(banhang_repo1.class.getName()).log(Level.SEVERE, null, ex);
+            return "Tạo hóa đơn  thất bại";
         }      
     
     }
     
-       public  List<banhangimeithoebang> imeisanphambanhang(String masp){
+       public  List<banhangimeithoebang1> imeisanphambanhang(String masp){
             listimei=new ArrayList<>();
     String aa = "declare @id int\n" +
 "set @id=(select id from SanPham where MaSP='"+masp+"')\n" +
-"select id,maimei,imei from imei where idsp=@id" ;
+"select id,maimei,imei,idSP from imei where idSP=@id   and TrangThai=0" ;
             try {
             st = db.openDbConnection().createStatement();
             rs = st.executeQuery(aa);
             while (rs.next()) {
-                listimei.add(new banhangimeithoebang(
+                listimei.add(new banhangimeithoebang1(
                 
-                rs.getInt(1),rs.getNString(2),rs.getString(3)
+                rs.getInt(1),rs.getNString(2),rs.getString(3),
+                          rs.getInt(4)
                 
                 
                 )
@@ -188,7 +192,7 @@ public class banhang_repo {
             }
             rs.close();
         } catch (SQLException ex) {
-            Logger.getLogger(banhang_repo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(banhang_repo1.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listimei;
             
@@ -210,7 +214,7 @@ public class banhang_repo {
 "    END\n" +
 "	else\n" +
 "	BEGIN\n" +
-"     insert into HoaDonchitiet(idhd,idsp,tensp,soluong,DonGia,CreatedAt,Deleted,UpdatedAt)values(?,?,?,?,?,getdate(),0,getdate())\n" +
+"     insert into HoaDonchitiet(idhd,idsp,tensp,soluong,dongia,CreatedAt,Deleted,UpdatedAt)values(?,?,?,?,?,getdate(),0,getdate())\n" +
 "\n" +
 "    END" ;
             pst = db.openDbConnection().prepareStatement(delete);
@@ -223,7 +227,7 @@ public class banhang_repo {
             return true;
            
         } catch (SQLException ex) {
-            Logger.getLogger(banhang_repo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(banhang_repo1.class.getName()).log(Level.SEVERE, null, ex);
            return false;
         }      
    
@@ -254,6 +258,7 @@ public class banhang_repo {
 "	set @solg=(select count(idhoadonchitiet) from ImeiDaBan  where IdHoaDonChiTiet =@vt)\n" +
 "	 print @solg\n" +
 "	update HoaDonChiTiet set SoLuong=@solg  where IdHD=@idhd  and IdSP=@idsp\n" +
+                    "		update Imei set TrangThai=1 where MaImei=@maimei\n" +
 "    END" ;
             pst = db.openDbConnection().prepareStatement(delete);
             pst.setInt(1, idhd);
@@ -265,7 +270,7 @@ public class banhang_repo {
             
            
         } catch (SQLException ex) {
-            Logger.getLogger(banhang_repo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(banhang_repo1.class.getName()).log(Level.SEVERE, null, ex);
           
         }      
     
@@ -275,9 +280,9 @@ public class banhang_repo {
           
           
           
-               public List<sanphambanhang> clhoadonrabanggiohang(String mahd) {
+               public List<sanphambanhang1> clhoadonrabanggiohang(String mahd) {
                lissanphambanhang=new ArrayList<>();
-        String select = "	select a.masp,a.tensp,b.TenPin,c.TenChip,d.TenRom,e.TenHang,f.DungLuong,count(i.IdHoaDonChiTiet),g.DonGia ,g.IdSP,g.id\n" +
+        String select = "	select a.masp,a.tensp,b.TenPin,c.TenChip,d.TenRom,e.TenHang,f.DungLuong,count(i.IdHoaDonChiTiet),g.dongia ,g.IdSP,g.id\n" +
 " from sanpham a  join pin b on a.idpin=b.id\n" +
 "                join Chip c on a.idchip=c.id\n" +
 "				 join Rom d on a.IdRom=d.id\n" +
@@ -288,7 +293,7 @@ public class banhang_repo {
 "					 \n" +
 "					 	left join ImeiDaBan i on g.Id=i.IdHoaDonChiTiet\n" +
 "\n" +
-"				group by a.masp,a.tensp,b.TenPin,c.TenChip,d.TenRom,e.TenHang,f.DungLuong,g.DonGia ,g.IdSP,h.MaHD,g.id\n" +
+"				group by a.masp,a.tensp,b.TenPin,c.TenChip,d.TenRom,e.TenHang,f.DungLuong,g.dongia ,g.IdSP,h.MaHD,g.id\n" +
 "					 \n" +
 "					 \n" +
 "					 having h.MaHD='"+mahd+"'";
@@ -297,7 +302,7 @@ public class banhang_repo {
             st = db.openDbConnection().createStatement();
             rs = st.executeQuery(select);
             while (rs.next()) {
-                lissanphambanhang.add(new sanphambanhang(
+                lissanphambanhang.add(new sanphambanhang1(
                         
                       rs.getNString(1),
                       rs.getString(2),
@@ -320,7 +325,7 @@ public class banhang_repo {
             }
             rs.close();
         } catch (SQLException ex) {
-            Logger.getLogger(banhang_repo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(banhang_repo1.class.getName()).log(Level.SEVERE, null, ex);
         }
         return lissanphambanhang;
         
@@ -333,22 +338,25 @@ public class banhang_repo {
                   public   String Thanhtoanhoadon(String tongtiensaukhuyenmai,String mahd){
             
       try {
-            String delete = "update HoaDon set Tongtien=? , createdat=getdate()  , trangthai=1 where mahd=?\n" +
+            String delete = "					  update HoaDon set Tongtien=? , createdat=getdate()  , trangthai=1 where mahd=?\n" +
 "\n" +
 "\n" +
 "\n" +
-"delete from Imei  where MaImei in (select c.MaImei from hoadon a join hoadonchitiet b on a.id=b.IdHD\n" +
+"update Imei set TrangThai=1  where MaImei in (select c.MaImei from hoadon a join hoadonchitiet b on a.id=b.IdHD\n" +
 "                        join ImeiDaBan c   on b.id=c.IdHoaDonChiTiet  where a.MaHD=?)\n" +
 "\n" +
 "delete from ImeiDaBan  where Id  in (\n" +
 "\n" +
-"						select c.id from hoadon a join hoadonchitiet b on a.id=b.IdHD\n" +
-"                        join ImeiDaBan c   on b.id=c.IdHoaDonChiTiet  where a.MaHD not in (select mahd from hoadon where mahd=?)  \n" +
+"					select c.id from hoadon a join hoadonchitiet b on a.id=b.IdHD\n" +
+"                     join ImeiDaBan c   on b.id=c.IdHoaDonChiTiet  where a.MaHD not in (select mahd from hoadon where mahd=?)  \n" +
 "\n" +
-"						and c.MaImei in (select c.MaImei from hoadon a join hoadonchitiet b on a.id=b.IdHD\n" +
-"                        join ImeiDaBan c   on b.id=c.IdHoaDonChiTiet  where a.MaHD=?)\n" +
+"					and c.MaImei in (select c.MaImei from hoadon a join hoadonchitiet b on a.id=b.IdHD\n" +
+"                      join ImeiDaBan c   on b.id=c.IdHoaDonChiTiet  where a.MaHD=?)\n" +
 "\n" +
-"						and a.TrangThai=0)" ;
+"					and a.TrangThai=0)\n" +
+"					 delete from HoaDonChiTiet where id   in    (select  a.id from HoaDonChiTiet a left  join ImeiDaBan b on a.id=b.IdHoaDonChiTiet \n" +
+"                                  left join  HoaDon c on c.id=a.idHD\n" +
+"                      group by a.id,c.Deleted  having count(b.IdHoaDonChiTiet)=0  and c.Deleted=0)" ;
             pst = db.openDbConnection().prepareStatement(delete);
             pst.setObject(1, tongtiensaukhuyenmai);
               pst.setObject(2, mahd);
@@ -359,7 +367,7 @@ public class banhang_repo {
             
             return "Thanh toán  thanh công";
         } catch (SQLException ex) {
-            Logger.getLogger(banhang_repo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(banhang_repo1.class.getName()).log(Level.SEVERE, null, ex);
             return "Thanh toán thất bại";
         }      
     
@@ -400,7 +408,7 @@ public class banhang_repo {
             
   
         } catch (SQLException ex) {
-            Logger.getLogger(banhang_repo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(banhang_repo1.class.getName()).log(Level.SEVERE, null, ex);
           
         }      
     
@@ -415,7 +423,9 @@ public class banhang_repo {
                      public   String huyhoadon(String Mahd){
             
       try {
-            String delete = " update hoadon set deleted=1  where mahd=?" ;
+            String delete = "   update hoadon set deleted=1  where mahd=?\n" +
+"  update Imei set TrangThai=0 where  MaImei in ( select c.MaImei from HoaDon a left join HoaDonChiTiet b on a.id=b.IdHD\n" +
+"                          left join ImeiDaBan c on c.IdHoaDonChiTiet=b.id)" ;
             pst = db.openDbConnection().prepareStatement(delete);
             pst.setObject(1, Mahd);
           
@@ -424,7 +434,7 @@ public class banhang_repo {
             
   return "ĐÃ HỦY HÓA ĐƠN THÀNH CÔNG";
         } catch (SQLException ex) {
-            Logger.getLogger(banhang_repo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(banhang_repo1.class.getName()).log(Level.SEVERE, null, ex);
            return "ĐÃ HỦY HÓA ĐƠN THẤT BẠI";
         }      
     
@@ -450,7 +460,7 @@ public class banhang_repo {
             
   return "TẠO KHÁCH HÀNG BÁN LẺ THÀNH CÔNG";
         } catch (SQLException ex) {
-            Logger.getLogger(banhang_repo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(banhang_repo1.class.getName()).log(Level.SEVERE, null, ex);
            return "TẠO KHÁCH HÀNG BÁN LẺ THẤT BẠI";
         }      
     
@@ -475,7 +485,7 @@ public class banhang_repo {
             
   return "TẠO KHÁCH HÀNG CÓ THÔNG TIN THÀNH CÔNG";
         } catch (SQLException ex) {
-            Logger.getLogger(banhang_repo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(banhang_repo1.class.getName()).log(Level.SEVERE, null, ex);
            return "TẠO KHÁCH HÀNG CÓ THÔNG TIN THẤT BẠI";
         }      
     
@@ -486,9 +496,9 @@ public class banhang_repo {
                                           
                                           
                                           
-       public  List<banhangimeithoebang> imeigiohangbanhang(String mahd,String masp){
+       public  List<banhangimeithoebang1> imeigiohangbanhang(String mahd,String masp){
             listimei=new ArrayList<>();
-    String aa = "select id , maimei,imei from ImeiDaBan where IdHoaDonChiTiet in \n" +
+    String aa = "select id , maimei,imei,idHoaDonChiTiet from ImeiDaBan where IdHoaDonChiTiet in \n" +
 "(select id from HoaDonChiTiet where  idhd in (select id from hoadon where MaHD='"+mahd+"')  \n" +
 "and \n" +
 " idsp in (select id from SanPham where MaSP='"+masp+"')\n" +
@@ -497,9 +507,10 @@ public class banhang_repo {
             st = db.openDbConnection().createStatement();
             rs = st.executeQuery(aa);
             while (rs.next()) {
-                listimei.add(new banhangimeithoebang(
+                listimei.add(new banhangimeithoebang1(
                 
-                rs.getInt(1),rs.getNString(2),rs.getString(3)
+                rs.getInt(1),rs.getNString(2),rs.getString(3),
+                         rs.getInt(1)
                 
                 
                 )
@@ -507,7 +518,7 @@ public class banhang_repo {
             }
             rs.close();
         } catch (SQLException ex) {
-            Logger.getLogger(banhang_repo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(banhang_repo1.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listimei;
             
@@ -520,21 +531,33 @@ public class banhang_repo {
        
        
        
-          public   String XOAIMEITRONGBANGIMEIDABAN(String idimeeidaban){
+          public   String XOAIMEITRONGBANGIMEIDABAN(String idimeeidaban,String maimei){
             
       try {
-            String delete = " delete  from ImeiDaBan where id=?" ;
+            String delete = "delete  from ImeiDaBan where id=?\n" +
+"\n" +
+"\n" +
+"\n" +
+"\n" +
+"\n" +
+"\n" +
+"       delete from HoaDonChiTiet where id   in    (select  a.id from HoaDonChiTiet a left  join ImeiDaBan b on a.id=b.IdHoaDonChiTiet \n" +
+"                                  left join  HoaDon c on c.id=a.idHD\n" +
+"                      group by a.id,c.Deleted  having count(b.IdHoaDonChiTiet)=0  and c.Deleted=0)\n"
+                    + "	update Imei set TrangThai=0 where MaImei=?" ;
             pst = db.openDbConnection().prepareStatement(delete);
+        pst.setObject(1, idimeeidaban);
+         pst.setObject(2, maimei);
        
-          
-   pst.setObject(1, idimeeidaban
-   );
+  
+   
+ 
 
             pst.executeUpdate();
             
   return "XÓA IMEI THÀNH CÔNG";
         } catch (SQLException ex) {
-            Logger.getLogger(banhang_repo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(banhang_repo1.class.getName()).log(Level.SEVERE, null, ex);
            return "XÓA IMEI THẤT BẠI";
         }      
     
@@ -574,13 +597,13 @@ public class banhang_repo {
             
   
         } catch (SQLException ex) {
-            Logger.getLogger(banhang_repo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(banhang_repo1.class.getName()).log(Level.SEVERE, null, ex);
           
         }      
     
     }
      
-                    public List<xuathoadon> xuathoadobbanhang(String mahd) {
+                    public List<xuathoadon1> xuathoadobbanhang(String mahd) {
                lisxuathoadon=new ArrayList<>();
         String select = "select b.MaHD,a.HoTen,a.SDT,a.DiaChi,convert(varchar,b.CreatedAt,105),d.TenSP,f.TenMauSac+','+g.tenrom+','+h.DungLuong,COUNT(e.IdHoaDonChiTiet),d.DonGia,COUNT(e.IdHoaDonChiTiet)*d.DonGia from\n" +
 " hoadon b  left join KhachHang a on a.id=b.IdKH\n" +
@@ -597,7 +620,7 @@ public class banhang_repo {
             st = db.openDbConnection().createStatement();
             rs = st.executeQuery(select);
             while (rs.next()) {
-                lisxuathoadon.add(new xuathoadon(
+                lisxuathoadon.add(new xuathoadon1(
                         rs.getNString(1),
                         rs.getString(2),
                         rs.getString(3),
@@ -613,11 +636,100 @@ public class banhang_repo {
             }
             rs.close();
         } catch (SQLException ex) {
-            Logger.getLogger(banhang_repo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(banhang_repo1.class.getName()).log(Level.SEVERE, null, ex);
         }
         return lisxuathoadon;
         
     }
                     
-   
+                     public   String updatekhachhang(String hoten,String sdt,String id ){
+            
+      try {
+            String delete = "  	  update KhachHang set HoTen=?  ,SDT=?  where id=?" ;
+            pst = db.openDbConnection().prepareStatement(delete);
+            pst.setObject(1, hoten);
+              pst.setObject(2, sdt);
+                pst.setObject(3, id);
+          
+
+            pst.executeUpdate();
+            
+  return "UPDATE KHÁCH HÀNG THÀNH CÔNG";
+        } catch (SQLException ex) {
+            Logger.getLogger(banhang_repo1.class.getName()).log(Level.SEVERE, null, ex);
+           return "UPDATE KHÁCH HÀNG THẤT BẠI";
+        }      
+    
+    }
+                     
+                     
+                     
+                     
+                                  public   String Xoagiohang(String mhd ){
+            
+      try {
+            String delete = "update Imei set TrangThai=0 where MaImei in (						  select c.MaImei from HoaDon a left join HoaDonChiTiet b on a.id=b.IdHD\n" +
+"						                          left join ImeiDaBan c on b.Id=c.IdHoaDonChiTiet\n" +
+"\n" +
+"												  where a.MaHD=?)\n" +
+"\n" +
+"\n" +
+"\n" +
+"	delete from ImeiDaBan  where  id in (select c.id from HoaDon a left join HoaDonChiTiet b on a.id=b.IdHD\n" +
+"						                          left join ImeiDaBan c on b.Id=c.IdHoaDonChiTiet\n" +
+" where a.MaHD=?)\n" +
+" delete from HoaDonChiTiet where IdHD in (select id from HoaDon where MaHD=?)" ;
+            pst = db.openDbConnection().prepareStatement(delete);
+            pst.setObject(1, mhd);
+              pst.setObject(2, mhd);
+                pst.setObject(3, mhd);
+          
+
+            pst.executeUpdate();
+            
+  return "XÓA GIỎ HÀNG THÀNH CÔNG";
+        } catch (SQLException ex) {
+            Logger.getLogger(banhang_repo1.class.getName()).log(Level.SEVERE, null, ex);
+           return "XÓA GIỎ HÀNG THẤT BẠI";
+        }      
+    
+    }
+                                  
+                                  
+       public List<QRimei1> getQR(String maimei) {
+               lisQR=new ArrayList<>();
+        String select = " select  a.MaImei,b.MaSP,a.TrangThai,b.id,b.TenSP,b.DonGia,a.Imei from imei a join SanPham b on a.idsp=b.id  where MaImei='"+maimei+"'";
+  
+        try {
+            st = db.openDbConnection().createStatement();
+            rs = st.executeQuery(select);
+            while (rs.next()) {
+                     lisQR.add(new QRimei1(
+                        
+                      rs.getString(1),
+                      rs.getString(2),
+                      rs.getInt(3), 
+            rs.getInt(4), 
+                               rs.getNString(5),
+                          rs.getInt(6), 
+                               rs.getString(7)
+                        )
+                        
+                        
+                )
+                       
+                     ;
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(banhang_repo1.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return       lisQR;
+        
+    }  
+       
+       public static void main(String[] args) {
+        new banhang_repo1().getQR("MI002").toString();
+                
+    }
 }
