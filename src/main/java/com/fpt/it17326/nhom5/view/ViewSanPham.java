@@ -6189,6 +6189,7 @@ String đinhang="";
         });
 
         tblSanPhamLuuTru.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        tblSanPhamLuuTru.setForeground(new java.awt.Color(0, 0, 102));
         tblSanPhamLuuTru.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -6206,6 +6207,7 @@ String đinhang="";
             }
         });
         tblSanPhamLuuTru.setGridColor(new java.awt.Color(0, 0, 102));
+        tblSanPhamLuuTru.setSelectionBackground(new java.awt.Color(255, 0, 51));
         tblSanPhamLuuTru.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblSanPhamLuuTruMouseClicked(evt);
