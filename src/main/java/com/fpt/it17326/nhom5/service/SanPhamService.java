@@ -42,4 +42,8 @@ public interface SanPhamService {
 
     int countRecord();
 
+    String deleteById(int id);
+
+    String restoreById(int id);
+
 }

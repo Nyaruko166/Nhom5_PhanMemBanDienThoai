@@ -13,9 +13,9 @@ public interface HangDienThoaiService {
     List<HangDienThoaiResponse> getAll();
 
     List<HangDienThoai> getAllHangDT();
-    
+
     List<HangDienThoai> getDeletedHangDT();
-    
+
     HangDienThoaiResponse getOne(String MaAnh);
 
     String add(HangDienThoai hdt);
@@ -23,8 +23,8 @@ public interface HangDienThoaiService {
     String update(HangDienThoai hdt);
 
     String delete(HangDienThoai hdt);
-    
+
     String restore(HangDienThoai hdt);
-    
+
     List<HangDienThoai> searchDeletedHangDT(String name);
 }

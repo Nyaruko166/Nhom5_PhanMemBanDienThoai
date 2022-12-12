@@ -17,17 +17,20 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author youngboizseetinh
  */
+@Repository
 public class SanPhamRepository {
 
     private Session session = HibernateConfig.getFACTORY().openSession();
 
     private String fromTable = "FROM SanPham";
 
+    @Async
     public SanPham getOneSP(String MaSanPham) {
         String sql = fromTable + " WHERE TenSP =:TenSP";
         Query query = session.createQuery(sql);
@@ -35,26 +38,30 @@ public class SanPhamRepository {
         return (SanPham) query.getSingleResult();
     }
 
-    public SanPham getOneMa(int MaSanPham) {
-        String sql = fromTable + " WHERE id =:TenSP";
+    @Async
+    public SanPham getOneMa(int id) {
+        String sql = fromTable + " WHERE Id =:id";
         Query query = session.createQuery(sql);
-        query.setParameter("TenSP", MaSanPham);
+        query.setParameter("id", id);
         return (SanPham) query.getSingleResult();
     }
 
 
+    @Async
     public List<SanPham> getAll() {
         String sql = fromTable + " WHERE deleted = 0  ORDER BY Id DESC";
         Query query = session.createQuery(sql);
         return query.getResultList();
     }
 
+    @Async
     public List<SanPham> getAllDeleted() {
         String sql = fromTable + " WHERE deleted = 1 ORDER BY UpdatedAt DESC";
         Query query = session.createQuery(sql);
         return query.getResultList();
     }
 
+    @Async
     public List<SanPham> search(String tenSP) {
         tenSP = "%" + tenSP + "%";
         String sql = fromTable + " WHERE TenSP LIKE :TenSP1 and deleted = 0";
@@ -63,6 +70,7 @@ public class SanPhamRepository {
         return query.getResultList();
     }
 
+    @Async
     public List<SanPham> searchDeleted(String tenSP) {
         tenSP = "%" + tenSP + "%";
         String sql = fromTable + " WHERE TenSP LIKE :TenSP1 and deleted = 1";
@@ -78,6 +86,7 @@ public class SanPhamRepository {
         return (SanPham) query.getSingleResult();
     }
 
+    @Async
     public SanPham getOne(int id) {
         String sql = fromTable + " WHERE Id =: id";
 
@@ -86,6 +95,7 @@ public class SanPhamRepository {
         return (SanPham) query.getSingleResult();
     }
 
+    @Async
     public Boolean add(SanPham sp) {
         Transaction transaction = null;
         try ( Session session = HibernateConfig.getFACTORY().openSession()) {
@@ -99,6 +109,7 @@ public class SanPhamRepository {
         return null;
     }
 
+    @Async
     public Boolean update(SanPham sp) {
         Transaction transaction = null;
         try ( Session session = HibernateConfig.getFACTORY().openSession()) {
@@ -112,6 +123,7 @@ public class SanPhamRepository {
         return null;
     }
 
+    @Async
     public Boolean delete(SanPham sp) {
         Transaction transaction = null;
         try ( Session session = HibernateConfig.getFACTORY().openSession()) {
@@ -127,6 +139,7 @@ public class SanPhamRepository {
         return null;
     }
 
+    @Async
     public Boolean updateSL(SanPham sp, int sl) {
         boolean update = false;
         try ( Session session = HibernateConfig.getFACTORY().openSession()) {
@@ -150,9 +163,44 @@ public class SanPhamRepository {
         return update;
     }
 
+    @Async
     public int count() {
         String sql = "Select COUNT(sp.id) from SanPham sp";
         Query countQuery = session.createQuery(sql);
         return Integer.parseInt(countQuery.uniqueResult().toString());
+    }
+
+    @Async
+    public Boolean deleteById(int id) {
+        SanPham sp = getOneMa(id);
+        sp.setDeleted(true);
+        sp.setUpdatedAt(Util.getCurrentDate());
+        Transaction transaction = null;
+        try ( Session session = HibernateConfig.getFACTORY().openSession()) {
+            transaction = session.beginTransaction();
+            session.update(sp);
+            transaction.commit();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Async
+    public Boolean restoreById(int id) {
+        SanPham sp = getOneMa(id);
+        sp.setDeleted(false);
+        sp.setUpdatedAt(Util.getCurrentDate());
+        Transaction transaction = null;
+        try ( Session session = HibernateConfig.getFACTORY().openSession()) {
+            transaction = session.beginTransaction();
+            session.update(sp);
+            transaction.commit();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
