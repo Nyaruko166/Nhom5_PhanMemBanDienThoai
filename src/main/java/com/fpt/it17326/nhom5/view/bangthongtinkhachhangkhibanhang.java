@@ -85,13 +85,23 @@ String đinhang="";
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("BẢNG THÔNG TIN KHÁCH HÀNG KHI BÁN HÀNG"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "BẢNG THÔNG TIN KHÁCH HÀNG KHI BÁN HÀNG", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(0, 0, 102))); // NOI18N
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("CỘT THÔNG TIN"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "CỘT THÔNG TIN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12), new java.awt.Color(0, 0, 102))); // NOI18N
 
-        jLabel1.setText("SDT                           :");
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 102));
+        jLabel1.setText("SDT                           ");
 
-        jLabel2.setText("TÊN KHÁCH HÀNG  :");
+        TFTENKHACHHANG.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        TFTENKHACHHANG.setForeground(new java.awt.Color(0, 0, 102));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 102));
+        jLabel2.setText("Tên Khách Hàng");
+
+        TFSODIENTHOAI.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        TFSODIENTHOAI.setForeground(new java.awt.Color(0, 0, 102));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -124,9 +134,10 @@ String đinhang="";
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("BẢNG THÔNG TIN KHÁCH HÀNG"));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "BẢNG THÔNG TIN KHÁCH HÀNG", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12), new java.awt.Color(0, 0, 102))); // NOI18N
 
         tbbangkhachhang.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        tbbangkhachhang.setForeground(new java.awt.Color(0, 0, 102));
         tbbangkhachhang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -152,6 +163,9 @@ String đinhang="";
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search.png"))); // NOI18N
         jButton3.setText("TÌM THEO MÃ");
 
+        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jTextField1.setForeground(new java.awt.Color(0, 0, 102));
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -175,7 +189,7 @@ String đinhang="";
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("CHỨC NĂNG"));
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "CHỨC NĂNG", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12), new java.awt.Color(0, 0, 102))); // NOI18N
 
         jButton2.setBackground(new java.awt.Color(0, 0, 102));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));

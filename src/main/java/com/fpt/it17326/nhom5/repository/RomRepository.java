@@ -6,6 +6,7 @@ package com.fpt.it17326.nhom5.repository;
 
 import com.fpt.it17326.nhom5.config.HibernateConfig;
 import com.fpt.it17326.nhom5.domainmodel.Rom;
+import com.fpt.it17326.nhom5.util.Util;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -18,7 +19,7 @@ import org.hibernate.Transaction;
  * @author youngboizseetinh
  */
 public class RomRepository {
-    
+
     private Session session = HibernateConfig.getFACTORY().openSession();
 
     private String fromTable = "FROM Rom";
@@ -28,7 +29,7 @@ public class RomRepository {
         Query query = session.createQuery(sql);
         return query.getResultList();
     }
-    
+
     public List<Rom> getAllDeleted() {
         String sql = fromTable + " WHERE deleted = 1 ORDER BY UpdatedAt DESC";
         Query query = session.createQuery(sql);
@@ -50,10 +51,10 @@ public class RomRepository {
         query.setParameter("TenRom1", tenRom);
         return query.getResultList();
     }
-    
+
     public Boolean add(Rom rom) {
         Transaction transaction = null;
-        try ( Session session = HibernateConfig.getFACTORY().openSession()) {
+        try (Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
             session.save(rom);
             transaction.commit();
@@ -66,7 +67,7 @@ public class RomRepository {
 
     public Boolean update(Rom rom) {
         Transaction transaction = null;
-        try ( Session session = HibernateConfig.getFACTORY().openSession()) {
+        try (Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
             session.saveOrUpdate(rom);
             transaction.commit();
@@ -79,9 +80,10 @@ public class RomRepository {
 
     public Boolean delete(Rom rom) {
         Transaction transaction = null;
-        try ( Session session = HibernateConfig.getFACTORY().openSession()) {
+        try (Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
             rom.setDeleted(true);
+            rom.setUpdatedAt(Util.getCurrentDate());
             session.update(rom);
             transaction.commit();
             return true;
@@ -90,14 +92,14 @@ public class RomRepository {
         }
         return null;
     }
-    
-        public static void main(String[] args) throws ParseException {
-        RomRepository romRepository = new RomRepository();
 
-        Rom rom = romRepository.getOne("1");
-        System.out.println(rom.toString());
-        
-        //Rom rom = new Rom();
+//        public static void main(String[] args) throws ParseException {
+//        RomRepository romRepository = new RomRepository();
+//
+//        Rom rom = romRepository.getOne("1");
+//        System.out.println(rom.toString());
+//        
+    //Rom rom = new Rom();
 //        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 //        rom.setTenRom("Hồng");
 //        rom.setCreatedAt(format.parse("2022-11-20"));
@@ -110,5 +112,4 @@ public class RomRepository {
 //        for (Rom x : lstms) {
 //            System.out.println(x.toString());
 //        }
-    }
 }
