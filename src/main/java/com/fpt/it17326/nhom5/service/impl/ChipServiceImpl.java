@@ -10,11 +10,14 @@ import com.fpt.it17326.nhom5.response.ChipResponse;
 import com.fpt.it17326.nhom5.service.ChipService;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author youngboizseetinh
  */
+@Service
 public class ChipServiceImpl implements ChipService{
 
     private ChipRepository chipRepository = new ChipRepository();
@@ -71,6 +74,22 @@ public class ChipServiceImpl implements ChipService{
     @Override
     public List<Chip> getDeletedChip() {
         return chipRepository.getAllDeleted();
+    }
+
+    @Async
+    @Override
+    public String restore(Chip chip) {
+        chip.setDeleted(false);
+        if (chipRepository.update(chip)) {
+            return "Khôi phục thành công";
+        } else {
+            return "Khôi phục thất bại";
+        }
+    }
+
+    @Override
+    public List<Chip> searchDeletedChip(String name) {
+        return chipRepository.searchDeleted(name);
     }
     
 }

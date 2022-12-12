@@ -2158,7 +2158,7 @@
                           <Layout>
                             <DimensionLayout dim="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jPanel13" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="pnPaging" alignment="0" max="32767" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
@@ -2233,8 +2233,7 @@
                                                           <Component id="cbbMauSac" alignment="3" min="-2" max="-2" attributes="0"/>
                                                       </Group>
                                                       <EmptySpace max="-2" attributes="0"/>
-                                                      <Component id="btnDesignMauSac" min="-2" pref="26" max="-2" attributes="0"/>
-                                                      <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                                                      <Component id="btnDesignMauSac" min="-2" pref="27" max="-2" attributes="0"/>
                                                   </Group>
                                                   <Component id="btnDesignRom" alignment="1" min="-2" max="-2" attributes="0"/>
                                               </Group>
@@ -2248,7 +2247,7 @@
                                           </Group>
                                       </Group>
                                       <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                                      <Component id="jPanel13" min="-2" max="-2" attributes="0"/>
+                                      <Component id="pnPaging" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -2491,7 +2490,7 @@
                                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDesignHangActionPerformed"/>
                               </Events>
                             </Component>
-                            <Container class="javax.swing.JPanel" name="jPanel13">
+                            <Container class="javax.swing.JPanel" name="pnPaging">
                               <Properties>
                                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -3079,7 +3078,7 @@
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="jLabel20" min="-2" pref="70" max="-2" attributes="0"/>
                                               <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="jTextField8" min="-2" pref="204" max="-2" attributes="0"/>
+                                                  <Component id="txtTimKiemSanPhamDeleted" min="-2" pref="204" max="-2" attributes="0"/>
                                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                                   <Component id="btnTimKiemSanPhamDeleted" min="-2" pref="66" max="-2" attributes="0"/>
                                               </Group>
@@ -3106,7 +3105,7 @@
                                           <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                               <Component id="btnTimKiemSanPhamDeleted" max="32767" attributes="0"/>
-                                              <Component id="jTextField8" max="32767" attributes="0"/>
+                                              <Component id="txtTimKiemSanPhamDeleted" max="32767" attributes="0"/>
                                           </Group>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Component id="jScrollPane18" min="-2" max="-2" attributes="0"/>
@@ -3118,7 +3117,7 @@
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Component class="javax.swing.JTextField" name="jTextField8">
+                        <Component class="javax.swing.JTextField" name="txtTimKiemSanPhamDeleted">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Tahoma" size="12" style="0"/>
@@ -4875,8 +4874,19 @@
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jTabbedPane3" min="-2" pref="790" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Component id="jTabbedPane3" min="-2" pref="790" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <EmptySpace min="-2" pref="556" max="-2" attributes="0"/>
+                                          <Component id="txt_searchKM" min="-2" pref="160" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="bt_searchKM" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
                                           <Component id="jPanel45" min="-2" max="-2" attributes="0"/>
@@ -4918,7 +4928,12 @@
                                           </Group>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="bt_searchKM" max="32767" attributes="0"/>
+                                              <Component id="txt_searchKM" max="32767" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
                                           <Component id="jTabbedPane3" min="-2" pref="589" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
@@ -5160,6 +5175,9 @@
                           </SubComponents>
                         </Container>
                         <Container class="javax.swing.JTabbedPane" name="jTabbedPane3">
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTabbedPane3MouseClicked"/>
+                          </Events>
 
                           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
                           <SubComponents>
@@ -5334,11 +5352,13 @@
                                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                               <Component id="jcbox_All" min="-2" pref="79" max="-2" attributes="0"/>
                                           </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                                  <Component id="bt_xoaKM" alignment="0" pref="100" max="32767" attributes="0"/>
-                                                  <Component id="bt_suaKM" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="bt_addKM" alignment="0" max="32767" attributes="0"/>
+                                          <Group type="102" attributes="0">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                                      <Component id="bt_xoaKM" alignment="0" pref="100" max="32767" attributes="0"/>
+                                                      <Component id="bt_suaKM" alignment="0" max="32767" attributes="0"/>
+                                                  </Group>
+                                                  <Component id="bt_addKM" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
                                               </Group>
                                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                           </Group>
@@ -5350,9 +5370,9 @@
                             <DimensionLayout dim="1">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                                       <Component id="bt_addKM" min="-2" pref="42" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="bt_suaKM" min="-2" pref="36" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="bt_xoaKM" min="-2" pref="35" max="-2" attributes="0"/>
@@ -5425,6 +5445,19 @@
                             </Component>
                           </SubComponents>
                         </Container>
+                        <Component class="javax.swing.JButton" name="bt_searchKM">
+                          <Properties>
+                            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                              <Image iconType="3" name="/images/search.png"/>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="bt_searchKMMouseClicked"/>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_searchKMActionPerformed"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="txt_searchKM">
+                        </Component>
                       </SubComponents>
                     </Container>
                     <Component class="com.toedter.calendar.JDateChooser" name="jdateFrom1">

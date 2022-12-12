@@ -27,4 +27,8 @@ public interface RomService {
     String update(Rom rom);
 
     String delete(Rom rom);
+    
+    String restore(Rom rom);
+    
+    List<Rom> searchDeletedRom(String name);
 }

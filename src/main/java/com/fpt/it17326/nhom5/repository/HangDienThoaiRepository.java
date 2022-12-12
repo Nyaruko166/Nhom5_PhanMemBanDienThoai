@@ -20,13 +20,13 @@ public class HangDienThoaiRepository {
     private String fromTable = "FROM HangDienThoai";
 
     public List<HangDienThoai> getAll() {
-        String sql = fromTable + " WHERE deleted = 0";
+        String sql = fromTable + " WHERE deleted = 0 ORDER BY Id DESC";
         Query query = session.createQuery(sql);
         return query.getResultList();
     }
     
     public List<HangDienThoai> getAllDeleted() {
-        String sql = fromTable + " WHERE deleted = 1";
+        String sql = fromTable + " WHERE deleted = 1 ORDER BY UpdatedAt DESC";
         Query query = session.createQuery(sql);
         return query.getResultList();
     }
@@ -38,6 +38,14 @@ public class HangDienThoaiRepository {
         return (HangDienThoai) query.getSingleResult();
     }
 
+    public List<HangDienThoai> searchDeleted(String tenHang) {
+        tenHang = "%" + tenHang + "%";
+        String sql = fromTable + " WHERE TenHang LIKE :TenHang1 and deleted = 1";
+        Query query = session.createQuery(sql);
+        query.setParameter("TenHang1", tenHang);
+        return query.getResultList();
+    }
+    
     public Boolean add(HangDienThoai hdt) {
         Transaction transaction = null;
         try ( Session session = HibernateConfig.getFACTORY().openSession()) {
