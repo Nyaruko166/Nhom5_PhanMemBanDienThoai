@@ -139,7 +139,6 @@ import com.itextpdf.layout.property.TextAlignment;
 import com.itextpdf.layout.property.VerticalAlignment;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Vector;
 // xuat hoa don
 
 /**
@@ -9649,12 +9648,10 @@ public class ViewSanPham extends javax.swing.JFrame {
                     XSSFCell TaiKhoan = excelRow.getCell(7);
                     XSSFCell MatKhau = excelRow.getCell(8);
                     XSSFCell TrangThai = excelRow.getCell(9);
-                    Vector<?> rowData = null;
 
                     //JTable excelJL = new JTable;
                     //modelnv2.addRow(new Object[]{excelMaNV, excelHoTen, excelGioiTinh, excelChucVu, excelEmail, excelQueQuan, excelNgaySinh, excelTaiKhoan, excelMatKhau});
-                    modelnv2.addRow(rowData);
-                    //modelnv2.addRow(new Object[]{MaNV, HoTen, GioiTinh, ChucVu, Email, QueQuan, NgaySinh, TaiKhoan, MatKhau,TrangThai});
+                    modelnv2.addRow(new Object[]{MaNV, HoTen, GioiTinh, ChucVu, Email, QueQuan, NgaySinh, TaiKhoan, MatKhau,TrangThai});
                     //modelnv2.addRow(new Object[row]);
                 }
                 JOptionPane.showMessageDialog(null, "Đã thêm thông tin từ Excel");
