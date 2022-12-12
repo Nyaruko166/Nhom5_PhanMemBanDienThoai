@@ -472,7 +472,7 @@ public class ViewSanPham extends javax.swing.JFrame implements Runnable,ThreadFa
         }
 
         //--BanHangthắng
-            // initwebcam();
+             initwebcam();
         //
          setLocationRelativeTo(null);
         loadtablebanhanghoadon();
@@ -5781,8 +5781,8 @@ String đinhang="";
             jPanel70Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel70Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel70Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnTemPlateExcel)
+                .addGroup(jPanel70Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnTemPlateExcel, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnImportExcel))
                 .addContainerGap())
         );
@@ -9529,12 +9529,12 @@ String đinhang="";
             String result = sanPhamService.update(sp);
             JOptionPane.showMessageDialog(this, result);
             if (result.contains("thành công")) {
-                listSp.set(tblSanPham2.getSelectedRow(), sp);
-                listSanPham.set(tblSanPham2.getSelectedRow(), new SanPhamResponse(sp));
+//                listSp.set(tblSanPham2.getSelectedRow(), sp);
+//                listSanPham.set(tblSanPham2.getSelectedRow(), new SanPhamResponse(sp));
                 if (urlUploadAnh != null && urlAnh != null) {
                     Util.uploadImage(urlUploadAnh, urlAnh);
                 }
-                loadProductTable();
+                loadTableSanPham();
                 List<Imei> listImeiData = imeiService.getAllImeiBySanPham(sp.getId());
                 for (Imei imei : listImeiData) {
                     imeiService.delete(imei);

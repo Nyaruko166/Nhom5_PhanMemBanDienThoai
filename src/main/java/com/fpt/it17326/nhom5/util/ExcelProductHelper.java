@@ -28,6 +28,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.IntStream;
@@ -281,7 +283,12 @@ public class ExcelProductHelper {
         // create cell
         fillData();
         // save
-        String path = saveTemplate();
+        String path = null;
+        try {
+            path = saveTemplate();
+        } catch (IOException ex) {
+            Logger.getLogger(ExcelProductHelper.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return path;
 
     }
@@ -414,7 +421,7 @@ public class ExcelProductHelper {
         setConstrain(data, row, 6);
     }
 
-    private String saveTemplate() {
+    private String saveTemplate() throws IOException {
         JFileChooser fileChooser = new JFileChooser();
         String fileDictName = "template.xlsx";
         fileChooser.setDialogTitle("Specify a file to save");
@@ -440,6 +447,8 @@ public class ExcelProductHelper {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
+            } finally {
+                outputStream.close();
             }
         }
         return null;
