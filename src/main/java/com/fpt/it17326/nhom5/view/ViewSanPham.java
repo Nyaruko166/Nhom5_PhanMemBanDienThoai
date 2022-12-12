@@ -239,6 +239,7 @@ public class ViewSanPham extends javax.swing.JFrame {
      */
     public ViewSanPham(String dataConstructor) {
         initComponents();
+
         pnPaging.setVisible(false);
         this.dataConstructor = dataConstructor;
         NhanVien nv = dvnv.getOneByUsername(dataConstructor);
@@ -3337,6 +3338,8 @@ public class ViewSanPham extends javax.swing.JFrame {
         bt_suaKM = new javax.swing.JButton();
         bt_xoaKM = new javax.swing.JButton();
         jcbox_All = new javax.swing.JCheckBox();
+        bt_searchKM = new javax.swing.JButton();
+        txt_searchKM = new javax.swing.JTextField();
         jdateFrom1 = new com.toedter.calendar.JDateChooser();
         pl_thongtincanhan = new javax.swing.JPanel();
         jPanel40 = new javax.swing.JPanel();
@@ -6359,6 +6362,18 @@ public class ViewSanPham extends javax.swing.JFrame {
                 .addComponent(jcbox_All))
         );
 
+        bt_searchKM.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search.png"))); // NOI18N
+        bt_searchKM.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_searchKMMouseClicked(evt);
+            }
+        });
+        bt_searchKM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_searchKMActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pl_khuyenmai5Layout = new javax.swing.GroupLayout(pl_khuyenmai5);
         pl_khuyenmai5.setLayout(pl_khuyenmai5Layout);
         pl_khuyenmai5Layout.setHorizontalGroup(
@@ -6368,8 +6383,16 @@ public class ViewSanPham extends javax.swing.JFrame {
                 .addGap(491, 491, 491))
             .addGroup(pl_khuyenmai5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 790, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGroup(pl_khuyenmai5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pl_khuyenmai5Layout.createSequentialGroup()
+                        .addComponent(jTabbedPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 790, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pl_khuyenmai5Layout.createSequentialGroup()
+                        .addGap(556, 556, 556)
+                        .addComponent(txt_searchKM, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(bt_searchKM)
+                        .addGap(33, 33, 33)))
                 .addGroup(pl_khuyenmai5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pl_khuyenmai5Layout.createSequentialGroup()
                         .addComponent(jPanel45, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -6400,7 +6423,11 @@ public class ViewSanPham extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jScrollPane22, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(pl_khuyenmai5Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addContainerGap()
+                        .addGroup(pl_khuyenmai5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(bt_searchKM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txt_searchKM))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTabbedPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 589, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(jPanel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -9496,6 +9523,9 @@ public class ViewSanPham extends javax.swing.JFrame {
         showDataKM(lists);
         showDataKM2(lists2);
         showDataKM3(listSanPham);
+        txt_MaGiamGia.setText(" ");
+        txt_MucGiam.setText(" ");
+        txt_TenKM.setText(" ");
         // TODO add your handling code here:
     }//GEN-LAST:event_bt_addKMActionPerformed
 
@@ -9547,6 +9577,9 @@ public class ViewSanPham extends javax.swing.JFrame {
             showDataKM2(lists2);
             showDataKM3(listSanPham);
             JOptionPane.showMessageDialog(this, "Sửa thành công!");
+            txt_MaGiamGia.setText(" ");
+        txt_MucGiam.setText(" ");
+        txt_TenKM.setText(" ");
 
         }        // TODO add your handling code here:
     }//GEN-LAST:event_bt_suaKMActionPerformed
@@ -9763,6 +9796,38 @@ bt_suaKM.setEnabled(true);
 bt_xoaKM.setEnabled(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_jTabbedPane3MouseClicked
+
+    private void bt_searchKMMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_searchKMMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bt_searchKMMouseClicked
+
+    private void bt_searchKMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_searchKMActionPerformed
+        try {
+
+        KhuyenMaiRepository khuyenMaiRepository = new KhuyenMaiRepository();
+        KhuyenMai khuyenMaiResponse = khuyenMaiRepository.getOne(txt_searchKM.getText());
+        SanPhamGiamGiaRepository giaRepository = new SanPhamGiamGiaRepository();
+        List<SanPhamGiamGia> giamTheoSPss = giaRepository.getAllSP(khuyenMaiResponse.getId());
+        for (int i = 0; i < listSanPham.size(); i++) {
+            for (SanPhamGiamGia giamTheoSP : giamTheoSPss) {
+                if (dfm3.getValueAt(i, 0).equals(giamTheoSP.getSanPham().getTenSP())) {
+                    dfm3.setValueAt(true, i, 1);
+                }
+            }
+        }
+        
+        txt_TenKM.setText(khuyenMaiResponse.getTenKM());
+        txt_MaGiamGia.setText(khuyenMaiResponse.getMaKM());
+        txt_MucGiam.setText(Float.toString(khuyenMaiResponse.getSoTienGiam()));
+        dtc_TuNgay.setDate(khuyenMaiResponse.getNgayBatDau());
+        dtc_DenNgay.setDate(khuyenMaiResponse.getNgayKetThuc());  
+        txt_searchKM.setText(" ");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đúng mã khuyến mại");
+        }
+        
+              // TODO add your handling code here:
+    }//GEN-LAST:event_bt_searchKMActionPerformed
     private void txtTongTienHang1ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
@@ -9881,6 +9946,7 @@ bt_xoaKM.setEnabled(true);
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton KM;
     private javax.swing.JButton bt_addKM;
+    private javax.swing.JButton bt_searchKM;
     private javax.swing.JButton bt_suaKM;
     private javax.swing.JButton bt_xoaKM;
     private javax.swing.JButton btnDesignAnh;
@@ -10261,6 +10327,7 @@ bt_xoaKM.setEnabled(true);
     private javax.swing.JTextField txt_MaGiamGia;
     private javax.swing.JTextField txt_MucGiam;
     private javax.swing.JTextField txt_TenKM;
+    private javax.swing.JTextField txt_searchKM;
     private javax.swing.JTextField txtemail;
     private javax.swing.JTextField txtmanv;
     private javax.swing.JTextField txtmatkhau;
