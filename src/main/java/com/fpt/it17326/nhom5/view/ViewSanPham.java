@@ -9831,7 +9831,7 @@ public class ViewSanPham extends javax.swing.JFrame {
     
     }//GEN-LAST:event_btnexportEXCELActionPerformed
 
-<<<<<<< HEAD
+
     private void jButton44ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton44ActionPerformed
         // TODO add your handling code here:
        String timnv = txttimnv.getText().trim();
@@ -9848,7 +9848,7 @@ public class ViewSanPham extends javax.swing.JFrame {
 //        loadnv2(list2);
         loadtable();
     }//GEN-LAST:event_jButton44ActionPerformed
-=======
+
     private void jTabbedPane3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane3MouseClicked
 bt_addKM.setEnabled(true);
 
@@ -9889,7 +9889,7 @@ bt_xoaKM.setEnabled(true);
         
               // TODO add your handling code here:
     }//GEN-LAST:event_bt_searchKMActionPerformed
->>>>>>> 75e74fd35aebe7c3be0e10aa603e49532ca0fa51
+
     private void txtTongTienHang1ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
