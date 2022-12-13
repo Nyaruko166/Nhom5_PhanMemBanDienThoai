@@ -6,6 +6,7 @@ package com.fpt.it17326.nhom5.repository;
 
 import com.fpt.it17326.nhom5.config.HibernateConfig;
 import com.fpt.it17326.nhom5.domainmodel.SanPham;
+import com.fpt.it17326.nhom5.util.Util;
 import java.awt.image.SampleModel;
 import java.util.List;
 
@@ -116,6 +117,7 @@ public class SanPhamRepository {
         try ( Session session = HibernateConfig.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
             sp.setDeleted(true);
+            sp.setUpdatedAt(Util.getCurrentDate());
             session.update(sp);
             transaction.commit();
             return true;

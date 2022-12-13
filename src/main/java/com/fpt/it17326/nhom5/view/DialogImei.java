@@ -106,6 +106,9 @@ public class DialogImei extends javax.swing.JDialog {
         jLabel4.setForeground(new java.awt.Color(0, 0, 102));
         jLabel4.setText("Imei");
 
+        txtImei.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtImei.setForeground(new java.awt.Color(0, 0, 102));
+
         btnThemImei.setBackground(new java.awt.Color(0, 0, 102));
         btnThemImei.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add.png"))); // NOI18N
         btnThemImei.addActionListener(new java.awt.event.ActionListener() {
